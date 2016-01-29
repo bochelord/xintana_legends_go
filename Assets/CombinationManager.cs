@@ -22,11 +22,13 @@ public class CombinationManager : MonoBehaviour {
     public GameObject[] objectsCombinationPool;     //Pool with all the possible GameObjects.
     public float timeToResolveCombination = 5;
 
+    private float tempTimer;
 	// Use this for initialization
 	void Start () {
         combinationArray = new GameObject[combinationLength];
         GenerateCombination();
         CreateButtonsAndPlaceThem();
+        tempTimer = timeToResolveCombination;
 	}
 	
 	// Update is called once per frame
@@ -61,7 +63,7 @@ public class CombinationManager : MonoBehaviour {
         for (int i = 0; i < combinationLength; i++)
         {
             offset += 75;
-            Vector3 screenPosition = GetScreenPosition(offset);
+            //Vector3 screenPosition = GetScreenPosition(offset);
             GameObject buttonCloned = Instantiate(combinationArray[i]);
             buttonCloned.transform.parent = Canvas.transform;
             //buttonCloned.gameObject.transform.position = screenPosition;
@@ -72,14 +74,43 @@ public class CombinationManager : MonoBehaviour {
     public Vector3 GetScreenPosition(float offset)
     {
         Vector3 screenPosition = new Vector3((Screen.width + offset)/2, Screen.height - 50, 0);
-        Debug.Log("ScreenPosition returned:" + screenPosition);
         return screenPosition;
     }
 
+    /// <summary>
+    /// Updates the Slider related to the timeToResolveCombination.
+    /// Updates the SliderTimerText.text with the time to finish the combination.
+    /// </summary>
     void UpdateTimer()
     {
         timerSlider.value -= Time.deltaTime / timeToResolveCombination;
-        float tempTimer = timeToResolveCombination - Time.deltaTime;
-        sliderTimerText.text = tempTimer.ToString(); 
+        tempTimer -= Time.deltaTime;
+        if (timerSlider.value > 0)
+        {
+            sliderTimerText.text = tempTimer.ToString("f0") + " SECS";
+        }
+         
+    }
+
+    public void CheckCombination(Button xButton){
+        string buttonColor = xButton.GetComponent<ColorButtonData>().buttonColor;
+
+        switch (buttonColor)
+        {
+            case "red":
+                Debug.Log("Button Red pressed.");
+                break;
+            case "yellow":
+                Debug.Log("Button yellow pressed.");
+                break;
+            case "green":
+                Debug.Log("Button green pressed.");
+                break;
+            case "blue":
+                Debug.Log("Button blue pressed.");
+                break;
+            default:
+                break;
+        }
     }
 }
