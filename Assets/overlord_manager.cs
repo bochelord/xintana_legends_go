@@ -66,12 +66,12 @@ public class overlord_manager : MonoBehaviour
 
         //Logo.DOFade(1f, 0.5f);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
 
         blackness.DOFade(0f, 1f);
         //Logo.DOFade(0f, 1f);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
 
 
         //El background turns purple (background color from camera)
