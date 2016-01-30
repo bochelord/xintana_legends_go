@@ -13,7 +13,7 @@ public class CombinationManager : MonoBehaviour {
 
     
     [Header("Links")]
-    public GameObject Canvas;
+    public GameObject combinationPanel;
     public Button prefabButton;
     public GameObject explosionPrefab;
     public Slider timerSlider;
@@ -26,7 +26,7 @@ public class CombinationManager : MonoBehaviour {
     public Text youLose_Text;
     [Header("UI Buttons")]
     public GameObject[] uiButtons;
-    public int combinationLength;                   //Combination length that the User will have to solve.
+    public int combinationLength;                   //Combination length that the User will has to solve.
     public GameObject[] combinationArray;           //This is the Array with the GameObjects combination.
     public GameObject[] copyCombinationArray;       //An Array store to delete later the combination game objects.
     public GameObject[] objectsCombinationPool;     //Pool with all the possible GameObjects.
@@ -38,15 +38,33 @@ public class CombinationManager : MonoBehaviour {
     private int currentCombinationPosition = 0;     //The combination position to check, by default 0.
 	// Use this for initialization
 	void Start () {
+       
         combinationArray = new GameObject[combinationLength];
         copyCombinationArray = new GameObject[combinationLength];
-
+        
         GenerateCombination();
         CreateButtonsAndPlaceThem();
         tempTimer = timeToResolveCombination;
         EnableButtonsInteraction();
         //gameOn = true;
 	}
+    void ResetGame()
+    {
+        combinationArray = null;
+        copyCombinationArray = null;
+        
+        combinationArray = new GameObject[combinationLength];
+        copyCombinationArray = new GameObject[combinationLength];
+        foreach (Transform child in combinationPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        currentCombinationPosition = 0;
+        GenerateCombination();
+        CreateButtonsAndPlaceThem();
+        HideWinLoseText();
+        EnableButtonsInteraction();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -56,10 +74,12 @@ public class CombinationManager : MonoBehaviour {
         }
         if (winningCondition)
         {
-            Debug.Log("YOU WON");
+            //Debug.Log("YOU WON");
         }
 	}
-
+    /// <summary>
+    /// Generates a Random combination with a combinationLength.
+    /// </summary>
     void GenerateCombination() 
     {
         int tempValue = 0;
@@ -67,6 +87,7 @@ public class CombinationManager : MonoBehaviour {
         {
             tempValue = Random.Range(0, objectsCombinationPool.Length);
             combinationArray[i] = objectsCombinationPool[tempValue];
+            
         }
     }
     /// <summary>
@@ -91,9 +112,8 @@ public class CombinationManager : MonoBehaviour {
             GameObject buttonCloned = Instantiate(combinationArray[i]);
             copyCombinationArray[i] = buttonCloned; 
             buttonCloned.GetComponent<ColorButtonData>().position = i;
-            buttonCloned.transform.parent = Canvas.transform;
+            buttonCloned.transform.parent = combinationPanel.transform;
             //buttonCloned.gameObject.transform.position = screenPosition;
-            
         }
     }
 
@@ -130,15 +150,9 @@ public class CombinationManager : MonoBehaviour {
         // Correct Combination, USER can continue.
         if (combinationArray[currentCombinationPosition].GetComponent<ColorButtonData>().buttonColor == buttonColor)
         {
-            // instantiate explosion
             audio.PlayOneShot(audioBongoClip, 1F); 
-            // destroy conbination color
-            //GameObject explosionCloned = Instantiate(explosionPrefab, combinationArray[currentCombinationPosition].transform.position, Quaternion.identity) as GameObject;
             copyCombinationArray[currentCombinationPosition].GetComponent<Image>().enabled = false;
             
-            //explosionCloned.transform.SetParent(Canvas.transform);
-            //explosionCloned.transform.localPosition = combinationArray[currentCombinationPosition].transform.localPosition;
-
             currentCombinationPosition++;
             
             // WINNING CONDITION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -147,38 +161,25 @@ public class CombinationManager : MonoBehaviour {
                 winningCondition = true;
                 gameOn = false;
                 ShowWinText();
+                
                 StartCoroutine(LoadNextRound());
+                ChangeCombinationLength(combinationLength+1);
+                //Debug.Log("COMBINATION LENGTH> " + combinationLength);
+                
                 
             }
         }
         else  // WRONG combination, USER lose. <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         {
-
             DisableButtonsInteraction();
             ShowLoseText();
             StartCoroutine(LoadNextRound());
             // We STOP the Game as the Player lose.
             gameOn = false;
         }
-
-        //switch (buttonColor)
-        //{
-        //    case "red":
-                
-        //        break;
-        //    case "yellow":
-                
-        //        break;
-        //    case "green":
-                
-        //        break;
-        //    case "blue":
-                
-        //        break;
-        //    default:
-        //        break;
-        //}
     }
+
+
     /// <summary>
     /// Buttons will not be interactable.
     /// </summary>
@@ -190,6 +191,8 @@ public class CombinationManager : MonoBehaviour {
 
         }
     }
+
+
     /// <summary>
     /// Buttons will be interactable.
     /// </summary>
@@ -218,7 +221,20 @@ public class CombinationManager : MonoBehaviour {
     IEnumerator LoadNextRound(){
 
         yield return new WaitForSeconds(2);
-        Application.LoadLevel(Application.loadedLevel);
+        ResetGame();
+        //Application.LoadLevel(Application.loadedLevel);
+    }
+    void HideWinLoseText(){
+        if (youLose_Text)
+        {
+            youLose_Text.gameObject.SetActive(false);
+        }
+        if (youWin_Text)
+        {
+            youWin_Text.gameObject.SetActive(false);
+        }
+            
+        
     }
     
 }
