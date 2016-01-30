@@ -96,6 +96,7 @@ public class overlord_manager : MonoBehaviour
 
 
         Logo.DOFade(1f, 1f);
+        Logo.transform.DOPunchScale(Vector3.up, 0.5f, 7,0.5f);
         JamLogo.DOFade(1f,1f);
         //TouchmeText.DOFade(1f, 1.7f);
 
