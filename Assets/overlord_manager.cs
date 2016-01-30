@@ -115,6 +115,6 @@ public class overlord_manager : MonoBehaviour
 
     public void Screen_touched()
     {
-        Application.LoadLevel("combinationDisplay");
+        Application.LoadLevel("combinationDisplay_safe");
     }
 }

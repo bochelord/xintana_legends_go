@@ -64,6 +64,8 @@ public class CombinationManager : MonoBehaviour {
         CreateButtonsAndPlaceThem();
         HideWinLoseText();
         EnableButtonsInteraction();
+        timerSlider.value = 1;
+        gameOn = true;
     }
 	
 	// Update is called once per frame
@@ -134,6 +136,14 @@ public class CombinationManager : MonoBehaviour {
         if (timerSlider.value > 0)
         {
             sliderTimerText.text = tempTimer.ToString("f0") + " SECS";
+        }
+        if (timerSlider.value <= 0)
+        {
+            DisableButtonsInteraction();
+            ShowLoseText();
+            StartCoroutine(LoadNextRound());
+            // We STOP the Game as the Player lose.
+            gameOn = false;
         }
          
     }
