@@ -160,6 +160,7 @@ public class CombinationManager : MonoBehaviour {
             {
                 winningCondition = true;
                 gameOn = false;
+                DisableButtonsInteraction();
                 ShowWinText();
                 
                 StartCoroutine(LoadNextRound());
