@@ -21,23 +21,30 @@ public class CombinationManager : MonoBehaviour {
 
     public int combinationLength;                   //Combination length that the User will have to solve.
     public GameObject[] combinationArray;           //This is the Array with the GameObjects combination.
+    public GameObject[] copyCombinationArray;       //An Array store to delete later the combination game objects.
     public GameObject[] objectsCombinationPool;     //Pool with all the possible GameObjects.
     public float timeToResolveCombination = 5;
-    
 
+    private bool gameOn;
     private float tempTimer;                        //Auxiliary variable to work with the Timer.
     private int currentCombinationPosition = 0;     //The combination position to check, by default 0.
 	// Use this for initialization
 	void Start () {
         combinationArray = new GameObject[combinationLength];
+        copyCombinationArray = new GameObject[combinationLength];
         GenerateCombination();
         CreateButtonsAndPlaceThem();
         tempTimer = timeToResolveCombination;
+        gameOn = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        UpdateTimer();
+        if (gameOn)
+        {
+            UpdateTimer();
+        }
+        
 	}
 
     void GenerateCombination() 
@@ -69,6 +76,7 @@ public class CombinationManager : MonoBehaviour {
             offset += 75;
             //Vector3 screenPosition = GetScreenPosition(offset);
             GameObject buttonCloned = Instantiate(combinationArray[i]);
+            copyCombinationArray[i] = buttonCloned; 
             buttonCloned.GetComponent<ColorButtonData>().position = i;
             buttonCloned.transform.parent = Canvas.transform;
             //buttonCloned.gameObject.transform.position = screenPosition;
@@ -110,30 +118,38 @@ public class CombinationManager : MonoBehaviour {
         {
             // instantiate explosion
             // destroy conbination color
-            GameObject explosionCloned = Instantiate(explosionPrefab, combinationArray[currentCombinationPosition].transform.position, Quaternion.identity) as GameObject;
+            //GameObject explosionCloned = Instantiate(explosionPrefab, combinationArray[currentCombinationPosition].transform.position, Quaternion.identity) as GameObject;
+            copyCombinationArray[currentCombinationPosition].GetComponent<Image>().enabled = false;
+            Debug.Log("CORRECT");
+            //explosionCloned.transform.SetParent(Canvas.transform);
+            //explosionCloned.transform.localPosition = combinationArray[currentCombinationPosition].transform.localPosition;
+
             currentCombinationPosition++;
+
         }
         else  //  WRONG combination, USER lose.
         {
             Debug.Log("YOU LOSE");
+            // We STOP the Game as the Player lose.
+            gameOn = false;
         }
 
-        switch (buttonColor)
-        {
-            case "red":
+        //switch (buttonColor)
+        //{
+        //    case "red":
                 
-                break;
-            case "yellow":
+        //        break;
+        //    case "yellow":
                 
-                break;
-            case "green":
+        //        break;
+        //    case "green":
                 
-                break;
-            case "blue":
+        //        break;
+        //    case "blue":
                 
-                break;
-            default:
-                break;
-        }
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 }
