@@ -18,6 +18,9 @@ public class CombinationManager : MonoBehaviour {
     public GameObject explosionPrefab;
     public Slider timerSlider;
     public Text sliderTimerText;
+    public AudioSource audio;
+    public AudioClip audioBongoClip;
+
     [Header("UI Elements")]
     public Text youWin_Text;
     public Text youLose_Text;
@@ -116,6 +119,7 @@ public class CombinationManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// Function called from the UI buttons.
     /// Get the Color of the Pressed Button and then compare it with the current combination to solve.
     /// </summary>
     /// <param name="xButton"></param>
@@ -127,6 +131,7 @@ public class CombinationManager : MonoBehaviour {
         if (combinationArray[currentCombinationPosition].GetComponent<ColorButtonData>().buttonColor == buttonColor)
         {
             // instantiate explosion
+            audio.PlayOneShot(audioBongoClip, 1F); 
             // destroy conbination color
             //GameObject explosionCloned = Instantiate(explosionPrefab, combinationArray[currentCombinationPosition].transform.position, Quaternion.identity) as GameObject;
             copyCombinationArray[currentCombinationPosition].GetComponent<Image>().enabled = false;
@@ -194,7 +199,7 @@ public class CombinationManager : MonoBehaviour {
         {
             if (uiButtons[i])
             {
-                Debug.Log("uiButton number: " + i);
+                //Debug.Log("uiButton number: " + i);
                 uiButtons[i].GetComponent<Button>().interactable = true;
             }
         }
