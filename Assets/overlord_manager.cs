@@ -17,6 +17,10 @@ public class overlord_manager : MonoBehaviour
 
     public Image blackness; 
     public Image Logo;
+    public Image JamLogo;
+
+    public Text TouchmeText;
+
     #endregion variables
 
 
@@ -89,8 +93,18 @@ public class overlord_manager : MonoBehaviour
         //Las montañas suben...
         mountains.DOMoveY(-1.6f, 1.7f);
 
-        Logo.DOFade(1f, 1f);
 
+        Logo.DOFade(1f, 1f);
+        JamLogo.DOFade(1f,1f);
+        //TouchmeText.DOFade(1f, 1.7f);
+
+        //spaceCraftFortressText.DOText("#1 Spacecraft Fortress \n Time to raid and escape from the fortress", 1).SetRelative().SetEase(Ease.Linear).SetAutoKill(false).Pause();
+
+        yield return new WaitForSeconds(0.5f);
+        TouchmeText.DOText("TOUCH THE SCREEN", 1).SetRelative().SetEase(Ease.Linear);
+        //DOTween.PlayAll();
+
+        //TouchmeText.DOText("TOUCH!", 1f);
         // Aparece la pasarela
 
         // Aparecen los dos enemigos
@@ -98,5 +112,12 @@ public class overlord_manager : MonoBehaviour
         //etc...
 
 
+    }
+
+
+
+    public void Screen_touched()
+    {
+        Application.LoadLevel("combinationDisplay");
     }
 }
