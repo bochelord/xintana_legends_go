@@ -15,14 +15,18 @@ public class CombinationManager : MonoBehaviour {
     [Header("Links")]
     public GameObject Canvas;
     public Button prefabButton;
+    public GameObject explosionPrefab;
     public Slider timerSlider;
     public Text sliderTimerText;
+
     public int combinationLength;                   //Combination length that the User will have to solve.
     public GameObject[] combinationArray;           //This is the Array with the GameObjects combination.
     public GameObject[] objectsCombinationPool;     //Pool with all the possible GameObjects.
     public float timeToResolveCombination = 5;
+    
 
-    private float tempTimer;
+    private float tempTimer;                        //Auxiliary variable to work with the Timer.
+    private int currentCombinationPosition = 0;     //The combination position to check, by default 0.
 	// Use this for initialization
 	void Start () {
         combinationArray = new GameObject[combinationLength];
@@ -65,6 +69,7 @@ public class CombinationManager : MonoBehaviour {
             offset += 75;
             //Vector3 screenPosition = GetScreenPosition(offset);
             GameObject buttonCloned = Instantiate(combinationArray[i]);
+            buttonCloned.GetComponent<ColorButtonData>().position = i;
             buttonCloned.transform.parent = Canvas.transform;
             //buttonCloned.gameObject.transform.position = screenPosition;
             
@@ -92,22 +97,40 @@ public class CombinationManager : MonoBehaviour {
          
     }
 
+    /// <summary>
+    /// Get the Color of the Pressed Button and then compare it with the current combination to solve.
+    /// </summary>
+    /// <param name="xButton"></param>
     public void CheckCombination(Button xButton){
+
         string buttonColor = xButton.GetComponent<ColorButtonData>().buttonColor;
+
+        // Correct Combination, USER can continue.
+        if (combinationArray[currentCombinationPosition].GetComponent<ColorButtonData>().buttonColor == buttonColor)
+        {
+            // instantiate explosion
+            // destroy conbination color
+            GameObject explosionCloned = Instantiate(explosionPrefab, combinationArray[currentCombinationPosition].transform.position, Quaternion.identity) as GameObject;
+            currentCombinationPosition++;
+        }
+        else  //  WRONG combination, USER lose.
+        {
+            Debug.Log("YOU LOSE");
+        }
 
         switch (buttonColor)
         {
             case "red":
-                Debug.Log("Button Red pressed.");
+                
                 break;
             case "yellow":
-                Debug.Log("Button yellow pressed.");
+                
                 break;
             case "green":
-                Debug.Log("Button green pressed.");
+                
                 break;
             case "blue":
-                Debug.Log("Button blue pressed.");
+                
                 break;
             default:
                 break;
