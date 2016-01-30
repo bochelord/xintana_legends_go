@@ -44,14 +44,15 @@ public class overlord_manager : MonoBehaviour
     IEnumerator Kickstart_explosions()
     {
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 15; i++) {
 
-            float x_aleatoria = UnityEngine.Random.Range(-2f, 2f);
-            float y_aleatoria = UnityEngine.Random.Range(-2f, 2f);
+            float x_aleatoria = UnityEngine.Random.Range(-4f, 4f);
+            float y_aleatoria = UnityEngine.Random.Range(-3f, -3.3f);
 
             Transform tempobj = Instantiate(explosion_big, new Vector3(x_aleatoria, y_aleatoria, 0), Quaternion.identity) as Transform;
 
-            yield return new WaitForSeconds(0.6f);
+            tempobj.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            yield return new WaitForSeconds(0.8f);
 
             tempobj.gameObject.SetActive(false);
         }
@@ -102,14 +103,9 @@ public class overlord_manager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         TouchmeText.DOText("TOUCH THE SCREEN", 1).SetRelative().SetEase(Ease.Linear);
-        //DOTween.PlayAll();
 
-        //TouchmeText.DOText("TOUCH!", 1f);
-        // Aparece la pasarela
-
-        // Aparecen los dos enemigos
-
-        //etc...
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(Kickstart_explosions());
 
 
     }
