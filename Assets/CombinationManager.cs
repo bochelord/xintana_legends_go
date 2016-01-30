@@ -15,18 +15,24 @@ public class CombinationManager : MonoBehaviour {
     [Header("Links")]
     public GameObject Canvas;
     public Button prefabButton;
+    public GameObject explosionPrefab;
     public Slider timerSlider;
     public Text sliderTimerText;
+
     public int combinationLength;                   //Combination length that the User will have to solve.
     public GameObject[] combinationArray;           //This is the Array with the GameObjects combination.
     public GameObject[] objectsCombinationPool;     //Pool with all the possible GameObjects.
     public float timeToResolveCombination = 5;
+    
 
+    private float tempTimer;                        //Auxiliary variable to work with the Timer.
+    private int currentCombinationPosition = 0;     //The combination position to check, by default 0.
 	// Use this for initialization
 	void Start () {
         combinationArray = new GameObject[combinationLength];
         GenerateCombination();
         CreateButtonsAndPlaceThem();
+        tempTimer = timeToResolveCombination;
 	}
 	
 	// Update is called once per frame
@@ -61,8 +67,9 @@ public class CombinationManager : MonoBehaviour {
         for (int i = 0; i < combinationLength; i++)
         {
             offset += 75;
-            Vector3 screenPosition = GetScreenPosition(offset);
+            //Vector3 screenPosition = GetScreenPosition(offset);
             GameObject buttonCloned = Instantiate(combinationArray[i]);
+            buttonCloned.GetComponent<ColorButtonData>().position = i;
             buttonCloned.transform.parent = Canvas.transform;
             //buttonCloned.gameObject.transform.position = screenPosition;
             
@@ -72,14 +79,61 @@ public class CombinationManager : MonoBehaviour {
     public Vector3 GetScreenPosition(float offset)
     {
         Vector3 screenPosition = new Vector3((Screen.width + offset)/2, Screen.height - 50, 0);
-        Debug.Log("ScreenPosition returned:" + screenPosition);
         return screenPosition;
     }
 
+    /// <summary>
+    /// Updates the Slider related to the timeToResolveCombination.
+    /// Updates the SliderTimerText.text with the time to finish the combination.
+    /// </summary>
     void UpdateTimer()
     {
         timerSlider.value -= Time.deltaTime / timeToResolveCombination;
-        float tempTimer = timeToResolveCombination - Time.deltaTime;
-        sliderTimerText.text = tempTimer.ToString(); 
+        tempTimer -= Time.deltaTime;
+        if (timerSlider.value > 0)
+        {
+            sliderTimerText.text = tempTimer.ToString("f0") + " SECS";
+        }
+         
+    }
+
+    /// <summary>
+    /// Get the Color of the Pressed Button and then compare it with the current combination to solve.
+    /// </summary>
+    /// <param name="xButton"></param>
+    public void CheckCombination(Button xButton){
+
+        string buttonColor = xButton.GetComponent<ColorButtonData>().buttonColor;
+
+        // Correct Combination, USER can continue.
+        if (combinationArray[currentCombinationPosition].GetComponent<ColorButtonData>().buttonColor == buttonColor)
+        {
+            // instantiate explosion
+            // destroy conbination color
+            GameObject explosionCloned = Instantiate(explosionPrefab, combinationArray[currentCombinationPosition].transform.position, Quaternion.identity) as GameObject;
+            currentCombinationPosition++;
+        }
+        else  //  WRONG combination, USER lose.
+        {
+            Debug.Log("YOU LOSE");
+        }
+
+        switch (buttonColor)
+        {
+            case "red":
+                
+                break;
+            case "yellow":
+                
+                break;
+            case "green":
+                
+                break;
+            case "blue":
+                
+                break;
+            default:
+                break;
+        }
     }
 }
