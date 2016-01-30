@@ -136,18 +136,22 @@ public class CombinationManager : MonoBehaviour {
 
             currentCombinationPosition++;
             
-            // WINNING CONDITION
+            // WINNING CONDITION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             if (currentCombinationPosition == combinationLength)
             {
                 winningCondition = true;
                 gameOn = false;
-                Application.LoadLevel(Application.loadedLevel);
+                ShowWinText();
+                StartCoroutine(LoadNextRound());
+                
             }
         }
-        else  //  WRONG combination, USER lose.
+        else  // WRONG combination, USER lose. <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         {
 
             DisableButtonsInteraction();
+            ShowLoseText();
+            StartCoroutine(LoadNextRound());
             // We STOP the Game as the Player lose.
             gameOn = false;
         }
@@ -193,8 +197,23 @@ public class CombinationManager : MonoBehaviour {
                 Debug.Log("uiButton number: " + i);
                 uiButtons[i].GetComponent<Button>().interactable = true;
             }
-            
-
         }
     }
+
+    public void ShowWinText()
+    {
+        youWin_Text.gameObject.SetActive(true);
+    }
+
+    public void ShowLoseText()
+    {
+        youLose_Text.gameObject.SetActive(true);
+    }
+
+    IEnumerator LoadNextRound(){
+
+        yield return new WaitForSeconds(2);
+        Application.LoadLevel(Application.loadedLevel);
+    }
+    
 }
