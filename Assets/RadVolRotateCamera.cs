@@ -38,8 +38,9 @@ public class RadVolRotateCamera : MonoBehaviour {
 
     public void ResetCamera()
     {
+        DOTween.KillAll();
         this.transform.position = new Vector3(0, 1, -10);
         this.GetComponent<Camera>().orthographic = true;
-        this.transform.rotation = Quaternion.EulerAngles(0,0,0);
+        this.transform.rotation = Quaternion.Euler(0,0,0);
     }
 }
