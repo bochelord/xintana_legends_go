@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 452240}
   - 198: {fileID: 19820914}
   - 199: {fileID: 19973112}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: 2D_DashPuff_Loop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23,8 +23,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128958}
-  m_LocalRotation: {x: .707106829, y: .707106709, z: -1.15202326e-07, w: -1.15202312e-07}
-  m_LocalPosition: {x: 0, y: -.567999959, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106709}
+  m_LocalPosition: {x: -1, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -69,7 +69,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 3
     startSpeed:
-      scalar: 2.5
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -186,7 +186,7 @@ ParticleSystem:
         rgba: 4288059030
       minMaxState: 2
     startSize:
-      scalar: .5
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -238,12 +238,12 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     type: 12
-    radius: .0500000007
+    radius: .200000003
     angle: 0
     length: .400000006
-    boxX: .125
-    boxY: .125
-    boxZ: .125
+    boxX: .5
+    boxY: .5
+    boxZ: .5
     arc: 360
     placementMode: 0
     m_Mesh: {fileID: 0}
@@ -565,7 +565,7 @@ ParticleSystem:
   ForceModule:
     enabled: 1
     x:
-      scalar: .25
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -588,7 +588,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 3
     y:
-      scalar: .75
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -611,7 +611,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 3
     z:
-      scalar: .25
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -674,7 +674,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     y:
-      scalar: .125
+      scalar: .5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -740,7 +740,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     magnitude:
-      scalar: 2.5
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -994,7 +994,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1783731295
+  m_SortingLayerID: 0
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MaxParticleSize: 10
