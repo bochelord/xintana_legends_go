@@ -23,12 +23,12 @@ public class startLevelSavepoint : MonoBehaviour {
     {
         if (SaveManager.xintanaLife < 50)
         {
-            player.GetComponent<PlayerManager>().xintanaLife = 50;
-            SaveManager.xintanaLife = player.GetComponent<PlayerManager>().xintanaLife;
+            player.GetComponent<PlayerManager_Imported>().xintanaLife = 50;
+            SaveManager.xintanaLife = player.GetComponent<PlayerManager_Imported>().xintanaLife;
         }
         else
         {
-            player.GetComponent<PlayerManager>().xintanaLife = SaveManager.xintanaLife;
+            player.GetComponent<PlayerManager_Imported>().xintanaLife = SaveManager.xintanaLife;
         }
         
         

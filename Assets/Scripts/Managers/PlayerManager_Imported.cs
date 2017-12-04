@@ -5,7 +5,7 @@ using UnityEngine.Analytics;
 using System.Collections.Generic;
 
 
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager_Imported : MonoBehaviour {
 
 	private InputState inputState;
 	private Walk walkBehavior;

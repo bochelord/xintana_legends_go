@@ -14,14 +14,14 @@ public class Walk : AbstractBehavior {
     protected bool dustFXOn;
     protected GameObject clone;
 
-    private PlayerManager playermanager;
+    private PlayerManager_Imported playermanager;
 
 	// Use this for initialization
 	void Start () {
         //clone = Instantiate(dustFXPrefab);
         //clone.transform.SetParent(this.transform, false);
         //clone.transform.position = new Vector3(0f,1.87f,0f);
-        playermanager = this.GetComponent<PlayerManager>();
+        playermanager = this.GetComponent<PlayerManager_Imported>();
 	}
 	
 	// Update is called once per frame

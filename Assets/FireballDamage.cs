@@ -5,14 +5,14 @@ public class FireballDamage : MonoBehaviour {
 
 
     private GameObject player;
-    private PlayerManager playermanager;
+    private PlayerManager_Imported playermanager;
     public GameObject explosionPrefab;
     
 
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindWithTag("Player");
-        playermanager = player.GetComponent<PlayerManager>();
+        playermanager = player.GetComponent<PlayerManager_Imported>();
 	}
 
     void OnTriggerEnter2D(Collider2D other)

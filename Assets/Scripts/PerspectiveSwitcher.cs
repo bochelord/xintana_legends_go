@@ -10,7 +10,8 @@ public class PerspectiveSwitcher : MonoBehaviour
     public float fov = 60f,
                         near = .3f,
                         far = 1000f,
-                        orthographicSize = 50f;
+                        orthographicSize = 50f,
+                        blendDuration = 1f;
     private float aspect;
     private MatrixBlender blender;
     private bool orthoOn;
@@ -42,8 +43,8 @@ public class PerspectiveSwitcher : MonoBehaviour
     {
         orthoOn = !orthoOn;
         if (orthoOn)
-            blender.BlendToMatrix(ortho, 1f);
+            blender.BlendToMatrix(ortho, blendDuration);
         else
-            blender.BlendToMatrix(perspective, 1f);
+            blender.BlendToMatrix(perspective, blendDuration);
     }
 }

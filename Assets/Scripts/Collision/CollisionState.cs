@@ -24,13 +24,13 @@ public class CollisionState : MonoBehaviour {
 
     private InputState inputState;
 
-    private PlayerManager playermanager;
+    private PlayerManager_Imported playermanager;
 
     private GameObject platform;
     void Awake()
     {
         inputState = GetComponent<InputState>();
-        playermanager = GetComponent<PlayerManager>();
+        playermanager = GetComponent<PlayerManager_Imported>();
     }
 	
 	// Update is called once per frame

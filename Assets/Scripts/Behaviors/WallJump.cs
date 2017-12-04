@@ -9,12 +9,12 @@ public class WallJump : AbstractBehavior {
     public float resetDelay = .2f;
 
     private float timeElapsed = 0;
-    private PlayerManager playermanager;
+    private PlayerManager_Imported playermanager;
     private LongJump longJumpBehavior;
     // Use this for initialization
     void Start()
     {
-        playermanager = this.GetComponent<PlayerManager>();
+        playermanager = this.GetComponent<PlayerManager_Imported>();
         longJumpBehavior = this.GetComponent<LongJump>();
     }
 

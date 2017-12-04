@@ -33,9 +33,11 @@ public class RadVolRotateCamera : MonoBehaviour {
 
     void moveCamera()
     {
-        this.transform.DORotate(new Vector3(0f, angleCamera, 0f), 2);
+        this.transform.DORotate(new Vector3(0f, angleCamera, 0f), 2).SetEase(Ease.InOutQuad);
         this.transform.DOMove(new Vector3(movementCamera, 1, -10), 2);
     }
+
+    
 
     public void ResetCamera()
     {

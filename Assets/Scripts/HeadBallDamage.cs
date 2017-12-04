@@ -4,12 +4,12 @@ using System.Collections;
 public class HeadBallDamage : MonoBehaviour {
 
     private GameObject player;
-    private PlayerManager playerManager;
+    private PlayerManager_Imported playerManager;
     public GameObject explosionPrefab;
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindWithTag("Player");
-        playerManager = player.GetComponent<PlayerManager>();
+        playerManager = player.GetComponent<PlayerManager_Imported>();
 	}
 
     void OnTriggerEnter2D(Collider2D other)

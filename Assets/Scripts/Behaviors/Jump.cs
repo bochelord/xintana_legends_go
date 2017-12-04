@@ -14,13 +14,13 @@ public class Jump : AbstractBehavior {
 
 	protected float lastJumpTime = 0;
 	//protected int jumpsRemaining = 0;
-    private PlayerManager playermanager;
+    private PlayerManager_Imported playermanager;
     private float holdTime;
     private bool canJump;
 
 	// Use this for initialization
 	void Start () {
-        playermanager = this.GetComponent<PlayerManager>();
+        playermanager = this.GetComponent<PlayerManager_Imported>();
         onDoubleJump = false;
 	}
 	

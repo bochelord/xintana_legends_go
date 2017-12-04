@@ -17,7 +17,7 @@ public class Attack : AbstractBehavior {
     protected float lastAttackTime = 0;
 
     private Animator animator;
-    private PlayerManager playermanager;
+    private PlayerManager_Imported playermanager;
     //private InputState inputState; <<<< This is taken from base.Awake! Redundant, pops an error!
 
     public float damage;
@@ -31,7 +31,7 @@ public class Attack : AbstractBehavior {
     {
         base.Awake();
         animator = GetComponent<Animator>();
-        playermanager = GetComponent<PlayerManager>();
+        playermanager = GetComponent<PlayerManager_Imported>();
         //inputState = GetComponent<InputState>(); <<<< This is taken from base.Awake! Redundant, pops an error!
     }
 	

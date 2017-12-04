@@ -3,11 +3,11 @@ using System.Collections;
 
 public class FaceDirection : AbstractBehavior {
 
-    private PlayerManager playermanager;
+    private PlayerManager_Imported playermanager;
 
 	// Use this for initialization
 	void Start () {
-        playermanager = this.GetComponent<PlayerManager>();
+        playermanager = this.GetComponent<PlayerManager_Imported>();
 	}
 	
 	// Update is called once per frame

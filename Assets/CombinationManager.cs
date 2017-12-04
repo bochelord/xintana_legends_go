@@ -37,7 +37,15 @@ public class CombinationManager : MonoBehaviour {
     private bool winningCondition = false;
     private float tempTimer;                        //Auxiliary variable to work with the Timer.
     private int currentCombinationPosition = 0;     //The combination position to check, by default 0.
-	// Use this for initialization
+    private LevelManager levelManager;
+
+
+    void Awake()
+    {
+        levelManager = FindObjectOfType<LevelManager>();
+    }
+
+    
 	void Start () {
        
         combinationArray = new GameObject[combinationLength];
@@ -173,8 +181,16 @@ public class CombinationManager : MonoBehaviour {
                 winningCondition = true;
                 gameOn = false;
                 DisableButtonsInteraction();
+
+                levelManager.AttackEnemy();
+
+
+                
+                
                 ShowWinText();
                 
+
+
                 StartCoroutine(LoadNextRound());
                 ChangeCombinationLength(combinationLength+1);
                 //Debug.Log("COMBINATION LENGTH> " + combinationLength);
