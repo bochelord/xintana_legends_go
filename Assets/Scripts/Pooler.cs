@@ -26,34 +26,12 @@ using UnityEngine;
 
         public virtual void Start()
         {
-            // New method to pool the bullets.
-            // Create a new list of bullets with 'pooledBulletsAmount' bullets on it.
             pooledObjects = new List<GameObject>();
             for (int i = 0; i < pooledAmount; i++)
             {
                 GameObject obj = (GameObject)Instantiate(pooledObject);
                 obj.transform.parent = current.transform;
-
-                /////////////////////////
-                ///////// TODO Remove this piece of code it's just for debug
-
-                float xpos;
-                float ypos;
-
-                xpos = -8.5f + i + 4;
-                ypos = 5;
-
-
-                if (xpos > 7.5f)
-                {
-                    xpos = -8.5f + i-15 + 4f;
-                    ypos = ypos - 3f;
-                }
- 
-                obj.transform.position = new Vector3(xpos, ypos, 0);
-                //////////////////////////
-                //////////////////////////
-
+                obj.transform.position = Vector3.zero;
                 obj.SetActive(false);
                 pooledObjects.Add(obj);
             }

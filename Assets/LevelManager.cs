@@ -10,8 +10,8 @@ using UnityEngine.UI;
 /// 
 public class LevelManager : MonoBehaviour {
 
-    private GameObject enemy;
-    private EnemyController enemyController;
+    public GameObject enemy;
+    public EnemyController enemyController;
 
     public GameObject HitPrefabRight;
     public GameObject damageFxPrefab;
@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour {
     private List<Transform> inactiveHUDTextList = new List<Transform>();
     public Pooler enemyPooler;
     public Transform enemyContainer;
+    public bool enemyKilled = false;
     void Awake()
     {
 
@@ -29,7 +30,7 @@ public class LevelManager : MonoBehaviour {
 
     void Start()
     {
-        GetNewEnemy();
+        GetNewEnemy(0);
         
         playerManager = player.GetComponent<PlayerManager>();
         //fixscreeperra();
@@ -77,13 +78,22 @@ public class LevelManager : MonoBehaviour {
 
     }
 
-    public void GetNewEnemy()
+
+    public void GetNewEnemy(float delay)
     {
+        
+        StartCoroutine(CoroGetNewEnemy(delay));
+    }
+
+    private IEnumerator CoroGetNewEnemy(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         enemy = enemyPooler.GetPooledObject();
         enemyController = enemy.GetComponent<EnemyController>();
         enemy.transform.position = enemyContainer.position;
         enemy.SetActive(true);
         enemy.transform.SetParent(enemyContainer);
+        enemyKilled = false;
     }
     
 

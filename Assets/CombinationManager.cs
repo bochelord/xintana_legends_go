@@ -151,7 +151,7 @@ public class CombinationManager : MonoBehaviour {
         {
             DisableButtonsInteraction();
             ShowLoseText();
-            StartCoroutine(LoadNextRound());
+            StartCoroutine(LoadNextRound(1.7f));
             // We STOP the Game as the Player lose.
             gameOn = false;
         }
@@ -187,12 +187,22 @@ public class CombinationManager : MonoBehaviour {
 
                 
                 
-                ShowWinText();
                 
+                if (levelManager.enemyKilled)
+                {
+                    ShowWinText();
+                    ChangeCombinationLength(combinationLength + 1);
+                    StartCoroutine(LoadNextRound(1.7f));
+                }
+                else
+                {
+                    ChangeCombinationLength(combinationLength );
+                    StartCoroutine(LoadNextRound(0.5f));
 
-
-                StartCoroutine(LoadNextRound());
-                ChangeCombinationLength(combinationLength+1);
+                }
+                
+                
+                
                 //Debug.Log("COMBINATION LENGTH> " + combinationLength);
                 
                 
@@ -202,7 +212,7 @@ public class CombinationManager : MonoBehaviour {
         {
             DisableButtonsInteraction();
             ShowLoseText();
-            StartCoroutine(LoadNextRound());
+            StartCoroutine(LoadNextRound(0.5f));
             // We STOP the Game as the Player lose.
             gameOn = false;
         }
@@ -247,9 +257,9 @@ public class CombinationManager : MonoBehaviour {
         youLose_Text.gameObject.SetActive(true);
     }
 
-    IEnumerator LoadNextRound(){
+    IEnumerator LoadNextRound(float delay){
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(delay);
         ResetGame();
         //Application.LoadLevel(Application.loadedLevel);
     }

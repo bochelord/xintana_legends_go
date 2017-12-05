@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
+
+    public float life;
 	// Use this for initialization
 	void Start () {
-		
+		life = 9;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
+    /// <summary>
+    /// Callback from Animation Event 
+    /// </summary>
     public void OnAttackFinished()
     {
         //    isAttacking = false;
