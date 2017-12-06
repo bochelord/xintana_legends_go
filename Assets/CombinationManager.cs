@@ -110,6 +110,24 @@ public class CombinationManager : MonoBehaviour {
             //Debug.Log("YOU WON");
         }
 	}
+
+    /// <summary>
+    /// called when player loses, it's possible that later will be removed
+    /// </summary>
+    public void ResetCombination()
+    {
+        currentCombinationPosition = 0;
+        minimCombinationValue = 1;
+        timerSlider.value = 1;
+        combinationLength = 1;
+        combinationArray = new GameObject[combinationLength];
+        copyCombinationArray = new GameObject[combinationLength];
+
+        GenerateCombination();
+        CreateButtonsAndPlaceThem();
+        tempTimer = timeToResolveCombination;
+        EnableButtonsInteraction();
+    }
     /// <summary>
     /// Generates a Random combination with a combinationLength.
     /// </summary>
@@ -187,6 +205,8 @@ public class CombinationManager : MonoBehaviour {
             StartCoroutine(LoadNextRoundEnemy(1.7f));
             // We STOP the Game as the Player lose.
             gameOn = false;
+
+            ResetCombination();
         }
          
     }
@@ -238,7 +258,7 @@ public class CombinationManager : MonoBehaviour {
         {
             levelManager.AttackPlayer();
             DisableButtonsInteraction();
-            ShowLoseText();
+            //ShowLoseText();
             StartCoroutine(LoadNextRoundEnemy(0.1f));
             // We STOP the Game as the Player lose.
             gameOn = false;

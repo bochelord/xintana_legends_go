@@ -27,10 +27,5 @@ public class PlayerManager : MonoBehaviour {
     public void ReceiveDamage(float damage)
     {
         life -= damage;
-
-        if(life <= 0)
-        {
-            //TODO levelmanager ? GameOver
-        }
     }
 }
