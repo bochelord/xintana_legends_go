@@ -23,6 +23,9 @@ public class LevelManager : MonoBehaviour {
     public EnemiesPooler enemyPooler;
     public Transform enemyContainer;
     public bool enemyKilled = false;
+
+    private int _currentEnemyLevel = 0;
+
     void Awake()
     {
 
@@ -107,6 +110,7 @@ public class LevelManager : MonoBehaviour {
     private IEnumerator CoroGetNewEnemy(float delay)
     {
         yield return new WaitForSeconds(delay);
+        _currentEnemyLevel++;
         enemy = enemyPooler.GetPooledObject();
         enemyController = enemy.GetComponent<EnemyController>();
         enemy.transform.position = enemyContainer.position;
@@ -183,5 +187,8 @@ public class LevelManager : MonoBehaviour {
         temptext.SetActive(false);
     }
 
-    
+    public int GetCurrentEnemyLevel()
+    {
+        return _currentEnemyLevel;
+    }
 }

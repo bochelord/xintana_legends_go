@@ -44,7 +44,8 @@ public class EnemyController : MonoBehaviour {
     void OnEnable() // On Enable we need to replenish its life otherwise would appear as a Zombie
     {
         //yield return new WaitForSeconds(0.1f);
-        new_enemy = new EnemyStructure().GenerateWithLevel(type, level);
+        new_enemy = new EnemyStructure().GenerateWithLevel(type, levelManager.GetCurrentEnemyLevel());
+        //new_enemy = new EnemyStructure().GenerateWithLevel(type, level);
         life = new_enemy.life;
         damage = new_enemy.damage;
         this.GetComponent<_2dxFX_HSV>()._HueShift = new_enemy.dna_hue;
