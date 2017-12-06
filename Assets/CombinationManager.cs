@@ -37,6 +37,7 @@ public class CombinationManager : MonoBehaviour {
     private bool winningCondition = false;
     private float tempTimer;                        //Auxiliary variable to work with the Timer.
     private int currentCombinationPosition = 0;     //The combination position to check, by default 0.
+    private int minimCombinationValue = 1;          
     private LevelManager levelManager;
 
 
@@ -61,9 +62,10 @@ public class CombinationManager : MonoBehaviour {
     {
         combinationArray = null;
         copyCombinationArray = null;
-        
-        combinationArray = new GameObject[combinationLength];
-        copyCombinationArray = new GameObject[combinationLength];
+
+        int _tempLength = Random.Range(minimCombinationValue, combinationLength);
+        combinationArray = new GameObject[_tempLength];
+        copyCombinationArray = new GameObject[_tempLength];
         foreach (Transform child in combinationPanel.transform)
         {
             Destroy(child.gameObject);
@@ -94,7 +96,7 @@ public class CombinationManager : MonoBehaviour {
     void GenerateCombination() 
     {
         int tempValue = 0;
-        for (int i = 0; i < combinationLength; i++)
+        for (int i = 0; i < combinationArray.Length; i++)
         {
             tempValue = Random.Range(0, objectsCombinationPool.Length);
             combinationArray[i] = objectsCombinationPool[tempValue];
@@ -110,14 +112,25 @@ public class CombinationManager : MonoBehaviour {
     {
         combinationLength = newValue;
     }
+    /// <summary>
+    /// Change minimCombinationValue
+    /// </summary>
+    /// <param name="newValue"></param>
+    void ChangeMinimCombinationValue(int newValue)
+    {
+        if(combinationLength > 3)
+        {
+            minimCombinationValue = newValue;
+        }
 
+    }
     /// <summary>
     /// Instantiate the gameobjects and place them in the middle top of the screen.
     /// </summary>
     void CreateButtonsAndPlaceThem()
     {
         float offset = 0;
-        for (int i = 0; i < combinationLength; i++)
+        for (int i = 0; i < combinationArray.Length; i++)
         {
             offset += 75;
             //Vector3 screenPosition = GetScreenPosition(offset);
@@ -176,7 +189,7 @@ public class CombinationManager : MonoBehaviour {
             currentCombinationPosition++;
             
             // WINNING CONDITION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-            if (currentCombinationPosition == combinationLength)
+            if (currentCombinationPosition == combinationArray.Length)
             {
                 winningCondition = true;
                 gameOn = false;
@@ -192,12 +205,13 @@ public class CombinationManager : MonoBehaviour {
                 {
                     ShowWinText();
                     ChangeCombinationLength(combinationLength + 1);
-                    StartCoroutine(LoadNextRound(1.7f));
+                    ChangeMinimCombinationValue(minimCombinationValue + 1);
+                    StartCoroutine(LoadNextRound(2.5f));
                 }
                 else
                 {
                     ChangeCombinationLength(combinationLength );
-                    StartCoroutine(LoadNextRound(0.5f));
+                    StartCoroutine(LoadNextRound(0.1f));
 
                 }
                 
@@ -212,7 +226,7 @@ public class CombinationManager : MonoBehaviour {
         {
             DisableButtonsInteraction();
             ShowLoseText();
-            StartCoroutine(LoadNextRound(0.5f));
+            StartCoroutine(LoadNextRound(0.1f));
             // We STOP the Game as the Player lose.
             gameOn = false;
         }

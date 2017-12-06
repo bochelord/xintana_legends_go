@@ -84,7 +84,7 @@ public class EnemyController : MonoBehaviour {
     private void KillEnemy()
     {
         levelManager.enemyKilled = true;
-        levelManager.GetNewEnemy(1.5f);
+        levelManager.GetNewEnemy(0.1f);
         pooler.RemoveElement(this.transform);
         
     }
