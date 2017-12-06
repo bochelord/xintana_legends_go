@@ -217,10 +217,6 @@ public class CombinationManager : MonoBehaviour {
 
                 levelManager.AttackEnemy();
 
-
-                
-                
-                
                 if (levelManager.enemyKilled)
                 {
                     ShowWinText();
@@ -234,16 +230,13 @@ public class CombinationManager : MonoBehaviour {
                     StartCoroutine(LoadNextRoundEnemy(0.1f));
 
                 }
-                
-                
-                
                 //Debug.Log("COMBINATION LENGTH> " + combinationLength);
-                
                 
             }
         }
         else  // WRONG combination, USER lose. <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         {
+            levelManager.AttackPlayer();
             DisableButtonsInteraction();
             ShowLoseText();
             StartCoroutine(LoadNextRoundEnemy(0.1f));

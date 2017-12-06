@@ -13,12 +13,9 @@ public class EnemyController : MonoBehaviour {
                                 /// - Color Saturation (-2,2)   [1]
                                 /// - Brightness (-2,2)         [2]
                                 /// - size (0.275,0.325)        [3]
-
-
-    
+ 
     private float life;
-
-    
+   
     private float damage;
 
     private EnemyStructure new_enemy;

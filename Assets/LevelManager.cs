@@ -59,12 +59,8 @@ public class LevelManager : MonoBehaviour {
         clone_prefab = Instantiate(HitPrefabRight);
         clone_prefab.transform.position = player.transform.position;
         //////////////
-        //////////////
-
-
         ///Effect on Enemy
         ///
-
         GameObject clone_damageFxprefab;
         clone_damageFxprefab = Instantiate(damageFxPrefab);
         clone_damageFxprefab.transform.position = enemy.transform.position;
@@ -84,7 +80,23 @@ public class LevelManager : MonoBehaviour {
             LaunchShowHUDText(enemyContainer.transform.position + new Vector3(1.5f, 1.5f, 0), "crit!", new Color32(245, 141, 12, 255));
         }
     }
+    
+    /// <summary>
+    /// called when player miss combination
+    /// </summary>
+    public void AttackPlayer()
+    {
+        player.GetComponent<Animator>().SetInteger("AnimState", 3);
 
+        GameObject clone_damageFxprefab;
+        clone_damageFxprefab = Instantiate(damageFxPrefab);
+        clone_damageFxprefab.transform.position = player.transform.position;
+
+        float _damageDone = enemyController.GetDamageDoneByEnemy();
+        LaunchShowHUDText(player.transform.position + new Vector3(0, 1.5f, 0), _damageDone.ToString("F1"), new Color32(245, 141, 12, 255));
+        playerManager.ReceiveDamage(_damageDone);
+        
+    }
 
     public void GetNewEnemy(float delay)
     {
@@ -170,4 +182,6 @@ public class LevelManager : MonoBehaviour {
 
         temptext.SetActive(false);
     }
+
+    
 }

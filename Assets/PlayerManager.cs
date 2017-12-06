@@ -23,4 +23,14 @@ public class PlayerManager : MonoBehaviour {
         this.GetComponent<Animator>().SetInteger("AnimState", 0);
         //    ToggleScripts(true);
     }
+
+    public void ReceiveDamage(float damage)
+    {
+        life -= damage;
+
+        if(life <= 0)
+        {
+            //TODO levelmanager ? GameOver
+        }
+    }
 }
