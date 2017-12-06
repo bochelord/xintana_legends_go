@@ -78,6 +78,26 @@ public class CombinationManager : MonoBehaviour {
         timerSlider.value = 1;
         gameOn = true;
     }
+
+    void ResetGameButDontResetTime()
+    {
+        combinationArray = null;
+        copyCombinationArray = null;
+
+        int _tempLength = Random.Range(minimCombinationValue, combinationLength);
+        combinationArray = new GameObject[_tempLength];
+        copyCombinationArray = new GameObject[_tempLength];
+        foreach (Transform child in combinationPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        currentCombinationPosition = 0;
+        GenerateCombination();
+        CreateButtonsAndPlaceThem();
+        HideWinLoseText();
+        EnableButtonsInteraction();
+        gameOn = true;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -164,7 +184,7 @@ public class CombinationManager : MonoBehaviour {
         {
             DisableButtonsInteraction();
             ShowLoseText();
-            StartCoroutine(LoadNextRound(1.7f));
+            StartCoroutine(LoadNextRoundEnemy(1.7f));
             // We STOP the Game as the Player lose.
             gameOn = false;
         }
@@ -210,8 +230,8 @@ public class CombinationManager : MonoBehaviour {
                 }
                 else
                 {
-                    ChangeCombinationLength(combinationLength );
-                    StartCoroutine(LoadNextRound(0.1f));
+                    ChangeCombinationLength(combinationLength);
+                    StartCoroutine(LoadNextRoundEnemy(0.1f));
 
                 }
                 
@@ -226,7 +246,7 @@ public class CombinationManager : MonoBehaviour {
         {
             DisableButtonsInteraction();
             ShowLoseText();
-            StartCoroutine(LoadNextRound(0.1f));
+            StartCoroutine(LoadNextRoundEnemy(0.1f));
             // We STOP the Game as the Player lose.
             gameOn = false;
         }
@@ -271,12 +291,20 @@ public class CombinationManager : MonoBehaviour {
         youLose_Text.gameObject.SetActive(true);
     }
 
-    IEnumerator LoadNextRound(float delay){
+    IEnumerator LoadNextRoundEnemy(float delay){
 
         yield return new WaitForSeconds(delay);
-        ResetGame();
+        ResetGameButDontResetTime();
+        
         //Application.LoadLevel(Application.loadedLevel);
     }
+
+    IEnumerator LoadNextRound(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ResetGame();
+    }
+
     void HideWinLoseText(){
         if (youLose_Text)
         {
