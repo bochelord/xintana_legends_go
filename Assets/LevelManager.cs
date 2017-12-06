@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject player;
     public GameObject HUDTextContainer;
     public GameObject HUDTextPrefab;
+    public GameObject HUDPlayAgainContainer;
     private PlayerManager playerManager;
     private CombinationManager combinationManager;
     private List<Transform> inactiveHUDTextList = new List<Transform>();
@@ -26,7 +27,7 @@ public class LevelManager : MonoBehaviour {
     public bool enemyKilled = false;
 
     private int _currentEnemyLevel = 0;
-
+    private int _enemyCount = 0;
     void Awake()
     {
         combinationManager = FindObjectOfType<CombinationManager>();
@@ -104,7 +105,9 @@ public class LevelManager : MonoBehaviour {
         {
             //TODO ad view panel
             //Continue or go to main menu
-            RestartGame(); 
+           HUDPlayAgainContainer.SetActive(true);
+           combinationManager.DisableButtonsInteraction();
+            combinationManager.SetGameOn(false);
         }
         
     }
@@ -119,6 +122,7 @@ public class LevelManager : MonoBehaviour {
     {
         yield return new WaitForSeconds(delay);
         _currentEnemyLevel++;
+        _enemyCount++;
         enemy = enemyPooler.GetPooledObject();
         enemyController = enemy.GetComponent<EnemyController>();
         enemy.transform.position = enemyContainer.position;
@@ -200,12 +204,18 @@ public class LevelManager : MonoBehaviour {
         return _currentEnemyLevel;
     }
 
-    private void RestartGame()
+    /// <summary>
+    /// called in gameoverpanel
+    /// </summary>
+    public void RestartGame()
     {
+        HUDPlayAgainContainer.SetActive(false);
         enemyPooler.RemoveElement(enemyController.transform);
+        combinationManager.EnableButtonsInteraction();
         _currentEnemyLevel = 0;
         combinationManager.ResetCombination();
         playerManager.life = 9; // TODO remove when real implementation is done
         GetNewEnemy(1);
+        combinationManager.SetGameOn(true);
     }
 }

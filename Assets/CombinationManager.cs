@@ -39,11 +39,12 @@ public class CombinationManager : MonoBehaviour {
     private int currentCombinationPosition = 0;     //The combination position to check, by default 0.
     private int minimCombinationValue = 1;          
     private LevelManager levelManager;
-
+    private PlayerManager _playerManager;
 
     void Awake()
     {
         levelManager = FindObjectOfType<LevelManager>();
+        _playerManager = FindObjectOfType<PlayerManager>();
     }
 
     
@@ -256,10 +257,15 @@ public class CombinationManager : MonoBehaviour {
         }
         else  // WRONG combination, USER lose. <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         {
+
             levelManager.AttackPlayer();
             DisableButtonsInteraction();
             //ShowLoseText();
-            StartCoroutine(LoadNextRoundEnemy(0.1f));
+            if(_playerManager.life > 0)
+            {
+                StartCoroutine(LoadNextRoundEnemy(0.1f));
+            }
+
             // We STOP the Game as the Player lose.
             gameOn = false;
         }
@@ -327,8 +333,10 @@ public class CombinationManager : MonoBehaviour {
         {
             youWin_Text.gameObject.SetActive(false);
         }
-            
-        
     }
     
+    public void SetGameOn(bool value)
+    {
+        gameOn = value;
+    }
 }
