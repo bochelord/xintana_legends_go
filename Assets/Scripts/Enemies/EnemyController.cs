@@ -23,14 +23,14 @@ public class EnemyController : MonoBehaviour {
 
     private EnemyStructure new_enemy;
     private bool critico;
-    private Pooler pooler;
+    private EnemiesPooler pooler;
     private LevelManager levelManager;
 
     void Awake()
     {
         animator = this.GetComponent<Animator>();
         hsv_spriteFX = this.GetComponent<_2dxFX_HSV>();
-        pooler = this.GetComponentInParent<Pooler>();
+        pooler = FindObjectOfType<EnemiesPooler>();
         levelManager = FindObjectOfType<LevelManager>();
     }
 

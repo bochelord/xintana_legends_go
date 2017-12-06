@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum EnemyType { zazuc, makula, ball}
+public enum EnemyType { zazuc, makula, ball, kogi}
 
 
 public class EnemyStructure {
@@ -33,8 +33,8 @@ public class EnemyStructure {
                 damageBase = 15f;
                 damageGrowth = 0.1f;
                 break;
-            case EnemyType.ball:
-                this.type = EnemyType.ball;
+            case EnemyType.kogi:
+                this.type = EnemyType.kogi;
                 lifeBase = 2f;
                 lifeGrowth = 0.07f;
                 damageBase = 1f;

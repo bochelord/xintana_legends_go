@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject HUDTextPrefab;
     private PlayerManager playerManager;
     private List<Transform> inactiveHUDTextList = new List<Transform>();
-    public Pooler enemyPooler;
+    public EnemiesPooler enemyPooler;
     public Transform enemyContainer;
     public bool enemyKilled = false;
     void Awake()
@@ -68,14 +68,21 @@ public class LevelManager : MonoBehaviour {
         GameObject clone_damageFxprefab;
         clone_damageFxprefab = Instantiate(damageFxPrefab);
         clone_damageFxprefab.transform.position = enemy.transform.position;
-        LaunchShowHUDText(enemyContainer.transform.position + new Vector3(0,1.5f,0), enemyController.GetDamageDoneByEnemy().ToString("F1"), new Color32(245, 141, 12, 255)); /// TODO This has to be feed with the proper damage coming from the playerManager
+
+        float damagedone = 0;
+        bool critico = false;
+        damagedone = Formulas.GetDamageCalculated(1.2f, out critico);
+        LaunchShowHUDText(enemyContainer.transform.position + new Vector3(0,1.5f,0), damagedone.ToString("F1"), new Color32(245, 141, 12, 255)); /// TODO This has to be feed with the proper damage coming from the playerManager
 
 
         //damage to enemy
         //
 
-        enemyController.ApplyDamageToEnemy(enemyController.GetDamageDoneByEnemy());
-
+        enemyController.ApplyDamageToEnemy(damagedone);
+        if (critico)
+        {
+            LaunchShowHUDText(enemyContainer.transform.position + new Vector3(1.5f, 1.5f, 0), "crit!", new Color32(245, 141, 12, 255));
+        }
     }
 
 

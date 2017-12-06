@@ -12,6 +12,8 @@ public class EnemiesPooler : Pooler {
     public int amountPooledPerType;
     
 
+    
+
     public override void Start()
     {
         pooledObjects = new List<GameObject>();
@@ -19,7 +21,7 @@ public class EnemiesPooler : Pooler {
         {
             for (int i = 0; i < amountPooledPerType; i++)
             {
-                GameObject obj = (GameObject)Instantiate(pooledObject);
+                GameObject obj = (GameObject)Instantiate(enemiesPrefabs[j]);
                 obj.transform.parent = current.transform;
                 obj.transform.position = Vector3.zero;
                 obj.SetActive(false);
@@ -32,7 +34,7 @@ public class EnemiesPooler : Pooler {
     {
         List<GameObject> activeEnemies = new List<GameObject>();
         foreach(GameObject enemyobj in pooledObjects){
-            if (enemyobj.activeInHierarchy)
+            if (!enemyobj.activeInHierarchy)
             {
                 activeEnemies.Add(enemyobj);
             }
@@ -40,7 +42,14 @@ public class EnemiesPooler : Pooler {
 
         int index = Random.Range(0, activeEnemies.Count);
 
+        if (activeEnemies.Count == 0) { Debug.LogError("godverdomme"); }
+
         return activeEnemies[index];
 
+    }
+
+    public override void RemoveElement(Transform item)
+    {
+        base.RemoveElement(item);
     }
 }
