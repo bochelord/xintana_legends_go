@@ -39,11 +39,12 @@ GUI Animator FREE 1.1.5
 	Advance features in full version:
 
 		• Callbacks.
-		• No message in Play mode.
+		• No on screen message in Play mode.
 		• Compatible with many Tweeners; DOTween, HOTween, LeanTween, iTween.
 		• Able to add your favorite tweeners.
+		• Switchable between tweeners.
 		• Rotate, Scale and Fade loops in Idle-animations.
-		• Friendly Inspector that categorize In/Idle/Out animations into tabs.
+		• Friendly Inspector, categorize In/Idle/Out animations into tabs.
 		• Better performance.
 
 	Please direct any bugs/comments/suggestions to geteamdev@gmail.com.
