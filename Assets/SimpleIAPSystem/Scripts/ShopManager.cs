@@ -45,7 +45,7 @@ namespace SIS
         /// "parent" transform. This is because IAP Manager is a prefab that exists during
         /// scene changes, thus can't keep scene-specific data like transforms. 
         /// </summary>
-        //[HideInInspector]
+        [HideInInspector]
         public List<ShopContainer> containers = new List<ShopContainer>();
 
         /// <summary>

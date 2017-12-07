@@ -17,8 +17,13 @@ namespace SIS
         void Start()
         {
             //switch over to the virtual reality supported scene if VR mode is enabled
+            #if UNITY_2017_2_OR_NEWER
+            if (SceneManager.GetActiveScene().name == "AllSelection" && UnityEngine.XR.XRSettings.enabled)
+                SceneManager.LoadScene("VerticalVR");
+            #else
             if (SceneManager.GetActiveScene().name == "AllSelection" && UnityEngine.VR.VRSettings.enabled)
                 SceneManager.LoadScene("VerticalVR");
+            #endif
         }
 
 
