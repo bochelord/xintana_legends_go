@@ -203,6 +203,7 @@ public class LevelManager : MonoBehaviour {
 
     public void GameOverPanel()
     {
+        combinationManager.MoveButtonsOut();
         _guiManager.GameOverPanelOn();
         combinationManager.DisableButtonsInteraction();
         combinationManager.SetGameOn(false);
@@ -212,6 +213,7 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     public void RestartGame()
     {
+        combinationManager.MoveButtonsIn();
         _guiManager.GameOverPanelOff();
         enemyPooler.RemoveElement(enemyController.transform);
         combinationManager.EnableButtonsInteraction();

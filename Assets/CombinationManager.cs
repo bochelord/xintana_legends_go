@@ -5,14 +5,15 @@ using UnityEngine.UI;
 
 public class CombinationManager : MonoBehaviour {
 
-        // button at the bottom
-        //  3 rounds
-        // timer
-        // victory condition
+    // button at the bottom
+    //  3 rounds
+    // timer
+    // victory condition
     //rojo amarillo verde azul.
 
-    
+
     [Header("Links")]
+    public GameObject combinationButtons;
     public GameObject combinationPanel;
     public Button prefabButton;
     public GameObject explosionPrefab;
@@ -274,12 +275,21 @@ public class CombinationManager : MonoBehaviour {
         }
     }
 
-
+    public void MoveButtonsOut()
+    {
+        combinationButtons.GetComponent<GUIAnimFREE>().MoveOut();
+    }
+    public void MoveButtonsIn()
+    {
+        combinationButtons.GetComponent<GUIAnimFREE>().m_MoveIn.Time = 0.5f;
+        combinationButtons.GetComponent<GUIAnimFREE>().MoveIn();
+    }
     /// <summary>
     /// Buttons will not be interactable.
     /// </summary>
     public void DisableButtonsInteraction()
     {
+
         for (int i=0; i < 4; i++)
         {
             uiButtons[i].GetComponent<Button>().interactable = false;
@@ -293,6 +303,7 @@ public class CombinationManager : MonoBehaviour {
     /// </summary>
     public void EnableButtonsInteraction()
     {
+
         for (int i = 0; i < 4; i++)
         {
             if (uiButtons[i])
