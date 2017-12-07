@@ -13,6 +13,12 @@ public class AudioManager : MonoBehaviour {
     [Range(0, 1)]
     public float generalVolume;
 
+    [Header("")]
+    public AudioClip musicLevel1;
+    public AudioClip musicLevel2;
+    public AudioClip musicLevel3;
+    public AudioClip musicBossFight;
+
     [Header("FX SO")]
     public ScriptableObject xintana_attack_weapon_1;
     public ScriptableObject xintana_attack_weapon_2;
@@ -32,6 +38,9 @@ public class AudioManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         instance = this;
+
+
+        musicPlayer.clip = musicLevel1;
 
         if (Rad_SaveManager.profile.audioEnabled)
         {
