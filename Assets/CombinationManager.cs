@@ -118,6 +118,11 @@ public class CombinationManager : MonoBehaviour {
     public void ResetCombination()
     {
         combinationArray = null;
+        copyCombinationArray = null;
+        foreach (Transform child in combinationPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
         currentCombinationPosition = 0;
         minimCombinationValue = 1;
         timerSlider.value = 1;
@@ -202,13 +207,10 @@ public class CombinationManager : MonoBehaviour {
         }
         if (timerSlider.value <= 0)
         {
-            DisableButtonsInteraction();
-            ShowLoseText();
-            StartCoroutine(LoadNextRoundEnemy(1.7f));
             // We STOP the Game as the Player lose.
             gameOn = false;
+            levelManager.GameOverPanel();
 
-            ResetCombination();
         }
          
     }

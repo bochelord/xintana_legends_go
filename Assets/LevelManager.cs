@@ -37,11 +37,8 @@ public class LevelManager : MonoBehaviour {
     void Start()
     {
         GetNewEnemy(0);
-
         //fixscreeperra();
         //LaunchShowHUDText(enemyContainer.transform.position, enemyController.GetDamageDoneByEnemy().ToString("F1"), new Color32(245, 141, 12, 255));
-
-
     }
 
 
@@ -105,9 +102,7 @@ public class LevelManager : MonoBehaviour {
         {
             //TODO ad view panel
             //Continue or go to main menu
-           HUDPlayAgainContainer.SetActive(true);
-           combinationManager.DisableButtonsInteraction();
-            combinationManager.SetGameOn(false);
+            GameOverPanel();
         }
         
     }
@@ -204,6 +199,12 @@ public class LevelManager : MonoBehaviour {
         return _currentEnemyLevel;
     }
 
+    public void GameOverPanel()
+    {
+        HUDPlayAgainContainer.SetActive(true);
+        combinationManager.DisableButtonsInteraction();
+        combinationManager.SetGameOn(false);
+    }
     /// <summary>
     /// called in gameoverpanel
     /// </summary>
