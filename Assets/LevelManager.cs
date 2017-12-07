@@ -74,6 +74,7 @@ public class LevelManager : MonoBehaviour {
         damagedone = Formulas.GetDamageCalculated(1.2f, out critico);
         LaunchShowHUDText(enemyContainer.transform.position + new Vector3(0,1.5f,0), damagedone.ToString("F1"), new Color32(245, 141, 12, 255)); /// TODO This has to be feed with the proper damage coming from the playerManager
 
+        AudioManager.Instance.Play_XintanaAttack_1();
 
         //damage to enemy
         //
@@ -100,10 +101,15 @@ public class LevelManager : MonoBehaviour {
         LaunchShowHUDText(player.transform.position + new Vector3(0, 1.5f, 0), _damageDone.ToString("F1"), new Color32(245, 141, 12, 255));
         playerManager.ReceiveDamage(_damageDone);
 
+        AudioManager.Instance.Play_XintanaHit();
+
+
         if(playerManager.life <= 0)
         {
             //TODO ad view panel
             //Continue or go to main menu
+            AudioManager.Instance.Play_XintanaDeath();
+            player.GetComponent<Animator>().SetInteger("AnimState",4);
             GameOverPanel();
         }
         
