@@ -5,7 +5,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+#if UNITY_2017_2_OR_NEWER
+using UnityEngine.XR;
+#else
 using UnityEngine.VR;
+#endif
 
 namespace SIS
 {
@@ -88,7 +92,11 @@ namespace SIS
                 displayIndex = eventCamera.targetDisplay;
 
             #if !UNITY_EDITOR
-            Vector2 vrPos = new Vector2(VRSettings.eyeTextureWidth / 2, VRSettings.eyeTextureHeight / 2);
+                #if UNITY_2017_2_OR_NEWER
+                Vector2 vrPos = new Vector2(XRSettings.eyeTextureWidth / 2, XRSettings.eyeTextureHeight / 2);
+                #else
+                Vector2 vrPos = new Vector2(VRSettings.eyeTextureWidth / 2, VRSettings.eyeTextureHeight / 2);
+                #endif
             eventData.position = vrPos;
             #endif
 
@@ -122,8 +130,13 @@ namespace SIS
                 float w = Screen.width;
                 float h = Screen.height;
                 #if !UNITY_EDITOR
-                w = VRSettings.eyeTextureWidth;
-                h = VRSettings.eyeTextureHeight;
+                    #if UNITY_2017_2_OR_NEWER
+                    w = XRSettings.eyeTextureWidth;
+                    h = XRSettings.eyeTextureHeight;
+                    #else
+                    w = VRSettings.eyeTextureWidth;
+                    h = VRSettings.eyeTextureHeight;
+                    #endif
                 #endif
 
                 if (displayIndex > 0 && displayIndex < Display.displays.Length)

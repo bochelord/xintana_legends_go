@@ -1,5 +1,9 @@
 using UnityEngine;
+#if UNITY_2017_2_OR_NEWER
+using UnityEngine.XR;
+#else
 using UnityEngine.VR;
+#endif
 
 namespace SIS
 {
@@ -25,7 +29,11 @@ namespace SIS
             // Set the rotation to be the same as the user's in the y axis.
             eulerRotation.x = 0;
             eulerRotation.z = 0;
+			#if UNITY_2017_2_OR_NEWER
+            eulerRotation.y = InputTracking.GetLocalRotation(XRNode.Head).eulerAngles.y;
+            #else
             eulerRotation.y = InputTracking.GetLocalRotation(VRNode.Head).eulerAngles.y;
+            #endif
 
             // Add 360 to the rotation so that it can effectively be clamped.
             if (eulerRotation.y < 270)

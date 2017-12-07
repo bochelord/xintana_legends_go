@@ -419,8 +419,6 @@ namespace SIS
                 return PurchaseProcessingResult.Complete;
             }
 
-            Debug.LogError("Processing Purchase: " + e.purchasedProduct.definition.id);
-
             /*
             //IN DEVELOPMENT until CloudMoolah comes out of beta
             //CloudMoolah payment request
