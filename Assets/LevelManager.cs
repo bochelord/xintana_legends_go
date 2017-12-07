@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject HUDPlayAgainContainer;
     private PlayerManager playerManager;
     private CombinationManager combinationManager;
+    private Rad_GuiManager _guiManager;
     private List<Transform> inactiveHUDTextList = new List<Transform>();
     public EnemiesPooler enemyPooler;
     public Transform enemyContainer;
@@ -32,6 +33,7 @@ public class LevelManager : MonoBehaviour {
     {
         combinationManager = FindObjectOfType<CombinationManager>();
         playerManager = player.GetComponent<PlayerManager>();
+        _guiManager = FindObjectOfType<Rad_GuiManager>();
     }
 
     void Start()
@@ -201,7 +203,7 @@ public class LevelManager : MonoBehaviour {
 
     public void GameOverPanel()
     {
-        HUDPlayAgainContainer.SetActive(true);
+        _guiManager.GameOverPanelOn();
         combinationManager.DisableButtonsInteraction();
         combinationManager.SetGameOn(false);
     }
@@ -210,7 +212,7 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     public void RestartGame()
     {
-        HUDPlayAgainContainer.SetActive(false);
+        _guiManager.GameOverPanelOff();
         enemyPooler.RemoveElement(enemyController.transform);
         combinationManager.EnableButtonsInteraction();
         _currentEnemyLevel = 0;
