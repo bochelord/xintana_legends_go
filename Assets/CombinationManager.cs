@@ -117,6 +117,7 @@ public class CombinationManager : MonoBehaviour {
     /// </summary>
     public void ResetCombination()
     {
+        combinationArray = null;
         currentCombinationPosition = 0;
         minimCombinationValue = 1;
         timerSlider.value = 1;
