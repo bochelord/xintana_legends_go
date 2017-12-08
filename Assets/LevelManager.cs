@@ -278,7 +278,7 @@ public class LevelManager : MonoBehaviour {
         combinationManager.EnableButtonsInteraction();
         _currentEnemyLevel = 0;
         combinationManager.ResetCombination();
-        player.GetComponent<Animator>().SetInteger("AnimState",0);
+        playerManager.OnAttackFinished();
         playerManager.life = 9; // TODO remove when real implementation is done
         GetNewEnemy(1);
         combinationManager.SetGameOn(true);
