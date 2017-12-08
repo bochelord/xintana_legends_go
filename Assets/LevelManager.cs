@@ -114,7 +114,8 @@ public class LevelManager : MonoBehaviour {
             //Continue or go to main menu
             AudioManager.Instance.Play_XintanaDeath();
             player.GetComponent<Animator>().SetInteger("AnimState",4);
-            GameOverPanel();
+            StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 0.5f));
+            //GameOverPanel();
         }
         
     }
