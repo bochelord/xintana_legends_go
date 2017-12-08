@@ -129,6 +129,7 @@ public class LevelManager : MonoBehaviour {
         enemy = enemyPooler.GetPooledObject();
         enemyController = enemy.GetComponent<EnemyController>();
         enemy.transform.position = enemyContainer.position;
+        _guiManager.enemyText.text = enemyController.type.ToString();
         enemy.SetActive(true);
         enemy.transform.SetParent(enemyContainer);
         enemyKilled = false;
