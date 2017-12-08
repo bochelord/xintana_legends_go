@@ -27,6 +27,10 @@ public class LevelManager : MonoBehaviour {
     public Transform enemyContainer;
     public bool enemyKilled = false;
 
+    private int _kogiKilled = 0;
+    private int _zazucKilled = 0;
+    private int _makulaKilled = 0;
+    private float _playerScore = 0;
     private int _currentEnemyLevel = 0;
     private int _enemyCount = 0;
     void Awake()
@@ -120,7 +124,42 @@ public class LevelManager : MonoBehaviour {
         
         StartCoroutine(CoroGetNewEnemy(delay));
     }
+    
+    /// <summary>
+    /// called in combinationManager, when you kill an enemy
+    /// </summary>
+    public void AddEnemyCount()
+    {
+        switch (enemyController.type)
+        {
+            case EnemyType.kogi:
+                _kogiKilled++;
+                break;
+            case EnemyType.makula:
+                _makulaKilled++;
+                break;
+            case EnemyType.zazuc:
+                _zazucKilled++;
+                break;
+        }
+    }
 
+    public void AddPlayerScore()
+    {
+        float timeRemaining = combinationManager.timerSlider.value;
+        switch (enemyController.type)
+        {
+            case EnemyType.kogi:
+                _playerScore = 1000 * GetCurrentEnemyLevel() * timeRemaining;
+                break;
+            case EnemyType.makula:
+                _playerScore = 2000 * GetCurrentEnemyLevel() *timeRemaining;
+                break;
+            case EnemyType.zazuc:
+                _playerScore = 5000 * GetCurrentEnemyLevel() * timeRemaining;
+                break;
+        }
+    }
     private IEnumerator CoroGetNewEnemy(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -230,4 +269,29 @@ public class LevelManager : MonoBehaviour {
         GetNewEnemy(1);
         combinationManager.SetGameOn(true);
     }
+
+    //private int _kogiKilled = 0;
+    //private int _zazucKilled = 0;
+    //private int _makulaKilled = 0;
+    //private int _playerScore = 0;
+    //private int _currentEnemyLevel = 0;
+    //private int _enemyCount = 0;
+
+    public int GetKogiKilled()
+    {
+        return _kogiKilled;
+    }
+    public int GetZazuKilled()
+    {
+        return _zazucKilled;
+    }
+    public int GetMakulaKilled()
+    {
+        return _makulaKilled;
+    }
+    public float GetPlayerScore()
+    {
+        return _playerScore;
+    }
+
 }

@@ -14,6 +14,18 @@ public class Rad_GuiManager : MonoBehaviour {
     [Header("Text")]
     public Text enemyText;
 
+    [Header("Share Panel")]
+    public Text kogiAmount;
+    public Text zazuAmount;
+    public Text makulaAmount;
+    public Text scorePlayer;
+
+    private LevelManager _levelManager;
+
+    private void Awake()
+    {
+        _levelManager = FindObjectOfType<LevelManager>();
+    }
     /// <summary>
     /// called from Button, set main menu panel on and turns off the rest
     /// </summary>
@@ -45,5 +57,13 @@ public class Rad_GuiManager : MonoBehaviour {
         gmeOverPanel.transform.localPosition = new Vector3(663f, 0, 0);
         gmeOverPanel.SetActive(false);
         
+    }
+    public void FillSharePanel()
+    {
+        kogiAmount.text = _levelManager.GetKogiKilled().ToString();
+        zazuAmount.text = _levelManager.GetZazuKilled().ToString();
+        makulaAmount.text = _levelManager.GetMakulaKilled().ToString();
+        int _tempScore = (int)_levelManager.GetPlayerScore();
+        scorePlayer.text = _tempScore.ToString();
     }
 }
