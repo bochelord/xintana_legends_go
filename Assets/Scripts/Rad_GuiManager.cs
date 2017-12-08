@@ -41,6 +41,7 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void GameOverPanelOff()
     {
+        //gmeOverPanel.transform.DOLocalMoveX(663f, 1f);
         gmeOverPanel.transform.localPosition = new Vector3(663f, 0, 0);
         gmeOverPanel.SetActive(false);
         
