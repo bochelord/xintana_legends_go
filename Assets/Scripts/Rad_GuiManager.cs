@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Rad_GuiManager : MonoBehaviour {
 
@@ -34,11 +35,14 @@ public class Rad_GuiManager : MonoBehaviour {
     public void GameOverPanelOn()
     {
         gmeOverPanel.SetActive(true);
+        gmeOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
     }
 
 
     public void GameOverPanelOff()
     {
+        gmeOverPanel.transform.localPosition = new Vector3(663f, 0, 0);
         gmeOverPanel.SetActive(false);
+        
     }
 }
