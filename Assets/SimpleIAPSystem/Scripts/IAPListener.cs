@@ -49,84 +49,17 @@ namespace SIS
             switch (id)
             {
                 //section for in app purchases
-                case "coins":
+                case "shop_item_00":
                     //the user bought the item "coins", show appropriate feedback
-                    ShowMessage("1000 coins were added to your balance!");
+                    ShowMessage("Your score will be double!!!");
                     break;
-                case "coin_pack":
-                    ShowMessage("2500 coins were added to your balance!");
+                case "shop_item_01":
+                    ShowMessage("Now you have an extra life in combat!");
                     break;
-                case "big_coin_pack":
-                    ShowMessage("6000 coins were added to your balance!");
-                    break;
-                case "huge_coin_pack":
-                    ShowMessage("12000 coins were added to your balance!");
-                    break;
-                case "no_ads":
-                    //no_ads purchased. You can now check DBManager.isPurchased("no_ads")
-                    //before showing ads and block them
-                    ShowMessage("Ads disabled!");
-                    break;
-                case "abo_monthly":
-                    //same here - your code to unlock subscription content
-                    ShowMessage("Subscribed to monthly abo!");
-                    break;
-                case "restore":
-                    //nothing else to call here,
-                    //the actual restore is handled by IAPManager
-                    ShowMessage("Restored transactions!");
+                case "shop_item_02":
                     break;
 
-                //section for in game content
-                case "bullets":
-                    //if you define a usage count in the IAP Settings editor, then the amount
-                    //has been added to your inventory already. No need to call something like
-                    //DBManager.IncreasePlayerData("bullets", new SimpleJSON.JSONData(bullets + 100));
-                    ShowMessage("Bullets were added to your inventory!");
-                    break;
-                case "health":
-                    ShowMessage("Medikits were added to your inventory!");
-                    break;
-                case "energy":
-                    ShowMessage("Energy was added to your inventory!");
-                    break;
-                case "speed":
-                    ShowMessage("Speed boost unlocked!");
-                    break;
-                case "speed_1":
-                case "speed_2":
-                case "speed_3":
-                    ShowMessage("Speed boost upgraded!");
-                    break;
-                case "bonus":
-                    ShowMessage("Bonus level unlocked!");
-                    break;
-
-                case "uzi":
-                    ShowMessage("Uzi unlocked!");
-                    break;
-                case "ak47":
-                    ShowMessage("AK47 unlocked!");
-                    break;
-                case "m4":
-                    ShowMessage("M4 unlocked!");
-                    break;
-
-                case "hat":
-                    ShowMessage("Hat unlocked!");
-                    break;
-                case "backpack":
-                    ShowMessage("Backpack unlocked!");
-                    break;
-                case "belt":
-                    ShowMessage("Ammo belt unlocked!");
-                    break;
-                case "jetpack":
-                    ShowMessage("Jetpack unlocked!");
-                    break;
-                case "booster":
-                    ShowMessage("Double XP unlocked!");
-                    break;
+                
             }
         }
 
