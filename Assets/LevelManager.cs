@@ -151,13 +151,13 @@ public class LevelManager : MonoBehaviour {
         switch (enemyController.type)
         {
             case EnemyType.kogi:
-                _playerScore = 1000 * GetCurrentEnemyLevel() * timeRemaining;
+                _playerScore += 1000 * GetCurrentEnemyLevel() * timeRemaining;
                 break;
             case EnemyType.makula:
-                _playerScore = 2000 * GetCurrentEnemyLevel() *timeRemaining;
+                _playerScore += 2000 * GetCurrentEnemyLevel() *timeRemaining;
                 break;
             case EnemyType.zazuc:
-                _playerScore = 5000 * GetCurrentEnemyLevel() * timeRemaining;
+                _playerScore += 5000 * GetCurrentEnemyLevel() * timeRemaining;
                 break;
         }
     }
@@ -166,7 +166,14 @@ public class LevelManager : MonoBehaviour {
         yield return new WaitForSeconds(delay);
         _currentEnemyLevel++;
         _enemyCount++;
-        enemy = enemyPooler.GetPooledObject();
+        if (_enemyCount == 10 || _enemyCount == 20 || _enemyCount == 30)
+        {
+            enemy = enemyPooler.GetBossObject();
+        }
+        else
+        {
+            enemy = enemyPooler.GetPooledObject();
+        }
         enemyController = enemy.GetComponent<EnemyController>();
         enemy.transform.position = enemyContainer.position;
         _guiManager.enemyText.text = enemyController.type.ToString();
