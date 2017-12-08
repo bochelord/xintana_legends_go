@@ -114,7 +114,7 @@ public class LevelManager : MonoBehaviour {
             //Continue or go to main menu
             AudioManager.Instance.Play_XintanaDeath();
             player.GetComponent<Animator>().SetInteger("AnimState",4);
-            StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 0.5f));
+            StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 1.5f));
             //GameOverPanel();
         }
         
@@ -273,6 +273,7 @@ public class LevelManager : MonoBehaviour {
         combinationManager.EnableButtonsInteraction();
         _currentEnemyLevel = 0;
         combinationManager.ResetCombination();
+        player.GetComponent<Animator>().SetInteger("AnimState",0);
         playerManager.life = 9; // TODO remove when real implementation is done
         GetNewEnemy(1);
         combinationManager.SetGameOn(true);
