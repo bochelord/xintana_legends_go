@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class CombinationManager : MonoBehaviour {
 
@@ -277,12 +278,18 @@ public class CombinationManager : MonoBehaviour {
 
     public void MoveButtonsOut()
     {
-        combinationButtons.GetComponent<GUIAnimFREE>().MoveOut();
+        //combinationButtons.GetComponent<GUIAnimFREE>().MoveOut();
+        //combinationButtons.transform.DOLocalMove
+        //combinationButtons.transform.DOLocalMove(new Vector3(-2.5f, -51f, 0f), 1f);
+        combinationButtons.transform.DOMoveY(-68f,1f);
     }
     public void MoveButtonsIn()
     {
-        combinationButtons.GetComponent<GUIAnimFREE>().m_MoveIn.Time = 0.5f;
-        combinationButtons.GetComponent<GUIAnimFREE>().MoveIn();
+        //combinationButtons.GetComponent<GUIAnimFREE>().m_MoveIn.Time = 0.5f;
+        //combinationButtons.GetComponent<GUIAnimFREE>().MoveIn();
+
+        //combinationButtons.transform.DOLocalMove(new Vector3(-2.5f,41f,0f),1f);
+        combinationButtons.transform.DOMoveY(58f, 1f);
     }
     /// <summary>
     /// Buttons will not be interactable.
