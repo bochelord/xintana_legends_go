@@ -27,6 +27,11 @@ public class LevelManager : MonoBehaviour {
     public Transform enemyContainer;
     public bool enemyKilled = false;
 
+    [Header("Backgrounds")]
+    public GameObject worldspritesLevel1;
+    public GameObject worldspritesLevel2;
+    public GameObject worldspritesLevel3;
+
     private int _kogiKilled = 0;
     private int _zazucKilled = 0;
     private int _makulaKilled = 0;
@@ -42,6 +47,7 @@ public class LevelManager : MonoBehaviour {
 
     void Start()
     {
+        PrepareBackgroundLevel(1);
         GetNewEnemy(0);
         //fixscreeperra();
         //LaunchShowHUDText(enemyContainer.transform.position, enemyController.GetDamageDoneByEnemy().ToString("F1"), new Color32(245, 141, 12, 255));
@@ -115,7 +121,7 @@ public class LevelManager : MonoBehaviour {
             AudioManager.Instance.Play_XintanaDeath();
             player.GetComponent<Animator>().SetInteger("AnimState",4);
             StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 1.5f));
-            //GameOverPanel();
+            
         }
         
     }
@@ -126,6 +132,29 @@ public class LevelManager : MonoBehaviour {
         StartCoroutine(CoroGetNewEnemy(delay));
     }
     
+    private void PrepareBackgroundLevel(int level)
+    {
+        worldspritesLevel1.SetActive(false);
+        worldspritesLevel2.SetActive(false);
+        worldspritesLevel3.SetActive(false);
+
+        switch (level)
+        {
+            case 1:
+                worldspritesLevel1.SetActive(true);
+                break;
+            case 2:
+                worldspritesLevel2.SetActive(true);
+                break;
+            case 3:
+                worldspritesLevel3.SetActive(true);
+                break;
+            //default:
+            //    Debug.LogError("Level" + level + "does not exist!!! Beware DUDE!");
+        }
+    }
+
+
     /// <summary>
     /// called in combinationManager, when you kill an enemy
     /// </summary>
@@ -151,13 +180,13 @@ public class LevelManager : MonoBehaviour {
         switch (enemyController.type)
         {
             case EnemyType.kogi:
-                _playerScore += 1000 * GetCurrentEnemyLevel() * timeRemaining;
+                _playerScore += 2000 * GetCurrentEnemyLevel() * timeRemaining;
                 break;
             case EnemyType.makula:
-                _playerScore += 2000 * GetCurrentEnemyLevel() *timeRemaining;
+                _playerScore += 5000 * GetCurrentEnemyLevel() *timeRemaining;
                 break;
             case EnemyType.zazuc:
-                _playerScore += 5000 * GetCurrentEnemyLevel() * timeRemaining;
+                _playerScore += 1500 * GetCurrentEnemyLevel() * timeRemaining;
                 break;
         }
     }
@@ -174,6 +203,20 @@ public class LevelManager : MonoBehaviour {
         {
             enemy = enemyPooler.GetPooledObject();
         }
+        
+        //we control the worldsprites based on the amount of enemies
+        if (_enemyCount > 10 && _enemyCount<=20)
+        {
+            //level2
+            PrepareBackgroundLevel(2);
+        }
+
+        if (_enemyCount > 20)
+        {
+            //level3
+            PrepareBackgroundLevel(3);
+        }
+
         enemyController = enemy.GetComponent<EnemyController>();
         enemy.transform.position = enemyContainer.position;
         _guiManager.enemyText.text = enemyController.type.ToString();

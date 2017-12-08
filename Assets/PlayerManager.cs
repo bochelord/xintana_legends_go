@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
 
-    public float life;
+    public float life = 9;
 	// Use this for initialization
-	void Start () {
-		life = 9;
-	}
+	//void Start () {
+	//	life = 9;
+	//}
 	
 
     /// <summary>
