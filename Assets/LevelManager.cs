@@ -267,6 +267,11 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     public void RestartGame()
     {
+        _playerScore = 0;
+        _zazucKilled = 0;
+        _makulaKilled = 0;
+        _kogiKilled = 0;
+        _enemyCount = 0;
         combinationManager.MoveButtonsIn();
         _guiManager.GameOverPanelOff();
         enemyPooler.RemoveElement(enemyController.transform);
