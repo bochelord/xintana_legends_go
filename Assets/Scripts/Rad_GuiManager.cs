@@ -10,6 +10,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject gmeOverPanel;
     public GameObject mainMenuPanel;
     public GameObject settingsPanel;
+    public GameObject shop;
 
     [Header("Text")]
     public Text enemyText;
@@ -65,5 +66,15 @@ public class Rad_GuiManager : MonoBehaviour {
         makulaAmount.text = _levelManager.GetMakulaKilled().ToString();
         int _tempScore = (int)_levelManager.GetPlayerScore();
         scorePlayer.text = _tempScore.ToString();
+    }
+
+    public void Button_OpenShop()
+    {
+        shop.SetActive(true);
+    }
+
+    public void Button_CloseShop()
+    {
+        shop.SetActive(false);
     }
 }
