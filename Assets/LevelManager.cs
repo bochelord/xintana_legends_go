@@ -143,9 +143,16 @@ public class LevelManager : MonoBehaviour {
         if(playerManager.life <= 0)
         {
             //TODO ad view panel
+
+
+
+
+
             //Continue or go to main menu
             AudioManager.Instance.Play_XintanaDeath();
             player.GetComponent<Animator>().SetInteger("AnimState",4);
+            AnalyticsManager.Instance.GameOver_Event((int)_playerScore, _enemyCount + 1, _worldNumber);
+
             StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 1.5f));
             
         }
@@ -204,7 +211,7 @@ public class LevelManager : MonoBehaviour {
     {
         float timeRemaining = combinationManager.timerSlider.value;
 
-        Debug.Log("MECAGO EN TODA TU PUTA MADRE");
+        //Debug.Log("MECAGO EN TODA TU PUTA MADRE");
         switch (typein)
         {
             case EnemyType.kogi:

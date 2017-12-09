@@ -12,6 +12,7 @@ public class RadLauncher : MonoBehaviour {
 	// Use this for initialization
 	IEnumerator Start () {
 
+        AnalyticsManager.Instance.DeviceModel_Event();
         Fader.DOFade(0f, 0.7f);
 
 
