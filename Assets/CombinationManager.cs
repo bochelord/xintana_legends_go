@@ -43,11 +43,14 @@ public class CombinationManager : MonoBehaviour {
     private LevelManager levelManager;
     private PlayerManager _playerManager;
     private int _eachthreetimes = 3;
+    public float original_timeToResolveCombination;
 
     void Awake()
     {
         levelManager = FindObjectOfType<LevelManager>();
         _playerManager = FindObjectOfType<PlayerManager>();
+        original_timeToResolveCombination = timeToResolveCombination;
+
     }
 
     
@@ -249,7 +252,7 @@ public class CombinationManager : MonoBehaviour {
                 gameOn = false;
                 DisableButtonsInteraction();
 
-                levelManager.AttackEnemy();
+                levelManager.AttackEnemy(1.5f); //TODO GHet tje damage from the player!!!
 
                 if (levelManager.enemyKilled)
                 {
@@ -260,7 +263,7 @@ public class CombinationManager : MonoBehaviour {
                     {
                         ChangeMinimCombinationValue(minimCombinationValue + 1);
                         ChangeCombinationLength(combinationLength + 1);
-                        timeToResolveCombination += 3;
+                        timeToResolveCombination += 1;
                         _eachthreetimes += 3;
                     }
                     else

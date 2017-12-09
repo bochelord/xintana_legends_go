@@ -39,6 +39,7 @@ public class LevelManager : MonoBehaviour {
     private int _currentEnemyLevel = 0;
     private int _enemyCount = 0;
     private int _eachthreetimes = 3;
+    private float timerSafe;
 
     void Awake()
     {
@@ -56,7 +57,7 @@ public class LevelManager : MonoBehaviour {
     }
 
 
-    public void AttackEnemy()
+    public void AttackEnemy(float in_damage)
     {
         // MiniPlan
         // Effect on Player
@@ -65,7 +66,7 @@ public class LevelManager : MonoBehaviour {
 
         float damagedone = 0;
         bool critico = false;
-        damagedone = Formulas.GetDamageCalculated(1.2f, out critico);
+        damagedone = Formulas.GetDamageCalculated(in_damage, out critico);
 
         if (damagedone > enemyController.GetLife())
         {
@@ -223,7 +224,13 @@ public class LevelManager : MonoBehaviour {
         if (_enemyCount == 7 || _enemyCount == 14 || _enemyCount == 21)//each 7 enemies killed we summon a final boss
         {
             enemy = enemyPooler.GetBossObject();
+            timerSafe = combinationManager.timeToResolveCombination;
             combinationManager.timeToResolveCombination *= 2;
+        }
+        else if (_enemyCount == 8 || _enemyCount == 15 || _enemyCount == 22)//after a boss fight we reset the timer to whatever it was before it
+        {
+            combinationManager.timeToResolveCombination = timerSafe;
+            enemy = enemyPooler.GetPooledObject();
         }
         else
         {
@@ -242,7 +249,7 @@ public class LevelManager : MonoBehaviour {
             
         }
 
-        if (_enemyCount > 21)
+        if (_enemyCount > 14)
         {
             //level3
             PrepareBackgroundLevel(3);
@@ -351,6 +358,7 @@ public class LevelManager : MonoBehaviour {
         _kogiKilled = 0;
         _enemyCount = 0;
         combinationManager.MoveButtonsIn();
+        combinationManager.timeToResolveCombination = combinationManager.original_timeToResolveCombination;
         _guiManager.GameOverPanelOff();
         enemyPooler.RemoveElement(enemyController.transform);
         combinationManager.EnableButtonsInteraction();
@@ -392,4 +400,7 @@ public class LevelManager : MonoBehaviour {
     {
         return _kogiKilled + _zazucKilled + _makulaKilled;
     }
+
+
+
 }
