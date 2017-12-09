@@ -40,6 +40,8 @@ public class LevelManager : MonoBehaviour {
     private int _enemyCount = 0;
     private int _eachthreetimes = 3;
     private float timerSafe;
+    private int _worldNumber = 1;
+
 
     private bool musiclevel2_AlreadyPlayed = false;
     private bool musiclevel3_AlreadyPlayed = false;
@@ -255,6 +257,7 @@ public class LevelManager : MonoBehaviour {
         {
             //level2
             PrepareBackgroundLevel(2);
+            _worldNumber++;
             if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicLevel2 && !musiclevel2_AlreadyPlayed)
             {
                 AudioManager.Instance.PlayMusicLevel2();
@@ -267,6 +270,7 @@ public class LevelManager : MonoBehaviour {
         {
             //level3
             PrepareBackgroundLevel(3);
+            _worldNumber++;
             if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicLevel3 && !musiclevel3_AlreadyPlayed)
             {
                 AudioManager.Instance.PlayMusicLevel3();
@@ -372,6 +376,7 @@ public class LevelManager : MonoBehaviour {
         _makulaKilled = 0;
         _kogiKilled = 0;
         _enemyCount = 0;
+        _worldNumber = 0;
         combinationManager.MoveButtonsIn();
         combinationManager.timeToResolveCombination = combinationManager.original_timeToResolveCombination;
         _guiManager.GameOverPanelOff();
@@ -416,6 +421,9 @@ public class LevelManager : MonoBehaviour {
         return _kogiKilled + _zazucKilled + _makulaKilled;
     }
 
-
+    public int GetWorldNumber()
+    {
+        return _worldNumber;
+    }
 
 }

@@ -20,6 +20,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text zazuAmount;
     public Text makulaAmount;
     public Text scorePlayer;
+    public Text worldReached;
 
     private LevelManager _levelManager;
 
@@ -66,6 +67,8 @@ public class Rad_GuiManager : MonoBehaviour {
         makulaAmount.text = _levelManager.GetMakulaKilled().ToString();
         int _tempScore = (int)_levelManager.GetPlayerScore();
         scorePlayer.text = _tempScore.ToString();
+        worldReached.text = _levelManager.GetWorldNumber().ToString();
+        
     }
 
     public void Button_OpenShop()
