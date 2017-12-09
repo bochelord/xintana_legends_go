@@ -78,7 +78,7 @@ public class CombinationManager : MonoBehaviour {
         CreateButtonsAndPlaceThem();
         HideWinLoseText();
         EnableButtonsInteraction();
-        timerSlider.value = 1;
+        ResetTimer();
         gameOn = true;
     }
 
@@ -108,10 +108,11 @@ public class CombinationManager : MonoBehaviour {
         {
             UpdateTimer();
         }
-        if (winningCondition)
-        {
-            //Debug.Log("YOU WON");
-        }
+        //if (winningCondition)
+        //{
+        //    //Debug.Log("YOU WON");
+        //    ResetTimer();
+        //}
 	}
 
     /// <summary>
@@ -217,6 +218,12 @@ public class CombinationManager : MonoBehaviour {
          
     }
 
+    void ResetTimer()
+    {
+        tempTimer = timeToResolveCombination;
+        timerSlider.value = tempTimer;
+    }
+
     /// <summary>
     /// Function called from the UI buttons.
     /// Get the Color of the Pressed Button and then compare it with the current combination to solve.
@@ -247,7 +254,15 @@ public class CombinationManager : MonoBehaviour {
                 {
                     ShowWinText();
                     ChangeCombinationLength(combinationLength + 1);
-                    ChangeMinimCombinationValue(minimCombinationValue + 1);
+
+                    if (levelManager.GetTotalEnemyKilled() % 3 ==0) //each three kills we gorw the combination
+                    {
+                        ChangeMinimCombinationValue(minimCombinationValue + 1);
+                    }
+                    else
+                    {
+                        ChangeMinimCombinationValue(minimCombinationValue);
+                    }
                     StartCoroutine(LoadNextRound(2.5f));
                 }
                 else
@@ -265,7 +280,7 @@ public class CombinationManager : MonoBehaviour {
 
             levelManager.AttackPlayer();
             DisableButtonsInteraction();
-            //ShowLoseText();
+            ShowLoseText();
             if(_playerManager.life > 0)
             {
                 StartCoroutine(LoadNextRoundEnemy(0.1f));

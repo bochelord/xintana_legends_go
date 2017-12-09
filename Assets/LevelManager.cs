@@ -211,7 +211,7 @@ public class LevelManager : MonoBehaviour {
         yield return new WaitForSeconds(delay);
         _currentEnemyLevel++;
         _enemyCount++;
-        if (_enemyCount == 10 || _enemyCount == 20 || _enemyCount == 30)
+        if (_enemyCount == 5 || _enemyCount == 10 || _enemyCount == 15)
         {
             enemy = enemyPooler.GetBossObject();
             combinationManager.timeToResolveCombination = 30f;
@@ -223,16 +223,22 @@ public class LevelManager : MonoBehaviour {
         }
         
         //we control the worldsprites based on the amount of enemies
-        if (_enemyCount > 10 && _enemyCount<=20)
+        if (_enemyCount > 5 && _enemyCount<=15)
         {
             //level2
             PrepareBackgroundLevel(2);
+            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicLevel2)
+            {
+                AudioManager.Instance.PlayMusicLevel2();
+            }
+            
         }
 
-        if (_enemyCount > 20)
+        if (_enemyCount > 15)
         {
             //level3
             PrepareBackgroundLevel(3);
+            AudioManager.Instance.PlayMusicLevel3();
         }
 
         enemyController = enemy.GetComponent<EnemyController>();
@@ -339,6 +345,8 @@ public class LevelManager : MonoBehaviour {
         combinationManager.EnableButtonsInteraction();
         _currentEnemyLevel = 0;
         combinationManager.ResetCombination();
+        PrepareBackgroundLevel(1);
+        AudioManager.Instance.PlayMusicLevel1();
         playerManager.OnAttackFinished();
         playerManager.life = 9; // TODO remove when real implementation is done
         GetNewEnemy(1);
@@ -369,4 +377,8 @@ public class LevelManager : MonoBehaviour {
         return _playerScore;
     }
 
+    public float GetTotalEnemyKilled()
+    {
+        return _kogiKilled + _zazucKilled + _makulaKilled;
+    }
 }

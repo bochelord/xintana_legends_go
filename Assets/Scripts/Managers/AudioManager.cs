@@ -39,6 +39,8 @@ public class AudioManager : MonoBehaviour {
     void Start () {
         instance = this;
 
+        musicPlayer.volume = generalVolume;
+        fxPlayer.volume = generalVolume;
 
         musicPlayer.clip = musicLevel1;
 
@@ -53,7 +55,33 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
+    public void PlayMusicLevel1()
+    {
+        if (musicLevel1 && audioEnabled)
+        {
+            musicPlayer.clip = musicLevel1;
+            musicPlayer.Play();
+        }
+    }
 
+
+    public void PlayMusicLevel2()
+    {
+        if (musicLevel2 && audioEnabled)
+        {
+            musicPlayer.clip = musicLevel2;
+            musicPlayer.Play();
+        }
+    }
+
+    public void PlayMusicLevel3()
+    {
+        if (musicLevel3 && audioEnabled)
+        {
+            musicPlayer.clip = musicLevel3;
+            musicPlayer.Play();
+        }
+    }
     public void Play_XintanaAttack_1()
     {
         if (xintana_attack_weapon_1 && audioEnabled)
