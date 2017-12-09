@@ -81,7 +81,7 @@ public class Rad_GuiManager : MonoBehaviour {
         int _tempScore = (int)_levelManager.GetPlayerScore();
         scorePlayer.text = _tempScore.ToString();
         worldReached.text = "World " + _levelManager.GetWorldNumber().ToString();
-        fightsNumber.text = _levelManager.GetTotalEnemyKilled().ToString();
+        fightsNumber.text = (_levelManager.GetTotalEnemyKilled()+1).ToString() + " Fights"; // This is plus one cause the current fight that player lost also counts although he didn't kill the enemy...
     }
 
     public void Button_OpenShop()
