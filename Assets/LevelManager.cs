@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour {
     private float timerSafe;
     private int _worldNumber = 1;
 
+    private float playerScoreUI;
 
     private bool musiclevel2_AlreadyPlayed = false;
     private bool musiclevel3_AlreadyPlayed = false;
@@ -199,19 +200,25 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    public void AddPlayerScore()
+    public void AddPlayerScore(EnemyType typein, int levelin)
     {
         float timeRemaining = combinationManager.timerSlider.value;
-        switch (enemyController.type)
+
+        Debug.Log("MECAGO EN TODA TU PUTA MADRE");
+        switch (typein)
         {
             case EnemyType.kogi:
-                _playerScore += 2000 * GetCurrentEnemyLevel() * timeRemaining;
+
+                DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 2000 * levelin * timeRemaining, 0.5f);
+                _playerScore += 2000 * levelin * timeRemaining;
                 break;
             case EnemyType.makula:
-                _playerScore += 5000 * GetCurrentEnemyLevel() *timeRemaining;
+                DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 5000 * levelin * timeRemaining, 0.5f);
+                _playerScore += 5000 * levelin * timeRemaining;
                 break;
             case EnemyType.zazuc:
-                _playerScore += 1500 * GetCurrentEnemyLevel() * timeRemaining;
+                DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 1500 * levelin * timeRemaining, 0.5f);
+                _playerScore += 1500 * levelin * timeRemaining;
                 break;
         }
     }
@@ -257,11 +264,12 @@ public class LevelManager : MonoBehaviour {
         {
             //level2
             PrepareBackgroundLevel(2);
-            _worldNumber++;
+            
             if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicLevel2 && !musiclevel2_AlreadyPlayed)
             {
                 AudioManager.Instance.PlayMusicLevel2();
                 musiclevel2_AlreadyPlayed = true;
+                _worldNumber++;
             }
             
         }
@@ -270,11 +278,12 @@ public class LevelManager : MonoBehaviour {
         {
             //level3
             PrepareBackgroundLevel(3);
-            _worldNumber++;
+            
             if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicLevel3 && !musiclevel3_AlreadyPlayed)
             {
                 AudioManager.Instance.PlayMusicLevel3();
                 musiclevel3_AlreadyPlayed = true;
+                _worldNumber++;
             }
         }
 
@@ -414,6 +423,11 @@ public class LevelManager : MonoBehaviour {
     public float GetPlayerScore()
     {
         return _playerScore;
+    }
+
+    public int GetPlayerScoreUI()
+    {
+        return (int)playerScoreUI;
     }
 
     public int GetTotalEnemyKilled()

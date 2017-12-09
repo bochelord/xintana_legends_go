@@ -88,7 +88,7 @@ public class EnemyController : MonoBehaviour {
     private void KillEnemy()
     {
         levelManager.AddEnemyCount();
-        levelManager.AddPlayerScore();
+        levelManager.AddPlayerScore(this.type, level);
         levelManager.enemyKilled = true;
         levelManager.GetNewEnemy(1.5f);
         pooler.RemoveElement(this.transform);

@@ -14,6 +14,7 @@ public class Rad_GuiManager : MonoBehaviour {
 
     [Header("Text")]
     public Text enemyText;
+    public Text scoreText;
 
     [Header("Share Panel")]
     public Text kogiAmount;
@@ -28,6 +29,17 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         _levelManager = FindObjectOfType<LevelManager>();
     }
+
+
+
+
+    private void Update()
+    {
+        scoreText.text = _levelManager.GetPlayerScoreUI().ToString();
+    }
+
+
+
     /// <summary>
     /// called from Button, set main menu panel on and turns off the rest
     /// </summary>
@@ -67,7 +79,7 @@ public class Rad_GuiManager : MonoBehaviour {
         makulaAmount.text = _levelManager.GetMakulaKilled().ToString();
         int _tempScore = (int)_levelManager.GetPlayerScore();
         scorePlayer.text = _tempScore.ToString();
-        worldReached.text = _levelManager.GetWorldNumber().ToString();
+        worldReached.text = "World " + _levelManager.GetWorldNumber().ToString();
         
     }
 
