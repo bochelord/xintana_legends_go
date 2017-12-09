@@ -42,6 +42,7 @@ public class CombinationManager : MonoBehaviour {
     private int minimCombinationValue = 1;          
     private LevelManager levelManager;
     private PlayerManager _playerManager;
+    private int _eachthreetimes = 3;
 
     void Awake()
     {
@@ -146,7 +147,7 @@ public class CombinationManager : MonoBehaviour {
         int tempValue = 0;
         for (int i = 0; i < combinationArray.Length; i++)
         {
-            tempValue = Random.Range(0, objectsCombinationPool.Length);
+            tempValue = Random.Range(0, objectsCombinationPool.Length); //this is plus one since Random.Range for ints takes the second value as not inclusive...
             combinationArray[i] = objectsCombinationPool[tempValue];
             
         }
@@ -166,10 +167,10 @@ public class CombinationManager : MonoBehaviour {
     /// <param name="newValue"></param>
     void ChangeMinimCombinationValue(int newValue)
     {
-        if(combinationLength > 3)
-        {
+        //if(combinationLength > 3)
+        //{
             minimCombinationValue = newValue;
-        }
+        //}
 
     }
     /// <summary>
@@ -253,14 +254,17 @@ public class CombinationManager : MonoBehaviour {
                 if (levelManager.enemyKilled)
                 {
                     ShowWinText();
-                    ChangeCombinationLength(combinationLength + 1);
+                    
 
-                    if (levelManager.GetTotalEnemyKilled() % 3 ==0) //each three kills we gorw the combination
+                    if (levelManager.GetTotalEnemyKilled() == _eachthreetimes) //each three kills we gorw the combination
                     {
                         ChangeMinimCombinationValue(minimCombinationValue + 1);
+                        ChangeCombinationLength(combinationLength + 1);
+                        _eachthreetimes += 3;
                     }
                     else
                     {
+                        ChangeCombinationLength(combinationLength);
                         ChangeMinimCombinationValue(minimCombinationValue);
                     }
                     StartCoroutine(LoadNextRound(2.5f));

@@ -38,6 +38,8 @@ public class LevelManager : MonoBehaviour {
     private float _playerScore = 0;
     private int _currentEnemyLevel = 0;
     private int _enemyCount = 0;
+    private int _eachthreetimes = 3;
+
     void Awake()
     {
         combinationManager = FindObjectOfType<CombinationManager>();
@@ -209,9 +211,16 @@ public class LevelManager : MonoBehaviour {
     private IEnumerator CoroGetNewEnemy(float delay)
     {
         yield return new WaitForSeconds(delay);
-        _currentEnemyLevel++;
+
+        if (_enemyCount > _eachthreetimes)//Each 3 enemies killed we level up the upcoming enemies by one level
+        {
+            _currentEnemyLevel++;
+            _eachthreetimes += 3;
+        }
+
+        
         _enemyCount++;
-        if (_enemyCount == 5 || _enemyCount == 10 || _enemyCount == 15)
+        if (_enemyCount == 7 || _enemyCount == 14 || _enemyCount == 21)//each 7 enemies killed we summon a final boss
         {
             enemy = enemyPooler.GetBossObject();
             combinationManager.timeToResolveCombination = 30f;
@@ -222,8 +231,8 @@ public class LevelManager : MonoBehaviour {
             combinationManager.timeToResolveCombination = 15f;
         }
         
-        //we control the worldsprites based on the amount of enemies
-        if (_enemyCount > 5 && _enemyCount<=15)
+        //we control the worldsprites based on the amount of enemies 
+        if (_enemyCount > 7 && _enemyCount<=14)
         {
             //level2
             PrepareBackgroundLevel(2);
@@ -234,11 +243,14 @@ public class LevelManager : MonoBehaviour {
             
         }
 
-        if (_enemyCount > 15)
+        if (_enemyCount > 21)
         {
             //level3
             PrepareBackgroundLevel(3);
-            AudioManager.Instance.PlayMusicLevel3();
+            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicLevel3)
+            {
+                AudioManager.Instance.PlayMusicLevel3();
+            }
         }
 
         enemyController = enemy.GetComponent<EnemyController>();
@@ -377,7 +389,7 @@ public class LevelManager : MonoBehaviour {
         return _playerScore;
     }
 
-    public float GetTotalEnemyKilled()
+    public int GetTotalEnemyKilled()
     {
         return _kogiKilled + _zazucKilled + _makulaKilled;
     }
