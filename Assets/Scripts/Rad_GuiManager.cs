@@ -22,6 +22,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text makulaAmount;
     public Text scorePlayer;
     public Text worldReached;
+    public Text fightsNumber;
 
     private LevelManager _levelManager;
 
@@ -80,7 +81,7 @@ public class Rad_GuiManager : MonoBehaviour {
         int _tempScore = (int)_levelManager.GetPlayerScore();
         scorePlayer.text = _tempScore.ToString();
         worldReached.text = "World " + _levelManager.GetWorldNumber().ToString();
-        
+        fightsNumber.text = _levelManager.GetTotalEnemyKilled().ToString();
     }
 
     public void Button_OpenShop()
