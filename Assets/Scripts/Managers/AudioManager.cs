@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour {
     [Header("AudioSources")]
     public AudioSource musicPlayer;
     public AudioSource fxPlayer;
+    public AudioSource musicBossPlayer;
 
     [Header("Volumes")]
     [Range(0, 1)]
@@ -82,6 +83,36 @@ public class AudioManager : MonoBehaviour {
             musicPlayer.Play();
         }
     }
+
+    public void PlayBossMusic()
+    {
+        if (musicBossFight && audioEnabled)
+        {
+            musicPlayer.clip = musicBossFight;
+            musicPlayer.Play();
+        }
+     }
+
+
+    //public void PlayBossMusicAndPauseMain()
+    //{
+    //    if (musicBossFight && audioEnabled)
+    //    {
+    //        musicPlayer.Pause();
+    //        musicBossPlayer.clip = musicBossFight;
+    //        musicBossPlayer.Play();
+    //    }
+    //}
+
+    //public void StopBossMusicAndResumeMain()
+    //{
+    //    if (audioEnabled)
+    //    {
+    //        musicBossPlayer.Stop();
+    //        musicPlayer.UnPause();
+    //    }
+    //}
+
     public void Play_XintanaAttack_1()
     {
         if (xintana_attack_weapon_1 && audioEnabled)

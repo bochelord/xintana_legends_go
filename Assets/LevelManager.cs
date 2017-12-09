@@ -41,6 +41,10 @@ public class LevelManager : MonoBehaviour {
     private int _eachthreetimes = 3;
     private float timerSafe;
 
+    private bool musiclevel2_AlreadyPlayed = false;
+    private bool musiclevel3_AlreadyPlayed = false;
+
+
     void Awake()
     {
         combinationManager = FindObjectOfType<CombinationManager>();
@@ -221,16 +225,25 @@ public class LevelManager : MonoBehaviour {
 
         
         _enemyCount++;
+
+        combinationManager.fightNumberValueText.text = _enemyCount.ToString();
+
         if (_enemyCount == 7 || _enemyCount == 14 || _enemyCount == 21)//each 7 enemies killed we summon a final boss
         {
             enemy = enemyPooler.GetBossObject();
             timerSafe = combinationManager.timeToResolveCombination;
             combinationManager.timeToResolveCombination *= 2;
+
+            AudioManager.Instance.PlayBossMusic();
+
+            //AudioManager.Instance.PlayBossMusicAndPauseMain();
+
         }
         else if (_enemyCount == 8 || _enemyCount == 15 || _enemyCount == 22)//after a boss fight we reset the timer to whatever it was before it
         {
             combinationManager.timeToResolveCombination = timerSafe;
             enemy = enemyPooler.GetPooledObject();
+            //AudioManager.Instance.StopBossMusicAndResumeMain();
         }
         else
         {
@@ -242,9 +255,10 @@ public class LevelManager : MonoBehaviour {
         {
             //level2
             PrepareBackgroundLevel(2);
-            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicLevel2)
+            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicLevel2 && !musiclevel2_AlreadyPlayed)
             {
                 AudioManager.Instance.PlayMusicLevel2();
+                musiclevel2_AlreadyPlayed = true;
             }
             
         }
@@ -253,9 +267,10 @@ public class LevelManager : MonoBehaviour {
         {
             //level3
             PrepareBackgroundLevel(3);
-            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicLevel3)
+            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicLevel3 && !musiclevel3_AlreadyPlayed)
             {
                 AudioManager.Instance.PlayMusicLevel3();
+                musiclevel3_AlreadyPlayed = true;
             }
         }
 

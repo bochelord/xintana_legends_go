@@ -29,7 +29,7 @@ public class CombinationManager : MonoBehaviour {
     [Header("UI Buttons")]
     public GameObject[] uiButtons;
     public int combinationLength;                   //Combination length that the User will has to solve.
-    public Text combinationLengthText;
+    public Text fightNumberValueText;
     public GameObject[] combinationArray;           //This is the Array with the GameObjects combination.
     public GameObject[] copyCombinationArray;       //An Array store to delete later the combination game objects.
     public GameObject[] objectsCombinationPool;     //Pool with all the possible GameObjects.
@@ -154,7 +154,7 @@ public class CombinationManager : MonoBehaviour {
             combinationArray[i] = objectsCombinationPool[tempValue];
             
         }
-        combinationLengthText.text = combinationArray.Length.ToString();
+        
     }
     /// <summary>
     /// Change the Combination Length.
