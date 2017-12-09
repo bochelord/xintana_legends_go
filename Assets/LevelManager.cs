@@ -61,17 +61,35 @@ public class LevelManager : MonoBehaviour {
         // Effect on Enemy
         // Enemy Data update if dead, respawn
 
+        float damagedone = 0;
+        bool critico = false;
+        damagedone = Formulas.GetDamageCalculated(1.2f, out critico);
+
+        if (damagedone > enemyController.GetLife())
+        {
+            //we are goinna kill the enemy so we trigger the jumping attack animation
+            player.GetComponent<Animator>().SetInteger("AnimState", 11);
+        } 
+        else
+        {
+            player.GetComponent<Animator>().SetBool("Attacking", true);
+            player.GetComponent<Animator>().SetInteger("AnimState", 10);
+
+        }
+
         //Effect on player
         ///////////////////////////////////////
         //This should be on the player manager...
         GameObject clone_prefab;
-        player.GetComponent<Animator>().SetBool("Attacking", true);
+        //player.GetComponent<Animator>().SetBool("Attacking", true);
         //animator.SetBool("Attacking", true);
         //player.GetComponent<Animator>().Play("Xintana_Attack");
-        player.GetComponent<Animator>().SetInteger("AnimState", 10);
+        //player.GetComponent<Animator>().SetInteger("AnimState", 10);
         //playermanager.ChangeAnimationState(10);
         clone_prefab = Instantiate(HitPrefabRight);
         clone_prefab.transform.position = player.transform.position;
+
+
         //////////////
         ///Effect on Enemy
         ///
@@ -79,9 +97,7 @@ public class LevelManager : MonoBehaviour {
         clone_damageFxprefab = Instantiate(damageFxPrefab);
         clone_damageFxprefab.transform.position = enemy.transform.position;
 
-        float damagedone = 0;
-        bool critico = false;
-        damagedone = Formulas.GetDamageCalculated(1.2f, out critico);
+        
         LaunchShowHUDText(enemyContainer.transform.position + new Vector3(0,1.5f,0), damagedone.ToString("F1"), new Color32(245, 141, 12, 255)); /// TODO This has to be feed with the proper damage coming from the playerManager
 
         AudioManager.Instance.Play_XintanaAttack_1();

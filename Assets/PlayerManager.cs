@@ -17,12 +17,35 @@ public class PlayerManager : MonoBehaviour {
     /// </summary>
     public void OnAttackFinished()
     {
-        //    isAttacking = false;
-        //    //Debug.Log("ApagatePerraAireosa");
+        AnimationToIdle();
+    }
+
+    /// <summary>
+    /// Callback for Animation Event Air Attack
+    /// </summary>
+    public void OnAirAttackFinished()
+    {
+        this.GetComponent<Animator>().SetBool("Attacking", false);
+        this.GetComponent<Animator>().SetInteger("AnimState", 20);
+    }
+
+    /// <summary>
+    /// CAllback for Animation Event Wing Jump
+    /// </summary>
+    public void OnAirWingJumpFinished()
+    {
+        AnimationToIdle();
+    }
+
+    /// <summary>
+    /// Sets the animation parameter to Idle Animation
+    /// </summary>
+    private void AnimationToIdle()
+    {
         this.GetComponent<Animator>().SetBool("Attacking", false);
         this.GetComponent<Animator>().SetInteger("AnimState", 0);
-        //    ToggleScripts(true);
     }
+
 
     public void ReceiveDamage(float damage)
     {

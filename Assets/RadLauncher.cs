@@ -8,8 +8,8 @@ public class RadLauncher : MonoBehaviour {
 	// Use this for initialization
 	IEnumerator Start () {
 
-        yield return new WaitForSeconds(12);
-        SceneManager.LoadScene(1);
+        yield return new WaitForSeconds(10);
+        SceneManager.LoadScene("LoadingScreen");
 	}
 	
 	
