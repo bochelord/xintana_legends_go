@@ -214,10 +214,12 @@ public class LevelManager : MonoBehaviour {
         if (_enemyCount == 10 || _enemyCount == 20 || _enemyCount == 30)
         {
             enemy = enemyPooler.GetBossObject();
+            combinationManager.timeToResolveCombination = 30f;
         }
         else
         {
             enemy = enemyPooler.GetPooledObject();
+            combinationManager.timeToResolveCombination = 15f;
         }
         
         //we control the worldsprites based on the amount of enemies
