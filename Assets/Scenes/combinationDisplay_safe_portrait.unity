@@ -663,43 +663,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 575106769}
   m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
---- !u!21 &169385997
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 2DxFX/Standard/ColorChange
-  m_Shader: {fileID: 4800000, guid: 9f1ae124906dd1a41bee3c95860f3a4f, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _Alpha: 0
-    - _ColorMask: 15
-    - _HueShift: 126
-    - _Sat: 1
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _Tolerance: 0.04
-    - _Val: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorX: {r: 0.69803923, g: 0.10980393, b: 0.23529413, a: 1}
 --- !u!1 &170995785
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,6 +1480,43 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 276828591}
+--- !u!21 &279953084
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 2DxFX/Standard/ColorChange
+  m_Shader: {fileID: 4800000, guid: 9f1ae124906dd1a41bee3c95860f3a4f, type: 3}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Alpha: 0
+    - _ColorMask: 15
+    - _HueShift: 126
+    - _Sat: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _Tolerance: 0.04
+    - _Val: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorX: {r: 0.69803923, g: 0.10980393, b: 0.23529413, a: 1}
 --- !u!1 &291841619
 GameObject:
   m_ObjectHideFlags: 0
@@ -2054,187 +2054,107 @@ MonoBehaviour:
   m_GameObject: {fileID: 349899831}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1853575441, guid: e12027aef8e7440199d1da19d3226929, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d0390bd8b8ffd640b34fe25065ff1df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CameraLeftEdge: 0
-  m_CameraRightEdge: 0
-  m_CameraTopEdge: 0
-  m_CameraBottomEdge: 0
-  m_CanvasWorldTopLeft: {x: 0, y: 0, z: 0}
-  m_CanvasWorldTopCenter: {x: 0, y: 0, z: 0}
-  m_CanvasWorldTopRight: {x: 0, y: 0, z: 0}
-  m_CanvasWorldMiddleLeft: {x: 0, y: 0, z: 0}
-  m_CanvasWorldMiddleCenter: {x: 0, y: 0, z: 0}
-  m_CanvasWorldMiddleRight: {x: 0, y: 0, z: 0}
-  m_CanvasWorldBottomLeft: {x: 0, y: 0, z: 0}
-  m_CanvasWorldBottomCenter: {x: 0, y: 0, z: 0}
-  m_CanvasWorldBottomRight: {x: 0, y: 0, z: 0}
-  m_TotalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  m_MoveOriginal: {x: 0, y: 0, z: 0}
-  m_RotationOriginal: {x: 0, y: 0, z: 0, w: 0}
-  m_ScaleOriginal: {x: 0, y: 0, z: 0}
-  m_FadeOriginal: 0
-  m_FadeOriginalTextOutline: 0
-  m_FadeOriginalTextShadow: 0
-  m_MoveIn:
-    Enable: 1
-    Began: 0
-    Animating: 0
-    Done: 0
-    MoveFrom: 4
-    BeginPos: {x: 0, y: 0, z: 0}
-    EndPos: {x: 0, y: 0, z: 0}
-    Position: {x: 0, y: 0, z: 0}
-    EaseType: 27
-    Time: 2
-    Delay: 0.1
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_RotationIn:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    BeginRotation: {x: 0, y: 0, z: 0}
-    EndRotation: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0}
-    EaseType: 27
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_ScaleIn:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    ScaleBegin: {x: 0, y: 0, z: 0}
-    EaseType: 27
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_FadeIn:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    Fade: 0
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    FadeChildren: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_ScaleLoop:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    IsOverriding: 0
-    IsOverridingDelayTimeCount: 0
-    Done: 0
-    m_ScaleLast: {x: 0, y: 0, z: 0}
-    Min: {x: 1, y: 1, z: 1}
-    Max: {x: 1.05, y: 1.05, z: 1.05}
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    Sound:
-      m_AudioClip: {fileID: 0}
-      m_Loop: 0
-      m_AudioSource: {fileID: 0}
-  m_FadeLoop:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    IsOverriding: 0
-    IsOverridingDelayTimeCount: 0
-    Done: 0
-    m_FadeLast: 0
-    Min: 0
-    Max: 1
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    FadeChildren: 0
-    Sound:
-      m_AudioClip: {fileID: 0}
-      m_Loop: 0
-      m_AudioSource: {fileID: 0}
-  m_MoveOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    MoveTo: 4
-    BeginPos: {x: 0, y: 0, z: 0}
-    EndPos: {x: 0, y: 0, z: 0}
-    Position: {x: 0, y: 0, z: 0}
-    EaseType: 26
-    Time: 2
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_RotationOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    BeginRotation: {x: 0, y: 0, z: 0}
-    EndRotation: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0}
-    EaseType: 26
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_ScaleOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    ScaleBegin: {x: 1, y: 1, z: 1}
-    ScaleEnd: {x: 0, y: 0, z: 0}
-    EaseType: 26
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_FadeOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    Fade: 0
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    FadeChildren: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_MoveVariable: 0
-  m_RotationVariable: 0
-  m_ScaleVariable: 0
-  m_FadeVariable: 0
+  updateType: 0
+  isSpeedBased: 0
+  hasOnStart: 0
+  hasOnPlay: 0
+  hasOnUpdate: 0
+  hasOnStepComplete: 0
+  hasOnComplete: 0
+  hasOnTweenCreated: 0
+  hasOnRewind: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onTweenCreated:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onRewind:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  delay: 0.1
+  duration: 1
+  easeType: 27
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loopType: 0
+  loops: 1
+  id: 
+  isRelative: 0
+  isFrom: 0
+  isIndependentUpdate: 0
+  autoKill: 1
+  isActive: 1
+  isValid: 1
+  target: {fileID: 849553341}
+  animationType: 1
+  targetType: 5
+  forcedTargetType: 0
+  autoPlay: 1
+  useTargetAsV3: 0
+  endValueFloat: 0
+  endValueV3: {x: -228, y: -145, z: 0}
+  endValueV2: {x: 0, y: 0}
+  endValueColor: {r: 1, g: 1, b: 1, a: 1}
+  endValueString: 
+  endValueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  endValueTransform: {fileID: 0}
+  optionalBool0: 0
+  optionalFloat0: 0
+  optionalInt0: 0
+  optionalRotationMode: 0
+  optionalScrambleMode: 0
+  optionalString: 
 --- !u!1 &375577791
 GameObject:
   m_ObjectHideFlags: 0
@@ -2828,7 +2748,7 @@ Prefab:
     - target: {fileID: 224462364285211162, guid: 858e0c0056b24654689368e27db0bb93,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -236
+      value: 71
       objectReference: {fileID: 0}
     - target: {fileID: 224462364285211162, guid: 858e0c0056b24654689368e27db0bb93,
         type: 2}
@@ -3190,7 +3110,7 @@ MonoBehaviour:
   - {fileID: 196580, guid: 7eeffcf076bb9574a8b8d28a49f67bea, type: 2}
   - {fileID: 196580, guid: 8a4cee23b80032543a9831827de9efad, type: 2}
   - {fileID: 196580, guid: 5cba0e7ce58d3be4892b85d46d87a840, type: 2}
-  timeToResolveCombination: 150
+  timeToResolveCombination: 15
 --- !u!4 &494791601
 Transform:
   m_ObjectHideFlags: 0
@@ -3537,7 +3457,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 49391968bbdfc4a42b76d1fec9c92400, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49391968bbdfc4a42b76d1fec9c92400, type: 2}
@@ -3753,7 +3673,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 169385997}
+  - {fileID: 279953084}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3939,187 +3859,107 @@ MonoBehaviour:
   m_GameObject: {fileID: 568357679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1853575441, guid: e12027aef8e7440199d1da19d3226929, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d0390bd8b8ffd640b34fe25065ff1df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CameraLeftEdge: 0
-  m_CameraRightEdge: 0
-  m_CameraTopEdge: 0
-  m_CameraBottomEdge: 0
-  m_CanvasWorldTopLeft: {x: 0, y: 0, z: 0}
-  m_CanvasWorldTopCenter: {x: 0, y: 0, z: 0}
-  m_CanvasWorldTopRight: {x: 0, y: 0, z: 0}
-  m_CanvasWorldMiddleLeft: {x: 0, y: 0, z: 0}
-  m_CanvasWorldMiddleCenter: {x: 0, y: 0, z: 0}
-  m_CanvasWorldMiddleRight: {x: 0, y: 0, z: 0}
-  m_CanvasWorldBottomLeft: {x: 0, y: 0, z: 0}
-  m_CanvasWorldBottomCenter: {x: 0, y: 0, z: 0}
-  m_CanvasWorldBottomRight: {x: 0, y: 0, z: 0}
-  m_TotalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  m_MoveOriginal: {x: 0, y: 0, z: 0}
-  m_RotationOriginal: {x: 0, y: 0, z: 0, w: 0}
-  m_ScaleOriginal: {x: 0, y: 0, z: 0}
-  m_FadeOriginal: 0
-  m_FadeOriginalTextOutline: 0
-  m_FadeOriginalTextShadow: 0
-  m_MoveIn:
-    Enable: 1
-    Began: 0
-    Animating: 0
-    Done: 0
-    MoveFrom: 3
-    BeginPos: {x: 0, y: 0, z: 0}
-    EndPos: {x: 0, y: 0, z: 0}
-    Position: {x: 0, y: 0, z: 0}
-    EaseType: 27
-    Time: 2
-    Delay: 0.1
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_RotationIn:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    BeginRotation: {x: 0, y: 0, z: 0}
-    EndRotation: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0}
-    EaseType: 27
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_ScaleIn:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    ScaleBegin: {x: 0, y: 0, z: 0}
-    EaseType: 27
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_FadeIn:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    Fade: 0
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    FadeChildren: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_ScaleLoop:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    IsOverriding: 0
-    IsOverridingDelayTimeCount: 0
-    Done: 0
-    m_ScaleLast: {x: 0, y: 0, z: 0}
-    Min: {x: 1, y: 1, z: 1}
-    Max: {x: 1.05, y: 1.05, z: 1.05}
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    Sound:
-      m_AudioClip: {fileID: 0}
-      m_Loop: 0
-      m_AudioSource: {fileID: 0}
-  m_FadeLoop:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    IsOverriding: 0
-    IsOverridingDelayTimeCount: 0
-    Done: 0
-    m_FadeLast: 0
-    Min: 0
-    Max: 1
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    FadeChildren: 0
-    Sound:
-      m_AudioClip: {fileID: 0}
-      m_Loop: 0
-      m_AudioSource: {fileID: 0}
-  m_MoveOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    MoveTo: 4
-    BeginPos: {x: 0, y: 0, z: 0}
-    EndPos: {x: 0, y: 0, z: 0}
-    Position: {x: 0, y: 0, z: 0}
-    EaseType: 26
-    Time: 2
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_RotationOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    BeginRotation: {x: 0, y: 0, z: 0}
-    EndRotation: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0}
-    EaseType: 26
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_ScaleOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    ScaleBegin: {x: 1, y: 1, z: 1}
-    ScaleEnd: {x: 0, y: 0, z: 0}
-    EaseType: 26
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_FadeOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    Fade: 0
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    FadeChildren: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_MoveVariable: 0
-  m_RotationVariable: 0
-  m_ScaleVariable: 0
-  m_FadeVariable: 0
+  updateType: 0
+  isSpeedBased: 0
+  hasOnStart: 0
+  hasOnPlay: 0
+  hasOnUpdate: 0
+  hasOnStepComplete: 0
+  hasOnComplete: 0
+  hasOnTweenCreated: 0
+  hasOnRewind: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onTweenCreated:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onRewind:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  delay: 0.1
+  duration: 1
+  easeType: 27
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loopType: 0
+  loops: 1
+  id: 
+  isRelative: 0
+  isFrom: 0
+  isIndependentUpdate: 0
+  autoKill: 1
+  isActive: 1
+  isValid: 1
+  target: {fileID: 1861654783}
+  animationType: 1
+  targetType: 5
+  forcedTargetType: 0
+  autoPlay: 1
+  useTargetAsV3: 0
+  endValueFloat: 0
+  endValueV3: {x: 0, y: -145, z: 0}
+  endValueV2: {x: 0, y: 0}
+  endValueColor: {r: 1, g: 1, b: 1, a: 1}
+  endValueString: 
+  endValueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  endValueTransform: {fileID: 0}
+  optionalBool0: 0
+  optionalFloat0: 0
+  optionalInt0: 0
+  optionalRotationMode: 0
+  optionalScrambleMode: 0
+  optionalString: 
 --- !u!1001 &575106769
 Prefab:
   m_ObjectHideFlags: 0
@@ -5597,7 +5437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -22.2}
+  m_AnchoredPosition: {x: 0, y: 73}
   m_SizeDelta: {x: 799.19995, y: 23.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &734710795
@@ -5608,187 +5448,107 @@ MonoBehaviour:
   m_GameObject: {fileID: 734710792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1853575441, guid: e12027aef8e7440199d1da19d3226929, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d0390bd8b8ffd640b34fe25065ff1df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CameraLeftEdge: 0
-  m_CameraRightEdge: 0
-  m_CameraTopEdge: 0
-  m_CameraBottomEdge: 0
-  m_CanvasWorldTopLeft: {x: 0, y: 0, z: 0}
-  m_CanvasWorldTopCenter: {x: 0, y: 0, z: 0}
-  m_CanvasWorldTopRight: {x: 0, y: 0, z: 0}
-  m_CanvasWorldMiddleLeft: {x: 0, y: 0, z: 0}
-  m_CanvasWorldMiddleCenter: {x: 0, y: 0, z: 0}
-  m_CanvasWorldMiddleRight: {x: 0, y: 0, z: 0}
-  m_CanvasWorldBottomLeft: {x: 0, y: 0, z: 0}
-  m_CanvasWorldBottomCenter: {x: 0, y: 0, z: 0}
-  m_CanvasWorldBottomRight: {x: 0, y: 0, z: 0}
-  m_TotalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  m_MoveOriginal: {x: 0, y: 0, z: 0}
-  m_RotationOriginal: {x: 0, y: 0, z: 0, w: 0}
-  m_ScaleOriginal: {x: 0, y: 0, z: 0}
-  m_FadeOriginal: 0
-  m_FadeOriginalTextOutline: 0
-  m_FadeOriginalTextShadow: 0
-  m_MoveIn:
-    Enable: 1
-    Began: 0
-    Animating: 0
-    Done: 0
-    MoveFrom: 2
-    BeginPos: {x: 0, y: 0, z: 0}
-    EndPos: {x: 0, y: 0, z: 0}
-    Position: {x: 0, y: 0, z: 0}
-    EaseType: 27
-    Time: 1.64
-    Delay: 0.04
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_RotationIn:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    BeginRotation: {x: 0, y: 0, z: 0}
-    EndRotation: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0}
-    EaseType: 27
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_ScaleIn:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    ScaleBegin: {x: 0, y: 0, z: 0}
-    EaseType: 27
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_FadeIn:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    Fade: 0
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    FadeChildren: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_ScaleLoop:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    IsOverriding: 0
-    IsOverridingDelayTimeCount: 0
-    Done: 0
-    m_ScaleLast: {x: 0, y: 0, z: 0}
-    Min: {x: 1, y: 1, z: 1}
-    Max: {x: 1.05, y: 1.05, z: 1.05}
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    Sound:
-      m_AudioClip: {fileID: 0}
-      m_Loop: 0
-      m_AudioSource: {fileID: 0}
-  m_FadeLoop:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    IsOverriding: 0
-    IsOverridingDelayTimeCount: 0
-    Done: 0
-    m_FadeLast: 0
-    Min: 0
-    Max: 1
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    FadeChildren: 0
-    Sound:
-      m_AudioClip: {fileID: 0}
-      m_Loop: 0
-      m_AudioSource: {fileID: 0}
-  m_MoveOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    MoveTo: 2
-    BeginPos: {x: 0, y: 0, z: 0}
-    EndPos: {x: 0, y: 0, z: 0}
-    Position: {x: 0, y: 0, z: 0}
-    EaseType: 26
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_RotationOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    BeginRotation: {x: 0, y: 0, z: 0}
-    EndRotation: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0}
-    EaseType: 26
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_ScaleOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    ScaleBegin: {x: 1, y: 1, z: 1}
-    ScaleEnd: {x: 0, y: 0, z: 0}
-    EaseType: 26
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_FadeOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    Fade: 0
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    FadeChildren: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_MoveVariable: 0
-  m_RotationVariable: 0
-  m_ScaleVariable: 0
-  m_FadeVariable: 0
+  updateType: 0
+  isSpeedBased: 0
+  hasOnStart: 0
+  hasOnPlay: 0
+  hasOnUpdate: 0
+  hasOnStepComplete: 0
+  hasOnComplete: 0
+  hasOnTweenCreated: 0
+  hasOnRewind: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onTweenCreated:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onRewind:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  delay: 0.1
+  duration: 1
+  easeType: 27
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loopType: 0
+  loops: 1
+  id: 
+  isRelative: 0
+  isFrom: 0
+  isIndependentUpdate: 0
+  autoKill: 1
+  isActive: 1
+  isValid: 1
+  target: {fileID: 734710794}
+  animationType: 1
+  targetType: 5
+  forcedTargetType: 0
+  autoPlay: 1
+  useTargetAsV3: 0
+  endValueFloat: 0
+  endValueV3: {x: 0, y: -22.5, z: 0}
+  endValueV2: {x: 0, y: 0}
+  endValueColor: {r: 1, g: 1, b: 1, a: 1}
+  endValueString: 
+  endValueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  endValueTransform: {fileID: 0}
+  optionalBool0: 0
+  optionalFloat0: 0
+  optionalInt0: 0
+  optionalRotationMode: 0
+  optionalScrambleMode: 0
+  optionalString: 
 --- !u!1 &743988570
 GameObject:
   m_ObjectHideFlags: 0
@@ -6308,7 +6068,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 1334726207}
+  - {fileID: 1611305019}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6489,7 +6249,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 421958, guid: 86672f35e84daff4699b96a3c82ee675, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 421958, guid: 86672f35e84daff4699b96a3c82ee675, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6866,52 +6626,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224462364285211162, guid: 858e0c0056b24654689368e27db0bb93,
     type: 2}
   m_PrefabInternal: {fileID: 413926854}
---- !u!1001 &858988412
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 490726, guid: 2213776e3293a42528266c30caae46f0, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 490726, guid: 2213776e3293a42528266c30caae46f0, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 490726, guid: 2213776e3293a42528266c30caae46f0, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 490726, guid: 2213776e3293a42528266c30caae46f0, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 490726, guid: 2213776e3293a42528266c30caae46f0, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 490726, guid: 2213776e3293a42528266c30caae46f0, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 490726, guid: 2213776e3293a42528266c30caae46f0, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 490726, guid: 2213776e3293a42528266c30caae46f0, type: 2}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 193560, guid: 2213776e3293a42528266c30caae46f0, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 2213776e3293a42528266c30caae46f0, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &864330865
 GameObject:
   m_ObjectHideFlags: 0
@@ -7467,7 +7181,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -2.5001001, y: 170}
+  m_AnchoredPosition: {x: -2.5001001, y: -109}
   m_SizeDelta: {x: 754, y: 174}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &983447836
@@ -7511,187 +7225,107 @@ MonoBehaviour:
   m_GameObject: {fileID: 983447834}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1853575441, guid: e12027aef8e7440199d1da19d3226929, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d0390bd8b8ffd640b34fe25065ff1df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CameraLeftEdge: 0
-  m_CameraRightEdge: 0
-  m_CameraTopEdge: 0
-  m_CameraBottomEdge: 0
-  m_CanvasWorldTopLeft: {x: 0, y: 0, z: 0}
-  m_CanvasWorldTopCenter: {x: 0, y: 0, z: 0}
-  m_CanvasWorldTopRight: {x: 0, y: 0, z: 0}
-  m_CanvasWorldMiddleLeft: {x: 0, y: 0, z: 0}
-  m_CanvasWorldMiddleCenter: {x: 0, y: 0, z: 0}
-  m_CanvasWorldMiddleRight: {x: 0, y: 0, z: 0}
-  m_CanvasWorldBottomLeft: {x: 0, y: 0, z: 0}
-  m_CanvasWorldBottomCenter: {x: 0, y: 0, z: 0}
-  m_CanvasWorldBottomRight: {x: 0, y: 0, z: 0}
-  m_TotalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  m_MoveOriginal: {x: 0, y: 0, z: 0}
-  m_RotationOriginal: {x: 0, y: 0, z: 0, w: 0}
-  m_ScaleOriginal: {x: 0, y: 0, z: 0}
-  m_FadeOriginal: 0
-  m_FadeOriginalTextOutline: 0
-  m_FadeOriginalTextShadow: 0
-  m_MoveIn:
-    Enable: 1
-    Began: 0
-    Animating: 0
-    Done: 0
-    MoveFrom: 5
-    BeginPos: {x: 0, y: 0, z: 0}
-    EndPos: {x: 0, y: 0, z: 0}
-    Position: {x: 0, y: 0, z: 0}
-    EaseType: 27
-    Time: 2.09
-    Delay: 0.22
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_RotationIn:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    BeginRotation: {x: 0, y: 0, z: 0}
-    EndRotation: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0}
-    EaseType: 27
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_ScaleIn:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    ScaleBegin: {x: 0, y: 0, z: 0}
-    EaseType: 27
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_FadeIn:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    Fade: 0
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    FadeChildren: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_ScaleLoop:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    IsOverriding: 0
-    IsOverridingDelayTimeCount: 0
-    Done: 0
-    m_ScaleLast: {x: 0, y: 0, z: 0}
-    Min: {x: 1, y: 1, z: 1}
-    Max: {x: 1.05, y: 1.05, z: 1.05}
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    Sound:
-      m_AudioClip: {fileID: 0}
-      m_Loop: 0
-      m_AudioSource: {fileID: 0}
-  m_FadeLoop:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    IsOverriding: 0
-    IsOverridingDelayTimeCount: 0
-    Done: 0
-    m_FadeLast: 0
-    Min: 0
-    Max: 1
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    FadeChildren: 0
-    Sound:
-      m_AudioClip: {fileID: 0}
-      m_Loop: 0
-      m_AudioSource: {fileID: 0}
-  m_MoveOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    MoveTo: 5
-    BeginPos: {x: 0, y: 0, z: 0}
-    EndPos: {x: 0, y: 0, z: 0}
-    Position: {x: 0, y: 0, z: 0}
-    EaseType: 26
-    Time: 2
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_RotationOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    BeginRotation: {x: 0, y: 0, z: 0}
-    EndRotation: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0}
-    EaseType: 26
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_ScaleOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    ScaleBegin: {x: 1, y: 1, z: 1}
-    ScaleEnd: {x: 0, y: 0, z: 0}
-    EaseType: 26
-    Time: 1
-    Delay: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_FadeOut:
-    Enable: 0
-    Began: 0
-    Animating: 0
-    Done: 0
-    Fade: 0
-    EaseType: 21
-    Time: 1
-    Delay: 0
-    FadeChildren: 0
-    Sounds:
-      m_Begin: {fileID: 0}
-      m_AfterDelay: {fileID: 0}
-      m_End: {fileID: 0}
-  m_MoveVariable: 0
-  m_RotationVariable: 0
-  m_ScaleVariable: 0
-  m_FadeVariable: 0
+  updateType: 0
+  isSpeedBased: 0
+  hasOnStart: 0
+  hasOnPlay: 0
+  hasOnUpdate: 0
+  hasOnStepComplete: 0
+  hasOnComplete: 0
+  hasOnTweenCreated: 0
+  hasOnRewind: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onTweenCreated:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onRewind:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  delay: 0.22
+  duration: 1.25
+  easeType: 27
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loopType: 0
+  loops: 0
+  id: 
+  isRelative: 0
+  isFrom: 0
+  isIndependentUpdate: 0
+  autoKill: 1
+  isActive: 1
+  isValid: 1
+  target: {fileID: 983447835}
+  animationType: 1
+  targetType: 5
+  forcedTargetType: 0
+  autoPlay: 1
+  useTargetAsV3: 0
+  endValueFloat: 0
+  endValueV3: {x: -2.5001, y: 80, z: 0}
+  endValueV2: {x: 0, y: 0}
+  endValueColor: {r: 1, g: 1, b: 1, a: 1}
+  endValueString: 
+  endValueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  endValueTransform: {fileID: 0}
+  optionalBool0: 0
+  optionalFloat0: 0
+  optionalInt0: 0
+  optionalRotationMode: 0
+  optionalScrambleMode: 0
+  optionalString: 
 --- !u!1 &1032838050
 GameObject:
   m_ObjectHideFlags: 0
@@ -9463,7 +9097,7 @@ Transform:
   - {fileID: 678234464}
   - {fileID: 393141987}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1269534618
 GameObject:
@@ -9640,40 +9274,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224291271962964298, guid: a6a22cb2be92d29469fcb1697472bcf0,
     type: 2}
   m_PrefabInternal: {fileID: 1535931945}
---- !u!21 &1334726207
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 2DxFX/Standard/Outline
-  m_Shader: {fileID: 4800000, guid: de520773f9a4021489f5eb10014b9c8f, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _Alpha: 0
-    - _ColorMask: 15
-    - _OutLineSpread: 0.0028
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorX: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1341399850
 GameObject:
   m_ObjectHideFlags: 0
@@ -11490,6 +11090,40 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224985520885149278, guid: f25f9c0f1f3e03146a73f2cf3dbbdd8b,
     type: 2}
   m_PrefabInternal: {fileID: 339482868}
+--- !u!21 &1611305019
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 2DxFX/Standard/Outline
+  m_Shader: {fileID: 4800000, guid: de520773f9a4021489f5eb10014b9c8f, type: 3}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Alpha: 0
+    - _ColorMask: 15
+    - _OutLineSpread: 0.0028
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorX: {r: 0, g: 0, b: 0, a: 1}
 --- !u!21 &1641317607
 Material:
   serializedVersion: 6
@@ -11626,7 +11260,7 @@ Prefab:
     - target: {fileID: 224658079645814024, guid: 7478fcdd182b7da449d28b7d325d3556,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -247
       objectReference: {fileID: 0}
     - target: {fileID: 224658079645814024, guid: 7478fcdd182b7da449d28b7d325d3556,
         type: 2}
@@ -14363,7 +13997,7 @@ Transform:
   m_LocalScale: {x: 0.41279072, y: 0.41279072, z: 0.41279072}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2116728799
 MonoBehaviour:

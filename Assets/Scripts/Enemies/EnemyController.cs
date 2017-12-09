@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour {
         this.GetComponent<_2dxFX_HSV>()._ValueBrightness = new_enemy.dna_brightness;
     }
     /// <summary>
-    /// Retu rns damage done by enemy based on standard fumble,critic (< 4,> 95)
+    /// Retu rns damage done by enemy based on standard fumble,critic (Fumble: less than 4 , Critic: more than 95)
     /// </summary>
     public float GetDamageDoneByEnemy()
     {
@@ -61,6 +61,12 @@ public class EnemyController : MonoBehaviour {
         return damage;
     }
 
+    /// <summary>
+    /// Returns damage done by enemy with fumble and critic as parameters
+    /// </summary>
+    /// <param name="fumbleThreshold"></param>
+    /// <param name="criticThreshold"></param>
+    /// <returns></returns>
     public float GetDamageDoneByEnemy(int fumbleThreshold, int criticThreshold)
     {
         damage = Formulas.GetDamageCalculated(damage,fumbleThreshold,criticThreshold, out critico);
@@ -84,7 +90,7 @@ public class EnemyController : MonoBehaviour {
         levelManager.AddEnemyCount();
         levelManager.AddPlayerScore();
         levelManager.enemyKilled = true;
-        levelManager.GetNewEnemy(0.1f);
+        levelManager.GetNewEnemy(1.5f);
         pooler.RemoveElement(this.transform);
         
     }
