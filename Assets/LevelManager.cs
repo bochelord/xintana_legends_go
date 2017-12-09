@@ -388,6 +388,7 @@ public class LevelManager : MonoBehaviour {
     public void RestartGame()
     {
         _playerScore = 0;
+        playerScoreUI = 0;
         _zazucKilled = 0;
         _makulaKilled = 0;
         _kogiKilled = 0;
