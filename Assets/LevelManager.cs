@@ -223,12 +223,11 @@ public class LevelManager : MonoBehaviour {
         if (_enemyCount == 7 || _enemyCount == 14 || _enemyCount == 21)//each 7 enemies killed we summon a final boss
         {
             enemy = enemyPooler.GetBossObject();
-            combinationManager.timeToResolveCombination = 30f;
+            combinationManager.timeToResolveCombination *= 2;
         }
         else
         {
             enemy = enemyPooler.GetPooledObject();
-            combinationManager.timeToResolveCombination = 15f;
         }
         
         //we control the worldsprites based on the amount of enemies 

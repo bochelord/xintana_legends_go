@@ -33,7 +33,7 @@ public class CombinationManager : MonoBehaviour {
     public GameObject[] combinationArray;           //This is the Array with the GameObjects combination.
     public GameObject[] copyCombinationArray;       //An Array store to delete later the combination game objects.
     public GameObject[] objectsCombinationPool;     //Pool with all the possible GameObjects.
-    public float timeToResolveCombination = 5;
+    public float timeToResolveCombination = 15;
 
     private bool gameOn = true;
     private bool winningCondition = false;
@@ -256,10 +256,11 @@ public class CombinationManager : MonoBehaviour {
                     ShowWinText();
                     
 
-                    if (levelManager.GetTotalEnemyKilled() == _eachthreetimes) //each three kills we gorw the combination
+                    if (levelManager.GetTotalEnemyKilled() == _eachthreetimes) //each three kills we gorw the combination and also give more time to solve it...
                     {
                         ChangeMinimCombinationValue(minimCombinationValue + 1);
                         ChangeCombinationLength(combinationLength + 1);
+                        timeToResolveCombination += 3;
                         _eachthreetimes += 3;
                     }
                     else
