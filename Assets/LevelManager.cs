@@ -53,10 +53,12 @@ public class LevelManager : MonoBehaviour {
         combinationManager = FindObjectOfType<CombinationManager>();
         playerManager = player.GetComponent<PlayerManager>();
         _guiManager = FindObjectOfType<Rad_GuiManager>();
+
     }
 
     void Start()
     {
+        AnalyticsManager.Instance.DeviceModel_Event();
         PrepareBackgroundLevel(1);
         GetNewEnemy(0);
         //fixscreeperra();

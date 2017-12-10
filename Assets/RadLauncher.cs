@@ -12,7 +12,7 @@ public class RadLauncher : MonoBehaviour {
 	// Use this for initialization
 	IEnumerator Start () {
 
-        AnalyticsManager.Instance.DeviceModel_Event();
+        
         Rad_SaveManager.LoadData();
         Rad_SaveManager.SaveData(); //We save in case is a new generated profile...
         Fader.DOFade(0f, 0.7f);
