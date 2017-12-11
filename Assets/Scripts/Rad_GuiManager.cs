@@ -15,6 +15,7 @@ public class Rad_GuiManager : MonoBehaviour {
     [Header("Text")]
     public Text enemyText;
     public Text scoreText;
+    public Text worldText;
 
     [Header("Share Panel")]
     public Text kogiAmount;
@@ -37,6 +38,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private void Update()
     {
         scoreText.text = _levelManager.GetPlayerScoreUI().ToString();
+        worldText.text = _levelManager.GetCurrentWorldNumber().ToString();
     }
 
 
@@ -80,7 +82,7 @@ public class Rad_GuiManager : MonoBehaviour {
         makulaAmount.text = _levelManager.GetMakulaKilled().ToString();
         int _tempScore = (int)_levelManager.GetPlayerScore();
         scorePlayer.text = _tempScore.ToString();
-        worldReached.text = "World " + _levelManager.GetWorldNumber().ToString();
+        worldReached.text = "World " + _levelManager.GetCurrentWorldNumber().ToString();
         fightsNumber.text = (_levelManager.GetTotalEnemyKilled()+1).ToString() + " Fights"; // This is plus one cause the current fight that player lost also counts although he didn't kill the enemy...
     }
 

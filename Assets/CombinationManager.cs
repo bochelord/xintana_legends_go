@@ -28,7 +28,7 @@ public class CombinationManager : MonoBehaviour {
     public Text youLose_Text;
     [Header("UI Buttons")]
     public GameObject[] uiButtons;
-    public int combinationLength;                   //Combination length that the User will has to solve.
+    [HideInInspector]public int combinationLength=1;                   //Combination length that the User will has to solve.
     public Text fightNumberValueText;
     public GameObject[] combinationArray;           //This is the Array with the GameObjects combination.
     public GameObject[] copyCombinationArray;       //An Array store to delete later the combination game objects.
@@ -39,10 +39,10 @@ public class CombinationManager : MonoBehaviour {
     private bool winningCondition = false;
     private float tempTimer;                        //Auxiliary variable to work with the Timer.
     private int currentCombinationPosition = 0;     //The combination position to check, by default 0.
-    private int minimCombinationValue = 1;          
+    private int minimCombinationLenght = 1;          
     private LevelManager levelManager;
     private PlayerManager _playerManager;
-    private int _eachthreetimes = 3;
+    private int _combinationFrecuency = 3;//bydefault
     public float original_timeToResolveCombination;
 
     void Awake()
@@ -70,7 +70,7 @@ public class CombinationManager : MonoBehaviour {
         combinationArray = null;
         copyCombinationArray = null;
 
-        int _tempLength = Random.Range(minimCombinationValue, combinationLength);
+        int _tempLength = Random.Range(minimCombinationLenght, combinationLength);
         combinationArray = new GameObject[_tempLength];
         copyCombinationArray = new GameObject[_tempLength];
         foreach (Transform child in combinationPanel.transform)
@@ -91,7 +91,7 @@ public class CombinationManager : MonoBehaviour {
         combinationArray = null;
         copyCombinationArray = null;
 
-        int _tempLength = Random.Range(minimCombinationValue, combinationLength);
+        int _tempLength = Random.Range(minimCombinationLenght, combinationLength);
         combinationArray = new GameObject[_tempLength];
         copyCombinationArray = new GameObject[_tempLength];
         foreach (Transform child in combinationPanel.transform)
@@ -131,7 +131,7 @@ public class CombinationManager : MonoBehaviour {
             Destroy(child.gameObject);
         }
         currentCombinationPosition = 0;
-        minimCombinationValue = 1;
+        minimCombinationLenght = 1;
         timerSlider.value = 1;
         combinationLength = 1;
         combinationArray = new GameObject[combinationLength];
@@ -150,7 +150,7 @@ public class CombinationManager : MonoBehaviour {
         int tempValue = 0;
         for (int i = 0; i < combinationArray.Length; i++)
         {
-            tempValue = Random.Range(0, objectsCombinationPool.Length); //this is plus one since Random.Range for ints takes the second value as not inclusive...
+            tempValue = Random.Range(0, objectsCombinationPool.Length); 
             combinationArray[i] = objectsCombinationPool[tempValue];
             
         }
@@ -168,11 +168,11 @@ public class CombinationManager : MonoBehaviour {
     /// Change minimCombinationValue
     /// </summary>
     /// <param name="newValue"></param>
-    void ChangeMinimCombinationValue(int newValue)
+    void ChangeMinimCombinationLength(int newValue)
     {
         //if(combinationLength > 3)
         //{
-            minimCombinationValue = newValue;
+            minimCombinationLenght = newValue;
         //}
 
     }
@@ -210,7 +210,7 @@ public class CombinationManager : MonoBehaviour {
         tempTimer -= Time.deltaTime;
         if (timerSlider.value > 0)
         {
-            sliderTimerText.text = tempTimer.ToString("f0") + " SECS";
+            sliderTimerText.text = tempTimer.ToString("f0");
         }
         if (timerSlider.value <= 0)
         {
@@ -259,24 +259,24 @@ public class CombinationManager : MonoBehaviour {
                     ShowWinText();
                     
 
-                    if (levelManager.GetTotalEnemyKilled() == _eachthreetimes) //each three kills we gorw the combination and also give more time to solve it...
+                    if (levelManager.GetTotalEnemyKilled() == _combinationFrecuency) //each three kills we gorw the combination and also give more time to solve it...
                     {
-                        ChangeMinimCombinationValue(minimCombinationValue + 1);
+                        ChangeMinimCombinationLength(minimCombinationLenght + 1);
                         ChangeCombinationLength(combinationLength + 1);
                         timeToResolveCombination += 1;
-                        _eachthreetimes += 3;
+                        _combinationFrecuency += _combinationFrecuency;
                     }
                     else
                     {
                         ChangeCombinationLength(combinationLength);
-                        ChangeMinimCombinationValue(minimCombinationValue);
+                        ChangeMinimCombinationLength(minimCombinationLenght);
                     }
                     StartCoroutine(LoadNextRound(2.5f));
                 }
                 else
                 {
                     ChangeCombinationLength(combinationLength);
-                    StartCoroutine(LoadNextRoundEnemy(0.1f));
+                    StartCoroutine(LoadNextEnemy(0.1f));
 
                 }
                 //Debug.Log("COMBINATION LENGTH> " + combinationLength);
@@ -291,7 +291,7 @@ public class CombinationManager : MonoBehaviour {
             ShowLoseText();
             if(_playerManager.life > 0)
             {
-                StartCoroutine(LoadNextRoundEnemy(0.1f));
+                StartCoroutine(LoadNextEnemy(0.1f));
             }
 
             // We STOP the Game as the Player lose.
@@ -354,7 +354,7 @@ public class CombinationManager : MonoBehaviour {
         youLose_Text.gameObject.SetActive(true);
     }
 
-    IEnumerator LoadNextRoundEnemy(float delay){
+    IEnumerator LoadNextEnemy(float delay){
 
         yield return new WaitForSeconds(delay);
         ResetGameButDontResetTime();
@@ -378,9 +378,15 @@ public class CombinationManager : MonoBehaviour {
             youWin_Text.gameObject.SetActive(false);
         }
     }
-    
+
     public void SetGameOn(bool value)
     {
         gameOn = value;
+    }
+
+
+    public void SetCombinationFrecuency(int newfrecu)
+    {
+        _combinationFrecuency = newfrecu;
     }
 }

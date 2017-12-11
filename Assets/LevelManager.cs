@@ -27,6 +27,13 @@ public class LevelManager : MonoBehaviour {
     public Transform enemyContainer;
     public bool enemyKilled = false;
 
+
+    [Header("Level Control Values")]
+    [Tooltip("This is measure in number of fights")]
+    public int bossFightFrecuency = 7; 
+    public int combinationIncreaseFrecuency = 3;
+
+
     [Header("Backgrounds")]
     //public GameObject worldspritesLevel1;
     //public GameObject worldspritesLevel2;
@@ -48,6 +55,7 @@ public class LevelManager : MonoBehaviour {
     private bool musiclevel2_AlreadyPlayed = false;
     private bool musiclevel3_AlreadyPlayed = false;
 
+    //private int currentWorld = 1;
 
     void Awake()
     {
@@ -60,6 +68,7 @@ public class LevelManager : MonoBehaviour {
     void Start()
     {
         AnalyticsManager.Instance.DeviceModel_Event();
+        combinationManager.SetCombinationFrecuency(combinationIncreaseFrecuency);
         PrepareBackgroundLevel(1);
         GetNewEnemy(0);
         //fixscreeperra();
@@ -227,55 +236,42 @@ public class LevelManager : MonoBehaviour {
 
         combinationManager.fightNumberValueText.text = _enemyCount.ToString();
 
-        if (_enemyCount == 7 || _enemyCount == 14 || _enemyCount == 21)//each 7 enemies killed we summon a final boss
+        if (_enemyCount == (bossFightFrecuency * _worldNumber))//final boss is summont on its frecuency and per world
         {
             enemy = enemyPooler.GetBossObject();
             timerSafe = combinationManager.timeToResolveCombination;
             combinationManager.timeToResolveCombination *= 2;
 
             AudioManager.Instance.PlayBossMusic();
-
-            //AudioManager.Instance.PlayBossMusicAndPauseMain();
-
-        }
-        else if (_enemyCount == 8 || _enemyCount == 15 || _enemyCount == 22)//after a boss fight we reset the timer to whatever it was before it
+        } 
+        else if (_enemyCount == (bossFightFrecuency * _worldNumber) + 1)//after a boss fight we reset the timer to whatever it was before it and
         {
             combinationManager.timeToResolveCombination = timerSafe;
             enemy = enemyPooler.GetPooledObject();
-            //AudioManager.Instance.StopBossMusicAndResumeMain();
+
+            _worldNumber++;
+
+            //We change the level to another world
+            PrepareBackgroundLevel(_worldNumber);
+
+            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicArray[_worldNumber - 1])
+            {
+                AudioManager.Instance.PlayMusicLevel(_worldNumber);
+            }
         }
         else
         {
             enemy = enemyPooler.GetPooledObject();
         }
-        
-        //we control the worldsprites based on the amount of enemies 
-        if (_enemyCount > 7 && _enemyCount<=14)
-        {
-            //level2
-            PrepareBackgroundLevel(2);
-            
-            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicLevel2 && !musiclevel2_AlreadyPlayed)
-            {
-                AudioManager.Instance.PlayMusicLevel2();
-                musiclevel2_AlreadyPlayed = true;
-                _worldNumber++;
-            }
-            
-        }
 
-        if (_enemyCount > 14)
-        {
-            //level3
-            PrepareBackgroundLevel(3);
-            
-            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicLevel3 && !musiclevel3_AlreadyPlayed)
-            {
-                AudioManager.Instance.PlayMusicLevel3();
-                musiclevel3_AlreadyPlayed = true;
-                _worldNumber++;
-            }
-        }
+        
+        
+
+
+       
+
+
+
 
         enemyController = enemy.GetComponent<EnemyController>();
         enemy.transform.position = enemyContainer.position;
@@ -409,6 +405,8 @@ public class LevelManager : MonoBehaviour {
         }
 
         worldspritesLevelList[worldlevel - 1].SetActive(true); //array starts at 0 so world 1 is item[0];
+
+        _worldNumber = worldlevel;
     }
 
     #endregion
@@ -443,7 +441,7 @@ public class LevelManager : MonoBehaviour {
         return _kogiKilled + _zazucKilled + _makulaKilled;
     }
 
-    public int GetWorldNumber()
+    public int GetCurrentWorldNumber()
     {
         return _worldNumber;
     }

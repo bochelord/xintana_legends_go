@@ -21,9 +21,7 @@ public class radicalIntroManager : MonoBehaviour
     [Header("timer")]
     public Text timerText;
 
-    [Header("audio")]
-    public AudioClip cunaoClip;
-
+    
 
     private static LoadLevelData loadlevelData;
 

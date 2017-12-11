@@ -14,7 +14,11 @@ public class AudioManager : MonoBehaviour {
     [Range(0, 1)]
     public float generalVolume;
 
-    [Header("")]
+    [Header("MusicClips")]
+
+    [Header("MusicArray")]
+    public AudioClip[] musicArray;
+
     public AudioClip musicLevel1;
     public AudioClip musicLevel2;
     public AudioClip musicLevel3;
@@ -80,6 +84,15 @@ public class AudioManager : MonoBehaviour {
         if (musicLevel3 && audioEnabled)
         {
             musicPlayer.clip = musicLevel3;
+            musicPlayer.Play();
+        }
+    }
+
+    public void PlayMusicLevel(int level)
+    {
+        if (musicArray[level-1] && audioEnabled)
+        {
+            musicPlayer.clip = musicArray[level - 1];
             musicPlayer.Play();
         }
     }
