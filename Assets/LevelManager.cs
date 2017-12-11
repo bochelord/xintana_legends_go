@@ -28,9 +28,10 @@ public class LevelManager : MonoBehaviour {
     public bool enemyKilled = false;
 
     [Header("Backgrounds")]
-    public GameObject worldspritesLevel1;
-    public GameObject worldspritesLevel2;
-    public GameObject worldspritesLevel3;
+    //public GameObject worldspritesLevel1;
+    //public GameObject worldspritesLevel2;
+    //public GameObject worldspritesLevel3;
+    public GameObject[] worldspritesLevelList;
 
     private int _kogiKilled = 0;
     private int _zazucKilled = 0;
@@ -167,27 +168,7 @@ public class LevelManager : MonoBehaviour {
         StartCoroutine(CoroGetNewEnemy(delay));
     }
     
-    private void PrepareBackgroundLevel(int level)
-    {
-        worldspritesLevel1.SetActive(false);
-        worldspritesLevel2.SetActive(false);
-        worldspritesLevel3.SetActive(false);
-
-        switch (level)
-        {
-            case 1:
-                worldspritesLevel1.SetActive(true);
-                break;
-            case 2:
-                worldspritesLevel2.SetActive(true);
-                break;
-            case 3:
-                worldspritesLevel3.SetActive(true);
-                break;
-            //default:
-            //    Debug.LogError("Level" + level + "does not exist!!! Beware DUDE!");
-        }
-    }
+    
 
 
     /// <summary>
@@ -417,6 +398,23 @@ public class LevelManager : MonoBehaviour {
     //private int _playerScore = 0;
     //private int _currentEnemyLevel = 0;
     //private int _enemyCount = 0;
+
+    #region World Level Generation
+
+    private void PrepareBackgroundLevel(int worldlevel)
+    {
+        for (int i = 0; i < worldspritesLevelList.Length; i++)
+        {
+            worldspritesLevelList[i].SetActive(false);
+        }
+
+        worldspritesLevelList[worldlevel - 1].SetActive(true); //array starts at 0 so world 1 is item[0];
+    }
+
+    #endregion
+
+
+
 
     public int GetKogiKilled()
     {
