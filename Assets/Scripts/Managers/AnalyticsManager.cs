@@ -45,4 +45,12 @@ public class AnalyticsManager : MonoBehaviour
             {"item bought", itemName }
         });
     }
+
+    public void Shared_Screen()
+    {
+        Analytics.CustomEvent("Shared_Screen", new Dictionary<string, object>
+        {
+            {"shared screen", "Yes" }
+        });
+    }
 }

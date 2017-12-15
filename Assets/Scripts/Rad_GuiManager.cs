@@ -8,15 +8,22 @@ public class Rad_GuiManager : MonoBehaviour {
 
     [Header("Panels")]
     public GameObject gmeOverPanel;
+    public GameObject playerGameOverPanel;
     public GameObject mainMenuPanel;
     public GameObject settingsPanel;
     public GameObject shop;
-
+    public GameObject viewAdPanel;
     [Header("Text")]
     public Text enemyText;
     public Text scoreText;
     public Text worldText;
-
+    [Header ("Player Game Over")]
+    public Text pKogiAmount;
+    public Text pZazuAmount;
+    public Text pMakulaAmount;
+    public Text pScorePlayer;
+    public Text pWorldReached;
+    public Text pFightsNumber;
     [Header("Share Panel")]
     public Text kogiAmount;
     public Text zazuAmount;
@@ -26,22 +33,17 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text fightsNumber;
 
     private LevelManager _levelManager;
-
+    
     private void Awake()
     {
         _levelManager = FindObjectOfType<LevelManager>();
     }
-
-
-
 
     private void Update()
     {
         scoreText.text = _levelManager.GetPlayerScoreUI().ToString();
         worldText.text = _levelManager.GetCurrentWorldNumber().ToString();
     }
-
-
 
     /// <summary>
     /// called from Button, set main menu panel on and turns off the rest
@@ -61,13 +63,25 @@ public class Rad_GuiManager : MonoBehaviour {
         settingsPanel.SetActive(true);
     }
 
+    /// <summary>
+    /// turns de game over panel on
+    /// </summary>
     public void GameOverPanelOn()
     {
+        playerGameOverPanel.SetActive(false);
         gmeOverPanel.SetActive(true);
         gmeOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
+
     }
 
-
+    public void PlayerGameOverPanelOn()
+    {
+        playerGameOverPanel.SetActive(true);
+        StartCoroutine(FillGameOverPanel());
+    }
+    /// <summary>
+    /// Turns de Game over panell off
+    /// </summary>
     public void GameOverPanelOff()
     {
         //gmeOverPanel.transform.DOLocalMoveX(663f, 1f);
@@ -75,6 +89,9 @@ public class Rad_GuiManager : MonoBehaviour {
         gmeOverPanel.SetActive(false);
         
     }
+    /// <summary>
+    /// fill all the info needed in the Share Panel
+    /// </summary>
     public void FillSharePanel()
     {
         kogiAmount.text = _levelManager.GetKogiKilled().ToString();
@@ -86,6 +103,56 @@ public class Rad_GuiManager : MonoBehaviour {
         fightsNumber.text = (_levelManager.GetTotalEnemyKilled()+1).ToString() + " Fights"; // This is plus one cause the current fight that player lost also counts although he didn't kill the enemy...
     }
 
+    /// <summary>
+    /// called from button
+    /// </summary>
+    public void Button_CloseViewAddPanel()
+    {
+        viewAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+        viewAdPanel.SetActive(false);
+        PlayerGameOverPanelOn();
+    }
+    IEnumerator FillGameOverPanel()
+    {
+        playerGameOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
+        yield return new WaitForSeconds(1);
+        int _tempScore = (int)_levelManager.GetPlayerScore();
+        pScorePlayer.DOText(_tempScore.ToString(), 1, false,ScrambleMode.None,null);
+        yield return new WaitForSeconds(1);
+        int _tempWorld = _levelManager.GetCurrentWorldNumber();
+        pWorldReached.DOText(_tempWorld.ToString(), 0.5f, false, ScrambleMode.None, null);
+        yield return new WaitForSeconds(0.5f);
+        int _tempFights = _levelManager.GetTotalEnemyKilled()+1;
+        pFightsNumber.DOText(_tempFights.ToString(), 0.5f, false, ScrambleMode.None, null);
+        yield return new WaitForSeconds(0.5f);
+        int _tempKogi = _levelManager.GetKogiKilled();
+        pKogiAmount.DOText(_tempKogi.ToString(), 0.5f, false, ScrambleMode.None, null);
+        yield return new WaitForSeconds(0.5f);
+        int _tempZazu = _levelManager.GetZazuKilled();
+        pZazuAmount.DOText(_tempZazu.ToString(), 0.5f, false, ScrambleMode.None, null);
+        yield return new WaitForSeconds(0.5f);
+        int _tempMakula = _levelManager.GetMakulaKilled();
+        pMakulaAmount.DOText(_tempMakula.ToString(), 0.5f, false, ScrambleMode.None, null);
+        yield return new WaitForSeconds(0.5f);
+    }
+
+    public void ShowAdPanel()
+    {
+        viewAdPanel.SetActive(true);
+        viewAdPanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+    }
+    public void HideAdPanel()
+    {
+        viewAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+        viewAdPanel.SetActive(false);
+    }
+
+    public void HideAdPanelAndStartGameOverPanel()
+    {
+        viewAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+        viewAdPanel.SetActive(false);
+        PlayerGameOverPanelOn();
+    }
     public void Button_OpenShop()
     {
         shop.SetActive(true);

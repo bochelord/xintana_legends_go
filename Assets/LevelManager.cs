@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour {
     private PlayerManager playerManager;
     private CombinationManager combinationManager;
     private Rad_GuiManager _guiManager;
+    private AdsManager adManager;
     private List<Transform> inactiveHUDTextList = new List<Transform>();
     public EnemiesPooler enemyPooler;
     public Transform enemyContainer;
@@ -62,6 +63,7 @@ public class LevelManager : MonoBehaviour {
         combinationManager = FindObjectOfType<CombinationManager>();
         playerManager = player.GetComponent<PlayerManager>();
         _guiManager = FindObjectOfType<Rad_GuiManager>();
+        adManager = FindObjectOfType<AdsManager>();
 
     }
 
@@ -154,19 +156,21 @@ public class LevelManager : MonoBehaviour {
 
         if(playerManager.life <= 0)
         {
-            //TODO ad view panel
-
-
-
-
-
+            
             //Continue or go to main menu
             AudioManager.Instance.Play_XintanaDeath();
             player.GetComponent<Animator>().SetInteger("AnimState",4);
             AnalyticsManager.Instance.GameOver_Event((int)_playerScore, _enemyCount + 1, _worldNumber);
 
-            StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 1.5f));
-            
+            if (!adManager.adViewed)
+            {
+                _guiManager.ShowAdPanel();
+            }
+            else
+            {
+                StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 1.5f));
+            }
+
         }
         
     }
@@ -176,9 +180,6 @@ public class LevelManager : MonoBehaviour {
         
         StartCoroutine(CoroGetNewEnemy(delay));
     }
-    
-    
-
 
     /// <summary>
     /// called in combinationManager, when you kill an enemy
@@ -263,14 +264,6 @@ public class LevelManager : MonoBehaviour {
         {
             enemy = enemyPooler.GetPooledObject();
         }
-
-        
-        
-
-
-       
-
-
 
 
         enemyController = enemy.GetComponent<EnemyController>();
@@ -357,7 +350,7 @@ public class LevelManager : MonoBehaviour {
     public void GameOverPanel()
     {
         combinationManager.MoveButtonsOut();
-        _guiManager.GameOverPanelOn();
+        _guiManager.PlayerGameOverPanelOn();
         combinationManager.DisableButtonsInteraction();
         combinationManager.SetGameOn(false);
     }
@@ -388,6 +381,22 @@ public class LevelManager : MonoBehaviour {
         combinationManager.SetGameOn(true);
     }
 
+    public void ContinueGame()
+    {
+        combinationManager.MoveButtonsIn();
+        combinationManager.timeToResolveCombination = combinationManager.original_timeToResolveCombination;
+        _guiManager.GameOverPanelOff();
+        enemyPooler.RemoveElement(enemyController.transform);
+        combinationManager.EnableButtonsInteraction();
+        _currentEnemyLevel = 0;
+        combinationManager.ResetCombination();
+        PrepareBackgroundLevel(1);
+        AudioManager.Instance.PlayMusicLevel1();
+        playerManager.OnAttackFinished();
+        playerManager.life = 9; // TODO remove when real implementation is done
+        GetNewEnemy(1);
+        combinationManager.SetGameOn(true);
+    }
     //private int _kogiKilled = 0;
     //private int _zazucKilled = 0;
     //private int _makulaKilled = 0;

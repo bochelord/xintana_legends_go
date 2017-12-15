@@ -22,6 +22,7 @@ public class NativeShareScript : MonoBehaviour
             didShare = true;
             CanvasShareObj.SetActive(true);
             guiManager.FillSharePanel();
+            AnalyticsManager.Instance.Shared_Screen();
         }
 
         if (!isProcessing)
