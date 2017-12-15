@@ -12,6 +12,7 @@ public class XintanaProfile : MonoBehaviour {
     public int highscore;
     public int tokens;
     public bool audioEnabled;
+    public System.DateTime timeStamp;
     //TODO creat purchases done and equipped_items;
     #endregion
 
@@ -29,7 +30,7 @@ public class XintanaProfile : MonoBehaviour {
         profile.highscore = 0;
         profile.tokens = 0;
         profile.audioEnabled = true;
-
+        profile.timeStamp = System.DateTime.Now;
         return profile;
     }
     #endregion

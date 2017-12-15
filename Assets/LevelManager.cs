@@ -162,13 +162,14 @@ public class LevelManager : MonoBehaviour {
             player.GetComponent<Animator>().SetInteger("AnimState",4);
             AnalyticsManager.Instance.GameOver_Event((int)_playerScore, _enemyCount + 1, _worldNumber);
 
-            if (!adManager.adViewed)
+            if (!adManager.adViewed && adManager.AdsViewed <=4)
             {
                 _guiManager.ShowAdPanel();
             }
             else
             {
                 StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 1.5f));
+                adManager.adViewed = false; 
             }
 
         }
