@@ -11,6 +11,7 @@ public class XintanaProfile : MonoBehaviour {
     public int profileID;
     public int highscore;
     public int tokens;
+    public int adsViewed;
     public bool audioEnabled;
     public System.DateTime timeStamp;
     //TODO creat purchases done and equipped_items;
@@ -29,6 +30,7 @@ public class XintanaProfile : MonoBehaviour {
         profile.profileID = id;
         profile.highscore = 0;
         profile.tokens = 0;
+        profile.adsViewed = 0;
         profile.audioEnabled = true;
         profile.timeStamp = System.DateTime.Now;
         return profile;

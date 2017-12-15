@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour {
                                 /// - size (0.275,0.325)        [3]
  
     private float life;
+    private float startLife;
    
     private float damage;
 
@@ -47,6 +48,7 @@ public class EnemyController : MonoBehaviour {
         new_enemy = new EnemyStructure().GenerateWithLevel(type, levelManager.GetCurrentEnemyLevel());
         //new_enemy = new EnemyStructure().GenerateWithLevel(type, level);
         life = new_enemy.life;
+        startLife = new_enemy.life;
         damage = new_enemy.damage;
         this.GetComponent<_2dxFX_HSV>()._HueShift = new_enemy.dna_hue;
         this.GetComponent<_2dxFX_HSV>()._Saturation = new_enemy.dna_colorsat;
@@ -99,5 +101,13 @@ public class EnemyController : MonoBehaviour {
     public float GetLife()
     {
         return life;
+    }
+    public void SetLife(float value)
+    {
+        life = value;
+    }
+    public float GetStartLife()
+    {
+        return startLife;
     }
 }

@@ -178,7 +178,6 @@ public class LevelManager : MonoBehaviour {
 
     public void GetNewEnemy(float delay)
     {
-        
         StartCoroutine(CoroGetNewEnemy(delay));
     }
 
@@ -397,6 +396,7 @@ public class LevelManager : MonoBehaviour {
         playerManager.life = 9; // TODO remove when real implementation is done
         GetNewEnemy(1);
         combinationManager.SetGameOn(true);
+
     }
     //private int _kogiKilled = 0;
     //private int _zazucKilled = 0;

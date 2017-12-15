@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Analytics;
-
+using UnityEngine.Advertisements;
 public class AnalyticsManager : MonoBehaviour
 {
 
@@ -51,6 +51,23 @@ public class AnalyticsManager : MonoBehaviour
         Analytics.CustomEvent("Shared_Screen", new Dictionary<string, object>
         {
             {"shared screen", "Yes" }
+        });
+    }
+
+    public void AdsViewed(ShowResult value)
+    {
+        Analytics.CustomEvent("Ads_Viewed", new Dictionary<string, object>
+        {
+            {"ads viewed",value }
+
+        });
+    }
+
+    public void TimePlayed()
+    {
+        Analytics.CustomEvent("Time_Played", new Dictionary<string, object>
+        {
+            {"time played",Time.time }
         });
     }
 }

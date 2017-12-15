@@ -15,13 +15,18 @@ public class AdsManager : MonoBehaviour {
     public int AdsViewed;
     void Awake()
     {
-        timeStamp = System.DateTime.Now;
-        if(timeStamp.Day > Rad_SaveManager.profile.timeStamp.Day)
-        {
-            AdsViewed = 0;
-        }
         _guiManager = FindObjectOfType<Rad_GuiManager>();
         _levelManager = FindObjectOfType<LevelManager>();
+    }
+
+    void Start()
+    {
+        timeStamp = System.DateTime.Now;
+        if (timeStamp.Day > Rad_SaveManager.profile.timeStamp.Day)
+        {
+            AdsViewed = 0;
+            Rad_SaveManager.profile.timeStamp = timeStamp;
+        }
     }
     public void ShowAd()
     {
@@ -33,6 +38,7 @@ public class AdsManager : MonoBehaviour {
 
     private void HandleAdResult(ShowResult result)
     {
+        AnalyticsManager.Instance.AdsViewed(result);
         switch (result)
         {
             case ShowResult.Finished:
@@ -49,5 +55,6 @@ public class AdsManager : MonoBehaviour {
                 break;
 
         }
+
     }
 }
