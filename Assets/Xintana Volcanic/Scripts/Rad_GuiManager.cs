@@ -31,9 +31,14 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text scorePlayer;
     public Text worldReached;
     public Text fightsNumber;
+    [Header("ViewAdsPanel")]
+    public Text timeCountdown;
+
 
     private LevelManager _levelManager;
-    
+    private float _timerCountdown = 5f;
+    private bool timerCountdownAdOn = false;
+
     private void Awake()
     {
         _levelManager = FindObjectOfType<LevelManager>();
@@ -43,6 +48,16 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         scoreText.text = _levelManager.GetPlayerScoreUI().ToString();
         worldText.text = _levelManager.GetCurrentWorldNumber().ToString();
+
+        if (timerCountdownAdOn)
+        {
+            _timerCountdown -= Time.deltaTime;
+            timeCountdown.text = Mathf.Round(_timerCountdown).ToString();
+            if (_timerCountdown < 0)
+            {
+                Button_CloseViewAddPanel();
+            }
+        }
     }
 
     /// <summary>
@@ -108,6 +123,8 @@ public class Rad_GuiManager : MonoBehaviour {
     /// </summary>
     public void Button_CloseViewAddPanel()
     {
+        timerCountdownAdOn = false;
+        _timerCountdown = 5;
         viewAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
         viewAdPanel.SetActive(false);
         PlayerGameOverPanelOn();
@@ -139,10 +156,13 @@ public class Rad_GuiManager : MonoBehaviour {
     public void ShowAdPanel()
     {
         viewAdPanel.SetActive(true);
+        timerCountdownAdOn = true;
         viewAdPanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
     }
     public void HideAdPanel()
     {
+        timerCountdownAdOn = false;
+        _timerCountdown = 5;
         viewAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
         viewAdPanel.SetActive(false);
     }
