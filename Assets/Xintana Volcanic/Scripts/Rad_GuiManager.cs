@@ -175,11 +175,13 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     public void Button_OpenShop()
     {
-        shop.SetActive(true);
+        //shop.SetActive(true);
+        shop.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack);
     }
 
     public void Button_CloseShop()
     {
-        shop.SetActive(false);
+        //shop.SetActive(false);
+        shop.transform.DOLocalMoveX(840f, 0.75f).SetEase(Ease.OutBack);
     }
 }
