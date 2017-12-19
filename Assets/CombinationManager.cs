@@ -28,11 +28,14 @@ public class CombinationManager : MonoBehaviour {
     public Text youLose_Text;
     [Header("UI Buttons")]
     public GameObject[] uiButtons;
-    [HideInInspector]public int combinationLength=1;                   //Combination length that the User will has to solve.
+    [HideInInspector]
+    public int combinationLength=1;                   //Combination length that the User will has to solve.
+
     public Text fightNumberValueText;
     public GameObject[] combinationArray;           //This is the Array with the GameObjects combination.
     public GameObject[] copyCombinationArray;       //An Array store to delete later the combination game objects.
     public GameObject[] objectsCombinationPool;     //Pool with all the possible GameObjects.
+
     public float timeToResolveCombination = 15;
 
     private bool gameOn = true;
@@ -44,13 +47,16 @@ public class CombinationManager : MonoBehaviour {
     private PlayerManager _playerManager;
     private int _combinationFrecuency = 3;//bydefault
     public float original_timeToResolveCombination;
+    private AdsManager adManager;
+    private Rad_GuiManager _guiManager;
 
     void Awake()
     {
         levelManager = FindObjectOfType<LevelManager>();
         _playerManager = FindObjectOfType<PlayerManager>();
         original_timeToResolveCombination = timeToResolveCombination;
-
+        adManager = FindObjectOfType<AdsManager>();
+        _guiManager = FindObjectOfType<Rad_GuiManager>();
     }
 
     
@@ -216,7 +222,16 @@ public class CombinationManager : MonoBehaviour {
         {
             // We STOP the Game as the Player lose.
             gameOn = false;
-            levelManager.GameOverPanel();
+            //levelManager.GameOverPanel();
+
+            if (!adManager.adViewed && adManager.AdsViewed <= 4)
+            {
+                _guiManager.ShowAdPanel();
+            } else
+            {
+                StartCoroutine(FunctionLibrary.CallWithDelay(levelManager.GameOverPanel, 1.5f));
+                adManager.adViewed = false;
+            }
 
         }
          
