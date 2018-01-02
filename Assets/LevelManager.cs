@@ -164,6 +164,7 @@ public class LevelManager : MonoBehaviour {
 
             if (!adManager.adViewed && adManager.AdsViewed <=4)
             {
+                combinationManager.MoveButtonsOut();
                 _guiManager.ShowAdPanel();
             }
             else

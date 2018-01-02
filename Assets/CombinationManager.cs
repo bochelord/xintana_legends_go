@@ -320,7 +320,7 @@ public class CombinationManager : MonoBehaviour {
         //combinationButtons.GetComponent<GUIAnimFREE>().MoveOut();
         //combinationButtons.transform.DOLocalMove
         //combinationButtons.transform.DOLocalMove(new Vector3(-2.5f, -51f, 0f), 1f);
-        combinationButtons.transform.DOMoveY(-68f,1f);
+        combinationButtons.transform.DOMoveY(-101f,1f);
     }
     public void MoveButtonsIn()
     {
