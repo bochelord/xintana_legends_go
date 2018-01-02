@@ -38,6 +38,14 @@ public class Rad_GuiManager : MonoBehaviour {
     private LevelManager _levelManager;
     private float _timerCountdown = 5f;
     private bool timerCountdownAdOn = false;
+    private bool _scorePanelOn = false;
+
+    private int _pScorePlayer;
+    private int _pZazuAmount;
+    private int _pKogiAmount;
+    private int _pMakulaAmount;
+    private int _pWorldReached;
+    private int _pFightsNumber;
 
     private void Awake()
     {
@@ -58,8 +66,41 @@ public class Rad_GuiManager : MonoBehaviour {
                 Button_CloseViewAddPanel();
             }
         }
+
+        if (_scorePanelOn)
+        {
+            UpdateScorePanelUI();
+        }
     }
 
+    private void UpdateScorePanelUI()
+    {
+        if (pScorePlayer)
+        {
+            pScorePlayer.text = _pScorePlayer.ToString();
+        }
+        if (pKogiAmount)
+        {
+            pKogiAmount.text = _pKogiAmount.ToString();
+        }
+        if (pZazuAmount)
+        {
+            pZazuAmount.text = _pZazuAmount.ToString();
+        }
+        if (pMakulaAmount)
+        {
+            pMakulaAmount.text = _pMakulaAmount.ToString();
+        }
+        if (pWorldReached)
+        {
+            pWorldReached.text = _pWorldReached.ToString();
+        }
+        if (pFightsNumber)
+        {
+            pFightsNumber.text = _pFightsNumber.ToString();
+        }
+
+    }
     /// <summary>
     /// called from Button, set main menu panel on and turns off the rest
     /// </summary>
@@ -131,25 +172,21 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     IEnumerator FillGameOverPanel()
     {
+        _scorePanelOn = true;
         playerGameOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
         yield return new WaitForSeconds(1);
-        int _tempScore = (int)_levelManager.GetPlayerScore();
-        pScorePlayer.DOText(_tempScore.ToString(), 1, false,ScrambleMode.None,null);
+        DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 1f);
         yield return new WaitForSeconds(1);
-        int _tempWorld = _levelManager.GetCurrentWorldNumber();
-        pWorldReached.DOText(_tempWorld.ToString(), 0.5f, false, ScrambleMode.None, null);
+        DOTween.To(() => _pWorldReached, x => _pWorldReached = x, _levelManager.GetCurrentWorldNumber(), 1f);
         yield return new WaitForSeconds(0.5f);
-        int _tempFights = _levelManager.GetTotalEnemyKilled()+1;
-        pFightsNumber.DOText(_tempFights.ToString(), 0.5f, false, ScrambleMode.None, null);
+        DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled()+1, 1f);
         yield return new WaitForSeconds(0.5f);
-        int _tempKogi = _levelManager.GetKogiKilled();
-        pKogiAmount.DOText(_tempKogi.ToString(), 0.5f, false, ScrambleMode.None, null);
+        DOTween.To(() => _pKogiAmount, x => _pKogiAmount = x, _levelManager.GetKogiKilled(), 1f);
         yield return new WaitForSeconds(0.5f);
-        int _tempZazu = _levelManager.GetZazuKilled();
-        pZazuAmount.DOText(_tempZazu.ToString(), 0.5f, false, ScrambleMode.None, null);
+
+        DOTween.To(() => _pZazuAmount, x => _pZazuAmount = x, _levelManager.GetZazuKilled(), 1f);
         yield return new WaitForSeconds(0.5f);
-        int _tempMakula = _levelManager.GetMakulaKilled();
-        pMakulaAmount.DOText(_tempMakula.ToString(), 0.5f, false, ScrambleMode.None, null);
+        DOTween.To(() => _pMakulaAmount, x => _pMakulaAmount = x, _levelManager.GetMakulaKilled(), 1f);
         yield return new WaitForSeconds(0.5f);
     }
 
