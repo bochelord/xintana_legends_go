@@ -195,7 +195,8 @@ public class CombinationManager : MonoBehaviour {
             GameObject buttonCloned = Instantiate(combinationArray[i]);
             copyCombinationArray[i] = buttonCloned; 
             buttonCloned.GetComponent<ColorButtonData>().position = i;
-            buttonCloned.transform.parent = combinationPanel.transform;
+            buttonCloned.transform.SetParent(combinationPanel.transform);
+            //buttonCloned.transform.parent = combinationPanel.transform;
             //buttonCloned.gameObject.transform.position = screenPosition;
         }
     }
