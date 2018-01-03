@@ -49,7 +49,7 @@ public class CombinationManager : MonoBehaviour {
     public float original_timeToResolveCombination;
     private AdsManager adManager;
     private Rad_GuiManager _guiManager;
-
+    private Vector2 _initialButtonsPosition;
     void Awake()
     {
         levelManager = FindObjectOfType<LevelManager>();
@@ -57,6 +57,7 @@ public class CombinationManager : MonoBehaviour {
         original_timeToResolveCombination = timeToResolveCombination;
         adManager = FindObjectOfType<AdsManager>();
         _guiManager = FindObjectOfType<Rad_GuiManager>();
+        _initialButtonsPosition = combinationButtons.transform.position;
     }
 
     
@@ -320,7 +321,7 @@ public class CombinationManager : MonoBehaviour {
         //combinationButtons.GetComponent<GUIAnimFREE>().MoveOut();
         //combinationButtons.transform.DOLocalMove
         //combinationButtons.transform.DOLocalMove(new Vector3(-2.5f, -51f, 0f), 1f);
-        combinationButtons.transform.DOMoveY(-101f,1f);
+        combinationButtons.transform.DOMoveY(_initialButtonsPosition.y,1f);
     }
     public void MoveButtonsIn()
     {
