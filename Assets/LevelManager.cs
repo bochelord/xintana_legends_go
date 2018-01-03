@@ -382,6 +382,9 @@ public class LevelManager : MonoBehaviour {
         combinationManager.SetGameOn(true);
     }
 
+    /// <summary>
+    /// called when you see an ad
+    /// </summary>
     public void ContinueGame()
     {
         combinationManager.MoveButtonsIn();
@@ -389,8 +392,7 @@ public class LevelManager : MonoBehaviour {
         _guiManager.GameOverPanelOff();
         enemyPooler.RemoveElement(enemyController.transform);
         combinationManager.EnableButtonsInteraction();
-        _currentEnemyLevel = 0;
-        combinationManager.ResetCombination();
+        combinationManager.GenerateCombination();
         PrepareBackgroundLevel(1);
         AudioManager.Instance.PlayMusicLevel1();
         playerManager.OnAttackFinished();

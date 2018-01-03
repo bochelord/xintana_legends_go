@@ -172,7 +172,7 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     IEnumerator FillGameOverPanel()
     {
-        _scorePanelOn = true;
+        _scorePanelOn = true; 
         playerGameOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
         yield return new WaitForSeconds(1);
         DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 1f);
@@ -188,6 +188,7 @@ public class Rad_GuiManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         DOTween.To(() => _pMakulaAmount, x => _pMakulaAmount = x, _levelManager.GetMakulaKilled(), 1f);
         yield return new WaitForSeconds(0.5f);
+        _scorePanelOn = false; //so we stop constantly refreshing this panel
     }
 
     public void ShowAdPanel()

@@ -151,7 +151,7 @@ public class CombinationManager : MonoBehaviour {
     /// <summary>
     /// Generates a Random combination with a combinationLength.
     /// </summary>
-    void GenerateCombination() 
+    public void GenerateCombination() 
     {
         int tempValue = 0;
         for (int i = 0; i < combinationArray.Length; i++)
