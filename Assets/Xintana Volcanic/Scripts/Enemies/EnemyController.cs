@@ -23,13 +23,14 @@ public class EnemyController : MonoBehaviour {
     private bool critico;
     private EnemiesPooler pooler;
     private LevelManager levelManager;
-
+    private HealthBarControllerBoss healthBarController;
     void Awake()
     {
         animator = this.GetComponent<Animator>();
         hsv_spriteFX = this.GetComponent<_2dxFX_HSV>();
         pooler = FindObjectOfType<EnemiesPooler>();
         levelManager = FindObjectOfType<LevelManager>();
+        healthBarController = FindObjectOfType<HealthBarControllerBoss>();
     }
 
     //void Start () {
@@ -53,6 +54,7 @@ public class EnemyController : MonoBehaviour {
         this.GetComponent<_2dxFX_HSV>()._HueShift = new_enemy.dna_hue;
         this.GetComponent<_2dxFX_HSV>()._Saturation = new_enemy.dna_colorsat;
         this.GetComponent<_2dxFX_HSV>()._ValueBrightness = new_enemy.dna_brightness;
+        healthBarController.SetScrollbarValue();
     }
     /// <summary>
     /// Retu rns damage done by enemy based on standard fumble,critic (Fumble: less than 4 , Critic: more than 95)

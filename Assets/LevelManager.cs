@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour {
     private CombinationManager combinationManager;
     private Rad_GuiManager _guiManager;
     private AdsManager adManager;
+    private HealthBarControllerBoss healthBarController;
     private List<Transform> inactiveHUDTextList = new List<Transform>();
     public EnemiesPooler enemyPooler;
     public Transform enemyContainer;
@@ -64,7 +65,7 @@ public class LevelManager : MonoBehaviour {
         playerManager = player.GetComponent<PlayerManager>();
         _guiManager = FindObjectOfType<Rad_GuiManager>();
         adManager = FindObjectOfType<AdsManager>();
-
+        healthBarController = FindObjectOfType<HealthBarControllerBoss>();
     }
 
     void Start()
@@ -276,6 +277,7 @@ public class LevelManager : MonoBehaviour {
         enemy.SetActive(true);
         enemy.transform.SetParent(enemyContainer);
         enemyKilled = false;
+        healthBarController.SetScrollbarValue();
     }
     
 
