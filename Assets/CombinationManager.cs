@@ -214,29 +214,31 @@ public class CombinationManager : MonoBehaviour {
     /// </summary>
     void UpdateTimer()
     {
-        timerSlider.value -= Time.deltaTime / timeToResolveCombination;
-        tempTimer -= Time.deltaTime;
-        if (timerSlider.value > 0)
+        if (levelManager.state == GameState.Running)
         {
-            sliderTimerText.text = tempTimer.ToString("f0");
-        }
-        if (timerSlider.value <= 0)
-        {
-            // We STOP the Game as the Player lose.
-            gameOn = false;
-            //levelManager.GameOverPanel();
-
-            if (!adManager.adViewed && adManager.AdsViewed <= 4)
+            timerSlider.value -= Time.deltaTime / timeToResolveCombination;
+            tempTimer -= Time.deltaTime;
+            if (timerSlider.value > 0)
             {
-                _guiManager.ShowAdPanel();
-            } else
-            {
-                StartCoroutine(FunctionLibrary.CallWithDelay(levelManager.GameOverPanel, 1.5f));
-                adManager.adViewed = false;
+                sliderTimerText.text = tempTimer.ToString("f0");
             }
+            if (timerSlider.value <= 0)
+            {
+                // We STOP the Game as the Player lose.
+                gameOn = false;
+                //levelManager.GameOverPanel();
 
+                if (!adManager.adViewed && adManager.AdsViewed <= 4)
+                {
+                    _guiManager.ShowAdPanel();
+                }
+                else
+                {
+                    StartCoroutine(FunctionLibrary.CallWithDelay(levelManager.GameOverPanel, 1.5f));
+                    adManager.adViewed = false;
+                }
+            }
         }
-         
     }
 
     void ResetTimer()

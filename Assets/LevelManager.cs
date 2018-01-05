@@ -8,11 +8,13 @@ using UnityEngine.UI;
 /// (c)2017 Radical Graphics Studios
 /// </summary>
 /// 
+
+    public enum GameState { Running,Paused}
 public class LevelManager : MonoBehaviour {
 
     public GameObject enemy;
     public EnemyController enemyController;
-
+    public GameState state = GameState.Running;
     public GameObject HitPrefabRight;
     public GameObject damageFxPrefab;
     public GameObject player;
@@ -28,7 +30,6 @@ public class LevelManager : MonoBehaviour {
     public EnemiesPooler enemyPooler;
     public Transform enemyContainer;
     public bool enemyKilled = false;
-
 
     [Header("Level Control Values")]
     [Tooltip("This is measure in number of fights")]
@@ -405,6 +406,18 @@ public class LevelManager : MonoBehaviour {
         GetNewEnemy(1);
         combinationManager.SetGameOn(true);
 
+    }
+
+    public void PauseGame()
+    {
+        state = GameState.Paused;
+        _guiManager.PausePanelOn();
+    }
+
+    public void UnPauseGame()
+    {
+        state = GameState.Running;
+        _guiManager.PausePanelOff();
     }
     //private int _kogiKilled = 0;
     //private int _zazucKilled = 0;

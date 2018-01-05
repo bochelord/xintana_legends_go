@@ -13,6 +13,8 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject settingsPanel;
     public GameObject shop;
     public GameObject viewAdPanel;
+    public GameObject pausePanel;
+    
     [Header("Text")]
     public Text enemyText;
     public Text scoreText;
@@ -169,6 +171,41 @@ public class Rad_GuiManager : MonoBehaviour {
         viewAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
         viewAdPanel.SetActive(false);
         PlayerGameOverPanelOn();
+    }
+
+   public void PausePanelOn()
+    {
+        if (pausePanel)
+        {
+            pausePanel.transform.DOLocalMoveX(1650f, 1f).SetEase(Ease.OutBack);
+        }
+
+    }
+    public void PausePanelOff()
+    {
+        if (pausePanel)
+        {
+            pausePanel.transform.DOLocalMoveX(-1650f, 1f).SetEase(Ease.OutBack);
+        }
+
+    }
+
+    public void OptionsPanelOn()
+    {
+        if (settingsPanel)
+        {
+            pausePanel.transform.DOLocalMoveX(-1650f, 1f).SetEase(Ease.OutBack);
+            settingsPanel.transform.DOLocalMoveX(1650f, 1f).SetEase(Ease.OutBack);
+        }
+    }
+
+    public void OptionsPanelOff()
+    {
+        if (settingsPanel)
+        {
+            pausePanel.transform.DOLocalMoveX(1650f, 1f).SetEase(Ease.OutBack);
+            settingsPanel.transform.DOLocalMoveX(-1650f, 1f).SetEase(Ease.OutBack);
+        }
     }
     IEnumerator FillGameOverPanel()
     {
