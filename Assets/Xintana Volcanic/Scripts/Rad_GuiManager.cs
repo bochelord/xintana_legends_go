@@ -16,6 +16,8 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject pausePanel;
     public GameObject menuButtons;
 
+    [Header("PlaceHolders")]
+    public Transform midScreen;
     [Header("Text")]
     public Text enemyText;
     public Text scoreText;
@@ -137,11 +139,21 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         playerGameOverPanel.SetActive(true);
         StartCoroutine(FillGameOverPanel());
+
+
+    }
+
+    /// <summary>
+    /// Called from button, playerGameOverPanel closeButton in cartoon scene
+    /// </summary>
+    public void Button_CloseScorePanel()
+    {
+        playerGameOverPanel.transform.DOMoveX(1100f, 1f).SetEase(Ease.OutBack);
+        pausePanel.transform.DOMoveX(midScreen.position.x,1).SetEase(Ease.OutBack);
         if (menuButtons)
         {
-            menuButtons.transform.DOLocalMoveY(-556f, 1);
+            menuButtons.transform.DOLocalMoveY(-556f, 1).SetEase(Ease.OutBack);
         }
-
     }
     /// <summary>
     /// Turns de Game over panell off
