@@ -14,7 +14,8 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject shop;
     public GameObject viewAdPanel;
     public GameObject pausePanel;
-    
+    public GameObject menuButtons;
+
     [Header("Text")]
     public Text enemyText;
     public Text scoreText;
@@ -136,6 +137,11 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         playerGameOverPanel.SetActive(true);
         StartCoroutine(FillGameOverPanel());
+        if (menuButtons)
+        {
+            menuButtons.transform.DOLocalMoveY(-556f, 1);
+        }
+
     }
     /// <summary>
     /// Turns de Game over panell off

@@ -412,12 +412,14 @@ public class LevelManager : MonoBehaviour {
     {
         state = GameState.Paused;
         _guiManager.PausePanelOn();
+        combinationManager.MoveButtonsOut();
     }
 
     public void UnPauseGame()
     {
         state = GameState.Running;
         _guiManager.PausePanelOff();
+        combinationManager.MoveButtonsIn();
     }
     //private int _kogiKilled = 0;
     //private int _zazucKilled = 0;
