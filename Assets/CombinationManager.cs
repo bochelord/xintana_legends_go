@@ -189,7 +189,7 @@ public class CombinationManager : MonoBehaviour {
     void CreateButtonsAndPlaceThem()
     {
         float offset = 0;
-        for (int i = 0; i < combinationArray.Length; i++)
+        for (int i = combinationArray.Length-1; i > -1; i--)
         {
             offset += 75;
             //Vector3 screenPosition = GetScreenPosition(offset);
