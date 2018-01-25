@@ -186,20 +186,21 @@ public class CombinationManager : MonoBehaviour {
     /// <summary>
     /// Instantiate the gameobjects and place them in the middle top of the screen.
     /// </summary>
-    void CreateButtonsAndPlaceThem()
-    {
-        float offset = 0;
-        for (int i = combinationArray.Length-1; i > -1; i--)
-        {
-            offset += 75;
-            //Vector3 screenPosition = GetScreenPosition(offset);
+    void CreateButtonsAndPlaceThem(){
+        for (int i = combinationArray.Length-1; i > -1; i--){
             GameObject buttonCloned = Instantiate(combinationArray[i]);
             copyCombinationArray[i] = buttonCloned; 
             buttonCloned.GetComponent<ColorButtonData>().position = i;
             buttonCloned.transform.SetParent(combinationPanel.transform);
-            //buttonCloned.transform.parent = combinationPanel.transform;
-            //buttonCloned.gameObject.transform.position = screenPosition;
         }
+        moveButtonsToCenter(0);
+    }
+    /// <summary>
+    /// Moves the button of the copyCombinationArray to the center of the combination panel.
+    /// </summary>
+    /// <param name="number">The position of the button you want to move.</param>
+    private void moveButtonsToCenter(int number) {
+        copyCombinationArray[number].transform.DOMoveX(combinationPanel.transform.position.x, 0.5f);
     }
 
     public Vector3 GetScreenPosition(float offset)
@@ -263,7 +264,8 @@ public class CombinationManager : MonoBehaviour {
             copyCombinationArray[currentCombinationPosition].GetComponent<Image>().enabled = false;
             
             currentCombinationPosition++;
-            
+            //moves the next button to the center of the panel.
+            if(currentCombinationPosition< combinationArray.Length) moveButtonsToCenter(currentCombinationPosition);
             // WINNING CONDITION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             if (currentCombinationPosition == combinationArray.Length)
             {
