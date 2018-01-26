@@ -19,4 +19,13 @@ public static class RadUtils
             list[n] = value;
         }
     }
+
+    public static int d100()
+    {
+        int a = UnityEngine.Random.Range(0, 10);
+        int b = UnityEngine.Random.Range(0, 10);
+
+        return a * 10 + b;
+    }
+
 }
