@@ -167,11 +167,14 @@ public class LevelManager : MonoBehaviour {
             if (!adManager.adViewed && adManager.AdsViewed <=4)
             {
                 combinationManager.MoveButtonsOut();
-                _guiManager.ShowAdPanel();
+                StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowAdPanel,2f));
+                //_guiManager.ShowAdPanel();
             }
             else
             {
-                StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 1.5f));
+                StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 2f));
+                //Debug.Log("papor");
+                //Invoke("GameOverPanel", 4.5f);
                 adManager.adViewed = false; 
             }
 
