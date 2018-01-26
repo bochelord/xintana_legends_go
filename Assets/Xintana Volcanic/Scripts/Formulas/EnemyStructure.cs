@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum EnemyType { zazuc, makula, ball, kogi}
+public enum EnemyType { zazuc, makula, ball, kogi,blackKnight}
 
 
 public class EnemyStructure {
@@ -30,7 +30,7 @@ public class EnemyStructure {
                 this.type = EnemyType.makula;
                 lifeBase = 7f;
                 lifeGrowth = 0.08f;
-                damageBase = 15f;
+                damageBase = 5f;
                 damageGrowth = 0.1f;
                 break;
             case EnemyType.kogi:
@@ -38,6 +38,13 @@ public class EnemyStructure {
                 lifeBase = 2f;
                 lifeGrowth = 0.07f;
                 damageBase = 1f;
+                damageGrowth = 0.1f;
+                break;
+            case EnemyType.blackKnight:
+                this.type = EnemyType.blackKnight;
+                lifeBase = 4f;
+                lifeGrowth = 0.07f;
+                damageBase = 3f;
                 damageGrowth = 0.1f;
                 break;
             default:

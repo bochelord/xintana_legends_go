@@ -275,7 +275,12 @@ public class LevelManager : MonoBehaviour {
 
 
         enemyController = enemy.GetComponent<EnemyController>();
+        if(enemyController == null)
+        {
+            enemyController = enemy.GetComponentInChildren<EnemyController>();
+        }
         enemy.transform.position = enemyContainer.position;
+
         if (_guiManager.enemyText)
         {
             _guiManager.enemyText.text = enemyController.type.ToString();
