@@ -52,15 +52,25 @@ namespace SIS
                 case "shop_item_00":
                     //the user bought the item "coins", show appropriate feedback
                     ShowMessage("Your score will be double!!!");
+                    DBManager.SetPurchase("shop_item_00", 1);
+                    Rad_SaveManager.profile.doubleScore = true;
                     break;
                 case "shop_item_01":
+                    DBManager.SetPurchase("shop_item_01", 1);
                     ShowMessage("Now you have an extra life in combat!");
+                    Rad_SaveManager.profile.extraLife = true;
                     break;
                 case "shop_item_02":
+                    DBManager.SetPurchase("shop_item_02", 1);
+                    Rad_SaveManager.profile.noAds = true;
+                    ShowMessage("No more ads!");
                     break;
-
-                
+                case "shop_item_03":
+                    DBManager.SetPurchase("shop_item_03", 1);
+                    ShowMessage("Eternal gratitude...now! Thx");
+                    break;
             }
+            Rad_SaveManager.SaveData();
         }
 
         //just shows a message via our ShopManager component,
