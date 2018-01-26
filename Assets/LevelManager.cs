@@ -58,6 +58,7 @@ public class LevelManager : MonoBehaviour {
     private bool musiclevel2_AlreadyPlayed = false;
     private bool musiclevel3_AlreadyPlayed = false;
 
+    private bool _extraLifePurchased = false;
     //private int currentWorld = 1;
 
     void Awake()
@@ -67,6 +68,7 @@ public class LevelManager : MonoBehaviour {
         _guiManager = FindObjectOfType<Rad_GuiManager>();
         adManager = FindObjectOfType<AdsManager>();
         healthBarController = FindObjectOfType<HealthBarControllerBoss>();
+        _extraLifePurchased = Rad_SaveManager.profile.extraLife;
     }
 
     void Start()
@@ -156,7 +158,7 @@ public class LevelManager : MonoBehaviour {
         AudioManager.Instance.Play_XintanaHit();
 
 
-        if(playerManager.life <= 0)
+        if(playerManager.life <= 0 && !_extraLifePurchased)
         {
             
             //Continue or go to main menu
@@ -164,7 +166,7 @@ public class LevelManager : MonoBehaviour {
             player.GetComponent<Animator>().SetInteger("AnimState",4);
             AnalyticsManager.Instance.GameOver_Event((int)_playerScore, _enemyCount + 1, _worldNumber);
 
-            if (!adManager.adViewed && adManager.AdsViewed <=4)
+            if (!adManager.adViewed && adManager.AdsViewed <=4 && !Rad_SaveManager.profile.noAds)
             {
                 combinationManager.MoveButtonsOut();
                 StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowAdPanel,2f));
@@ -172,11 +174,16 @@ public class LevelManager : MonoBehaviour {
             }
             else
             {
+                AddNemesisCount();
                 StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 2f));
-                //Debug.Log("papor");
-                //Invoke("GameOverPanel", 4.5f);
                 adManager.adViewed = false; 
             }
+        }
+        else if (playerManager.life <= 0 && _extraLifePurchased)
+        {
+            _extraLifePurchased = false;
+            combinationManager.MoveButtonsOut();
+            StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowContinuePanel, 2f));
         }
     }
 
@@ -223,6 +230,25 @@ public class LevelManager : MonoBehaviour {
                 DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 1500 * levelin * timeRemaining, 0.5f);
                 _playerScore += 1500 * levelin * timeRemaining;
                 break;
+        }
+    }
+    private void AddNemesisCount()
+    {
+        switch (enemyController.type)
+        {
+            case EnemyType.blackKnight:
+                Rad_SaveManager.profile.timesKilledByBlackKnight++;
+                break;
+            case EnemyType.kogi:
+                Rad_SaveManager.profile.timesKilledByKogi++;
+                break;
+            case EnemyType.makula:
+                Rad_SaveManager.profile.timesKilledByMakula++;
+                break;
+            case EnemyType.zazuc:
+                Rad_SaveManager.profile.timesKilledByZazuc++;
+                break;
+
         }
     }
     private IEnumerator CoroGetNewEnemy(float delay)
@@ -377,6 +403,7 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     public void RestartGame()
     {
+        _extraLifePurchased = Rad_SaveManager.profile.extraLife;
         _playerScore = 0;
         playerScoreUI = 0;
         _zazucKilled = 0;
@@ -480,7 +507,15 @@ public class LevelManager : MonoBehaviour {
 
     public int GetPlayerScoreUI()
     {
-        return (int)playerScoreUI;
+        if (Rad_SaveManager.profile.doubleScore)
+        {
+            return (int)playerScoreUI * 2;
+        }
+        else
+        {
+            return (int)playerScoreUI;
+        }
+
     }
 
     public int GetTotalEnemyKilled()

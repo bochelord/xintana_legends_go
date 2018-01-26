@@ -13,6 +13,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject settingsPanel;
     public GameObject shop;
     public GameObject viewAdPanel;
+    public GameObject ContinueNoAdPanel;
     public GameObject pausePanel;
     public GameObject menuButtons;
 
@@ -38,11 +39,13 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text fightsNumber;
     [Header("ViewAdsPanel")]
     public Text timeCountdown;
+    public Text timeCountDownContinuePanel;
 
 
     private LevelManager _levelManager;
     private float _timerCountdown = 5f;
     private bool timerCountdownAdOn = false;
+    private bool timerContdownContinue = false;
     private bool _scorePanelOn = false;
 
     private int _pScorePlayer;
@@ -72,6 +75,15 @@ public class Rad_GuiManager : MonoBehaviour {
             }
         }
 
+        if (timerContdownContinue)
+        {
+            _timerCountdown -= Time.deltaTime;
+            timeCountDownContinuePanel.text = Mathf.Round(_timerCountdown).ToString();
+            if (_timerCountdown < 0)
+            {
+                HideContinuePanel();
+            }
+        }
         if (_scorePanelOn)
         {
             UpdateScorePanelUI();
@@ -236,12 +248,13 @@ public class Rad_GuiManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled()+1, 1f);
         yield return new WaitForSeconds(0.5f);
-        DOTween.To(() => _pKogiAmount, x => _pKogiAmount = x, _levelManager.GetKogiKilled(), 1f);
-        yield return new WaitForSeconds(0.5f);
+        //DOTween.To(() => _pKogiAmount, x => _pKogiAmount = x, _levelManager.GetKogiKilled(), 1f);
+        //yield return new WaitForSeconds(0.5f);
+        //DOTween.To(() => _pZazuAmount, x => _pZazuAmount = x, _levelManager.GetZazuKilled(), 1f);
+        //yield return new WaitForSeconds(0.5f);
+        //DOTween.To(() => _pMakulaAmount, x => _pMakulaAmount = x, _levelManager.GetMakulaKilled(), 1f);
 
-        DOTween.To(() => _pZazuAmount, x => _pZazuAmount = x, _levelManager.GetZazuKilled(), 1f);
-        yield return new WaitForSeconds(0.5f);
-        DOTween.To(() => _pMakulaAmount, x => _pMakulaAmount = x, _levelManager.GetMakulaKilled(), 1f);
+
         yield return new WaitForSeconds(0.5f);
         _scorePanelOn = false; //so we stop constantly refreshing this panel
     }
@@ -276,5 +289,19 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         //shop.SetActive(false);
         shop.transform.DOLocalMoveX(840f, 0.75f).SetEase(Ease.OutBack);
+    }
+    public void ShowContinuePanel()
+    {
+        timerContdownContinue = true;
+        ContinueNoAdPanel.SetActive(true);
+        ContinueNoAdPanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+    }
+
+    public void HideContinuePanel()
+    {
+        timerContdownContinue = false;
+        _timerCountdown = 5;
+        ContinueNoAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+        ContinueNoAdPanel.SetActive(false);
     }
 }
