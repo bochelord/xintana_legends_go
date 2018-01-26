@@ -13,7 +13,16 @@ public class ES2UserType_XintanaProfile : ES2Type
 		writer.Write(data.profileID);
 		writer.Write(data.highscore);
 		writer.Write(data.tokens);
+		writer.Write(data.timesKilledByZazuc);
+		writer.Write(data.timesKilledByMakula);
+		writer.Write(data.timesKilledByKogi);
+		writer.Write(data.timesKilledByBlackKnight);
+		writer.Write(data.adsViewed);
 		writer.Write(data.audioEnabled);
+		writer.Write(data.extraLife);
+		writer.Write(data.noAds);
+		writer.Write(data.doubleScore);
+		writer.Write(data.timeStamp);
 
 	}
 	
@@ -32,7 +41,16 @@ public class ES2UserType_XintanaProfile : ES2Type
 		data.profileID = reader.Read<System.Int32>();
 		data.highscore = reader.Read<System.Int32>();
 		data.tokens = reader.Read<System.Int32>();
+		data.timesKilledByZazuc = reader.Read<System.Int32>();
+		data.timesKilledByMakula = reader.Read<System.Int32>();
+		data.timesKilledByKogi = reader.Read<System.Int32>();
+		data.timesKilledByBlackKnight = reader.Read<System.Int32>();
+		data.adsViewed = reader.Read<System.Int32>();
 		data.audioEnabled = reader.Read<System.Boolean>();
+		data.extraLife = reader.Read<System.Boolean>();
+		data.noAds = reader.Read<System.Boolean>();
+		data.doubleScore = reader.Read<System.Boolean>();
+		data.timeStamp = reader.Read<System.DateTime>();
 
 	}
 	

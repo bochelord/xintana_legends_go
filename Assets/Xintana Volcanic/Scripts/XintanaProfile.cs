@@ -11,8 +11,15 @@ public class XintanaProfile : MonoBehaviour {
     public int profileID;
     public int highscore;
     public int tokens;
+    public int timesKilledByZazuc;
+    public int timesKilledByMakula;
+    public int timesKilledByKogi;
+    public int timesKilledByBlackKnight; //TODO add variable for any type of enemy
     public int adsViewed;
     public bool audioEnabled;
+    public bool extraLife;
+    public bool noAds;
+    public bool doubleScore;
     public System.DateTime timeStamp;
     //TODO creat purchases done and equipped_items;
     #endregion
@@ -32,6 +39,13 @@ public class XintanaProfile : MonoBehaviour {
         profile.tokens = 0;
         profile.adsViewed = 0;
         profile.audioEnabled = true;
+        profile.extraLife = false;
+        profile.noAds = false;
+        profile.doubleScore = false;
+        profile.timesKilledByBlackKnight = 0;
+        profile.timesKilledByKogi = 0;
+        profile.timesKilledByMakula = 0;
+        profile.timesKilledByZazuc = 0;
         profile.timeStamp = System.DateTime.Now;
         return profile;
     }
