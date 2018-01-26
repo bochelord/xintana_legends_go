@@ -250,6 +250,7 @@ public class LevelManager : MonoBehaviour {
             combinationManager.timeToResolveCombination *= 2;
 
             AudioManager.Instance.PlayBossMusic();
+            AudioManager.Instance.Play_Boss();
         } 
         else if (_enemyCount == (bossFightFrecuency * _worldNumber) + 1)//after a boss fight we reset the timer to whatever it was before it and
         {
@@ -261,9 +262,10 @@ public class LevelManager : MonoBehaviour {
             //We change the level to another world
             PrepareBackgroundLevel(_worldNumber);
 
-            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicArray[_worldNumber - 1])
-            {
+            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicArray[_worldNumber - 1]){
                 AudioManager.Instance.PlayMusicLevel(_worldNumber);
+
+                AudioManager.Instance.Play_NextStage();
             }
         }
         else
@@ -389,6 +391,7 @@ public class LevelManager : MonoBehaviour {
         playerManager.life = 9; // TODO remove when real implementation is done
         GetNewEnemy(1);
         combinationManager.SetGameOn(true);
+        combinationManager.HideWinLoseText();
     }
 
     /// <summary>

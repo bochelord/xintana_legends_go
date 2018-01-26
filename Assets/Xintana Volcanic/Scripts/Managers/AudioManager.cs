@@ -30,6 +30,12 @@ public class AudioManager : MonoBehaviour {
     public ScriptableObject xintana_death;
     public ScriptableObject xintana_hit;
 
+    [Header("FX")]
+    public ScriptableObject YouWin;
+    public ScriptableObject YouLose;
+    public ScriptableObject Boss;
+    public ScriptableObject NextStage;
+
     //cached variables
     private AudioClip tempclip;
 
@@ -159,5 +165,27 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
+    public void Play_YouWin() {
+        if (YouWin && audioEnabled) {
+            ((SimpleAudioEvent)YouWin).PlayOneShot(fxPlayer, generalVolume, true);
+        }
+    }
 
+    public void Play_YouLose() {
+        if (YouLose && audioEnabled) {
+            ((SimpleAudioEvent)YouLose).PlayOneShot(fxPlayer, generalVolume, true);
+        }
+    }
+
+    public void Play_Boss() {
+        if (Boss && audioEnabled) {
+            ((SimpleAudioEvent)Boss).PlayOneShot(fxPlayer, generalVolume, true);
+        }
+    }
+
+    public void Play_NextStage() {
+        if (NextStage && audioEnabled) {
+            ((SimpleAudioEvent)NextStage).PlayOneShot(fxPlayer, generalVolume, true);
+        }
+    }
 }

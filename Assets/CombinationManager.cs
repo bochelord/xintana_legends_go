@@ -62,7 +62,6 @@ public class CombinationManager : MonoBehaviour {
 
     
 	void Start () {
-       
         combinationArray = new GameObject[combinationLength];
         copyCombinationArray = new GameObject[combinationLength];
         
@@ -225,6 +224,7 @@ public class CombinationManager : MonoBehaviour {
             }
             if (timerSlider.value <= 0)
             {
+                ShowLoseText();
                 // We STOP the Game as the Player lose.
                 gameOn = false;
                 //levelManager.GameOverPanel();
@@ -309,10 +309,12 @@ public class CombinationManager : MonoBehaviour {
 
             levelManager.AttackPlayer();
             DisableButtonsInteraction();
-            ShowLoseText();
             if(_playerManager.life > 0)
             {
                 StartCoroutine(LoadNextEnemy(0.1f));
+            }
+            else {
+                ShowLoseText();
             }
 
             // We STOP the Game as the Player lose.
@@ -365,14 +367,14 @@ public class CombinationManager : MonoBehaviour {
         }
     }
 
-    public void ShowWinText()
-    {
+    public void ShowWinText(){
         youWin_Text.gameObject.SetActive(true);
+        AudioManager.Instance.Play_YouWin();
     }
 
-    public void ShowLoseText()
-    {
+    public void ShowLoseText(){
         youLose_Text.gameObject.SetActive(true);
+        AudioManager.Instance.Play_YouLose();
     }
 
     IEnumerator LoadNextEnemy(float delay){
@@ -389,7 +391,7 @@ public class CombinationManager : MonoBehaviour {
         ResetGame();
     }
 
-    void HideWinLoseText(){
+    public void HideWinLoseText(){
         if (youLose_Text)
         {
             youLose_Text.gameObject.SetActive(false);
