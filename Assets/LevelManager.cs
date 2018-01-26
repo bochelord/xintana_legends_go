@@ -52,7 +52,7 @@ public class LevelManager : MonoBehaviour {
     private int _eachthreetimes = 3;
     private float timerSafe;
     private int _worldNumber = 1;
-
+    private int numberOfRounds = 0;
     private float playerScoreUI;
 
     private bool musiclevel2_AlreadyPlayed = false;
@@ -243,7 +243,9 @@ public class LevelManager : MonoBehaviour {
 
         combinationManager.fightNumberValueText.text = _enemyCount.ToString();
 
-        if (_enemyCount == (bossFightFrecuency * _worldNumber))//final boss is summont on its frecuency and per world
+        Debug.Log(_enemyCount);
+        Debug.Log((bossFightFrecuency * (_worldNumber + numberOfRounds * worldspritesLevelList.Length)));
+        if (_enemyCount == (bossFightFrecuency * (_worldNumber + numberOfRounds * worldspritesLevelList.Length)))//final boss is summont on its frecuency and per world
         {
             enemy = enemyPooler.GetBossObject();
             timerSafe = combinationManager.timeToResolveCombination;
@@ -251,8 +253,9 @@ public class LevelManager : MonoBehaviour {
 
             AudioManager.Instance.PlayBossMusic();
             AudioManager.Instance.Play_Boss();
-        } 
-        else if (_enemyCount == (bossFightFrecuency * _worldNumber) + 1)//after a boss fight we reset the timer to whatever it was before it and
+        }
+        //numberOfRounds * sprites.length because probably player will end worlds, we reset _worldnumber to 1 in PrepareBackgroundLevel()
+        else if (_enemyCount == (bossFightFrecuency *( _worldNumber + numberOfRounds * worldspritesLevelList.Length)) + 1)//after a boss fight we reset the timer to whatever it was before it and
         {
             combinationManager.timeToResolveCombination = timerSafe;
             enemy = enemyPooler.GetPooledObject();
@@ -262,7 +265,9 @@ public class LevelManager : MonoBehaviour {
             //We change the level to another world
             PrepareBackgroundLevel(_worldNumber);
 
-            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicArray[_worldNumber - 1]){
+
+            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicArray[_worldNumber - 1])
+            {
                 AudioManager.Instance.PlayMusicLevel(_worldNumber);
 
                 AudioManager.Instance.Play_NextStage();
@@ -410,7 +415,7 @@ public class LevelManager : MonoBehaviour {
         enemyPooler.RemoveElement(enemyController.transform);
         combinationManager.EnableButtonsInteraction();
         combinationManager.GenerateCombination();
-        PrepareBackgroundLevel(1);
+        PrepareBackgroundLevel(_worldNumber);
         AudioManager.Instance.PlayMusicLevel1();
         playerManager.OnAttackFinished();
         playerManager.life = 9; // TODO remove when real implementation is done
@@ -443,11 +448,16 @@ public class LevelManager : MonoBehaviour {
 
     private void PrepareBackgroundLevel(int worldlevel)
     {
+
         for (int i = 0; i < worldspritesLevelList.Length; i++)
         {
             worldspritesLevelList[i].SetActive(false);
         }
-
+        if (worldlevel > worldspritesLevelList.Length)
+        {
+            numberOfRounds++;
+            worldlevel = 1;
+        }
         worldspritesLevelList[worldlevel - 1].SetActive(true); //array starts at 0 so world 1 is item[0];
 
         _worldNumber = worldlevel;
@@ -487,7 +497,7 @@ public class LevelManager : MonoBehaviour {
 
     public int GetCurrentWorldNumber()
     {
-        return _worldNumber;
+        return _worldNumber + (numberOfRounds * worldspritesLevelList.Length);
     }
 
 }

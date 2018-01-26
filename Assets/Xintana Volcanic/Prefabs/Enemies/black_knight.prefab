@@ -994,7 +994,9 @@ GameObject:
   - component: {fileID: 95662336779227270}
   - component: {fileID: 210578253800746750}
   - component: {fileID: 114969358811747738}
-  - component: {fileID: 114887089431492806}
+  - component: {fileID: 114945751499547704}
+  - component: {fileID: 114271654214968944}
+  - component: {fileID: 114485926978827014}
   m_Layer: 0
   m_Name: black_knight
   m_TagString: Untagged
@@ -2770,7 +2772,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114887089431492806
+--- !u!114 &114271654214968944
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2778,9 +2780,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 1604806389575540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93017953ccd50414cb1871c8e4883928, type: 3}
+  m_Script: {fileID: 11500000, guid: 671e5299f45539b4fa8402eed33d84d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ForceMaterial: {fileID: 0}
+  ActiveChange: 1
+  _Alpha: 1
+  _ColorX: {r: 1, g: 1, b: 1, a: 1}
+  _OutLineSpread: 0.007
+  ShaderChange: 0
+--- !u!114 &114485926978827014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1604806389575540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10e32bdca891fb4887e8c4aa6811712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  type: 4
+--- !u!114 &114945751499547704
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1604806389575540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2492f0af9bd8ac44caecc73617ecda27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForceMaterial: {fileID: 0}
+  ActiveChange: 1
+  _Alpha: 1
+  _HueShift: 180
+  _Saturation: 1
+  _ValueBrightness: 1
+  ShaderChange: 0
 --- !u!114 &114969358811747738
 MonoBehaviour:
   m_ObjectHideFlags: 1
