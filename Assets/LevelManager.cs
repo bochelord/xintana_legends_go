@@ -177,9 +177,7 @@ public class LevelManager : MonoBehaviour {
                 //Invoke("GameOverPanel", 4.5f);
                 adManager.adViewed = false; 
             }
-
         }
-        
     }
 
     public void GetNewEnemy(float delay)
@@ -237,7 +235,6 @@ public class LevelManager : MonoBehaviour {
             _eachthreetimes += 3;
         }
 
-        
         _enemyCount++;
 
         combinationManager.fightNumberValueText.text = _enemyCount.ToString();
@@ -413,7 +410,7 @@ public class LevelManager : MonoBehaviour {
         _guiManager.GameOverPanelOff();
         enemyPooler.RemoveElement(enemyController.transform);
         combinationManager.EnableButtonsInteraction();
-        combinationManager.ResetCombination();
+        combinationManager.ResetCurrentLenghtCombination();
         PrepareBackgroundLevel(_worldNumber);
         AudioManager.Instance.PlayMusicLevel1();
         playerManager.OnAttackFinished();
@@ -464,9 +461,6 @@ public class LevelManager : MonoBehaviour {
 
     #endregion
 
-
-
-
     public int GetKogiKilled()
     {
         return _kogiKilled;
@@ -491,7 +485,7 @@ public class LevelManager : MonoBehaviour {
 
     public int GetTotalEnemyKilled()
     {
-        return _kogiKilled + _zazucKilled + _makulaKilled;
+        return _enemyCount;
     }
 
     public int GetCurrentWorldNumber()

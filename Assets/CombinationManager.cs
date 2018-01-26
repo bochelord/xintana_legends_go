@@ -391,6 +391,10 @@ public class CombinationManager : MonoBehaviour {
         ResetGame();
     }
 
+    public void ResetCurrentLenghtCombination()
+    {
+        ResetGameButDontResetTime();
+    }
     public void HideWinLoseText(){
         if (youLose_Text)
         {
