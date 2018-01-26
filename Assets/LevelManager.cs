@@ -214,7 +214,6 @@ public class LevelManager : MonoBehaviour {
         switch (typein)
         {
             case EnemyType.kogi:
-
                 DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 2000 * levelin * timeRemaining, 0.5f);
                 _playerScore += 2000 * levelin * timeRemaining;
                 break;
@@ -414,7 +413,7 @@ public class LevelManager : MonoBehaviour {
         _guiManager.GameOverPanelOff();
         enemyPooler.RemoveElement(enemyController.transform);
         combinationManager.EnableButtonsInteraction();
-        combinationManager.GenerateCombination();
+        combinationManager.ResetCombination();
         PrepareBackgroundLevel(_worldNumber);
         AudioManager.Instance.PlayMusicLevel1();
         playerManager.OnAttackFinished();
