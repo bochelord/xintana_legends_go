@@ -51,9 +51,25 @@ public class EnemyController : MonoBehaviour {
         life = new_enemy.life;
         startLife = new_enemy.life;
         damage = new_enemy.damage;
-        this.GetComponent<_2dxFX_HSV>()._HueShift = new_enemy.dna_hue;
-        this.GetComponent<_2dxFX_HSV>()._Saturation = new_enemy.dna_colorsat;
-        this.GetComponent<_2dxFX_HSV>()._ValueBrightness = new_enemy.dna_brightness;
+
+        if (new_enemy.type == EnemyType.blackKnight || new_enemy.type == EnemyType.lavabeast)
+        {
+            foreach (_2dxFX_HSV child_HSV in this.transform.GetComponentsInChildren(typeof(_2dxFX_HSV)))
+            {
+                child_HSV._HueShift = new_enemy.dna_hue;
+                child_HSV._Saturation = new_enemy.dna_colorsat;
+                child_HSV._ValueBrightness = new_enemy.dna_brightness;
+            }
+
+        }
+        else
+        {
+            this.GetComponent<_2dxFX_HSV>()._HueShift = new_enemy.dna_hue;
+            this.GetComponent<_2dxFX_HSV>()._Saturation = new_enemy.dna_colorsat;
+            this.GetComponent<_2dxFX_HSV>()._ValueBrightness = new_enemy.dna_brightness;
+        }
+
+        
         healthBarController.SetScrollbarValue();
     }
     /// <summary>

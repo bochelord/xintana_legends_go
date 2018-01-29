@@ -76,13 +76,12 @@ public class UnitControl : MonoBehaviour {
 					} else if (keyCode == KeyCode.J) {
 						animator.SetTrigger("skill_2");
 					} else if (keyCode == KeyCode.K) {
-						animator.SetTrigger("skill_3");
-					} else if (keyCode == KeyCode.L) {
 						animator.SetTrigger("idle_2");
+					} else if (keyCode == KeyCode.L) {
+						animator.SetTrigger("skill_3");
 					} else if (keyCode == KeyCode.Space) {
 						animator.SetTrigger("evade_1");
 						StartCoroutine (Evade ());
-
 					} 
 				}  
 			}  
