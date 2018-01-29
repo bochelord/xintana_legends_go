@@ -191,6 +191,9 @@ public class CombinationManager : MonoBehaviour {
             copyCombinationArray[i] = buttonCloned; 
             buttonCloned.GetComponent<ColorButtonData>().position = i;
             buttonCloned.transform.SetParent(combinationPanel.transform);
+            Vector3 scale =buttonCloned.transform.localScale;
+            scale *= 2.25f;
+            buttonCloned.transform.localScale=scale;
         }
         moveButtonsToCenter(0);
     }
