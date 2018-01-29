@@ -265,8 +265,6 @@ public class LevelManager : MonoBehaviour {
 
         combinationManager.fightNumberValueText.text = _enemyCount.ToString();
 
-        Debug.Log(_enemyCount);
-        Debug.Log((bossFightFrecuency * (_worldNumber + numberOfRounds * worldspritesLevelList.Length)));
         if (_enemyCount == (bossFightFrecuency * (_worldNumber + numberOfRounds * worldspritesLevelList.Length)))//final boss is summont on its frecuency and per world
         {
             enemy = enemyPooler.GetBossObject();
