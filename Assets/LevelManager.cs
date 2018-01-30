@@ -184,7 +184,6 @@ public class LevelManager : MonoBehaviour {
         {
             //SIS.DBManager.IncreasePurchase("shop_item_01", -1);
             SIS.DBManager.RemovePurchase("shop_item_01");
-            Debug.Log(SIS.DBManager.isPurchased("shop_item_01"));
             SIS.DBManager.RemovePurchaseUI("shop_item_01");
             Rad_SaveManager.profile.extraLife = false;
             _extraLifePurchased = false;

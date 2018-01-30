@@ -16,7 +16,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject ContinueNoAdPanel;
     public GameObject pausePanel;
     public GameObject menuButtons;
-
+    
     [Header("PlaceHolders")]
     public Transform midScreen;
     [Header("Text")]
@@ -30,6 +30,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text pScorePlayer;
     public Text pWorldReached;
     public Text pFightsNumber;
+    public GameObject x2Text;
     [Header("Share Panel")]
     public Text kogiAmount;
     public Text zazuAmount;
@@ -41,7 +42,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text timeCountdown;
     public Text timeCountDownContinuePanel;
 
-
+    private SIS.ShopManager _shopManager;
     private LevelManager _levelManager;
     private float _timerCountdown = 5f;
     private bool timerCountdownAdOn = false;
@@ -58,6 +59,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private void Awake()
     {
         _levelManager = FindObjectOfType<LevelManager>();
+        _shopManager = FindObjectOfType<SIS.ShopManager>();
     }
 
     private void Update()
@@ -239,7 +241,8 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     IEnumerator FillGameOverPanel()
     {
-        _scorePanelOn = true; 
+        _scorePanelOn = true;
+        x2Text.SetActive(false); 
         playerGameOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
         yield return new WaitForSeconds(1);
         DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 1f);
@@ -248,6 +251,15 @@ public class Rad_GuiManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled()+1, 1f);
         yield return new WaitForSeconds(0.5f);
+        if (Rad_SaveManager.profile.doubleScore)
+        {
+            x2Text.SetActive(true);
+            x2Text.transform.DOShakeScale(2, 0.5f, 2, 25, true);
+            DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore()*2, 1f);
+            SIS.DBManager.RemovePurchase("shop_item_00");
+            SIS.DBManager.RemovePurchaseUI("shop_item_00");
+            Rad_SaveManager.profile.doubleScore = false;
+        }
         //DOTween.To(() => _pKogiAmount, x => _pKogiAmount = x, _levelManager.GetKogiKilled(), 1f);
         //yield return new WaitForSeconds(0.5f);
         //DOTween.To(() => _pZazuAmount, x => _pZazuAmount = x, _levelManager.GetZazuKilled(), 1f);
