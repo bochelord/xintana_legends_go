@@ -167,7 +167,7 @@ public class LevelManager : MonoBehaviour {
             AudioManager.Instance.Play_XintanaDeath();
             player.GetComponent<Animator>().SetInteger("AnimState",4);
             AnalyticsManager.Instance.GameOver_Event((int)_playerScore, _enemyCount + 1, _worldNumber);
-
+            AddNemesisCount();
             if (!adManager.adViewed && adManager.AdsViewed <=4 && !Rad_SaveManager.profile.noAds)
             {
                 combinationManager.MoveButtonsOut();
@@ -176,7 +176,6 @@ public class LevelManager : MonoBehaviour {
             }
             else
             {
-                AddNemesisCount();
                 StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 2f));
                 adManager.adViewed = false; 
             }
@@ -239,7 +238,7 @@ public class LevelManager : MonoBehaviour {
                 break;
         }
     }
-    private void AddNemesisCount()
+    public void AddNemesisCount()
     {
         switch (enemyController.type)
         {
@@ -431,6 +430,7 @@ public class LevelManager : MonoBehaviour {
         combinationManager.SetGameOn(true);
         combinationManager.HideWinLoseText();
     }
+
 
     /// <summary>
     /// called when you see an ad
