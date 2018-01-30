@@ -313,7 +313,13 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         timerContdownContinue = false;
         _timerCountdown = 5;
-        ContinueNoAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
-        ContinueNoAdPanel.SetActive(false);
+        ContinueNoAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+        {
+            ContinueNoAdPanel.SetActive(false);
+            _levelManager.ContinueGame();
+        });
+
+
+
     }
 }
