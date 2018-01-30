@@ -788,7 +788,7 @@ namespace SIS
                 if(items[i].productId == id)
                 {
                     items[i].sold.SetActive(false);
-                    items[i].buyTrigger.GetComponent<_2dxFX_4Gradients>().ShaderChange = 1;
+
                     items[i].Purchased(false);
                     ShopManager.RefreshAll();
                 }
