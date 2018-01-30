@@ -302,8 +302,17 @@ public class LevelManager : MonoBehaviour {
             //We change the level to another world
             PrepareBackgroundLevel(_worldNumber);
 
+            int _musicArrayIndex = 0;
+            if (_worldNumber > AudioManager.Instance.musicArray.Length)
+            {
+                _musicArrayIndex = _worldNumber - AudioManager.Instance.musicArray.Length;
+            }
+            else
+            {
+                _musicArrayIndex = _worldNumber - 1;
+            }
 
-            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicArray[_worldNumber - 1])
+            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicArray[_musicArrayIndex])
             {
                 AudioManager.Instance.PlayMusicLevel(_worldNumber);
 
