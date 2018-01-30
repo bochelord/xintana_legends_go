@@ -160,7 +160,7 @@ public class LevelManager : MonoBehaviour {
         AudioManager.Instance.Play_XintanaHit();
 
 
-        if(playerManager.life <= 0 && !_extraLifePurchased)
+        if(playerManager.life <= 0 && SIS.DBManager.GetPurchase("shop_item_01") <= 0)
         {
             
             //Continue or go to main menu
@@ -180,7 +180,7 @@ public class LevelManager : MonoBehaviour {
                 adManager.adViewed = false; 
             }
         }
-        else if (playerManager.life <= 0 && _extraLifePurchased)
+        else if (playerManager.life <= 0 && SIS.DBManager.GetPurchase("shop_item_01") > 0)
         {
             //SIS.DBManager.IncreasePurchase("shop_item_01", -1);
             SIS.DBManager.RemovePurchase("shop_item_01");

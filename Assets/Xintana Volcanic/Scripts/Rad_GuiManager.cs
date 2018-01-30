@@ -241,6 +241,7 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     IEnumerator FillGameOverPanel()
     {
+        _pScorePlayer = 0;
         _scorePanelOn = true;
         x2Text.SetActive(false); 
         playerGameOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
@@ -251,11 +252,11 @@ public class Rad_GuiManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled()+1, 1f);
         yield return new WaitForSeconds(0.5f);
-        if (Rad_SaveManager.profile.doubleScore)
+        if (SIS.DBManager.GetPurchase("shop_item_00") > 0)
         {
             x2Text.SetActive(true);
             x2Text.transform.DOShakeScale(2, 0.5f, 2, 25, true);
-            DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore()*2, 1f);
+            DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore() * 2, 1f);
             SIS.DBManager.RemovePurchase("shop_item_00");
             SIS.DBManager.RemovePurchaseUI("shop_item_00");
             Rad_SaveManager.profile.doubleScore = false;
@@ -267,7 +268,7 @@ public class Rad_GuiManager : MonoBehaviour {
         //DOTween.To(() => _pMakulaAmount, x => _pMakulaAmount = x, _levelManager.GetMakulaKilled(), 1f);
 
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
         _scorePanelOn = false; //so we stop constantly refreshing this panel
     }
 
