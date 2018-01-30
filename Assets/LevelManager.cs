@@ -235,6 +235,18 @@ public class LevelManager : MonoBehaviour {
                 DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 1500 * levelin * timeRemaining, 0.5f);
                 _playerScore += 1500 * levelin * timeRemaining;
                 break;
+            case EnemyType.blackKnight:
+                DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 1500 * levelin * timeRemaining, 0.5f);
+                _playerScore += 2500 * levelin * timeRemaining;
+                break;
+            case EnemyType.lavabeast:
+                DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 1500 * levelin * timeRemaining, 0.5f);
+                _playerScore += 2250 * levelin * timeRemaining;
+                break;
+            default:
+                DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 1500 * levelin * timeRemaining, 0.5f);
+                _playerScore += 1000 * levelin * timeRemaining;
+                break;
         }
     }
     public void AddNemesisCount()
