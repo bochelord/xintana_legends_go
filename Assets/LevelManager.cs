@@ -73,6 +73,7 @@ public class LevelManager : MonoBehaviour {
 
     void Start()
     {
+
         AnalyticsManager.Instance.DeviceModel_Event();
         combinationManager.SetCombinationFrecuency(combinationIncreaseFrecuency);
         PrepareBackgroundLevel(1);
@@ -145,6 +146,7 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     public void AttackPlayer()
     {
+
         player.GetComponent<Animator>().SetInteger("AnimState", 3);
 
         GameObject clone_damageFxprefab;
@@ -181,6 +183,11 @@ public class LevelManager : MonoBehaviour {
         }
         else if (playerManager.life <= 0 && _extraLifePurchased)
         {
+            //SIS.DBManager.IncreasePurchase("shop_item_01", -1);
+            SIS.DBManager.RemovePurchase("shop_item_01");
+            Debug.Log(SIS.DBManager.isPurchased("shop_item_01"));
+            SIS.DBManager.RemovePurchaseUI("shop_item_01");
+            Rad_SaveManager.profile.extraLife = false;
             _extraLifePurchased = false;
             combinationManager.MoveButtonsOut();
             StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowContinuePanel, 2f));
@@ -505,15 +512,7 @@ public class LevelManager : MonoBehaviour {
 
     public int GetPlayerScoreUI()
     {
-        if (Rad_SaveManager.profile.doubleScore)
-        {
-            return (int)playerScoreUI * 2;
-        }
-        else
-        {
-            return (int)playerScoreUI;
-        }
-
+        return (int)playerScoreUI;
     }
 
     public int GetTotalEnemyKilled()

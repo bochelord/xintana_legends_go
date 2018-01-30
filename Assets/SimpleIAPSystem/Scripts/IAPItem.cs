@@ -358,7 +358,7 @@ namespace SIS
         public void Deselect()
         {
             //hide the deselect button and 'selected' state
-            deselectButton.SetActive(false);
+            if(deselectButton)deselectButton.SetActive(false);
             if (selected) selected.SetActive(false);
 
             //tell our checkbox component that this object isn't checked
@@ -366,7 +366,7 @@ namespace SIS
             //tell our ShopManager to change the database entry accordingly
             ShopManager.SetToDeselected(this);
             //re-show the select button
-            selectButton.SetActive(true);
+            if(selectButton)selectButton.SetActive(true);
         }
     }
 }
