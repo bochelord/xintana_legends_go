@@ -207,6 +207,7 @@ public class Rad_GuiManager : MonoBehaviour {
         viewAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
         viewAdPanel.SetActive(false);
         PlayerGameOverPanelOn();
+        _analyticsManager.ResurrectionAd_Event(false);
     }
 
    public void PausePanelOn()
@@ -264,7 +265,8 @@ public class Rad_GuiManager : MonoBehaviour {
             SIS.DBManager.RemovePurchase("shop_item_00");
             SIS.DBManager.RemovePurchaseUI("shop_item_00");
             Rad_SaveManager.profile.doubleScore = false;
-        }else
+        }
+        else
         {
             ShowDoubleScorePanel();
         }

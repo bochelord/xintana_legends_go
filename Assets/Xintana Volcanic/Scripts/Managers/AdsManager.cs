@@ -48,6 +48,7 @@ public class AdsManager : MonoBehaviour {
                 adViewed = true;
                 _levelManager.ContinueGame();
                 _guiManager.HideAdPanel();
+                _analyticsManager.ResurrectionAd_Event(true);
                 break;
             case ShowResult.Skipped:
                 _guiManager.HideAdPanelAndStartGameOverPanel();
