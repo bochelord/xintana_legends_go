@@ -54,7 +54,7 @@ public class EnemyController : MonoBehaviour {
 
         if (new_enemy.type == EnemyType.blackKnight || new_enemy.type == EnemyType.lavabeast)
         {
-            foreach (_2dxFX_HSV child_HSV in this.transform.GetComponentsInChildren(typeof(_2dxFX_HSV)))
+            foreach (_2dxFX_HSV child_HSV in this.transform.GetComponentsInChildren(typeof(_2dxFX_HSV),true))
             {
                 child_HSV._HueShift = new_enemy.dna_hue;
                 child_HSV._Saturation = new_enemy.dna_colorsat;
