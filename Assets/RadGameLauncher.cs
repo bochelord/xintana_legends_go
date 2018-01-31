@@ -7,7 +7,11 @@ public class RadGameLauncher : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		
+
+#if UNITY_ANDROID || UNITY_IOS
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+#endif
+
         if (ES2.Exists(Rad_SaveManager.xintanaProfileFilename))
         {
             SceneManager.LoadScene("LoadingScreen");
