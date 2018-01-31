@@ -38,7 +38,7 @@ public class AdsManager : MonoBehaviour {
 
     private void HandleAdResult(ShowResult result)
     {
-        AnalyticsManager.Instance.AdsViewed(result);
+        AnalyticsManager.Instance.AdsViewed_Event(result);
         switch (result)
         {
             case ShowResult.Finished:
