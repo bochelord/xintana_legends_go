@@ -9,6 +9,7 @@ public class AdsManager : MonoBehaviour {
     public bool adViewed = false;
     private Rad_GuiManager _guiManager;
     private LevelManager _levelManager;
+    private AnalyticsManager _analyticsManager;
 
     private System.DateTime timeStamp;
     [HideInInspector]
@@ -17,6 +18,7 @@ public class AdsManager : MonoBehaviour {
     {
         _guiManager = FindObjectOfType<Rad_GuiManager>();
         _levelManager = FindObjectOfType<LevelManager>();
+        _analyticsManager = FindObjectOfType<AnalyticsManager>();
     }
 
     void Start()
@@ -28,15 +30,15 @@ public class AdsManager : MonoBehaviour {
             Rad_SaveManager.profile.timeStamp = timeStamp;
         }
     }
-    public void ShowAd()
+    public void ShowAdForExtraLife()
     {
-        if (Advertisement.IsReady() && AdsViewed <=4)
+        if (Advertisement.IsReady())
         {
-            Advertisement.Show("rewardedVideo",new ShowOptions() { resultCallback = HandleAdResult });
+            Advertisement.Show("rewardedVideo",new ShowOptions() { resultCallback = HandleResultExtraLife });
         }
     }
 
-    private void HandleAdResult(ShowResult result)
+    private void HandleResultExtraLife(ShowResult result)
     {
         AnalyticsManager.Instance.AdsViewed_Event(result);
         switch (result)
@@ -53,8 +55,34 @@ public class AdsManager : MonoBehaviour {
             case ShowResult.Failed:
                 _guiManager.HideAdPanelAndStartGameOverPanel();
                 break;
-
         }
-
+    }
+    private void HandleResultDoubleScore(ShowResult result)
+    {
+        AnalyticsManager.Instance.AdsViewed_Event(result);
+        switch (result)
+        {
+            case ShowResult.Finished:
+                AdsViewed++;
+                adViewed = true;
+                _guiManager.HideDoubleScorePanel();
+                _guiManager.DoubleScore();
+                _analyticsManager.DoubleScoreAd_Event(true);
+                break;
+            case ShowResult.Skipped:
+                _guiManager.HideDoubleScorePanel();
+                _analyticsManager.DoubleScoreAd_Event(false);
+                break;
+            case ShowResult.Failed:
+                _guiManager.HideDoubleScorePanel();
+                break;
+        }
+    }
+    public void ShowAdForDoubleScore()
+    {
+        if (Advertisement.IsReady())
+        {
+            Advertisement.Show("rewardedVideo", new ShowOptions() { resultCallback = HandleResultDoubleScore });
+        }
     }
 }

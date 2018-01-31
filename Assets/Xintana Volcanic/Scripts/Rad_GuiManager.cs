@@ -16,7 +16,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject ContinueNoAdPanel;
     public GameObject pausePanel;
     public GameObject menuButtons;
-    
+    public GameObject doubleScorePanel;
     [Header("PlaceHolders")]
     public Transform midScreen;
     [Header("Text")]
@@ -42,6 +42,8 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text timeCountdown;
     public Text timeCountDownContinuePanel;
 
+    private AnalyticsManager _analyticsManager;
+    private AdsManager _adsManager;
     private SIS.ShopManager _shopManager;
     private LevelManager _levelManager;
     private float _timerCountdown = 5f;
@@ -58,8 +60,10 @@ public class Rad_GuiManager : MonoBehaviour {
 
     private void Awake()
     {
+        _analyticsManager = FindObjectOfType<AnalyticsManager>();
         _levelManager = FindObjectOfType<LevelManager>();
         _shopManager = FindObjectOfType<SIS.ShopManager>();
+        _adsManager = FindObjectOfType<AdsManager>();
     }
 
     private void Update()
@@ -260,6 +264,9 @@ public class Rad_GuiManager : MonoBehaviour {
             SIS.DBManager.RemovePurchase("shop_item_00");
             SIS.DBManager.RemovePurchaseUI("shop_item_00");
             Rad_SaveManager.profile.doubleScore = false;
+        }else
+        {
+            ShowDoubleScorePanel();
         }
         //DOTween.To(() => _pKogiAmount, x => _pKogiAmount = x, _levelManager.GetKogiKilled(), 1f);
         //yield return new WaitForSeconds(0.5f);
@@ -319,8 +326,39 @@ public class Rad_GuiManager : MonoBehaviour {
             ContinueNoAdPanel.SetActive(false);
             _levelManager.ContinueGame();
         });
+    }
 
-
-
+    public void ShowDoubleScorePanel()
+    {
+        doubleScorePanel.SetActive(true);
+        doubleScorePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+    }
+    public void Button_DoubleScore()
+    {
+        _adsManager.ShowAdForDoubleScore();
+    }
+    public void DoubleScore()
+    {
+        StartCoroutine(DoubleScoreFromAd());
+    }
+    IEnumerator DoubleScoreFromAd()
+    {
+        _scorePanelOn = true;
+        x2Text.SetActive(true);
+        x2Text.transform.DOShakeScale(2, 0.5f, 2, 25, true);
+        DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore() * 2, 1f);
+        yield return new WaitForSeconds(1);
+        _scorePanelOn = false;
+    }
+    public void HideDoubleScorePanel()
+    {
+        doubleScorePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+        {
+            doubleScorePanel.SetActive(false);
+        });
+    }
+    public void Button_HideDoubleScorePanel()
+    {
+        _analyticsManager.DoubleScoreAd_Event(false);
     }
 }
