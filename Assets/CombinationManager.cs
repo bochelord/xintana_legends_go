@@ -26,6 +26,7 @@ public class CombinationManager : MonoBehaviour {
     [Header("UI Elements")]
     public Text youWin_Text;
     public Text youLose_Text;
+    public GameObject auraCombination;
     [Header("UI Buttons")]
     public GameObject[] uiButtons;
     [HideInInspector]
@@ -50,6 +51,7 @@ public class CombinationManager : MonoBehaviour {
     private AdsManager adManager;
     private Rad_GuiManager _guiManager;
     private Vector2 _initialButtonsPosition;
+    private Coroutine _auraCoroutine;
     void Awake()
     {
         levelManager = FindObjectOfType<LevelManager>();
@@ -195,16 +197,27 @@ public class CombinationManager : MonoBehaviour {
             scale *= 2.25f;
             buttonCloned.transform.localScale=scale;
         }
-        moveButtonsToCenter(0);
+        moveButtonsToCenter(0,0.5f);
     }
     /// <summary>
     /// Moves the button of the copyCombinationArray to the center of the combination panel.
     /// </summary>
     /// <param name="number">The position of the button you want to move.</param>
-    private void moveButtonsToCenter(int number) {
-        copyCombinationArray[number].transform.DOMoveX(combinationPanel.transform.position.x, 0.5f);
+    /// <param name="time">Time needed to tween position</param>
+    private void moveButtonsToCenter(int number,float time)
+    {
+        _auraCoroutine = StartCoroutine(AuraCombinationOn(time));
+        copyCombinationArray[number].transform.DOMoveX(combinationPanel.transform.position.x, time);//.OnComplete(()=> 
+        //{
+        //    if(copyCombinationArray[number].activeSelf)auraCombination.SetActive(true);
+        //});
     }
 
+    IEnumerator AuraCombinationOn(float time)
+    {
+        yield return new WaitForSeconds(time);
+        auraCombination.SetActive(true);
+    }
     public Vector3 GetScreenPosition(float offset)
     {
         Vector3 screenPosition = new Vector3((Screen.width + offset)/2, Screen.height - 50, 0);
@@ -260,7 +273,11 @@ public class CombinationManager : MonoBehaviour {
     public void CheckCombination(Button xButton){
 
         string buttonColor = xButton.GetComponent<ColorButtonData>().buttonColor;
-
+        if(_auraCoroutine != null)
+        {
+            StopCoroutine(_auraCoroutine);
+        }
+        auraCombination.SetActive(false);
         // Correct Combination, USER can continue.
         if (combinationArray[currentCombinationPosition].GetComponent<ColorButtonData>().buttonColor == buttonColor)
         {
@@ -269,7 +286,7 @@ public class CombinationManager : MonoBehaviour {
             
             currentCombinationPosition++;
             //moves the next button to the center of the panel.
-            if(currentCombinationPosition< combinationArray.Length) moveButtonsToCenter(currentCombinationPosition);
+            if(currentCombinationPosition< combinationArray.Length) moveButtonsToCenter(currentCombinationPosition,0.5f);
             // WINNING CONDITION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             if (currentCombinationPosition == combinationArray.Length)
             {
@@ -283,7 +300,6 @@ public class CombinationManager : MonoBehaviour {
                 {
                     ShowWinText();
                     
-
                     if (levelManager.GetTotalEnemyKilled() == _combinationFrecuency) //each three kills we gorw the combination and also give more time to solve it...
                     {
                         ChangeMinimCombinationLength(minimCombinationLenght + 1);

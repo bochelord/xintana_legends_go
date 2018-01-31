@@ -249,9 +249,9 @@ public class Rad_GuiManager : MonoBehaviour {
         DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 1f);
         yield return new WaitForSeconds(1);
         DOTween.To(() => _pWorldReached, x => _pWorldReached = x, _levelManager.GetCurrentWorldNumber(), 1f);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled()+1, 1f);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         if (SIS.DBManager.GetPurchase("shop_item_00") > 0)
         {
             x2Text.SetActive(true);
