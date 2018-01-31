@@ -41,13 +41,29 @@ public class ChestRoulette : MonoBehaviour {
     /// </summary>
     private void GeneratePrizes()
     {
+        float diceroll = 0;
 
         foreach (GameObject chest in chests)
         {
 
-            
+            diceroll = RadUtils.d100();
 
+            if (diceroll < 20) // 20% gems
+            {
 
+            }
+            else if(diceroll >= 20 && diceroll < 40) // 20% gold
+            {
+
+            }
+            else if (diceroll >=40 && diceroll < 60) // 20% shells
+            {
+
+            }
+            else if (diceroll >= 60) // empty
+            {
+
+            }
         }
     }
 }
