@@ -58,11 +58,12 @@ public class AnalyticsManager : MonoBehaviour
     /// <summary>
     /// Has the player shared the score screen?
     /// </summary>
-    public void Shared_Screen()
+    public void Shared_Screen(int amount)
     {
         Analytics.CustomEvent("Shared_Screen", new Dictionary<string, object>
         {
-            {"shared screen", "Yes" }
+            {"shared screen", "Yes" },
+            {"times shared", amount }
         });
     }
 

@@ -10,9 +10,12 @@ public class NativeShareScript : MonoBehaviour
     private bool isFocus = false;
     private Rad_GuiManager guiManager;
     private bool didShare = false;
+    private XintanaProfile _xintanaProfile;
+
     private void Start()
     {
         guiManager = FindObjectOfType<Rad_GuiManager>();
+        _xintanaProfile = Rad_SaveManager.profile;
 
     }
     public void ShareBtnPress()
@@ -22,7 +25,7 @@ public class NativeShareScript : MonoBehaviour
             didShare = true;
             CanvasShareObj.SetActive(true);
             guiManager.FillSharePanel();
-            AnalyticsManager.Instance.Shared_Screen();
+            AnalyticsManager.Instance.Shared_Screen(_xintanaProfile.sharedScoreTimes);
         }
 
         if (!isProcessing)

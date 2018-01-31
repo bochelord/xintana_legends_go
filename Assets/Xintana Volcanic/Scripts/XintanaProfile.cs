@@ -22,6 +22,7 @@ public class XintanaProfile : MonoBehaviour {
     public bool noAds;
     public bool doubleScore;
     public System.DateTime timeStamp;
+    public int sharedScoreTimes;
     //TODO creat purchases done and equipped_items;
     #endregion
 
@@ -49,6 +50,7 @@ public class XintanaProfile : MonoBehaviour {
         profile.timesKilledByMakula = 0;
         profile.timesKilledByZazuc = 0;
         profile.timeStamp = System.DateTime.Now;
+        profile.sharedScoreTimes = 0;
         return profile;
     }
     #endregion
