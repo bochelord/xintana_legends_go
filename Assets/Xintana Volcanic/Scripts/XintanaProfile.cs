@@ -16,6 +16,7 @@ public class XintanaProfile : MonoBehaviour {
     public int timesKilledByKogi;
     public int timesKilledByBlackKnight; //TODO add variable for any type of enemy
     public int adsViewed;
+    public int adsSkipped;
     public bool audioEnabled;
     public bool extraLife;
     public bool noAds;
@@ -38,6 +39,7 @@ public class XintanaProfile : MonoBehaviour {
         profile.highscore = 0;
         profile.tokens = 0;
         profile.adsViewed = 0;
+        profile.adsSkipped = 0;
         profile.audioEnabled = true;
         profile.extraLife = false;
         profile.noAds = false;

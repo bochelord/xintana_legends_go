@@ -18,6 +18,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		writer.Write(data.timesKilledByKogi);
 		writer.Write(data.timesKilledByBlackKnight);
 		writer.Write(data.adsViewed);
+		writer.Write(data.adsSkipped);
 		writer.Write(data.audioEnabled);
 		writer.Write(data.extraLife);
 		writer.Write(data.noAds);
@@ -46,6 +47,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		data.timesKilledByKogi = reader.Read<System.Int32>();
 		data.timesKilledByBlackKnight = reader.Read<System.Int32>();
 		data.adsViewed = reader.Read<System.Int32>();
+		data.adsSkipped = reader.Read<System.Int32>();
 		data.audioEnabled = reader.Read<System.Boolean>();
 		data.extraLife = reader.Read<System.Boolean>();
 		data.noAds = reader.Read<System.Boolean>();

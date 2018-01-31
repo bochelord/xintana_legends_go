@@ -14,10 +14,12 @@ public class RadGameLauncher : MonoBehaviour {
 
         if (ES2.Exists(Rad_SaveManager.xintanaProfileFilename))
         {
+            Rad_SaveManager.LoadData();
             SceneManager.LoadScene("LoadingScreen");
         }
         else
         {
+            Rad_SaveManager.SaveData();
             SceneManager.LoadScene("radical_intro");
         }
 	}

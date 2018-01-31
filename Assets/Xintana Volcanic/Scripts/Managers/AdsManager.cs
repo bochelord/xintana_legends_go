@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.SceneManagement;
 
 public class AdsManager : MonoBehaviour {
 
@@ -77,6 +76,27 @@ public class AdsManager : MonoBehaviour {
             case ShowResult.Failed:
                 _guiManager.HideDoubleScorePanel();
                 break;
+        }
+    }
+    private void HandlResultNoReward(ShowResult result)
+    {
+        AnalyticsManager.Instance.AdsViewed_Event(result);
+        switch (result)
+        {
+            case ShowResult.Finished:
+                Rad_SaveManager.profile.adsSkipped = 0;
+                SceneManager.LoadScene("LoadingScreen");
+                break;
+            case ShowResult.Failed:
+                SceneManager.LoadScene("LoadingScreen");
+                break;
+        }
+    }
+    public void ShowAdNoReward()
+    {
+        if (Advertisement.IsReady())
+        {
+            Advertisement.Show("rewardedVideo", new ShowOptions() { resultCallback = HandlResultNoReward });
         }
     }
     public void ShowAdForDoubleScore()

@@ -50,7 +50,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private bool timerCountdownAdOn = false;
     private bool timerContdownContinue = false;
     private bool _scorePanelOn = false;
-
+    private bool _doubleScorePanelOn = false;
     private int _pScorePlayer;
     private int _pZazuAmount;
     private int _pKogiAmount;
@@ -150,7 +150,10 @@ public class Rad_GuiManager : MonoBehaviour {
         playerGameOverPanel.SetActive(false);
         gmeOverPanel.SetActive(true);
         gmeOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
-
+        if (_doubleScorePanelOn)
+        {
+            HideDoubleScorePanel();
+        }
     }
 
     public void PlayerGameOverPanelOn()
@@ -172,6 +175,7 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             menuButtons.transform.DOLocalMoveY(-556f, 1).SetEase(Ease.OutBack);
         }
+
     }
     /// <summary>
     /// Turns de Game over panell off
@@ -206,8 +210,10 @@ public class Rad_GuiManager : MonoBehaviour {
         _timerCountdown = 5;
         viewAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
         viewAdPanel.SetActive(false);
+        Rad_SaveManager.profile.adsSkipped++;
         PlayerGameOverPanelOn();
         _analyticsManager.ResurrectionAd_Event(false);
+
     }
 
    public void PausePanelOn()
@@ -269,6 +275,12 @@ public class Rad_GuiManager : MonoBehaviour {
         else
         {
             ShowDoubleScorePanel();
+        }
+
+        if(_pScorePlayer > Rad_SaveManager.profile.highscore)
+        {
+            Rad_SaveManager.profile.highscore = _pScorePlayer;
+            Rad_SaveManager.SaveData();
         }
         //DOTween.To(() => _pKogiAmount, x => _pKogiAmount = x, _levelManager.GetKogiKilled(), 1f);
         //yield return new WaitForSeconds(0.5f);
@@ -333,6 +345,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public void ShowDoubleScorePanel()
     {
         doubleScorePanel.SetActive(true);
+        _doubleScorePanelOn = true;
         doubleScorePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
     }
     public void Button_DoubleScore()
@@ -350,17 +363,25 @@ public class Rad_GuiManager : MonoBehaviour {
         x2Text.transform.DOShakeScale(2, 0.5f, 2, 25, true);
         DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore() * 2, 1f);
         yield return new WaitForSeconds(1);
+        if (_pScorePlayer > Rad_SaveManager.profile.highscore)
+        {
+            Rad_SaveManager.profile.highscore = _pScorePlayer;
+            Rad_SaveManager.SaveData();
+        }
         _scorePanelOn = false;
     }
     public void HideDoubleScorePanel()
     {
         doubleScorePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
         {
+            _doubleScorePanelOn = false;
             doubleScorePanel.SetActive(false);
         });
     }
     public void Button_HideDoubleScorePanel()
     {
         _analyticsManager.DoubleScoreAd_Event(false);
+        HideDoubleScorePanel();
+        Rad_SaveManager.profile.adsSkipped++;
     }
 }

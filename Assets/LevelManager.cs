@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 /// <summary>
 /// Level Manager for Xintana Volcanic
 /// (c)2017 Radical Graphics Studios
 /// </summary>
 /// 
 
-    public enum GameState { Running,Paused}
+public enum GameState { Running,Paused}
 public class LevelManager : MonoBehaviour {
 
     public GameObject enemy;
@@ -21,12 +22,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject HUDTextContainer;
     public GameObject HUDTextPrefab;
     public GameObject HUDPlayAgainContainer;
-    private PlayerManager playerManager;
-    private CombinationManager combinationManager;
-    private Rad_GuiManager _guiManager;
-    private AdsManager adManager;
-    private HealthBarControllerBoss healthBarController;
-    private List<Transform> inactiveHUDTextList = new List<Transform>();
+
     public EnemiesPooler enemyPooler;
     public Transform enemyContainer;
     public bool enemyKilled = false;
@@ -36,7 +32,8 @@ public class LevelManager : MonoBehaviour {
     public int bossFightFrecuency = 7; 
     public int combinationIncreaseFrecuency = 3;
 
-
+    [Header("Max ads skipped")]
+    public int adsSkipped = 5;
     [Header("Backgrounds")]
     //public GameObject worldspritesLevel1;
     //public GameObject worldspritesLevel2;
@@ -54,6 +51,13 @@ public class LevelManager : MonoBehaviour {
     private int _worldNumber = 1;
     private int numberOfRounds = 0;
     private float playerScoreUI;
+
+    private PlayerManager playerManager;
+    private CombinationManager combinationManager;
+    private Rad_GuiManager _guiManager;
+    private AdsManager adManager;
+    private HealthBarControllerBoss healthBarController;
+    private List<Transform> inactiveHUDTextList = new List<Transform>();
 
     private bool musiclevel2_AlreadyPlayed = false;
     private bool musiclevel3_AlreadyPlayed = false;
@@ -427,28 +431,36 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     public void RestartGame()
     {
-        _extraLifePurchased = Rad_SaveManager.profile.extraLife;
-        _playerScore = 0;
-        playerScoreUI = 0;
-        _zazucKilled = 0;
-        _makulaKilled = 0;
-        _kogiKilled = 0;
-        _enemyCount = 0;
-        _worldNumber = 0;
-        combinationManager.MoveButtonsIn();
-        combinationManager.timeToResolveCombination = combinationManager.original_timeToResolveCombination;
-        _guiManager.GameOverPanelOff();
-        enemyPooler.RemoveElement(enemyController.transform);
-        combinationManager.EnableButtonsInteraction();
-        _currentEnemyLevel = 0;
-        combinationManager.ResetCombination();
-        PrepareBackgroundLevel(1);
-        AudioManager.Instance.PlayMusicLevel1();
-        playerManager.OnAttackFinished();
-        playerManager.life = 9; // TODO remove when real implementation is done
-        GetNewEnemy(1);
-        combinationManager.SetGameOn(true);
-        combinationManager.HideWinLoseText();
+        //_extraLifePurchased = Rad_SaveManager.profile.extraLife;
+        //_playerScore = 0;
+        //playerScoreUI = 0;
+        //_zazucKilled = 0;
+        //_makulaKilled = 0;
+        //_kogiKilled = 0;
+        //_enemyCount = 0;
+        //_worldNumber = 0;
+        //combinationManager.MoveButtonsIn();
+        //combinationManager.timeToResolveCombination = combinationManager.original_timeToResolveCombination;
+        //_guiManager.GameOverPanelOff();
+        //enemyPooler.RemoveElement(enemyController.transform);
+        //combinationManager.EnableButtonsInteraction();
+        //_currentEnemyLevel = 0;
+        //combinationManager.ResetCombination();
+        //PrepareBackgroundLevel(1);
+        //AudioManager.Instance.PlayMusicLevel1();
+        //playerManager.OnAttackFinished();
+        //playerManager.life = 9; // TODO remove when real implementation is done
+        //GetNewEnemy(1);
+        //combinationManager.SetGameOn(true);
+        //combinationManager.HideWinLoseText();
+        if(Rad_SaveManager.profile.adsSkipped >= adsSkipped)
+        {
+            adManager.ShowAdNoReward();
+        }
+        else
+        {
+            SceneManager.LoadScene("LoadingScreen");
+        }
     }
 
 
