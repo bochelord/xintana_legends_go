@@ -29,8 +29,6 @@ public class ChestRoulette : MonoBehaviour {
     void Start ()
     {
         _guiManager = FindObjectOfType<Rad_GuiManager>();
-        RestartChestGenerations();
-
 	}
 	
 
@@ -141,6 +139,13 @@ public class ChestRoulette : MonoBehaviour {
         }
     }
 
+    public void CloseChests()
+    {
+        for (int i = 0; i < chests.Length; i++)
+        {
+            chests[i].CloseChest();
+        }
+    }
     public void SetCanOpen(bool value) { canOpen = value; }
     public bool GetCanOpen() { return canOpen; }
 }

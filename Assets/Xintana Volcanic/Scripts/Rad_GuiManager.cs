@@ -45,9 +45,18 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text timeCountdown;
     public Text timeCountDownContinuePanel;
 
+    [Header("Roulette")]
+    public GameObject chest1;
+    public GameObject chest2;
+    public GameObject chest3;
+    public Text rouletteTitle;
+    public Transform posChest1;
+    public Transform posChest2;
+    public Transform posChest3;
+    public Transform posTitle;
     [Header("Price Panel")]
     public Text priceText;
-
+    
     private AnalyticsManager _analyticsManager;
     private AdsManager _adsManager;
     private SIS.ShopManager _shopManager;
@@ -66,7 +75,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private int _pMakulaAmount;
     private int _pWorldReached;
     private int _pFightsNumber;
-
+    private Coroutine gameOverPanelCoroutine;
     private void Awake()
     {
         _analyticsManager = FindObjectOfType<AnalyticsManager>();
@@ -181,12 +190,16 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             HideDoubleScorePanel();
         }
+        if(gameOverPanelCoroutine != null)
+        {
+            StopCoroutine(gameOverPanelCoroutine);
+        }
     }
 
     public void PlayerGameOverPanelOn()
     {
         playerGameOverPanel.SetActive(true);
-        StartCoroutine(FillGameOverPanel());
+        gameOverPanelCoroutine = StartCoroutine(FillGameOverPanel());
 
 
     }
@@ -415,15 +428,34 @@ public class Rad_GuiManager : MonoBehaviour {
     public void Button_ShowRoulettePanel()
     {
         
-        roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack);
-        _chestManager.RestartChestGenerations();
+        roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() => 
+        {
+            rouletteTitle.transform.DOLocalMove(posTitle.position, 1f).SetEase(Ease.OutBack).OnComplete(()=> 
+            {
+                chest1.transform.DOLocalMove(posChest1.position, 1f).SetEase(Ease.OutBack).OnComplete(() => 
+                {
+                    chest2.transform.DOLocalMove(posChest2.position, 1f).SetEase(Ease.OutBack).OnComplete(() => 
+                    {
+                        chest3.transform.DOLocalMove(posChest3.position, 1f).SetEase(Ease.OutBack).OnComplete(() => 
+                        {
+                            _chestManager.RestartChestGenerations();
+                        });
+                    });
+                });
+            });
+        });
     }
 
     public void Button_HideRoulettePanel()
     {
         HidePricePanel();
         roulettePanel.transform.DOLocalMoveX(-840f, 0.75f).SetEase(Ease.OutBack);
-    }
+        rouletteTitle.transform.DOLocalMoveX(3000f, 0.75f).SetEase(Ease.OutBack);
+        chest1.transform.DOLocalMoveX(2100f, 0.75f).SetEase(Ease.OutBack);
+        chest2.transform.DOLocalMoveX(-2110f, 0.75f).SetEase(Ease.OutBack);
+        chest3.transform.DOLocalMoveX(2110f, 0.75f).SetEase(Ease.OutBack);
+        _chestManager.CloseChests();
+        }
 
     public void ShowPricePanel()
     {

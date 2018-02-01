@@ -25,7 +25,7 @@ public class Rad_Chest : MonoBehaviour {
     {
         if (_chestManager.GetCanOpen())
         {
-            this.transform.DOShakeRotation(2, 10, 1, 25, false).OnComplete(() =>
+            this.transform.DOShakeRotation(2, 20, 2, 25, false).OnComplete(() =>
             {
                 chestClosed.SetActive(false);
                 chestOpen.SetActive(true);
