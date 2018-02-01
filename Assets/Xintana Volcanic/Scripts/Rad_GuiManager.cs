@@ -17,6 +17,9 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject pausePanel;
     public GameObject menuButtons;
     public GameObject doubleScorePanel;
+    public GameObject roulettePanel;
+    public GameObject pricePanel;
+
     [Header("PlaceHolders")]
     public Transform midScreen;
     [Header("Text")]
@@ -42,15 +45,21 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text timeCountdown;
     public Text timeCountDownContinuePanel;
 
+    [Header("Price Panel")]
+    public Text priceText;
+
     private AnalyticsManager _analyticsManager;
     private AdsManager _adsManager;
     private SIS.ShopManager _shopManager;
     private LevelManager _levelManager;
+    private ChestRoulette _chestManager;
+
     private float _timerCountdown = 5f;
     private bool timerCountdownAdOn = false;
     private bool timerContdownContinue = false;
     private bool _scorePanelOn = false;
     private bool _doubleScorePanelOn = false;
+    private bool _pricePanelOn = false;
     private int _pScorePlayer;
     private int _pZazuAmount;
     private int _pKogiAmount;
@@ -64,6 +73,7 @@ public class Rad_GuiManager : MonoBehaviour {
         _levelManager = FindObjectOfType<LevelManager>();
         _shopManager = FindObjectOfType<SIS.ShopManager>();
         _adsManager = FindObjectOfType<AdsManager>();
+        _chestManager = FindObjectOfType<ChestRoulette>();
     }
 
     private void Update()
@@ -94,8 +104,25 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             UpdateScorePanelUI();
         }
+        if (_pricePanelOn)
+        {
+            UpdatePricePanel();
+        }
     }
-
+    private void UpdatePricePanel()
+    {
+        if (priceText && _chestManager.priceType == chestType.coins)
+        {
+            priceText.text = _chestManager.priceAmount.ToString() + " Coins !!";
+        }
+        else if (priceText && _chestManager.priceType == chestType.gems)
+        {
+            priceText.text = _chestManager.priceAmount.ToString() + " Gems !!";
+        }else if(priceText && _chestManager.priceType == chestType.empty)
+        {
+            priceText.text = " OOHHHH !!";
+        }
+    }
     private void UpdateScorePanelUI()
     {
         if (pScorePlayer)
@@ -383,5 +410,30 @@ public class Rad_GuiManager : MonoBehaviour {
         _analyticsManager.DoubleScoreAd_Event(false);
         HideDoubleScorePanel();
         Rad_SaveManager.profile.adsSkipped++;
+    }
+
+    public void Button_ShowRoulettePanel()
+    {
+        
+        roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack);
+        _chestManager.RestartChestGenerations();
+    }
+
+    public void Button_HideRoulettePanel()
+    {
+        HidePricePanel();
+        roulettePanel.transform.DOLocalMoveX(-840f, 0.75f).SetEase(Ease.OutBack);
+    }
+
+    public void ShowPricePanel()
+    {
+        _pricePanelOn = true;
+        pricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+    }
+
+    public void HidePricePanel()
+    {
+        _pricePanelOn = false;
+        pricePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
     }
 }
