@@ -197,7 +197,8 @@ public class CombinationManager : MonoBehaviour {
             scale *= 0.75f;
             buttonCloned.transform.localScale=scale;
         }
-        moveButtonsToCenter(0,0.5f);
+        //moveButtonsToCenter(0,0.5f);
+        moveGemsTopToMiddle(0, 0.5f);
     }
     /// <summary>
     /// Moves the button of the copyCombinationArray to the center of the combination panel.
@@ -212,6 +213,22 @@ public class CombinationManager : MonoBehaviour {
         //    if(copyCombinationArray[number].activeSelf)auraCombination.SetActive(true);
         //});
     }
+
+    /// <summary>
+    /// Moves the Combination Gems of the copyCombinationArray to the center of the combination panel.
+    /// </summary>
+    /// <param name="number">The position of the button you want to move.</param>
+    /// <param name="time">Time needed to tween position</param>
+    private void moveGemsTopToMiddle(int number, float time)
+    {
+        _auraCoroutine = StartCoroutine(AuraCombinationOn(time));
+        copyCombinationArray[number].transform.DOMoveY(combinationPanel.transform.position.y, time);//.OnComplete(()=> 
+        //{
+        //    if(copyCombinationArray[number].activeSelf)auraCombination.SetActive(true);
+        //});
+    }
+
+
 
     IEnumerator AuraCombinationOn(float time)
     {
@@ -286,7 +303,9 @@ public class CombinationManager : MonoBehaviour {
             
             currentCombinationPosition++;
             //moves the next button to the center of the panel.
-            if(currentCombinationPosition< combinationArray.Length) moveButtonsToCenter(currentCombinationPosition,0.5f);
+            //if(currentCombinationPosition< combinationArray.Length) moveButtonsToCenter(currentCombinationPosition,0.5f);
+            if (currentCombinationPosition < combinationArray.Length) moveGemsTopToMiddle(currentCombinationPosition, 0.5f);
+            
             // WINNING CONDITION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             if (currentCombinationPosition == combinationArray.Length)
             {
@@ -415,6 +434,7 @@ public class CombinationManager : MonoBehaviour {
     {
         ResetGameButDontResetTime();
     }
+
     public void HideWinLoseText(){
         if (youLose_Text)
         {
