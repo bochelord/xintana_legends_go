@@ -448,11 +448,14 @@ public class Rad_GuiManager : MonoBehaviour {
         }
         else
         {
-            StartCoroutine(ShowNoTokensPanelCoroutine(1.5f));
+            ShowNoTokensCoroutine(1.5f);
         }
 
     }
-
+    public void ShowNoTokensCoroutine(float time)
+    {
+        StartCoroutine(ShowNoTokensPanelCoroutine(time));
+    }
     IEnumerator ShowNoTokensPanelCoroutine(float time)
     {
         ShowNoTokensPanel();

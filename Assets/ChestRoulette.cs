@@ -21,6 +21,7 @@ public class ChestRoulette : MonoBehaviour {
     public Image flashImage;
 
     private Rad_GuiManager _guiManager;
+    private ParticlePooler _pooler;
     private List<Vector2> initialPosition = new List<Vector2>();
     private bool canOpen;
 
@@ -29,15 +30,16 @@ public class ChestRoulette : MonoBehaviour {
     void Start ()
     {
         _guiManager = FindObjectOfType<Rad_GuiManager>();
-	}
+        _pooler = FindObjectOfType<ParticlePooler>();
+    }
 	
 
     public void RestartChestGenerations()
     {
         _guiManager.HidePricePanel();
-        //if(Rad_SaveManager.profile.tokens > 0)
-        //{
-       
+        if (Rad_SaveManager.profile.tokens > 0)
+        {
+
             for (int i = 0; i < 3; i++)
             {
                 initialPosition.Add(chests[i].transform.position);
@@ -47,7 +49,10 @@ public class ChestRoulette : MonoBehaviour {
             RandomChestPositions();
             Debug.Log("roulette");
             canOpen = true;
-        //}
+        }else
+        {
+            _guiManager.ShowNoTokensCoroutine(1.5f);
+        }
     }
 
     public void Flash()
@@ -145,6 +150,22 @@ public class ChestRoulette : MonoBehaviour {
         {
             chests[i].CloseChest();
         }
+    }
+
+    public void SpawnGoldParticleChest(Transform item)
+    {
+        GameObject particle = _pooler.GetPooledGoldParticle();
+        particle.transform.position = item.position;
+    }
+    public void SpawnEmptyParticleChest(Transform item)
+    {
+        GameObject particle = _pooler.GetPooledEmptyParticle();
+        particle.transform.position = item.position;
+    }
+    public void SpawnGemParticleChest(Transform item)
+    {
+        GameObject particle = _pooler.GetPooledGemParticle();
+        particle.transform.position = item.position;
     }
     public void SetCanOpen(bool value) { canOpen = value; }
     public bool GetCanOpen() { return canOpen; }
