@@ -19,7 +19,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject doubleScorePanel;
     public GameObject roulettePanel;
     public GameObject pricePanel;
-
+    public GameObject noTokensPanel;
     [Header("PlaceHolders")]
     public Transform midScreen;
     [Header("Text")]
@@ -427,25 +427,47 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void Button_ShowRoulettePanel()
     {
-        
-        roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() => 
+        if (Rad_SaveManager.profile.tokens > 0)
         {
-            rouletteTitle.transform.DOLocalMove(posTitle.position, 1f).SetEase(Ease.OutBack).OnComplete(()=> 
+            roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
             {
-                chest1.transform.DOLocalMove(posChest1.position, 1f).SetEase(Ease.OutBack).OnComplete(() => 
+                rouletteTitle.transform.DOLocalMove(posTitle.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
                 {
-                    chest2.transform.DOLocalMove(posChest2.position, 1f).SetEase(Ease.OutBack).OnComplete(() => 
+                    chest1.transform.DOLocalMove(posChest1.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
                     {
-                        chest3.transform.DOLocalMove(posChest3.position, 1f).SetEase(Ease.OutBack).OnComplete(() => 
+                        chest2.transform.DOLocalMove(posChest2.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
                         {
-                            _chestManager.RestartChestGenerations();
+                            chest3.transform.DOLocalMove(posChest3.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+                            {
+                                _chestManager.RestartChestGenerations();
+                            });
                         });
                     });
                 });
             });
-        });
+        }
+        else
+        {
+            StartCoroutine(ShowNoTokensPanelCoroutine(1.5f));
+        }
+
     }
 
+    IEnumerator ShowNoTokensPanelCoroutine(float time)
+    {
+        ShowNoTokensPanel();
+        yield return new WaitForSeconds(time);
+        HideNoTokensPanel();
+    }
+
+    private void ShowNoTokensPanel()
+    {
+        noTokensPanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+    }
+    private void HideNoTokensPanel()
+    {
+        noTokensPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+    }
     public void Button_HideRoulettePanel()
     {
         HidePricePanel();
