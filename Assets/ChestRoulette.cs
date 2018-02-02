@@ -37,6 +37,7 @@ public class ChestRoulette : MonoBehaviour {
     public void RestartChestGenerations()
     {
         _guiManager.HidePricePanel();
+
         if (Rad_SaveManager.profile.tokens > 0)
         {
             Rad_SaveManager.profile.tokens--;
@@ -49,7 +50,9 @@ public class ChestRoulette : MonoBehaviour {
             RandomChestPositions();
             Debug.Log("roulette");
             canOpen = true;
-        }else
+            _guiManager.backButton.enabled = false;
+        }
+        else
         {
             _guiManager.ShowNoTokensCoroutine(1.5f);
         }

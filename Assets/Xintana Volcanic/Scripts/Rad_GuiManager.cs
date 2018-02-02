@@ -58,6 +58,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public Transform posChest3;
     public Transform posTitle;
     public Button backButton;
+    public Text gemsTextRoulette;
     [Header("Price Panel")]
     public Text priceText;
     
@@ -75,6 +76,8 @@ public class Rad_GuiManager : MonoBehaviour {
     private bool _doubleScorePanelOn = false;
     private bool _pricePanelOn = false;
     private bool _doublePrice = false;
+    private bool _mainMenu = false;
+    private bool rouletteOn = false;
     private int _pDoublePrice = 0;
     private int _pScorePlayer;
     private int _pZazuAmount;
@@ -96,7 +99,7 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         scoreText.text = _levelManager.GetPlayerScoreUI().ToString();
         worldText.text = _levelManager.GetCurrentWorldNumber().ToString();
-        gemsText.text = Rad_SaveManager.profile.tokens.ToString();
+
         if (timerCountdownAdOn)
         {
             _timerCountdown -= Time.deltaTime;
@@ -124,7 +127,10 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             UpdatePricePanel();
         }
-
+        if (rouletteOn)
+        {
+            gemsTextRoulette.text = Rad_SaveManager.profile.tokens.ToString();
+        }
         if (_doublePrice && _chestManager.priceType == chestType.coins)
         {
             priceText.text = _pDoublePrice.ToString() + " Coins !!";
@@ -132,6 +138,10 @@ public class Rad_GuiManager : MonoBehaviour {
         else if (_doublePrice &&_chestManager.priceType == chestType.gems)
         {
             priceText.text = _pDoublePrice.ToString() + " Gems !!";
+        }
+        if (_mainMenu)
+        {
+            gemsText.text = Rad_SaveManager.profile.tokens.ToString();
         }
 
     }
@@ -200,6 +210,7 @@ public class Rad_GuiManager : MonoBehaviour {
     /// </summary>
     public void GameOverPanelOn()
     {
+        _mainMenu = true;
         playerGameOverPanel.SetActive(false);
         gmeOverPanel.SetActive(true);
         gmeOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
@@ -226,11 +237,13 @@ public class Rad_GuiManager : MonoBehaviour {
     /// </summary>
     public void Button_CloseScorePanel()
     {
+        _mainMenu = true;
         playerGameOverPanel.transform.DOMoveX(1100f, 1f).SetEase(Ease.OutBack);
         pausePanel.transform.DOMoveX(midScreen.position.x,1).SetEase(Ease.OutBack);
         if (menuButtons)
         {
             menuButtons.transform.DOLocalMoveY(-556f, 1).SetEase(Ease.OutBack);
+
         }
 
     }
@@ -278,6 +291,7 @@ public class Rad_GuiManager : MonoBehaviour {
         if (pausePanel)
         {
             pausePanel.transform.DOLocalMoveX(1650f, 1f).SetEase(Ease.OutBack);
+            _mainMenu = true;
         }
 
     }
@@ -286,6 +300,7 @@ public class Rad_GuiManager : MonoBehaviour {
         if (pausePanel)
         {
             pausePanel.transform.DOLocalMoveX(-1650f, 1f).SetEase(Ease.OutBack);
+            _mainMenu = false;
         }
 
     }
@@ -419,11 +434,10 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void ShowDoublePricePanel()
     {
-        backButton.enabled = false;
         doublePricePanel.SetActive(true);
         _doubleScorePanelOn = true;
         doublePricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
-        backButton.enabled = false;
+
         //pricePanel.SetActive(false);
     }
     public void Button_DoublePrice()
@@ -436,6 +450,7 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     IEnumerator DoublePriceFromAd()
     {
+        backButton.enabled = true;
         //_scorePanelOn = true;
         //x2Text.SetActive(true);
         //x2Text.transform.DOShakeScale(2, 0.5f, 2, 25, true);
@@ -451,7 +466,7 @@ public class Rad_GuiManager : MonoBehaviour {
         _doublePrice = true;
         DOTween.To(() =>_pDoublePrice, x => _pDoublePrice = x,(int)_chestManager.priceAmount * 2, 2f );
         yield return new WaitForSeconds(2);
-        backButton.enabled = true;
+
         _doublePrice = false;
     }
     public void HideDoublePricePanel()
@@ -463,16 +478,20 @@ public class Rad_GuiManager : MonoBehaviour {
             doublePricePanel.SetActive(false);
 
         });
+
     }
     public void Button_HideDoublePricePanel()
     {
         _analyticsManager.DoublePriceAd_Event(false);
         HideDoublePricePanel();
         Rad_SaveManager.profile.adsSkipped++;
+        backButton.enabled = true;
     }
 
     public void Button_ShowRoulettePanel()
     {
+        backButton.enabled = false;
+        rouletteOn = true;
         if (Rad_SaveManager.profile.tokens > 0)
         {
             roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
@@ -519,6 +538,7 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     public void HideRoulette()
     {
+        rouletteOn = false;
         HidePricePanel();
         roulettePanel.transform.DOLocalMoveX(-840f, 0.75f).SetEase(Ease.OutBack);
         rouletteTitle.transform.DOLocalMoveX(3000f, 0.75f).SetEase(Ease.OutBack);
@@ -536,6 +556,10 @@ public class Rad_GuiManager : MonoBehaviour {
             if(_chestManager.priceAmount > 0)
             {
                 ShowDoublePricePanel();
+            }
+            else
+            {
+                backButton.enabled = true;
             }
 
         });
