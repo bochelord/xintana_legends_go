@@ -22,10 +22,12 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject noTokensPanel;
     [Header("PlaceHolders")]
     public Transform midScreen;
+    public Transform gemPosition;
     [Header("Text")]
     public Text enemyText;
     public Text scoreText;
     public Text worldText;
+    public Text gemsText;
     [Header ("Player Game Over")]
     public Text pKogiAmount;
     public Text pZazuAmount;
@@ -34,6 +36,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text pWorldReached;
     public Text pFightsNumber;
     public GameObject x2Text;
+    public GameObject gem;
     [Header("Share Panel")]
     public Text kogiAmount;
     public Text zazuAmount;
@@ -89,7 +92,7 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         scoreText.text = _levelManager.GetPlayerScoreUI().ToString();
         worldText.text = _levelManager.GetCurrentWorldNumber().ToString();
-
+        gemsText.text = Rad_SaveManager.profile.tokens.ToString();
         if (timerCountdownAdOn)
         {
             _timerCountdown -= Time.deltaTime;
@@ -299,7 +302,16 @@ public class Rad_GuiManager : MonoBehaviour {
         yield return new WaitForSeconds(1);
         DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 1f);
         yield return new WaitForSeconds(1);
-        DOTween.To(() => _pWorldReached, x => _pWorldReached = x, _levelManager.GetCurrentWorldNumber(), 1f);
+        DOTween.To(() => _pWorldReached, x => _pWorldReached = x, _levelManager.GetCurrentWorldNumber(), 1f).OnComplete(()=> 
+        {
+            if (_pWorldReached > 1)
+            {
+                SpawnGem();
+                Rad_SaveManager.profile.tokens++;
+                Rad_SaveManager.SaveData();
+            }
+        });
+
         yield return new WaitForSeconds(1f);
         DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled()+1, 1f);
         yield return new WaitForSeconds(1f);
@@ -333,6 +345,15 @@ public class Rad_GuiManager : MonoBehaviour {
         _scorePanelOn = false; //so we stop constantly refreshing this panel
     }
 
+    private void SpawnGem()
+    {
+        gem.SetActive(true);
+        gem.transform.DOScale(3, 1).OnComplete(()=> 
+        {
+            gem.transform.DOScale(1, 0);
+            gem.SetActive(false);
+        });
+    }
     public void ShowAdPanel()
     {
         viewAdPanel.SetActive(true);

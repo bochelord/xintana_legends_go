@@ -39,7 +39,7 @@ public class ChestRoulette : MonoBehaviour {
         _guiManager.HidePricePanel();
         if (Rad_SaveManager.profile.tokens > 0)
         {
-
+            Rad_SaveManager.profile.tokens--;
             for (int i = 0; i < 3; i++)
             {
                 initialPosition.Add(chests[i].transform.position);
