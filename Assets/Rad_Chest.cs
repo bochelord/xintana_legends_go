@@ -85,5 +85,6 @@ public class Rad_Chest : MonoBehaviour {
             _chestManager.gemsImage.SetActive(false);
             _chestManager.coinsImage.SetActive(false);
         }
+        Rad_SaveManager.SaveData();
     }
 }

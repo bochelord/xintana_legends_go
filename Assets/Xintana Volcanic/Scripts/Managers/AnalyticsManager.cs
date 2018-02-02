@@ -120,6 +120,13 @@ public class AnalyticsManager : MonoBehaviour
         });
     }
 
+    public void DoublePriceAd_Event(bool watched)
+    {
+        Analytics.CustomEvent("DoublePrice_Ad_Event", new Dictionary<String, object>
+        {
+            { "double price ad watched", watched }
+        });
+    }
     //===================================================================================================================
     //TIME
     //===================================================================================================================

@@ -57,24 +57,25 @@ public class AdsManager : MonoBehaviour {
                 break;
         }
     }
-    private void HandleResultDoubleScore(ShowResult result)
+    private void HandleResultDoublePrice(ShowResult result)
     {
         AnalyticsManager.Instance.AdsViewed_Event(result);
+        Debug.Log(result);
         switch (result)
         {
             case ShowResult.Finished:
                 AdsViewed++;
                 adViewed = true;
-                _guiManager.HideDoubleScorePanel();
-                _guiManager.DoubleScore();
-                _analyticsManager.DoubleScoreAd_Event(true);
+                _guiManager.HideDoublePricePanel();
+                _guiManager.DoublePrice();
+                _analyticsManager.DoublePriceAd_Event(true);
                 break;
             case ShowResult.Skipped:
-                _guiManager.HideDoubleScorePanel();
-                _analyticsManager.DoubleScoreAd_Event(false);
+                _guiManager.HideDoublePricePanel();
+                _analyticsManager.DoublePriceAd_Event(false);
                 break;
             case ShowResult.Failed:
-                _guiManager.HideDoubleScorePanel();
+                _guiManager.HideDoublePricePanel();
                 break;
         }
     }
@@ -99,11 +100,11 @@ public class AdsManager : MonoBehaviour {
             Advertisement.Show("rewardedVideo", new ShowOptions() { resultCallback = HandlResultNoReward });
         }
     }
-    public void ShowAdForDoubleScore()
+    public void ShowAdForDoublePrice()
     {
         if (Advertisement.IsReady())
         {
-            Advertisement.Show("rewardedVideo", new ShowOptions() { resultCallback = HandleResultDoubleScore });
+            Advertisement.Show("rewardedVideo", new ShowOptions() { resultCallback = HandleResultDoublePrice });
         }
     }
 }

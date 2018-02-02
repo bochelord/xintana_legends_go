@@ -16,7 +16,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject ContinueNoAdPanel;
     public GameObject pausePanel;
     public GameObject menuButtons;
-    public GameObject doubleScorePanel;
+    public GameObject doublePricePanel;
     public GameObject roulettePanel;
     public GameObject pricePanel;
     public GameObject noTokensPanel;
@@ -57,9 +57,11 @@ public class Rad_GuiManager : MonoBehaviour {
     public Transform posChest2;
     public Transform posChest3;
     public Transform posTitle;
+    public Button backButton;
     [Header("Price Panel")]
     public Text priceText;
     
+
     private AnalyticsManager _analyticsManager;
     private AdsManager _adsManager;
     private SIS.ShopManager _shopManager;
@@ -72,6 +74,8 @@ public class Rad_GuiManager : MonoBehaviour {
     private bool _scorePanelOn = false;
     private bool _doubleScorePanelOn = false;
     private bool _pricePanelOn = false;
+    private bool _doublePrice = false;
+    private int _pDoublePrice = 0;
     private int _pScorePlayer;
     private int _pZazuAmount;
     private int _pKogiAmount;
@@ -120,6 +124,16 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             UpdatePricePanel();
         }
+
+        if (_doublePrice && _chestManager.priceType == chestType.coins)
+        {
+            priceText.text = _pDoublePrice.ToString() + " Coins !!";
+        }
+        else if (_doublePrice &&_chestManager.priceType == chestType.gems)
+        {
+            priceText.text = _pDoublePrice.ToString() + " Gems !!";
+        }
+
     }
     private void UpdatePricePanel()
     {
@@ -191,7 +205,7 @@ public class Rad_GuiManager : MonoBehaviour {
         gmeOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
         if (_doubleScorePanelOn)
         {
-            HideDoubleScorePanel();
+            HideDoublePricePanel();
         }
         if(gameOverPanelCoroutine != null)
         {
@@ -324,10 +338,10 @@ public class Rad_GuiManager : MonoBehaviour {
             SIS.DBManager.RemovePurchaseUI("shop_item_00");
             Rad_SaveManager.profile.doubleScore = false;
         }
-        else
-        {
-            ShowDoubleScorePanel();
-        }
+        //else
+        //{
+        //    ShowDoubleScorePanel();
+        //}
 
         if(_pScorePlayer > Rad_SaveManager.profile.highscore)
         {
@@ -403,46 +417,57 @@ public class Rad_GuiManager : MonoBehaviour {
         });
     }
 
-    public void ShowDoubleScorePanel()
+    public void ShowDoublePricePanel()
     {
-        doubleScorePanel.SetActive(true);
+        backButton.enabled = false;
+        doublePricePanel.SetActive(true);
         _doubleScorePanelOn = true;
-        doubleScorePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+        doublePricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+        backButton.enabled = false;
+        //pricePanel.SetActive(false);
     }
-    public void Button_DoubleScore()
+    public void Button_DoublePrice()
     {
-        _adsManager.ShowAdForDoubleScore();
+        _adsManager.ShowAdForDoublePrice();
     }
-    public void DoubleScore()
+    public void DoublePrice()
     {
-        StartCoroutine(DoubleScoreFromAd());
+        StartCoroutine(DoublePriceFromAd());
     }
-    IEnumerator DoubleScoreFromAd()
+    IEnumerator DoublePriceFromAd()
     {
-        _scorePanelOn = true;
-        x2Text.SetActive(true);
-        x2Text.transform.DOShakeScale(2, 0.5f, 2, 25, true);
-        DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore() * 2, 1f);
-        yield return new WaitForSeconds(1);
-        if (_pScorePlayer > Rad_SaveManager.profile.highscore)
-        {
-            Rad_SaveManager.profile.highscore = _pScorePlayer;
-            Rad_SaveManager.SaveData();
-        }
-        _scorePanelOn = false;
+        //_scorePanelOn = true;
+        //x2Text.SetActive(true);
+        //x2Text.transform.DOShakeScale(2, 0.5f, 2, 25, true);
+        //DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore() * 2, 1f);
+        //yield return new WaitForSeconds(1);
+        //if (_pScorePlayer > Rad_SaveManager.profile.highscore)
+        //{
+        //    Rad_SaveManager.profile.highscore = _pScorePlayer;
+        //    Rad_SaveManager.SaveData();
+        //}
+        //_scorePanelOn = false;]
+        _pricePanelOn = false;
+        _doublePrice = true;
+        DOTween.To(() =>_pDoublePrice, x => _pDoublePrice = x,(int)_chestManager.priceAmount * 2, 2f );
+        yield return new WaitForSeconds(2);
+        backButton.enabled = true;
+        _doublePrice = false;
     }
-    public void HideDoubleScorePanel()
+    public void HideDoublePricePanel()
     {
-        doubleScorePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+        //pricePanel.SetActive(true);
+        doublePricePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
         {
             _doubleScorePanelOn = false;
-            doubleScorePanel.SetActive(false);
+            doublePricePanel.SetActive(false);
+
         });
     }
-    public void Button_HideDoubleScorePanel()
+    public void Button_HideDoublePricePanel()
     {
-        _analyticsManager.DoubleScoreAd_Event(false);
-        HideDoubleScorePanel();
+        _analyticsManager.DoublePriceAd_Event(false);
+        HideDoublePricePanel();
         Rad_SaveManager.profile.adsSkipped++;
     }
 
@@ -492,7 +517,7 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         noTokensPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
     }
-    public void Button_HideRoulettePanel()
+    public void HideRoulette()
     {
         HidePricePanel();
         roulettePanel.transform.DOLocalMoveX(-840f, 0.75f).SetEase(Ease.OutBack);
@@ -501,12 +526,19 @@ public class Rad_GuiManager : MonoBehaviour {
         chest2.transform.DOLocalMoveX(-2110f, 0.75f).SetEase(Ease.OutBack);
         chest3.transform.DOLocalMoveX(2110f, 0.75f).SetEase(Ease.OutBack);
         _chestManager.CloseChests();
-        }
+    }
 
     public void ShowPricePanel()
     {
         _pricePanelOn = true;
-        pricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+        pricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack).OnComplete(()=> 
+        {
+            if(_chestManager.priceAmount > 0)
+            {
+                ShowDoublePricePanel();
+            }
+
+        });
     }
 
     public void HidePricePanel()
