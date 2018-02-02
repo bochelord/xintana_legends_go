@@ -15,6 +15,7 @@ public class Rad_Chest : MonoBehaviour {
 
     private ChestRoulette _chestManager;
     private Rad_GuiManager _guiManager;
+
     private void Start()
     {
         _chestManager = FindObjectOfType<ChestRoulette>();
@@ -34,6 +35,18 @@ public class Rad_Chest : MonoBehaviour {
                 _chestManager.priceType = type;
                 UpdatePrice();
                 _guiManager.ShowPricePanel();
+                switch (type)
+                {
+                    case chestType.coins:
+                        _chestManager.SpawnGoldParticleChest(this.transform);
+                        break;
+                    case chestType.gems:
+                        _chestManager.SpawnGemParticleChest(this.transform);
+                        break;
+                    case chestType.empty:
+                        _chestManager.SpawnEmptyParticleChest(this.transform);
+                        break;
+                }
             });
         }
     }
@@ -50,7 +63,7 @@ public class Rad_Chest : MonoBehaviour {
     {
         if (type == chestType.coins)
         {
-            //SIS.DBManager.IncreaseFunds("coins", amount);
+            SIS.DBManager.IncreaseFunds("coins", amount);
             _chestManager.nothingImage.SetActive(false);
             _chestManager.gemsImage.SetActive(false);
             _chestManager.coinsImage.SetActive(true);
@@ -59,7 +72,7 @@ public class Rad_Chest : MonoBehaviour {
         else if (type == chestType.gems)
         {
 
-            //Rad_SaveManager.profile.tokens += amount;
+            Rad_SaveManager.profile.tokens += amount;
             _chestManager.nothingImage.SetActive(false);
             _chestManager.gemsImage.SetActive(true);
             _chestManager.coinsImage.SetActive(false);
