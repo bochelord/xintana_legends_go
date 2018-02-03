@@ -26,6 +26,7 @@ public class Rad_GuiManager : MonoBehaviour {
     [Header("Text")]
     public Text enemyText;
     public Text scoreText;
+    public Text highScoreText;
     public Text worldText;
     public Text gemsText;
     [Header ("Player Game Over")]
@@ -324,6 +325,7 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     IEnumerator FillGameOverPanel()
     {
+        highScoreText.text = Rad_SaveManager.profile.highscore.ToString();
         _pScorePlayer = 0;
         _scorePanelOn = true;
         x2Text.SetActive(false); 
@@ -331,6 +333,11 @@ public class Rad_GuiManager : MonoBehaviour {
         yield return new WaitForSeconds(1);
         DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 1f);
         yield return new WaitForSeconds(1);
+        if(Rad_SaveManager.profile.highscore< _levelManager.GetPlayerScore()) {
+            Rad_SaveManager.profile.highscore = _pScorePlayer;
+            Rad_SaveManager.SaveData();
+            Debug.Log("new record");
+        }
         DOTween.To(() => _pWorldReached, x => _pWorldReached = x, _levelManager.GetCurrentWorldNumber(), 1f).OnComplete(()=> 
         {
             if (_pWorldReached > 1)
@@ -358,11 +365,6 @@ public class Rad_GuiManager : MonoBehaviour {
         //    ShowDoubleScorePanel();
         //}
 
-        if(_pScorePlayer > Rad_SaveManager.profile.highscore)
-        {
-            Rad_SaveManager.profile.highscore = _pScorePlayer;
-            Rad_SaveManager.SaveData();
-        }
         //DOTween.To(() => _pKogiAmount, x => _pKogiAmount = x, _levelManager.GetKogiKilled(), 1f);
         //yield return new WaitForSeconds(0.5f);
         //DOTween.To(() => _pZazuAmount, x => _pZazuAmount = x, _levelManager.GetZazuKilled(), 1f);
