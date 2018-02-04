@@ -374,7 +374,7 @@ public class CombinationManager : MonoBehaviour {
         //combinationButtons.GetComponent<GUIAnimFREE>().MoveIn();
 
         //combinationButtons.transform.DOLocalMove(new Vector3(-2.5f,41f,0f),1f);
-        combinationButtons.transform.DOMoveY(58f, 1f);
+        combinationButtons.transform.DOMoveY(100f, 1f);
     }
     /// <summary>
     /// Buttons will not be interactable.
