@@ -38,6 +38,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text pFightsNumber;
     public GameObject x2Text;
     public GameObject gem;
+    public GameObject HighScoreFxPrefab;
     [Header("Share Panel")]
     public Text kogiAmount;
     public Text zazuAmount;
@@ -81,6 +82,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private bool rouletteOn = false;
     private int _pDoublePrice = 0;
     private int _pScorePlayer;
+    private int _pHighScore;
     private int _pZazuAmount;
     private int _pKogiAmount;
     private int _pMakulaAmount;
@@ -185,6 +187,9 @@ public class Rad_GuiManager : MonoBehaviour {
         if (pFightsNumber)
         {
             pFightsNumber.text = _pFightsNumber.ToString();
+        }
+        if (highScoreText) {
+            highScoreText.text = _pHighScore.ToString();
         }
 
     }
@@ -323,6 +328,13 @@ public class Rad_GuiManager : MonoBehaviour {
             settingsPanel.transform.DOLocalMoveX(-1650f, 1f).SetEase(Ease.OutBack);
         }
     }
+
+    private IEnumerator refreshHighScore(int newHighScore) {
+        yield return new WaitForSeconds(0.60f);
+        _pHighScore = 0;
+        DOTween.To(() => _pHighScore, x => _pHighScore = x, newHighScore, 1f);
+    }
+
     IEnumerator FillGameOverPanel()
     {
         highScoreText.text = Rad_SaveManager.profile.highscore.ToString();
@@ -334,9 +346,13 @@ public class Rad_GuiManager : MonoBehaviour {
         DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 1f);
         yield return new WaitForSeconds(1);
         if(Rad_SaveManager.profile.highscore< _levelManager.GetPlayerScore()) {
-            Rad_SaveManager.profile.highscore = _pScorePlayer;
+            Rad_SaveManager.profile.highscore = (int)_levelManager.GetPlayerScore();
             Rad_SaveManager.SaveData();
-            Debug.Log("new record");
+            GameObject clone_HighScoreFxPrefab;
+            clone_HighScoreFxPrefab = Instantiate(HighScoreFxPrefab);
+            clone_HighScoreFxPrefab.transform.SetParent(playerGameOverPanel.transform);
+            clone_HighScoreFxPrefab.transform.position = highScoreText.transform.position;
+            StartCoroutine(refreshHighScore(Rad_SaveManager.profile.highscore));
         }
         DOTween.To(() => _pWorldReached, x => _pWorldReached = x, _levelManager.GetCurrentWorldNumber(), 1f).OnComplete(()=> 
         {
