@@ -130,6 +130,7 @@ public class LevelManager : MonoBehaviour {
         clone_damageFxprefab = Instantiate(damageFxPrefab);
         clone_damageFxprefab.transform.position = enemy.transform.position;
 
+        enemyController.DamagedAnimation();
         
         LaunchShowHUDText(enemyContainer.transform.position + new Vector3(0,1.5f,0), damagedone.ToString("F1"), new Color32(245, 141, 12, 255)); /// TODO This has to be feed with the proper damage coming from the playerManager
 
@@ -141,7 +142,7 @@ public class LevelManager : MonoBehaviour {
         enemyController.ApplyDamageToEnemy(damagedone);
         if (critico)
         {
-            LaunchShowHUDText(enemyContainer.transform.position + new Vector3(1.5f, 1.5f, 0), "crit!", new Color32(245, 141, 12, 255));
+            LaunchShowHUDText(enemyContainer.transform.position + new Vector3(1f, 1.5f, 0), "crit!", new Color32(245, 141, 12, 255));
         }
     }
     
@@ -157,8 +158,12 @@ public class LevelManager : MonoBehaviour {
         clone_damageFxprefab = Instantiate(damageFxPrefab);
         clone_damageFxprefab.transform.position = player.transform.position;
 
+        enemyController.AttackAnimation();
+
+
         float _damageDone = enemyController.GetDamageDoneByEnemy();
         LaunchShowHUDText(player.transform.position + new Vector3(0, 1.5f, 0), _damageDone.ToString("F1"), new Color32(245, 141, 12, 255));
+
         playerManager.ReceiveDamage(_damageDone);
 
         AudioManager.Instance.Play_XintanaHit();

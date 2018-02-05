@@ -100,21 +100,25 @@ public class EnemyController : MonoBehaviour {
 
         if (life < 0)
         {
-            KillEnemy();
+            StartCoroutine(KillEnemy());
         }
         
     }
 
-    private void KillEnemy()
+    IEnumerator KillEnemy()
     {
         levelManager.AddEnemyCount();
         levelManager.AddPlayerScore(this.type, level);
         levelManager.enemyKilled = true;
-        levelManager.GetNewEnemy(1.5f);
+        levelManager.GetNewEnemy(2.5f);
+        DeadAnimation();
+        yield return new WaitForSeconds(1.5f);
         pooler.RemoveElement(this.transform);
+        
         
     }
 
+    
 
     public float GetLife()
     {
@@ -128,4 +132,45 @@ public class EnemyController : MonoBehaviour {
     {
         return startLife;
     }
+
+
+    #region Animations
+
+    public void IdleAnimation()
+    {
+        animator.SetTrigger("idle_1");
+    }
+
+    public void AttackAnimation()
+    {
+
+        if (RadUtils.d100() <= 49)
+        {
+            animator.SetTrigger("skill_1");
+        } 
+        else
+        {
+            animator.SetTrigger("skill_2");
+        }
+
+        
+    }
+
+    public void DamagedAnimation()
+    {
+        if (RadUtils.d100() <= 49)
+        {
+            animator.SetTrigger("hit_1");
+        } else
+        {
+            animator.SetTrigger("hit_2");
+        }
+    }
+
+    public void DeadAnimation()
+    {
+        animator.SetTrigger("death");
+    }
+
+    #endregion
 }

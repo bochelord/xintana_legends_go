@@ -142,7 +142,7 @@ public static class Formulas : object
     /// <summary>
     /// Returns a Damage value based on the orginal param and if its a critical.
     /// The damage is calculated based on a D100, based on this result we get
-    /// a Fumble (04 or less) , Normal or Critical (95 or more)
+    /// a Fumble (04 or less) , Normal or Critical (85 or more)
     /// A fumble gives damage = 0
     /// A normal gives damage weapondamage +-1
     /// a critic gives damage weapondamage *2
@@ -163,7 +163,7 @@ public static class Formulas : object
         {
             damage = 0;
         }
-        else if (dice > 4 && dice <= 94)
+        else if (dice > 4 && dice <= 84)
         {
             damage = Random.Range(weaponDamage - 1f, weaponDamage + 1f);
         }
