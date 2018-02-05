@@ -179,6 +179,7 @@ public class LevelManager : MonoBehaviour {
             AddNemesisCount();
             if (!adManager.adViewed && adManager.AdsViewed <=4 && !Rad_SaveManager.profile.noAds)
             {
+                combinationManager.SetGameOn(false);
                 combinationManager.MoveButtonsOut();
                 StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowAdPanel,2f));
                 //_guiManager.ShowAdPanel();
@@ -191,6 +192,7 @@ public class LevelManager : MonoBehaviour {
         }
         else if (playerManager.life <= 0 && SIS.DBManager.GetPurchase("shop_item_01") > 0)
         {
+            combinationManager.SetGameOn(false);
             //SIS.DBManager.IncreasePurchase("shop_item_01", -1);
             SIS.DBManager.RemovePurchase("shop_item_01");
             SIS.DBManager.RemovePurchaseUI("shop_item_01");
@@ -474,8 +476,9 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     public void ContinueGame()
     {
-        combinationManager.MoveButtonsIn();
+
         combinationManager.timeToResolveCombination = combinationManager.original_timeToResolveCombination;
+        Debug.Log(combinationManager.timeToResolveCombination);
         _guiManager.GameOverPanelOff();
         enemyPooler.RemoveElement(enemyController.transform);
         combinationManager.EnableButtonsInteraction();
