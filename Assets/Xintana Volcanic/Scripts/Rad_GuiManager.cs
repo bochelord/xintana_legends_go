@@ -89,6 +89,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private int _pWorldReached;
     private int _pFightsNumber;
     private Coroutine gameOverPanelCoroutine;
+    private Coroutine doublePricePanelCoroutine;
     private void Awake()
     {
         _analyticsManager = FindObjectOfType<AnalyticsManager>();
@@ -452,10 +453,15 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void ShowDoublePricePanel()
     {
+        doublePricePanelCoroutine = StartCoroutine(ShowDoublePriceCoroutine(2));
+    }
+
+    IEnumerator ShowDoublePriceCoroutine(float time)
+    {
+        yield return new WaitForSeconds(time);
         doublePricePanel.SetActive(true);
         _doubleScorePanelOn = true;
         doublePricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
-
         //pricePanel.SetActive(false);
     }
     public void Button_DoublePrice()
@@ -469,24 +475,14 @@ public class Rad_GuiManager : MonoBehaviour {
     IEnumerator DoublePriceFromAd()
     {
         backButton.enabled = true;
-        //_scorePanelOn = true;
-        //x2Text.SetActive(true);
-        //x2Text.transform.DOShakeScale(2, 0.5f, 2, 25, true);
-        //DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore() * 2, 1f);
-        //yield return new WaitForSeconds(1);
-        //if (_pScorePlayer > Rad_SaveManager.profile.highscore)
-        //{
-        //    Rad_SaveManager.profile.highscore = _pScorePlayer;
-        //    Rad_SaveManager.SaveData();
-        //}
-        //_scorePanelOn = false;]
         _pricePanelOn = false;
         _doublePrice = true;
         DOTween.To(() =>_pDoublePrice, x => _pDoublePrice = x,(int)_chestManager.priceAmount * 2, 2f );
         yield return new WaitForSeconds(2);
-
+        _chestManager.UpdateDoublePrice();
         _doublePrice = false;
     }
+
     public void HideDoublePricePanel()
     {
         //pricePanel.SetActive(true);
@@ -556,6 +552,10 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     public void HideRoulette()
     {
+        if(doublePricePanelCoroutine != null)
+        {
+            StopCoroutine(doublePricePanelCoroutine);
+        }
         rouletteOn = false;
         HidePricePanel();
         roulettePanel.transform.DOLocalMoveX(-840f, 0.75f).SetEase(Ease.OutBack);
@@ -582,6 +582,8 @@ public class Rad_GuiManager : MonoBehaviour {
 
         });
     }
+
+  
 
     public void HidePricePanel()
     {

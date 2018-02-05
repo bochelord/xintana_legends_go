@@ -48,7 +48,6 @@ public class ChestRoulette : MonoBehaviour {
 
             GeneratePrizes();
             RandomChestPositions();
-            Debug.Log("roulette");
             canOpen = true;
             _guiManager.backButton.enabled = false;
         }
@@ -104,7 +103,19 @@ public class ChestRoulette : MonoBehaviour {
             initialPosition.RemoveAt(randomIndex);
         }
     }
+    public void UpdateDoublePrice()
+    {
+        if (priceType == chestType.coins)
+        {
+            SIS.DBManager.IncreaseFunds("coins", priceAmount);
+        }
+        else if (priceType == chestType.gems)
+        {
+            Rad_SaveManager.profile.tokens += priceAmount;
+        }
 
+        Rad_SaveManager.SaveData();
+    }
     private void GeneratePriceAmountGold(Rad_Chest chest)
     {
         float diceroll = 0;
