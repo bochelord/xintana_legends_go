@@ -68,7 +68,7 @@ public class CombinationManager : MonoBehaviour {
         copyCombinationArray = new GameObject[combinationLength];
         
         GenerateCombination();
-        CreateButtonsAndPlaceThem();
+        InstantiateGemsAndPlaceThem();
         tempTimer = timeToResolveCombination;
         EnableButtonsInteraction();
         //gameOn = true;
@@ -87,7 +87,7 @@ public class CombinationManager : MonoBehaviour {
         }
         currentCombinationPosition = 0;
         GenerateCombination();
-        CreateButtonsAndPlaceThem();
+        InstantiateGemsAndPlaceThem();
         HideWinLoseText();
         EnableButtonsInteraction();
         ResetTimer();
@@ -108,7 +108,7 @@ public class CombinationManager : MonoBehaviour {
         }
         currentCombinationPosition = 0;
         GenerateCombination();
-        CreateButtonsAndPlaceThem();
+        InstantiateGemsAndPlaceThem();
         HideWinLoseText();
         EnableButtonsInteraction();
         gameOn = true;
@@ -146,7 +146,7 @@ public class CombinationManager : MonoBehaviour {
         copyCombinationArray = new GameObject[combinationLength];
 
         GenerateCombination();
-        CreateButtonsAndPlaceThem();
+        InstantiateGemsAndPlaceThem();
         tempTimer = timeToResolveCombination;
         EnableButtonsInteraction();
     }
@@ -187,7 +187,7 @@ public class CombinationManager : MonoBehaviour {
     /// <summary>
     /// Instantiate the gameobjects and place them in the middle top of the screen.
     /// </summary>
-    void CreateButtonsAndPlaceThem(){
+    void InstantiateGemsAndPlaceThem(){
         for (int i = combinationArray.Length-1; i > -1; i--){
             GameObject buttonCloned = Instantiate(combinationArray[i]);
             copyCombinationArray[i] = buttonCloned; 
