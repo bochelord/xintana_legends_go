@@ -78,6 +78,7 @@ public class UnitControl : MonoBehaviour {
 					} else if (keyCode == KeyCode.K) {
 						animator.SetTrigger("idle_2");
 					} else if (keyCode == KeyCode.L) {
+//						animator.SetTrigger("skill_3");
 					} else if (keyCode == KeyCode.Space) {
 						animator.SetTrigger("evade_1");
 						StartCoroutine (Evade ());
@@ -90,7 +91,7 @@ public class UnitControl : MonoBehaviour {
 	public IEnumerator Evade(){
 		yield return new WaitForSeconds (0.2f);
 		isEvade = true;
-		yield return new WaitForSeconds (0.3f);
+		yield return new WaitForSeconds (0.2f);
 		isEvade = false;
 	}
 
