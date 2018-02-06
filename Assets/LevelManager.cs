@@ -478,7 +478,6 @@ public class LevelManager : MonoBehaviour {
     {
 
         combinationManager.timeToResolveCombination = combinationManager.original_timeToResolveCombination;
-        Debug.Log(combinationManager.timeToResolveCombination);
         _guiManager.GameOverPanelOff();
         enemyPooler.RemoveElement(enemyController.transform);
         combinationManager.EnableButtonsInteraction();

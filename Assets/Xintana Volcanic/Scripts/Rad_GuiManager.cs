@@ -510,13 +510,13 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
             {
-                rouletteTitle.transform.DOLocalMove(posTitle.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+                rouletteTitle.transform.DOMove(posTitle.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
                 {
-                    chest1.transform.DOLocalMove(posChest1.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+                    chest1.transform.DOMove(posChest1.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
                     {
-                        chest2.transform.DOLocalMove(posChest2.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+                        chest2.transform.DOMove(posChest2.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
                         {
-                            chest3.transform.DOLocalMove(posChest3.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+                            chest3.transform.DOMove(posChest3.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
                             {
                                 _chestManager.RestartChestGenerations();
                             });
