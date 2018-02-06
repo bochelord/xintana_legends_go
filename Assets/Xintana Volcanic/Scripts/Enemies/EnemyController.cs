@@ -100,19 +100,19 @@ public class EnemyController : MonoBehaviour {
 
         if (life < 0)
         {
-            StartCoroutine(KillEnemy());
+            KillEnemy();
         }
         
     }
 
-    IEnumerator KillEnemy()
+    private void KillEnemy()
     {
+        levelManager.state = GameState.Paused;
         levelManager.AddEnemyCount();
-        levelManager.AddPlayerScore(this.type, level);
+        levelManager.AddPlayerScoreAndGetNewEnemy(this.type, level);
         levelManager.enemyKilled = true;
-        levelManager.GetNewEnemy(2.5f);
+        //levelManager.GetNewEnemy(2.5f);
         DeadAnimation();
-        yield return new WaitForSeconds(1.5f);
         pooler.RemoveElement(this.transform);
         
         

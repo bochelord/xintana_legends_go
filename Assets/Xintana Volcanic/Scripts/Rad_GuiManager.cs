@@ -29,6 +29,9 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text highScoreText;
     public Text worldText;
     public Text gemsText;
+    [Header("Icons")]
+    public GameObject doubleScoreIcon;
+    public GameObject extraLifeIcon;
     [Header ("Player Game Over")]
     public Text pKogiAmount;
     public Text pZazuAmount;
@@ -80,6 +83,8 @@ public class Rad_GuiManager : MonoBehaviour {
     private bool _doublePrice = false;
     private bool _mainMenu = false;
     private bool rouletteOn = false;
+    private bool _updateScore = false;
+    private int _scorePlayer = 0;
     private int _pDoublePrice = 0;
     private int _pScorePlayer;
     private int _pHighScore;
@@ -148,6 +153,10 @@ public class Rad_GuiManager : MonoBehaviour {
             gemsText.text = Rad_SaveManager.profile.tokens.ToString();
         }
 
+        if(scoreText && _updateScore)
+        {
+            scoreText.text = _levelManager.GetPlayerScoreUI().ToString();
+        }
     }
     private void UpdatePricePanel()
     {
@@ -193,6 +202,27 @@ public class Rad_GuiManager : MonoBehaviour {
             highScoreText.text = _pHighScore.ToString();
         }
 
+    }
+
+    public void UpdateIcons()
+    {
+        if (SIS.DBManager.GetPurchase("shop_item_00") > 0)
+        {
+            doubleScoreIcon.SetActive(true);
+        }
+        else
+        {
+            doubleScoreIcon.SetActive(false);
+        }
+
+        if (SIS.DBManager.GetPurchase("shop_item_01") > 0)
+        {
+            extraLifeIcon.SetActive(true);
+        }
+        else
+        {
+            extraLifeIcon.SetActive(false);
+        }
     }
     /// <summary>
     /// called from Button, set main menu panel on and turns off the rest

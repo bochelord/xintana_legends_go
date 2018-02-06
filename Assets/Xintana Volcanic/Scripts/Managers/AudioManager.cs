@@ -35,6 +35,7 @@ public class AudioManager : MonoBehaviour {
     public ScriptableObject YouLose;
     public ScriptableObject Boss;
     public ScriptableObject NextStage;
+    public ScriptableObject addScore;
 
     //cached variables
     private AudioClip tempclip;
@@ -188,5 +189,17 @@ public class AudioManager : MonoBehaviour {
         if (NextStage && audioEnabled) {
             ((SimpleAudioEvent)NextStage).PlayOneShot(fxPlayer, generalVolume, true);
         }
+    }
+    public void Play_AddScore()
+    {
+        if (addScore && audioEnabled)
+        {
+            fxPlayer.loop = true;
+            ((SimpleAudioEvent)addScore).Play(fxPlayer);
+        }
+    }
+    public void Stop_AddScore()
+    {
+        fxPlayer.loop = false;
     }
 }

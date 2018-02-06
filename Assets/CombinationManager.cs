@@ -73,7 +73,7 @@ public class CombinationManager : MonoBehaviour {
         EnableButtonsInteraction();
         //gameOn = true;
 	}
-    void ResetGame()
+    public void ResetGame()
     {
         combinationArray = null;
         copyCombinationArray = null;
@@ -163,6 +163,12 @@ public class CombinationManager : MonoBehaviour {
             
         }
         
+    }
+
+    public void ResetTimer()
+    {
+        timerSlider.value = 1;
+        tempTimer = timeToResolveCombination;
     }
     /// <summary>
     /// Change the Combination Length.
@@ -277,11 +283,7 @@ public class CombinationManager : MonoBehaviour {
         }
     }
 
-    void ResetTimer()
-    {
-        tempTimer = timeToResolveCombination;
-        timerSlider.value = tempTimer;
-    }
+
 
     /// <summary>
     /// Function called from the UI buttons.
@@ -332,7 +334,7 @@ public class CombinationManager : MonoBehaviour {
                         ChangeCombinationLength(combinationLength);
                         ChangeMinimCombinationLength(minimCombinationLenght);
                     }
-                    StartCoroutine(LoadNextRound(2.5f));
+                    //StartCoroutine(LoadNextRound(2.5f));
                 }
                 else
                 {
@@ -390,7 +392,10 @@ public class CombinationManager : MonoBehaviour {
         }
     }
 
-
+    public void ChangeTimerSliderColor(float value)
+    {
+        timerSlider.fillRect.GetComponent<_2dxFX_HSV>()._Saturation = value;
+    }
     /// <summary>
     /// Buttons will be interactable.
     /// </summary>

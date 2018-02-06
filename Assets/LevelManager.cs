@@ -77,7 +77,7 @@ public class LevelManager : MonoBehaviour {
 
     void Start()
     {
-
+        _guiManager.UpdateIcons();
         AnalyticsManager.Instance.DeviceModel_Event();
         combinationManager.SetCombinationFrecuency(combinationIncreaseFrecuency);
         PrepareBackgroundLevel(1);
@@ -227,38 +227,46 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    public void AddPlayerScore(EnemyType typein, int levelin)
+    public void AddPlayerScoreAndGetNewEnemy(EnemyType typein, int levelin)
     {
         float timeRemaining = combinationManager.timerSlider.value;
-
+        int _enemyPoints = 0;
         //Debug.Log("MECAGO EN TODA TU PUTA MADRE");
         switch (typein)
         {
             case EnemyType.kogi:
-                DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 2000 * levelin * timeRemaining, 0.5f);
-                _playerScore += 2000 * levelin * timeRemaining;
+                _enemyPoints = 2000;
                 break;
             case EnemyType.makula:
-                DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 5000 * levelin * timeRemaining, 0.5f);
-                _playerScore += 5000 * levelin * timeRemaining;
+                _enemyPoints = 5000;
                 break;
             case EnemyType.zazuc:
-                DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 1500 * levelin * timeRemaining, 0.5f);
-                _playerScore += 1500 * levelin * timeRemaining;
+                _enemyPoints = 1500;
                 break;
             case EnemyType.blackKnight:
-                DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 1500 * levelin * timeRemaining, 0.5f);
-                _playerScore += 2500 * levelin * timeRemaining;
+                _enemyPoints = 2500;
                 break;
             case EnemyType.lavabeast:
-                DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 1500 * levelin * timeRemaining, 0.5f);
-                _playerScore += 2250 * levelin * timeRemaining;
+                _enemyPoints = 2250;
                 break;
             default:
-                DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + 1500 * levelin * timeRemaining, 0.5f);
-                _playerScore += 1000 * levelin * timeRemaining;
+                _enemyPoints = 1000;
                 break;
         }
+
+        //scoreParticle On
+        //score sound on
+        combinationManager.ChangeTimerSliderColor(-1);
+        AudioManager.Instance.Play_AddScore();
+        DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + _enemyPoints * levelin * timeRemaining, 3);
+        DOTween.To(() => combinationManager.timerSlider.value, x => combinationManager.timerSlider.value = x, 0, 3f).OnComplete(() =>
+         {
+             combinationManager.ChangeTimerSliderColor(1);
+             GetNewEnemy(1.5f);
+             _playerScore += _enemyPoints * levelin * timeRemaining;
+             AudioManager.Instance.Stop_AddScore();
+         });
+
     }
     public void AddNemesisCount()
     {
@@ -351,6 +359,8 @@ public class LevelManager : MonoBehaviour {
         enemy.transform.SetParent(enemyContainer);
         enemyKilled = false;
         healthBarController.SetScrollbarValue();
+        combinationManager.ResetGame();
+        state = GameState.Running;
     }
     
 
@@ -476,7 +486,7 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     public void ContinueGame()
     {
-
+        _guiManager.UpdateIcons();
         combinationManager.timeToResolveCombination = combinationManager.original_timeToResolveCombination;
         _guiManager.GameOverPanelOff();
         enemyPooler.RemoveElement(enemyController.transform);
