@@ -59,7 +59,7 @@ public class CombinationManager : MonoBehaviour {
         original_timeToResolveCombination = timeToResolveCombination;
         adManager = FindObjectOfType<AdsManager>();
         _guiManager = FindObjectOfType<Rad_GuiManager>();
-        _initialButtonsPosition = combinationButtons.transform.position;
+        _initialButtonsPosition = combinationButtons.transform.localPosition;
     }
 
     
@@ -368,16 +368,16 @@ public class CombinationManager : MonoBehaviour {
     {
         //combinationButtons.GetComponent<GUIAnimFREE>().MoveOut();
         //combinationButtons.transform.DOLocalMove
-        //combinationButtons.transform.DOLocalMove(new Vector3(-2.5f, -51f, 0f), 1f);
-        combinationButtons.transform.DOMoveY(_initialButtonsPosition.y,1f);
+        combinationButtons.transform.DOLocalMove(new Vector3(-2.5f, -1000f, 0f), 1f);
     }
     public void MoveButtonsIn()
     {
         //combinationButtons.GetComponent<GUIAnimFREE>().m_MoveIn.Time = 0.5f;
         //combinationButtons.GetComponent<GUIAnimFREE>().MoveIn();
 
-        //combinationButtons.transform.DOLocalMove(new Vector3(-2.5f,41f,0f),1f);
-        combinationButtons.transform.DOMoveY(100f, 1f);
+        combinationButtons.transform.DOLocalMove(new Vector3(-2.5f,-550f,0f),1f);
+        //combinationButtons.transform.DOMoveY(100f, 1f);
+
     }
     /// <summary>
     /// Buttons will not be interactable.

@@ -488,17 +488,15 @@ public class LevelManager : MonoBehaviour {
     {
         _guiManager.UpdateIcons();
         combinationManager.timeToResolveCombination = combinationManager.original_timeToResolveCombination;
-        _guiManager.GameOverPanelOff();
+        //_guiManager.GameOverPanelOff();
         enemyPooler.RemoveElement(enemyController.transform);
-        combinationManager.EnableButtonsInteraction();
+        combinationManager.MoveButtonsIn();
         combinationManager.ResetCurrentLenghtCombination();
         PrepareBackgroundLevel(_worldNumber);
         AudioManager.Instance.PlayMusicLevel1();
         playerManager.OnAttackFinished();
         playerManager.life = 9; // TODO remove when real implementation is done
         GetNewEnemy(1);
-        combinationManager.SetGameOn(true);
-
     }
 
     public void PauseGame()
