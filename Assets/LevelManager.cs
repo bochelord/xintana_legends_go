@@ -265,6 +265,7 @@ public class LevelManager : MonoBehaviour {
              combinationManager.ChangeTimerSliderColor(1);
              GetNewEnemy(1.5f);
              _playerScore += _enemyPoints * levelin * timeRemaining;
+             enemyPooler.RemoveElement(enemyController.transform);
              AudioManager.Instance.Stop_AddScore();
          });
 

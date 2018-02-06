@@ -113,9 +113,6 @@ public class EnemyController : MonoBehaviour {
         levelManager.enemyKilled = true;
         //levelManager.GetNewEnemy(2.5f);
         DeadAnimation();
-        pooler.RemoveElement(this.transform);
-        
-        
     }
 
     
