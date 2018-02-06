@@ -198,7 +198,8 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             pFightsNumber.text = _pFightsNumber.ToString();
         }
-        if (highScoreText) {
+        if (highScoreText)
+        {
             highScoreText.text = _pHighScore.ToString();
         }
 
@@ -373,15 +374,17 @@ public class Rad_GuiManager : MonoBehaviour {
 
     IEnumerator FillGameOverPanel()
     {
-        highScoreText.text = Rad_SaveManager.profile.highscore.ToString();
-        _pScorePlayer = 0;
         _scorePanelOn = true;
+        _pHighScore = Rad_SaveManager.profile.highscore;
+        Debug.Log(Rad_SaveManager.profile.highscore);
+        _pScorePlayer = 0;
         x2Text.SetActive(false); 
         playerGameOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
         yield return new WaitForSeconds(1);
         DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 1f);
         yield return new WaitForSeconds(1);
-        if(Rad_SaveManager.profile.highscore< _levelManager.GetPlayerScore()) {
+        if(Rad_SaveManager.profile.highscore< _levelManager.GetPlayerScore())
+        {
             Rad_SaveManager.profile.highscore = (int)_levelManager.GetPlayerScore();
             Rad_SaveManager.SaveData();
             GameObject clone_HighScoreFxPrefab;
