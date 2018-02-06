@@ -150,6 +150,16 @@ public class CombinationManager : MonoBehaviour {
         tempTimer = timeToResolveCombination;
         EnableButtonsInteraction();
     }
+
+    public void DestroyCombination()
+    {
+        combinationArray = null;
+        copyCombinationArray = null;
+        foreach (Transform child in combinationPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
     /// <summary>
     /// Generates a Random combination with a combinationLength.
     /// </summary>

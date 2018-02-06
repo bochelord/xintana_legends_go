@@ -181,6 +181,7 @@ public class LevelManager : MonoBehaviour {
             {
                 combinationManager.SetGameOn(false);
                 combinationManager.MoveButtonsOut();
+                combinationManager.DestroyCombination();
                 StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowAdPanel,2f));
                 //_guiManager.ShowAdPanel();
             }
@@ -491,7 +492,7 @@ public class LevelManager : MonoBehaviour {
         //_guiManager.GameOverPanelOff();
         enemyPooler.RemoveElement(enemyController.transform);
         combinationManager.MoveButtonsIn();
-        combinationManager.ResetCurrentLenghtCombination();
+        //combinationManager.ResetCurrentLenghtCombination();
         PrepareBackgroundLevel(_worldNumber);
         AudioManager.Instance.PlayMusicLevel1();
         playerManager.OnAttackFinished();
