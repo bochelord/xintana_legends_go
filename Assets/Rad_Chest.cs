@@ -15,9 +15,10 @@ public class Rad_Chest : MonoBehaviour {
 
     private ChestRoulette _chestManager;
     private Rad_GuiManager _guiManager;
-
+    private ParticlePooler _pooler;
     private void Start()
     {
+        _pooler = FindObjectOfType<ParticlePooler>();
         _chestManager = FindObjectOfType<ChestRoulette>();
         _guiManager = FindObjectOfType<Rad_GuiManager>();
 
@@ -67,6 +68,7 @@ public class Rad_Chest : MonoBehaviour {
             _chestManager.nothingImage.SetActive(false);
             _chestManager.gemsImage.SetActive(false);
             _chestManager.coinsImage.SetActive(true);
+
             gold.SetActive(true);
         }
         else if (type == chestType.gems)
@@ -76,6 +78,7 @@ public class Rad_Chest : MonoBehaviour {
             _chestManager.nothingImage.SetActive(false);
             _chestManager.gemsImage.SetActive(true);
             _chestManager.coinsImage.SetActive(false);
+
             gems.SetActive(true);
         }
         else if (type == chestType.empty)
@@ -84,7 +87,10 @@ public class Rad_Chest : MonoBehaviour {
             _chestManager.nothingImage.SetActive(false);
             _chestManager.gemsImage.SetActive(false);
             _chestManager.coinsImage.SetActive(false);
+
         }
         Rad_SaveManager.SaveData();
     }
+
+
 }

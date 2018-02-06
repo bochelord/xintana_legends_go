@@ -37,7 +37,7 @@ public class ChestRoulette : MonoBehaviour {
     public void RestartChestGenerations()
     {
         _guiManager.HidePricePanel();
-
+        _guiManager.StopDoublePriceCoroutine();
         if (Rad_SaveManager.profile.tokens > 0)
         {
             Rad_SaveManager.profile.tokens--;
@@ -168,18 +168,42 @@ public class ChestRoulette : MonoBehaviour {
 
     public void SpawnGoldParticleChest(Transform item)
     {
-        GameObject particle = _pooler.GetPooledGoldParticle();
-        particle.transform.position = item.position;
+        StartCoroutine(SpawnCoinsParticle(item));
     }
     public void SpawnEmptyParticleChest(Transform item)
     {
-        GameObject particle = _pooler.GetPooledEmptyParticle();
-        particle.transform.position = item.position;
+        StartCoroutine(SpawnEmptyParticle(item));
     }
     public void SpawnGemParticleChest(Transform item)
     {
-        GameObject particle = _pooler.GetPooledGemParticle();
-        particle.transform.position = item.position;
+        StartCoroutine(SpawnGemParticle(item));
+    }
+    IEnumerator SpawnCoinsParticle(Transform item)
+    {
+        GameObject obj = _pooler.GetPooledGoldParticle();
+        obj.SetActive(true);
+        Debug.Log(obj);
+        obj.transform.position = item.transform.position;
+        yield return new WaitForSeconds(1);
+        _pooler.RemoveElement(obj.transform);
+    }
+    IEnumerator SpawnGemParticle(Transform item)
+    {
+        GameObject obj = _pooler.GetPooledGemParticle();
+        obj.SetActive(true);
+        Debug.Log(obj);
+        obj.transform.position = item.transform.position;
+        yield return new WaitForSeconds(1);
+        _pooler.RemoveElement(obj.transform);
+    }
+    IEnumerator SpawnEmptyParticle(Transform item)
+    {
+        GameObject obj = _pooler.GetPooledEmptyParticle();
+        obj.SetActive(true);
+        Debug.Log(obj);
+        obj.transform.position = item.transform.position;
+        yield return new WaitForSeconds(1);
+        _pooler.RemoveElement(obj.transform);
     }
     public void SetCanOpen(bool value) { canOpen = value; }
     public bool GetCanOpen() { return canOpen; }

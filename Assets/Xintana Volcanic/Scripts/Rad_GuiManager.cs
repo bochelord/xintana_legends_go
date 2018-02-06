@@ -590,10 +590,7 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     public void HideRoulette()
     {
-        if(doublePricePanelCoroutine != null)
-        {
-            StopCoroutine(doublePricePanelCoroutine);
-        }
+        StopDoublePriceCoroutine();
         rouletteOn = false;
         HidePricePanel();
         roulettePanel.transform.DOLocalMoveX(-840f, 0.75f).SetEase(Ease.OutBack);
@@ -603,13 +600,26 @@ public class Rad_GuiManager : MonoBehaviour {
         chest3.transform.DOLocalMoveX(2110f, 0.75f).SetEase(Ease.OutBack);
         _chestManager.CloseChests();
     }
-
+    public void StopDoublePriceCoroutine()
+    {
+        if (doublePricePanelCoroutine != null)
+        {
+            StopCoroutine(doublePricePanelCoroutine);
+        }
+    }
     public void ShowPricePanel()
     {
+        StartCoroutine(ShowPricePanelCoroutine(1));
+    }
+
+  IEnumerator ShowPricePanelCoroutine(float time)
+    {
+
+        yield return new WaitForSeconds(time);
         _pricePanelOn = true;
-        pricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack).OnComplete(()=> 
+        pricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
         {
-            if(_chestManager.priceAmount > 0)
+            if (_chestManager.priceAmount > 0)
             {
                 ShowDoublePricePanel();
             }
@@ -620,8 +630,6 @@ public class Rad_GuiManager : MonoBehaviour {
 
         });
     }
-
-  
 
     public void HidePricePanel()
     {
