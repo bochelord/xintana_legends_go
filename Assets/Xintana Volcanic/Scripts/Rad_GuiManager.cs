@@ -323,6 +323,11 @@ public class Rad_GuiManager : MonoBehaviour {
 
     }
 
+    public void Button_ShowAdExtraLife()
+    {
+        timerCountdownAdOn = false;
+        _adsManager.ShowAdForExtraLife();
+    }
    public void PausePanelOn()
     {
         if (pausePanel)
