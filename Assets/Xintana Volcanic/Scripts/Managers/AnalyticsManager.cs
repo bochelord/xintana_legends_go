@@ -67,7 +67,18 @@ public class AnalyticsManager : MonoBehaviour
         });
     }
 
-
+    /// <summary>
+    /// Which item won the player
+    /// </summary>
+    /// <param name="itemName"></param>
+    /// <param name="amount"></param>
+    public void ChestPrice_Event(string itemName, int amount)
+    {
+        Analytics.CustomEvent("Chest_Price", new Dictionary<string, object>
+        {
+            {itemName, amount }
+        });
+    }
     //===================================================================================================================
     //ADS
     //===================================================================================================================

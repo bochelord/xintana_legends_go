@@ -68,12 +68,12 @@ public class Rad_Chest : MonoBehaviour {
             _chestManager.nothingImage.SetActive(false);
             _chestManager.gemsImage.SetActive(false);
             _chestManager.coinsImage.SetActive(true);
-
+            AnalyticsManager.Instance.ChestPrice_Event("Coins", amount);
             gold.SetActive(true);
         }
         else if (type == chestType.gems)
         {
-
+            AnalyticsManager.Instance.ChestPrice_Event("Gems", amount);
             Rad_SaveManager.profile.tokens += amount;
             _chestManager.nothingImage.SetActive(false);
             _chestManager.gemsImage.SetActive(true);
@@ -83,7 +83,7 @@ public class Rad_Chest : MonoBehaviour {
         }
         else if (type == chestType.empty)
         {
-
+            AnalyticsManager.Instance.ChestPrice_Event("Empty", amount);
             _chestManager.nothingImage.SetActive(false);
             _chestManager.gemsImage.SetActive(false);
             _chestManager.coinsImage.SetActive(false);
