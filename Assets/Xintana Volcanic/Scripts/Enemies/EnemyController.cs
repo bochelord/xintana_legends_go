@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour {
         startLife = new_enemy.life;
         damage = new_enemy.damage;
 
-        if (new_enemy.type == EnemyType.blackKnight || new_enemy.type == EnemyType.lavabeast || new_enemy.type == EnemyType.alchemist || new_enemy.type == EnemyType.devil || new_enemy.type == EnemyType.explorer)
+        if (new_enemy.type == EnemyType.blackKnight || new_enemy.type == EnemyType.lavabeast || new_enemy.type == EnemyType.alchemist || new_enemy.type == EnemyType.devil || new_enemy.type == EnemyType.explorer || new_enemy.type == EnemyType.fireMage)
         {
             foreach (_2dxFX_HSV child_HSV in this.transform.GetComponentsInChildren(typeof(_2dxFX_HSV),true))
             {
