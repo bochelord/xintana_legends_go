@@ -376,13 +376,25 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         _scorePanelOn = true;
         _pHighScore = Rad_SaveManager.profile.highscore;
-        Debug.Log(Rad_SaveManager.profile.highscore);
         _pScorePlayer = 0;
         x2Text.SetActive(false); 
         playerGameOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
         yield return new WaitForSeconds(1);
-        DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 1f);
-        yield return new WaitForSeconds(1);
+        DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 1f).OnComplete(()=> 
+        {
+            if (SIS.DBManager.GetPurchase("shop_item_00") > 0)
+            {
+                x2Text.SetActive(true);
+                x2Text.transform.DOShakeScale(2, 0.5f, 2, 25, true);
+                DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore() * 2, 1f);
+                SIS.DBManager.RemovePurchase("shop_item_00");
+                SIS.DBManager.RemovePurchaseUI("shop_item_00");
+                Rad_SaveManager.profile.doubleScore = false;
+                _levelManager.SetPlayerScore((int)_levelManager.GetPlayerScore() * 2);
+            }
+        });
+
+        yield return new WaitForSeconds(2.5f);
         if(Rad_SaveManager.profile.highscore< _levelManager.GetPlayerScore())
         {
             Rad_SaveManager.profile.highscore = (int)_levelManager.GetPlayerScore();
@@ -405,27 +417,6 @@ public class Rad_GuiManager : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
         DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled()+1, 1f);
-        yield return new WaitForSeconds(1f);
-        if (SIS.DBManager.GetPurchase("shop_item_00") > 0)
-        {
-            x2Text.SetActive(true);
-            x2Text.transform.DOShakeScale(2, 0.5f, 2, 25, true);
-            DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore() * 2, 1f);
-            SIS.DBManager.RemovePurchase("shop_item_00");
-            SIS.DBManager.RemovePurchaseUI("shop_item_00");
-            Rad_SaveManager.profile.doubleScore = false;
-        }
-        //else
-        //{
-        //    ShowDoubleScorePanel();
-        //}
-
-        //DOTween.To(() => _pKogiAmount, x => _pKogiAmount = x, _levelManager.GetKogiKilled(), 1f);
-        //yield return new WaitForSeconds(0.5f);
-        //DOTween.To(() => _pZazuAmount, x => _pZazuAmount = x, _levelManager.GetZazuKilled(), 1f);
-        //yield return new WaitForSeconds(0.5f);
-        //DOTween.To(() => _pMakulaAmount, x => _pMakulaAmount = x, _levelManager.GetMakulaKilled(), 1f);
-
 
         yield return new WaitForSeconds(1.5f);
         _scorePanelOn = false; //so we stop constantly refreshing this panel

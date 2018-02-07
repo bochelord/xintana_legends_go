@@ -554,6 +554,10 @@ public class LevelManager : MonoBehaviour {
     {
         return _makulaKilled;
     }
+    public void SetPlayerScore(int value)
+    {
+        _playerScore = value;
+    }
     public float GetPlayerScore()
     {
         return _playerScore;
