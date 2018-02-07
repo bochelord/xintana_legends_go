@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject HUDTextPrefab;
     public GameObject HUDPlayAgainContainer;
 
+    public ParticlePooler particlePooler;
     public EnemiesPooler enemyPooler;
     public Transform enemyContainer;
     public bool enemyKilled = false;
@@ -265,10 +266,26 @@ public class LevelManager : MonoBehaviour {
              combinationManager.ChangeTimerSliderColor(1);
              GetNewEnemy(1.5f);
              _playerScore += _enemyPoints * levelin * timeRemaining;
+             GetEnemyDeadParticle();
              enemyPooler.RemoveElement(enemyController.transform);
              AudioManager.Instance.Stop_AddScore();
+             Debug.Log("1");
          });
 
+    }
+    public void GetEnemyDeadParticle()
+    {
+        StartCoroutine(EnemyDeadParticle(2f, enemyController.transform.position));
+        Debug.Log("2");
+    }
+    IEnumerator EnemyDeadParticle(float time, Vector2 position)
+    {
+        Debug.Log("3");
+        GameObject obj = particlePooler.GetPooledDeadEnemyParticle();
+        obj.SetActive(true);
+        obj.transform.position = position;
+        yield return new WaitForSeconds(time);
+        particlePooler.RemoveElement(obj.transform);
     }
     public void AddNemesisCount()
     {

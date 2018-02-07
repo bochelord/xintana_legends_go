@@ -7,12 +7,13 @@ public class ParticlePooler : Pooler {
     public GameObject goldChestParticle;
     public GameObject gemsChestParticle;
     public GameObject emptyChestParticle;
-
+    public GameObject deadEnemyParticle;
     public int amount;
 
     private List<GameObject> pooledGold;
     private List<GameObject> pooledGems;
     private List<GameObject> pooledEmpty;
+    private List<GameObject> pooledDeadEnemy;
     // Use this for initialization
 
     public override void Start ()
@@ -44,6 +45,15 @@ public class ParticlePooler : Pooler {
             obj.transform.position = Vector3.zero;
             obj.SetActive(false);
             pooledEmpty.Add(obj);
+        }
+        pooledDeadEnemy = new List<GameObject>();
+        for (int j = 0; j < amount; j++)
+        {
+            GameObject obj = (GameObject)Instantiate(deadEnemyParticle);
+            obj.transform.parent = this.transform;
+            obj.transform.position = Vector3.zero;
+            obj.SetActive(false);
+            pooledDeadEnemy.Add(obj);
         }
     }
 	
@@ -106,7 +116,25 @@ public class ParticlePooler : Pooler {
 
         return null;
     }
+    public GameObject GetPooledDeadEnemyParticle()
+    {
+        for (int i = 0; i < pooledDeadEnemy.Count; i++)
+        {
+            if (!pooledDeadEnemy[i].activeInHierarchy)
+            {
+                return pooledDeadEnemy[i];
+            }
+        }
+        if (willGrow)
+        {
+            GameObject obj = (GameObject)Instantiate(deadEnemyParticle);
+            obj.transform.parent = current.transform;
+            pooledDeadEnemy.Add(obj);
+            return obj;
+        }
 
+        return null;
+    }
     public override void RemoveElement(Transform item)
     {
         base.RemoveElement(item);
