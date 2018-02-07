@@ -55,40 +55,48 @@ namespace SIS
                     ShowMessage("Your score will be double!!!");
                     DBManager.IncreasePurchase("shop_item_00", 1);
                     Rad_SaveManager.profile.doubleScore = true;
+                    AnalyticsManager.Instance.Item_Bought_Event("Double Score");
                     break;
                 case "shop_item_01":
                     DBManager.IncreasePurchase("shop_item_01", 1);
                     ShowMessage("Now you have an extra life in combat!");
                     Rad_SaveManager.profile.extraLife = true;
+                    AnalyticsManager.Instance.Item_Bought_Event("Extra Life");
                     break;
                 case "shop_item_02":
                     DBManager.IncreasePurchase("shop_item_02", 1);
                     Rad_SaveManager.profile.noAds = true;
                     ShowMessage("No more ads!");
+                    AnalyticsManager.Instance.Item_Bought_Event("No ads");
                     break;
                 case "shop_item_03":
                     DBManager.IncreasePurchase("shop_item_03", 1);
                     ShowMessage("Eternal gratitude...now! Thx");
+                    AnalyticsManager.Instance.Item_Bought_Event("Eternal Gratitude");
                     break;
                 case "shop_item_04":
                     //DBManager.IncreasePurchase("shop_item_04", 1);
                     Rad_SaveManager.profile.tokens++;
-                    ShowMessage("1 Chest Purchased !");
+                    ShowMessage("1 Gem Purchased !");
+                    AnalyticsManager.Instance.Item_Bought_Event("1 Gem");
                     break;
                 case "shop_item_05":
                     //DBManager.IncreasePurchase("shop_item_05", 1);
                     Rad_SaveManager.profile.tokens += 5;
-                    ShowMessage("5 Chest Purchased !");
+                    ShowMessage("5 Gems Purchased !");
+                    AnalyticsManager.Instance.Item_Bought_Event("5 Gems");
                     break;
                 case "shop_item_06":
                     // DBManager.IncreasePurchase("shop_item_06", 1);
                     Rad_SaveManager.profile.tokens += 10;
-                    ShowMessage("10 Chest Purchased !");
+                    AnalyticsManager.Instance.Item_Bought_Event("10 Gems");
+                    ShowMessage("10 Gems Purchased !");
                     break;
                 case "shop_item_07":
                     //DBManager.IncreasePurchase("shop_item_07", 1);
                     Rad_SaveManager.profile.tokens += 20;
-                    ShowMessage("20 Chest Purchased !");
+                    AnalyticsManager.Instance.Item_Bought_Event("20 Gems");
+                    ShowMessage("20 Gems Purchased !");
                     break;
             }
             Rad_SaveManager.SaveData();
