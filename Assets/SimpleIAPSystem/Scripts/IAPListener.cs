@@ -76,25 +76,25 @@ namespace SIS
                     break;
                 case "shop_item_04":
                     //DBManager.IncreasePurchase("shop_item_04", 1);
-                    Rad_SaveManager.profile.tokens++;
+                    Rad_SaveManager.profile.gems++;
                     ShowMessage("1 Gem Purchased !");
                     AnalyticsManager.Instance.Item_Bought_Event("1 Gem");
                     break;
                 case "shop_item_05":
                     //DBManager.IncreasePurchase("shop_item_05", 1);
-                    Rad_SaveManager.profile.tokens += 5;
+                    Rad_SaveManager.profile.gems += 5;
                     ShowMessage("5 Gems Purchased !");
                     AnalyticsManager.Instance.Item_Bought_Event("5 Gems");
                     break;
                 case "shop_item_06":
                     // DBManager.IncreasePurchase("shop_item_06", 1);
-                    Rad_SaveManager.profile.tokens += 10;
+                    Rad_SaveManager.profile.gems += 10;
                     AnalyticsManager.Instance.Item_Bought_Event("10 Gems");
                     ShowMessage("10 Gems Purchased !");
                     break;
                 case "shop_item_07":
                     //DBManager.IncreasePurchase("shop_item_07", 1);
-                    Rad_SaveManager.profile.tokens += 20;
+                    Rad_SaveManager.profile.gems += 20;
                     AnalyticsManager.Instance.Item_Bought_Event("20 Gems");
                     ShowMessage("20 Gems Purchased !");
                     break;

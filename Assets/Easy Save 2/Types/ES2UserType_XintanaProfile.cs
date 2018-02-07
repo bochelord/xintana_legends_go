@@ -12,7 +12,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		writer.Write(data.gameVersion);
 		writer.Write(data.profileID);
 		writer.Write(data.highscore);
-		writer.Write(data.tokens);
+		writer.Write(data.gems);
 		writer.Write(data.timesKilledByZazuc);
 		writer.Write(data.timesKilledByMakula);
 		writer.Write(data.timesKilledByKogi);
@@ -24,6 +24,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		writer.Write(data.noAds);
 		writer.Write(data.doubleScore);
 		writer.Write(data.timeStamp);
+		writer.Write(data.sharedScoreTimes);
 
 	}
 	
@@ -41,7 +42,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		data.gameVersion = reader.Read<System.String>();
 		data.profileID = reader.Read<System.Int32>();
 		data.highscore = reader.Read<System.Int32>();
-		data.tokens = reader.Read<System.Int32>();
+		data.gems = reader.Read<System.Int32>();
 		data.timesKilledByZazuc = reader.Read<System.Int32>();
 		data.timesKilledByMakula = reader.Read<System.Int32>();
 		data.timesKilledByKogi = reader.Read<System.Int32>();
@@ -53,6 +54,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		data.noAds = reader.Read<System.Boolean>();
 		data.doubleScore = reader.Read<System.Boolean>();
 		data.timeStamp = reader.Read<System.DateTime>();
+		data.sharedScoreTimes = reader.Read<System.Int32>();
 
 	}
 	

@@ -74,7 +74,7 @@ public class Rad_Chest : MonoBehaviour {
         else if (type == chestType.gems)
         {
             AnalyticsManager.Instance.ChestPrice_Event("Gems", amount);
-            Rad_SaveManager.profile.tokens += amount;
+            Rad_SaveManager.profile.gems += amount;
             _chestManager.nothingImage.SetActive(false);
             _chestManager.gemsImage.SetActive(true);
             _chestManager.coinsImage.SetActive(false);

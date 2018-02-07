@@ -19,7 +19,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject doublePricePanel;
     public GameObject roulettePanel;
     public GameObject pricePanel;
-    public GameObject noTokensPanel;
+    public GameObject noGemsPanel;
     [Header("PlaceHolders")]
     public Transform midScreen;
     public Transform gemPosition;
@@ -138,7 +138,7 @@ public class Rad_GuiManager : MonoBehaviour {
         }
         if (rouletteOn)
         {
-            gemsTextRoulette.text = Rad_SaveManager.profile.tokens.ToString();
+            gemsTextRoulette.text = Rad_SaveManager.profile.gems.ToString();
         }
         if (_doublePrice && _chestManager.priceType == chestType.coins)
         {
@@ -150,7 +150,7 @@ public class Rad_GuiManager : MonoBehaviour {
         }
         if (_mainMenu)
         {
-            gemsText.text = Rad_SaveManager.profile.tokens.ToString();
+            gemsText.text = Rad_SaveManager.profile.gems.ToString();
         }
 
         if(scoreText && _updateScore)
@@ -410,7 +410,7 @@ public class Rad_GuiManager : MonoBehaviour {
             if (_pWorldReached > 1)
             {
                 SpawnGem();
-                Rad_SaveManager.profile.tokens++;
+                Rad_SaveManager.profile.gems++;
                 Rad_SaveManager.SaveData();
             }
         });
@@ -535,7 +535,7 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         backButton.enabled = false;
         rouletteOn = true;
-        if (Rad_SaveManager.profile.tokens > 0)
+        if (Rad_SaveManager.profile.gems > 0)
         {
             roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
             {
@@ -556,28 +556,28 @@ public class Rad_GuiManager : MonoBehaviour {
         }
         else
         {
-            ShowNoTokensCoroutine(1.5f);
+            ShowNoGemsCoroutine(1.5f);
         }
 
     }
-    public void ShowNoTokensCoroutine(float time)
+    public void ShowNoGemsCoroutine(float time)
     {
-        StartCoroutine(ShowNoTokensPanelCoroutine(time));
+        StartCoroutine(ShowNoGemsPanelCoroutine(time));
     }
-    IEnumerator ShowNoTokensPanelCoroutine(float time)
+    IEnumerator ShowNoGemsPanelCoroutine(float time)
     {
-        ShowNoTokensPanel();
+        ShowNoGemsPanel();
         yield return new WaitForSeconds(time);
-        HideNoTokensPanel();
+        HideNoGemsPanel();
     }
 
-    private void ShowNoTokensPanel()
+    private void ShowNoGemsPanel()
     {
-        noTokensPanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+        noGemsPanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
     }
-    private void HideNoTokensPanel()
+    private void HideNoGemsPanel()
     {
-        noTokensPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+        noGemsPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
     }
     public void HideRoulette()
     {

@@ -38,9 +38,9 @@ public class ChestRoulette : MonoBehaviour {
     {
         _guiManager.HidePricePanel();
         _guiManager.StopDoublePriceCoroutine();
-        if (Rad_SaveManager.profile.tokens > 0)
+        if (Rad_SaveManager.profile.gems > 0)
         {
-            Rad_SaveManager.profile.tokens--;
+            Rad_SaveManager.profile.gems--;
             for (int i = 0; i < 3; i++)
             {
                 initialPosition.Add(chests[i].transform.position);
@@ -53,7 +53,7 @@ public class ChestRoulette : MonoBehaviour {
         }
         else
         {
-            _guiManager.ShowNoTokensCoroutine(1.5f);
+            _guiManager.ShowNoGemsCoroutine(1.5f);
         }
     }
 
@@ -111,7 +111,7 @@ public class ChestRoulette : MonoBehaviour {
         }
         else if (priceType == chestType.gems)
         {
-            Rad_SaveManager.profile.tokens += priceAmount;
+            Rad_SaveManager.profile.gems += priceAmount;
         }
 
         Rad_SaveManager.SaveData();
