@@ -38,7 +38,7 @@ public class XintanaProfile : MonoBehaviour {
 #endif
         profile.profileID = id;
         profile.highscore = 0;
-        profile.gems = 0;
+        profile.gems = 1;
         profile.adsViewed = 0;
         profile.adsSkipped = 0;
         profile.audioEnabled = true;
