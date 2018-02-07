@@ -66,7 +66,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text gemsTextRoulette;
     [Header("Price Panel")]
     public Text priceText;
-    
+    public GameObject rerollButton;
 
     private AnalyticsManager _analyticsManager;
     private AdsManager _adsManager;
@@ -605,7 +605,14 @@ public class Rad_GuiManager : MonoBehaviour {
 
   IEnumerator ShowPricePanelCoroutine(float time)
     {
-
+        if(Rad_SaveManager.profile.gems > 0)
+        {
+            rerollButton.SetActive(true);
+        }
+        else
+        {
+            rerollButton.SetActive(false);
+        }
         yield return new WaitForSeconds(time);
         _pricePanelOn = true;
         pricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
