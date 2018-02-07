@@ -70,6 +70,26 @@ namespace SIS
                     DBManager.IncreasePurchase("shop_item_03", 1);
                     ShowMessage("Eternal gratitude...now! Thx");
                     break;
+                case "shop_item_04":
+                    //DBManager.IncreasePurchase("shop_item_04", 1);
+                    Rad_SaveManager.profile.tokens++;
+                    ShowMessage("1 Chest Purchased !");
+                    break;
+                case "shop_item_05":
+                    //DBManager.IncreasePurchase("shop_item_05", 1);
+                    Rad_SaveManager.profile.tokens += 5;
+                    ShowMessage("5 Chest Purchased !");
+                    break;
+                case "shop_item_06":
+                    // DBManager.IncreasePurchase("shop_item_06", 1);
+                    Rad_SaveManager.profile.tokens += 10;
+                    ShowMessage("10 Chest Purchased !");
+                    break;
+                case "shop_item_07":
+                    //DBManager.IncreasePurchase("shop_item_07", 1);
+                    Rad_SaveManager.profile.tokens += 20;
+                    ShowMessage("20 Chest Purchased !");
+                    break;
             }
             Rad_SaveManager.SaveData();
         }

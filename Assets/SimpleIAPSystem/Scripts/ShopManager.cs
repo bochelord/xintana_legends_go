@@ -227,7 +227,16 @@ namespace SIS
             if (obj == null || item == null || item.productId != id) return;
 
             bool isSelected = DBManager.GetSelected(id);
-            bool isPurchased = DBManager.GetPurchase(id) > 0;
+            bool isPurchased;
+            if (id != "shop_item_02" && id != "shop_item_03")
+            {
+                isPurchased = false;
+
+            }else
+            {
+                isPurchased = DBManager.GetPurchase(id) > 0;
+            }
+
 
 			//double check that selected items are actually owned
             //if not, correct the entry by setting it to deselected
