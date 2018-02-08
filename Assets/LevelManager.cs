@@ -170,7 +170,7 @@ public class LevelManager : MonoBehaviour {
         AudioManager.Instance.Play_XintanaHit();
 
 
-        if(playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_x2") <= 0)
+        if(playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") <= 0)
         {
             
             //Continue or go to main menu
@@ -192,12 +192,12 @@ public class LevelManager : MonoBehaviour {
                 adManager.adViewed = false; 
             }
         }
-        else if (playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_x2") > 0)
+        else if (playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") > 0)
         {
             combinationManager.SetGameOn(false);
             //SIS.DBManager.IncreasePurchase("shop_item_01", -1);
-            SIS.DBManager.RemovePurchase("si_x2");
-            SIS.DBManager.RemovePurchaseUI("si_x2");
+            SIS.DBManager.RemovePurchase("si_1up");
+            SIS.DBManager.RemovePurchaseUI("si_1up");
             Rad_SaveManager.profile.extraLife = false;
             _extraLifePurchased = false;
             combinationManager.MoveButtonsOut();

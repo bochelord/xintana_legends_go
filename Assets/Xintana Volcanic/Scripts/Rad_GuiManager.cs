@@ -216,7 +216,7 @@ public class Rad_GuiManager : MonoBehaviour {
             doubleScoreIcon.SetActive(false);
         }
 
-        if (SIS.DBManager.GetPurchase("si_x2") > 0)
+        if (SIS.DBManager.GetPurchase("si_1up") > 0)
         {
             extraLifeIcon.SetActive(true);
         }
