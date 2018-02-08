@@ -207,7 +207,7 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void UpdateIcons()
     {
-        if (SIS.DBManager.GetPurchase("shop_item_00") > 0)
+        if (SIS.DBManager.GetPurchase("si_x2") > 0)
         {
             doubleScoreIcon.SetActive(true);
         }
@@ -216,7 +216,7 @@ public class Rad_GuiManager : MonoBehaviour {
             doubleScoreIcon.SetActive(false);
         }
 
-        if (SIS.DBManager.GetPurchase("shop_item_01") > 0)
+        if (SIS.DBManager.GetPurchase("si_x2") > 0)
         {
             extraLifeIcon.SetActive(true);
         }
@@ -382,13 +382,13 @@ public class Rad_GuiManager : MonoBehaviour {
         yield return new WaitForSeconds(1);
         DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 1f).OnComplete(()=> 
         {
-            if (SIS.DBManager.GetPurchase("shop_item_00") > 0)
+            if (SIS.DBManager.GetPurchase("si_x2") > 0)
             {
                 x2Text.SetActive(true);
                 x2Text.transform.DOShakeScale(2, 0.5f, 2, 25, true);
                 DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore() * 2, 1f);
-                SIS.DBManager.RemovePurchase("shop_item_00");
-                SIS.DBManager.RemovePurchaseUI("shop_item_00");
+                SIS.DBManager.RemovePurchase("si_x2");
+                SIS.DBManager.RemovePurchaseUI("si_x2");
                 Rad_SaveManager.profile.doubleScore = false;
                 _levelManager.SetPlayerScore((int)_levelManager.GetPlayerScore() * 2);
             }

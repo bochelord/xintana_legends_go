@@ -228,7 +228,7 @@ namespace SIS
 
             bool isSelected = DBManager.GetSelected(id);
             bool isPurchased;
-            if (id != "shop_item_02" && id != "shop_item_03")
+            if (id != "si_noAds" && id != "si_supportDevs")
             {
                 isPurchased = false;
 

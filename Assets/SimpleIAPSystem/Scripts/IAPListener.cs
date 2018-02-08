@@ -24,7 +24,6 @@ namespace SIS
             IAPManager.purchaseFailedEvent += HandleFailedPurchase;
             ShopManager.itemSelectedEvent += HandleSelectedItem;
             ShopManager.itemDeselectedEvent += HandleDeselectedItem;
-
         }
 
 
@@ -50,53 +49,54 @@ namespace SIS
             switch (id)
             {
                 //section for in app purchases
-                case "shop_item_00":
+                case "si_x2":
                     //the user bought the item "coins", show appropriate feedback
                     ShowMessage("Your score will be double!!!");
-                    DBManager.IncreasePurchase("shop_item_00", 1);
+                    DBManager.IncreasePurchase("si_x2", 1);
                     Rad_SaveManager.profile.doubleScore = true;
                     AnalyticsManager.Instance.Item_Bought_Event("Double Score");
                     break;
-                case "shop_item_01":
-                    DBManager.IncreasePurchase("shop_item_01", 1);
+                case "si_1up":
+                    DBManager.IncreasePurchase("si_1up", 1);
                     ShowMessage("Now you have an extra life in combat!");
                     Rad_SaveManager.profile.extraLife = true;
                     AnalyticsManager.Instance.Item_Bought_Event("Extra Life");
                     break;
-                case "shop_item_02":
-                    DBManager.IncreasePurchase("shop_item_02", 1);
+                case "si_noAds":
+                    DBManager.IncreasePurchase("si_noAds", 1);
                     Rad_SaveManager.profile.noAds = true;
                     ShowMessage("No more ads!");
                     AnalyticsManager.Instance.Item_Bought_Event("No ads");
                     break;
-                case "shop_item_03":
-                    DBManager.IncreasePurchase("shop_item_03", 1);
-                    ShowMessage("Eternal gratitude...now! Thx");
-                    AnalyticsManager.Instance.Item_Bought_Event("Eternal Gratitude");
-                    break;
-                case "shop_item_04":
+
+                case "si_1gem":
                     //DBManager.IncreasePurchase("shop_item_04", 1);
                     Rad_SaveManager.profile.gems++;
                     ShowMessage("1 Gem Purchased !");
                     AnalyticsManager.Instance.Item_Bought_Event("1 Gem");
                     break;
-                case "shop_item_05":
+                case "si_5gems":
                     //DBManager.IncreasePurchase("shop_item_05", 1);
                     Rad_SaveManager.profile.gems += 5;
                     ShowMessage("5 Gems Purchased !");
                     AnalyticsManager.Instance.Item_Bought_Event("5 Gems");
                     break;
-                case "shop_item_06":
+                case "si_10gems":
                     // DBManager.IncreasePurchase("shop_item_06", 1);
                     Rad_SaveManager.profile.gems += 10;
                     AnalyticsManager.Instance.Item_Bought_Event("10 Gems");
                     ShowMessage("10 Gems Purchased !");
                     break;
-                case "shop_item_07":
+                case "si_20gems":
                     //DBManager.IncreasePurchase("shop_item_07", 1);
                     Rad_SaveManager.profile.gems += 20;
                     AnalyticsManager.Instance.Item_Bought_Event("20 Gems");
                     ShowMessage("20 Gems Purchased !");
+                    break;
+                case "si_supportDevs":
+                    DBManager.IncreasePurchase("si_supportDevs", 1);
+                    ShowMessage("Eternal gratitude...now! Thx");
+                    AnalyticsManager.Instance.Item_Bought_Event("Eternal Gratitude");
                     break;
             }
             Rad_SaveManager.SaveData();
