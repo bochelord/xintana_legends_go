@@ -62,8 +62,8 @@ namespace SIS
                     Rad_SaveManager.profile.extraLife = true;
                     AnalyticsManager.Instance.Item_Bought_Event("Extra Life");
                     break;
-                case "si_noAds":
-                    DBManager.IncreasePurchase("si_noAds", 1);
+                case "si_noads":
+                    DBManager.IncreasePurchase("si_noads", 1);
                     Rad_SaveManager.profile.noAds = true;
                     ShowMessage("No more ads!");
                     AnalyticsManager.Instance.Item_Bought_Event("No ads");
@@ -93,8 +93,8 @@ namespace SIS
                     AnalyticsManager.Instance.Item_Bought_Event("20 Gems");
                     ShowMessage("20 Gems Purchased !");
                     break;
-                case "si_supportDevs":
-                    DBManager.IncreasePurchase("si_supportDevs", 1);
+                case "si_supportdevs":
+                    DBManager.IncreasePurchase("si_supportdevs", 1);
                     ShowMessage("Eternal gratitude...now! Thx");
                     AnalyticsManager.Instance.Item_Bought_Event("Eternal Gratitude");
                     break;
