@@ -49,7 +49,7 @@ public class NativeShareScript : MonoBehaviour
         if (!Application.isEditor)
         {
 #if UNITY_ANDROID
-            if (GetSDKLevel() < 24) {
+            if (GetSDKLevel() < 26) {
                 AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
                 AndroidJavaObject intentObject = new AndroidJavaObject("android.content.Intent");
                 intentObject.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
@@ -85,10 +85,15 @@ public class NativeShareScript : MonoBehaviour
     }
 
     public int GetSDKLevel() {
-        var clazz = AndroidJNI.FindClass("android.os.Build$VERSION");
-        var fieldID = AndroidJNI.GetStaticFieldID(clazz, "SDK_INT", "I");
-        var sdkLevel = AndroidJNI.GetStaticIntField(clazz, fieldID);
-        return sdkLevel;
+        //var clazz = AndroidJNI.FindClass("android.os.Build$VERSION");
+        //var fieldID = AndroidJNI.GetStaticFieldID(clazz, "SDK_INT", "I");
+        //var sdkLevel = AndroidJNI.GetStaticIntField(clazz, fieldID);
+        //Debug.Log(sdkLevel);
+        //return sdkLevel;
+        using (var version = new AndroidJavaClass("android.os.Build$VERSION"))
+        {
+            return version.GetStatic<int>("SDK_INT");
+        }
     }
 
 #if UNITY_ANDROID
