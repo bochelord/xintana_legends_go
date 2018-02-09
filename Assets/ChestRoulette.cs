@@ -37,23 +37,22 @@ public class ChestRoulette : MonoBehaviour {
 
     public void RestartChestGenerations()
     {
-        _guiManager.HidePricePanel();
-        _guiManager.StopDoublePriceCoroutine();
+
         if (Rad_SaveManager.profile.gems > 0)
         {
-            chestContainer.DORotate(new Vector3(0, 0, 1080), 2, RotateMode.LocalAxisAdd).OnComplete(()=> 
+            _guiManager.HidePricePanel();
+            _guiManager.StopDoublePriceCoroutine();
+            Rad_SaveManager.profile.gems--;
+            for (int i = 0; i < 3; i++)
             {
-                Rad_SaveManager.profile.gems--;
-                for (int i = 0; i < 3; i++)
-                {
-                    initialPosition.Add(chests[i].transform.position);
-                }
+                initialPosition.Add(chests[i].transform.position);
+            }
 
-                GeneratePrizes();
-                RandomChestPositions();
-                canOpen = true;
-                _guiManager.backButton.enabled = false;
-            });
+            GeneratePrizes();
+            RandomChestPositions();
+            canOpen = true;
+            _guiManager.backButton.enabled = false;
+
 
         }
         else
