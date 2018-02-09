@@ -9,6 +9,7 @@ public class ChestRoulette : MonoBehaviour {
 
     public Sprite[] available_chest_contents;
     public Rad_Chest[] chests;
+    public Transform chestContainer;
     public int numChests;
 
     [Header("Price Panel")]
@@ -40,16 +41,20 @@ public class ChestRoulette : MonoBehaviour {
         _guiManager.StopDoublePriceCoroutine();
         if (Rad_SaveManager.profile.gems > 0)
         {
-            Rad_SaveManager.profile.gems--;
-            for (int i = 0; i < 3; i++)
+            chestContainer.DORotate(new Vector3(0, 0, 1080), 2, RotateMode.LocalAxisAdd).OnComplete(()=> 
             {
-                initialPosition.Add(chests[i].transform.position);
-            }
+                Rad_SaveManager.profile.gems--;
+                for (int i = 0; i < 3; i++)
+                {
+                    initialPosition.Add(chests[i].transform.position);
+                }
 
-            GeneratePrizes();
-            RandomChestPositions();
-            canOpen = true;
-            _guiManager.backButton.enabled = false;
+                GeneratePrizes();
+                RandomChestPositions();
+                canOpen = true;
+                _guiManager.backButton.enabled = false;
+            });
+
         }
         else
         {
