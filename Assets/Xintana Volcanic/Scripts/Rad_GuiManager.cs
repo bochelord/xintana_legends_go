@@ -43,12 +43,10 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject gem;
     public GameObject HighScoreFxPrefab;
     [Header("Share Panel")]
-    public Text kogiAmount;
-    public Text zazuAmount;
-    public Text makulaAmount;
     public Text scorePlayer;
     public Text worldReached;
     public Text fightsNumber;
+    public Image screenshot;
     [Header("ViewAdsPanel")]
     public Text timeCountdown;
     public Text timeCountDownContinuePanel;
@@ -73,6 +71,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private SIS.ShopManager _shopManager;
     private LevelManager _levelManager;
     private ChestRoulette _chestManager;
+    private ScreenShot _screenshot;
 
     private float _timerCountdown = 5f;
     private bool timerCountdownAdOn = false;
@@ -102,6 +101,8 @@ public class Rad_GuiManager : MonoBehaviour {
         _shopManager = FindObjectOfType<SIS.ShopManager>();
         _adsManager = FindObjectOfType<AdsManager>();
         _chestManager = FindObjectOfType<ChestRoulette>();
+        _screenshot = FindObjectOfType<ScreenShot>();
+
     }
 
     private void Update()
@@ -300,13 +301,12 @@ public class Rad_GuiManager : MonoBehaviour {
     /// </summary>
     public void FillSharePanel()
     {
-        kogiAmount.text = _levelManager.GetKogiKilled().ToString();
-        zazuAmount.text = _levelManager.GetZazuKilled().ToString();
-        makulaAmount.text = _levelManager.GetMakulaKilled().ToString();
         int _tempScore = (int)_levelManager.GetPlayerScore();
         scorePlayer.text = _tempScore.ToString();
         worldReached.text = "World " + _levelManager.GetCurrentWorldNumber().ToString();
         fightsNumber.text = (_levelManager.GetTotalEnemyKilled()+1).ToString() + " Fights"; // This is plus one cause the current fight that player lost also counts although he didn't kill the enemy...
+        screenshot.sprite = Sprite.Create(_screenshot.tex, new Rect(0.0f, 0.0f, _screenshot.tex.width, _screenshot.tex.height), new Vector2(0.5f, 0.5f), 100.0f);
+        screenshot.preserveAspect = true;
     }
 
     /// <summary>
