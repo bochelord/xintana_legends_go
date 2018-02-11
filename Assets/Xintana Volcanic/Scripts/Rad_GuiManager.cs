@@ -304,7 +304,7 @@ public class Rad_GuiManager : MonoBehaviour {
         int _tempScore = (int)_levelManager.GetPlayerScore();
         scorePlayer.text = _tempScore.ToString();
         worldReached.text = "World " + _levelManager.GetCurrentWorldNumber().ToString();
-        fightsNumber.text = (_levelManager.GetTotalEnemyKilled()+1).ToString() + " Fights"; // This is plus one cause the current fight that player lost also counts although he didn't kill the enemy...
+        fightsNumber.text = "Fight " + (_levelManager.GetTotalEnemyKilled()+1).ToString() ; // This is plus one cause the current fight that player lost also counts although he didn't kill the enemy...
         screenshot.sprite = Sprite.Create(_screenshot.tex, new Rect(0.0f, 0.0f, _screenshot.tex.width, _screenshot.tex.height), new Vector2(0.5f, 0.5f), 100.0f);
         screenshot.preserveAspect = true;
     }
