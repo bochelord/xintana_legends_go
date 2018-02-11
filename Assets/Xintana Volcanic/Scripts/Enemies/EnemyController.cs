@@ -135,33 +135,72 @@ public class EnemyController : MonoBehaviour {
 
     public void IdleAnimation()
     {
-        animator.SetTrigger("idle_1");
+        switch (type)
+        {
+            case EnemyType.makula:
+                //animator.SetFloat("AnimState", 0);
+                animator.SetTrigger("idle_1");
+                break;
+            default:
+                animator.SetTrigger("idle_1");
+                break;
+
+        }
+
+        
     }
 
     public void AttackAnimation()
     {
 
-        if (RadUtils.d100() <= 49)
+        switch (type)
         {
-            animator.SetTrigger("skill_1");
-        } 
-        else
-        {
-            animator.SetTrigger("skill_2");
+            case EnemyType.makula:
+                //animator.SetFloat("AnimState", 1);
+                animator.SetTrigger("skill_1");
+                print("MAKULA muevete mamona,....");
+                break;
+            default:
+                if (RadUtils.d100() <= 49)
+                {
+                    animator.SetTrigger("skill_1");
+                } else
+                {
+                    animator.SetTrigger("skill_2");
+                }
+                break;
+
         }
+
+
+
+       
 
         
     }
 
     public void DamagedAnimation()
     {
-        if (RadUtils.d100() <= 49)
+        switch (type)
         {
-            animator.SetTrigger("hit_1");
-        } else
-        {
-            animator.SetTrigger("hit_2");
+            case EnemyType.makula:
+                //animator.SetFloat("AnimState", 1);
+                animator.SetTrigger("hit_1");
+                print("MAKULA muevete mamona,....");
+                break;
+            default:
+                if (RadUtils.d100() <= 49)
+                {
+                    animator.SetTrigger("hit_1");
+                } else
+                {
+                    animator.SetTrigger("hit_2");
+                }
+                break;
+
         }
+
+
     }
 
     public void DeadAnimation()
