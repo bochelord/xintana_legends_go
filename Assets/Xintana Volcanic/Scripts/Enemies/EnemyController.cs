@@ -111,6 +111,7 @@ public class EnemyController : MonoBehaviour {
         levelManager.AddEnemyCount();
         levelManager.AddPlayerScoreAndGetNewEnemy(this.type, level);
         levelManager.enemyKilled = true;
+        levelManager.screenshot.TakeDeathScreenshot();
         //levelManager.GetNewEnemy(2.5f);
         DeadAnimation();
     }

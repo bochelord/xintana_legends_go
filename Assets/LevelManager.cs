@@ -53,7 +53,7 @@ public class LevelManager : MonoBehaviour {
     private int numberOfRounds = 0;
     private float playerScoreUI;
 
-    private ScreenShot _screenshot;
+    public ScreenShot screenshot;
     private PlayerManager playerManager;
     private CombinationManager combinationManager;
     private Rad_GuiManager _guiManager;
@@ -69,7 +69,7 @@ public class LevelManager : MonoBehaviour {
 
     void Awake()
     {
-        _screenshot = FindObjectOfType<ScreenShot>();
+        screenshot = FindObjectOfType<ScreenShot>();
         combinationManager = FindObjectOfType<CombinationManager>();
         playerManager = player.GetComponent<PlayerManager>();
         _guiManager = FindObjectOfType<Rad_GuiManager>();
@@ -174,7 +174,10 @@ public class LevelManager : MonoBehaviour {
 
         if(playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") <= 0)
         {
-            _screenshot.TakeDeathScreenshot();
+            screenshot.TakeDeathScreenshot();
+
+            //screenshot.GetCombatScreenshot();
+
             //Continue or go to main menu
             AudioManager.Instance.Play_XintanaDeath();
             player.GetComponent<Animator>().SetInteger("AnimState",4);

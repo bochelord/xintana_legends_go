@@ -46,7 +46,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text scorePlayer;
     public Text worldReached;
     public Text fightsNumber;
-    public Image screenshot;
+    public Image screenshotImage;
     [Header("ViewAdsPanel")]
     public Text timeCountdown;
     public Text timeCountDownContinuePanel;
@@ -305,8 +305,11 @@ public class Rad_GuiManager : MonoBehaviour {
         scorePlayer.text = _tempScore.ToString();
         worldReached.text = "World " + _levelManager.GetCurrentWorldNumber().ToString();
         fightsNumber.text = "Fight " + (_levelManager.GetTotalEnemyKilled()+1).ToString() ; // This is plus one cause the current fight that player lost also counts although he didn't kill the enemy...
-        screenshot.sprite = Sprite.Create(_screenshot.tex, new Rect(0.0f, 0.0f, _screenshot.tex.width, _screenshot.tex.height), new Vector2(0.5f, 0.5f), 100.0f);
-        screenshot.preserveAspect = true;
+
+        screenshotImage.sprite = _screenshot.GetScreenshot();
+
+        //screenshotImage.sprite = Sprite.Create(_screenshot.tex, new Rect(0.0f, 0.0f, _screenshot.tex.width, _screenshot.tex.height), new Vector2(0.5f, 0.5f), 100.0f);
+        screenshotImage.preserveAspect = true;
     }
 
     /// <summary>
