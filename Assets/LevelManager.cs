@@ -27,6 +27,7 @@ public class LevelManager : MonoBehaviour {
     public EnemiesPooler enemyPooler;
     public Transform enemyContainer;
     public bool enemyKilled = false;
+    public GameObject GIFRecordingprefab;
 
     [Header("Level Control Values")]
     [Tooltip("This is measure in number of fights")]
@@ -240,6 +241,14 @@ public class LevelManager : MonoBehaviour {
         float timeRemaining = combinationManager.timerSlider.value;
         int _enemyPoints = 0;
         //Debug.Log("MECAGO EN TODA TU PUTA MADRE");
+
+
+        // TODO -- TODO
+        // GIF recording is not working cause it corrupts the HUD GUI at least on the Editor
+        //
+        //We start the GIF recording
+        //Instantiate(GIFRecordingprefab);
+
         switch (typein)
         {
             case EnemyType.kogi:
