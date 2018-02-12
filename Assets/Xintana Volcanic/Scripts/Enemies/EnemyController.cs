@@ -97,6 +97,9 @@ public class EnemyController : MonoBehaviour {
     public void ApplyDamageToEnemy(float damage_in)
     {
         life = life - damage_in;
+        levelManager.screenshot.TakeDeathScreenshot();
+        //Screenshot added everytime you hit an enemy
+        //levelManager.screenshot.TakeDeathScreenshot();
 
         if (life < 0)
         {
@@ -111,7 +114,7 @@ public class EnemyController : MonoBehaviour {
         levelManager.AddEnemyCount();
         levelManager.AddPlayerScoreAndGetNewEnemy(this.type, level);
         levelManager.enemyKilled = true;
-        levelManager.screenshot.TakeDeathScreenshot();
+        
         //levelManager.GetNewEnemy(2.5f);
         DeadAnimation();
     }
