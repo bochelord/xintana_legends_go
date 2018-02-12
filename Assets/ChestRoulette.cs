@@ -11,13 +11,14 @@ public class ChestRoulette : MonoBehaviour {
     public Rad_Chest[] chests;
     public Transform chestContainer;
     public int numChests;
+    public bool chestRotate = false;
 
     [Header("Price Panel")]
-    public int priceAmount;
+    public int prizeAmount;
     public GameObject coinsImage;
     public GameObject gemsImage;
     public GameObject nothingImage;
-    public chestType priceType;
+    public chestType prizeType;
     [Header("Flash")]
     public Image flashImage;
 
@@ -25,7 +26,7 @@ public class ChestRoulette : MonoBehaviour {
     private ParticlePooler _pooler;
     private List<Vector2> initialPosition = new List<Vector2>();
     private bool canOpen;
-
+    
 
     // Use this for initialization
     void Start ()
@@ -37,23 +38,15 @@ public class ChestRoulette : MonoBehaviour {
 
     public void RestartChestGenerations()
     {
+        for (int i = 0; i < 3; i++)
+        {
+            initialPosition.Add(chests[i].transform.position);
+        }
 
         if (Rad_SaveManager.profile.gems > 0)
         {
-            _guiManager.HidePricePanel();
-            _guiManager.StopDoublePriceCoroutine();
-            Rad_SaveManager.profile.gems--;
-            for (int i = 0; i < 3; i++)
-            {
-                initialPosition.Add(chests[i].transform.position);
-            }
-
             GeneratePrizes();
-            RandomChestPositions();
-            canOpen = true;
-            _guiManager.backButton.enabled = false;
-
-
+            StartCoroutine(StartChestRotation(2));
         }
         else
         {
@@ -61,12 +54,53 @@ public class ChestRoulette : MonoBehaviour {
         }
     }
 
+    IEnumerator StartChestRotation(float time)
+    {
+        _guiManager.HidePricePanel();
+        _guiManager.StopDoublePriceCoroutine();
+        ShowChestPrizes();
+        yield return new WaitForSeconds(time);
+        CloseChests();
+        //RandomChestPositions();
+        yield return new WaitForSeconds(1);
+        int _randomTime = Random.Range(3, 6);
+        chestRotate = true;
+        Rad_SaveManager.profile.gems--;
+        yield return new WaitForSeconds(_randomTime);
+        chestRotate = false;
+        ResetRotationChest();
+        canOpen = true;
+        _guiManager.backButton.enabled = false;
+
+    }
     public void Flash()
     {
         flashImage.DOFade(1, 0.1f).OnComplete(() => 
         {
             flashImage.DOFade(0, 0.1f);
         });
+    }
+    private void ShowChestPrizes()
+    {
+        for (int i = 0; i < chests.Length; i++)
+        {
+            chests[i].PreShowPRize();
+        }
+    }
+    public void CloseChests()
+    {
+        for (int i = 0; i < chests.Length; i++)
+        {
+            chests[i].CloseChest();
+        }
+    }
+    private void ResetRotationChest()
+    {
+        for (int i = 0; i < chests.Length; i++)
+        {
+            chests[i].ResetChestRotation();
+        }
+
     }
     /// <summary>
     /// Function that generate the Prizes for all the chests that are included on the list (in principle three)
@@ -109,13 +143,13 @@ public class ChestRoulette : MonoBehaviour {
     }
     public void UpdateDoublePrice()
     {
-        if (priceType == chestType.coins)
+        if (prizeType == chestType.coins)
         {
-            SIS.DBManager.IncreaseFunds("coins", priceAmount);
+            SIS.DBManager.IncreaseFunds("coins", prizeAmount);
         }
-        else if (priceType == chestType.gems)
+        else if (prizeType == chestType.gems)
         {
-            Rad_SaveManager.profile.gems += priceAmount;
+            Rad_SaveManager.profile.gems += prizeAmount;
         }
 
         Rad_SaveManager.SaveData();
@@ -142,7 +176,6 @@ public class ChestRoulette : MonoBehaviour {
             chest.amount = 50;
         }
     }
-
     private void GeneratePriceAmountGems(Rad_Chest chest)
     {
         float diceroll = 0;
@@ -159,14 +192,6 @@ public class ChestRoulette : MonoBehaviour {
         else if (diceroll >= 20)
         {
             chest.amount = 1;
-        }
-    }
-
-    public void CloseChests()
-    {
-        for (int i = 0; i < chests.Length; i++)
-        {
-            chests[i].CloseChest();
         }
     }
 

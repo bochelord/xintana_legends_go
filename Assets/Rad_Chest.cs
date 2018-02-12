@@ -12,16 +12,27 @@ public class Rad_Chest : MonoBehaviour {
     public GameObject gems;
     public chestType type;
     public int amount;
+    public Transform midPoint;
+    public float rotationSpeed;
 
     private ChestRoulette _chestManager;
     private Rad_GuiManager _guiManager;
     private ParticlePooler _pooler;
+    private bool _rotate = false;
     private void Start()
     {
         _pooler = FindObjectOfType<ParticlePooler>();
         _chestManager = FindObjectOfType<ChestRoulette>();
         _guiManager = FindObjectOfType<Rad_GuiManager>();
 
+    }
+    private void Update()
+    {
+        if (_chestManager.chestRotate)
+        {
+            this.transform.RotateAround(midPoint.position, Vector3.forward, rotationSpeed * Time.deltaTime);
+
+        }
     }
     public void OpenChest()
     {
@@ -32,26 +43,33 @@ public class Rad_Chest : MonoBehaviour {
                 chestClosed.SetActive(false);
                 chestOpen.SetActive(true);
                 _chestManager.SetCanOpen(false);
-                _chestManager.priceAmount = amount;
-                _chestManager.priceType = type;
-                UpdatePrice();
-                _guiManager.ShowPricePanel();
-                switch (type)
-                {
-                    case chestType.coins:
-                        _chestManager.SpawnGoldParticleChest(this.transform);
-                        break;
-                    case chestType.gems:
-                        _chestManager.SpawnGemParticleChest(this.transform);
-                        break;
-                    case chestType.empty:
-                        _chestManager.SpawnEmptyParticleChest(this.transform);
-                        break;
-                }
+                _chestManager.prizeAmount = amount;
+                _chestManager.prizeType = type;
+                UpdatePrize();
+                _guiManager.ShowPrizePanel();
             });
         }
     }
+    public void ResetChestRotation()
+    {
+        Debug.Log("rotating>>>>>>>>>>>>>>>>>>");
+        this.transform.DOLocalRotate(new Vector3(0, 0, 0), 0);
+    }
+    public void PreShowPRize()
+    {
+        chestClosed.SetActive(false);
+        chestOpen.SetActive(true);
+        switch (type)
+        {
+            case chestType.coins:
+                gold.SetActive(true);
+                break;
 
+            case chestType.gems:
+                gems.SetActive(true);
+                break;
+        }
+    }
     public void CloseChest()
     {
         chestClosed.SetActive(true);
@@ -60,34 +78,37 @@ public class Rad_Chest : MonoBehaviour {
         gems.SetActive(false);
     }
    
-    private void UpdatePrice()
+    private void UpdatePrize()
     {
-        if (type == chestType.coins)
+        switch (type)
         {
-            SIS.DBManager.IncreaseFunds("coins", amount);
-            _chestManager.nothingImage.SetActive(false);
-            _chestManager.gemsImage.SetActive(false);
-            _chestManager.coinsImage.SetActive(true);
-            AnalyticsManager.Instance.ChestPrice_Event("Coins", amount);
-            gold.SetActive(true);
-        }
-        else if (type == chestType.gems)
-        {
-            AnalyticsManager.Instance.ChestPrice_Event("Gems", amount);
-            Rad_SaveManager.profile.gems += amount;
-            _chestManager.nothingImage.SetActive(false);
-            _chestManager.gemsImage.SetActive(true);
-            _chestManager.coinsImage.SetActive(false);
+            case chestType.coins:
+                SIS.DBManager.IncreaseFunds("coins", amount);
+                _chestManager.nothingImage.SetActive(false);
+                _chestManager.gemsImage.SetActive(false);
+                _chestManager.coinsImage.SetActive(true);
+                AnalyticsManager.Instance.ChestPrice_Event("Coins", amount);
+                _chestManager.SpawnGoldParticleChest(this.transform);
+                gold.SetActive(true);
+                break;
 
-            gems.SetActive(true);
-        }
-        else if (type == chestType.empty)
-        {
-            AnalyticsManager.Instance.ChestPrice_Event("Empty", amount);
-            _chestManager.nothingImage.SetActive(false);
-            _chestManager.gemsImage.SetActive(false);
-            _chestManager.coinsImage.SetActive(false);
+            case chestType.gems:
+                AnalyticsManager.Instance.ChestPrice_Event("Gems", amount);
+                Rad_SaveManager.profile.gems += amount;
+                _chestManager.nothingImage.SetActive(false);
+                _chestManager.gemsImage.SetActive(true);
+                _chestManager.coinsImage.SetActive(false);
+                _chestManager.SpawnGemParticleChest(this.transform);
+                gems.SetActive(true);
+                break;
 
+            case chestType.empty:
+                AnalyticsManager.Instance.ChestPrice_Event("Empty", amount);
+                _chestManager.nothingImage.SetActive(false);
+                _chestManager.gemsImage.SetActive(false);
+                _chestManager.coinsImage.SetActive(false);
+                _chestManager.SpawnEmptyParticleChest(this.transform);
+                break;
         }
         Rad_SaveManager.SaveData();
     }

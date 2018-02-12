@@ -20,6 +20,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject roulettePanel;
     public GameObject pricePanel;
     public GameObject noGemsPanel;
+    public GameObject startRoulettePanel;
     [Header("PlaceHolders")]
     public Transform midScreen;
     public Transform gemPosition;
@@ -63,7 +64,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public Button backButton;
     public Text gemsTextRoulette;
     [Header("Price Panel")]
-    public Text priceText;
+    public Text prizeText;
     public GameObject rerollButton;
 
     private AnalyticsManager _analyticsManager;
@@ -79,12 +80,12 @@ public class Rad_GuiManager : MonoBehaviour {
     private bool _scorePanelOn = false;
     private bool _doubleScorePanelOn = false;
     private bool _pricePanelOn = false;
-    private bool _doublePrice = false;
+    private bool _doublePrize = false;
     private bool _mainMenu = false;
     private bool rouletteOn = false;
     private bool _updateScore = false;
     private int _scorePlayer = 0;
-    private int _pDoublePrice = 0;
+    private int _pDoublePrize = 0;
     private int _pScorePlayer;
     private int _pHighScore;
     private int _pZazuAmount;
@@ -141,13 +142,13 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             gemsTextRoulette.text = Rad_SaveManager.profile.gems.ToString();
         }
-        if (_doublePrice && _chestManager.priceType == chestType.coins)
+        if (_doublePrize && _chestManager.prizeType == chestType.coins)
         {
-            priceText.text = _pDoublePrice.ToString() + " Coins !!";
+            prizeText.text = _pDoublePrize.ToString() + " Coins !!";
         }
-        else if (_doublePrice &&_chestManager.priceType == chestType.gems)
+        else if (_doublePrize &&_chestManager.prizeType == chestType.gems)
         {
-            priceText.text = _pDoublePrice.ToString() + " Gems !!";
+            prizeText.text = _pDoublePrize.ToString() + " Gems !!";
         }
         if (_mainMenu)
         {
@@ -161,16 +162,16 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     private void UpdatePricePanel()
     {
-        if (priceText && _chestManager.priceType == chestType.coins)
+        if (prizeText && _chestManager.prizeType == chestType.coins)
         {
-            priceText.text = _chestManager.priceAmount.ToString() + " Coins !!";
+            prizeText.text = _chestManager.prizeAmount.ToString() + " Coins !!";
         }
-        else if (priceText && _chestManager.priceType == chestType.gems)
+        else if (prizeText && _chestManager.prizeType == chestType.gems)
         {
-            priceText.text = _chestManager.priceAmount.ToString() + " Gems !!";
-        }else if(priceText && _chestManager.priceType == chestType.empty)
+            prizeText.text = _chestManager.prizeAmount.ToString() + " Gems !!";
+        }else if(prizeText && _chestManager.prizeType == chestType.empty)
         {
-            priceText.text = " OOHHHH !!";
+            prizeText.text = "  You chose poorly!!";
         }
     }
     private void UpdateScorePanelUI()
@@ -508,11 +509,11 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         backButton.enabled = true;
         _pricePanelOn = false;
-        _doublePrice = true;
-        DOTween.To(() =>_pDoublePrice, x => _pDoublePrice = x,(int)_chestManager.priceAmount * 2, 2f );
+        _doublePrize = true;
+        DOTween.To(() =>_pDoublePrize, x => _pDoublePrize = x,(int)_chestManager.prizeAmount * 2, 2f );
         yield return new WaitForSeconds(2);
         _chestManager.UpdateDoublePrice();
-        _doublePrice = false;
+        _doublePrize = false;
     }
 
     public void HideDoublePricePanel()
@@ -540,22 +541,7 @@ public class Rad_GuiManager : MonoBehaviour {
         rouletteOn = true;
         if (Rad_SaveManager.profile.gems > 0)
         {
-            roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
-            {
-                rouletteTitle.transform.DOMove(posTitle.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
-                {
-                    chest1.transform.DOMove(posChest1.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
-                    {
-                        chest2.transform.DOMove(posChest2.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
-                        {
-                            chest3.transform.DOMove(posChest3.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
-                            {
-                                _chestManager.RestartChestGenerations();
-                            });
-                        });
-                    });
-                });
-            });
+            StartRoulettePanel();
         }
         else
         {
@@ -563,6 +549,38 @@ public class Rad_GuiManager : MonoBehaviour {
         }
 
     }
+    private void StartRoulettePanel()
+    {
+        roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
+        {
+            rouletteTitle.transform.DOMove(posTitle.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+            {
+                chest1.transform.DOMove(posChest1.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+                {
+                    chest2.transform.DOMove(posChest2.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+                    {
+                        chest3.transform.DOMove(posChest3.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+                        {
+                            ShowStartRoulettePanel();
+                        });
+                    });
+                });
+            });
+        });
+    }
+    public void ShowStartRoulettePanel()
+    {
+        startRoulettePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+    }
+    public void HideStartRoulettePanel()
+    {
+        startRoulettePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+    }
+    public void Button_StartRoulettePanel()
+    {
+        _chestManager.RestartChestGenerations();
+    }
+
     public void ShowNoGemsCoroutine(float time)
     {
         StartCoroutine(ShowNoGemsPanelCoroutine(time));
@@ -601,7 +619,7 @@ public class Rad_GuiManager : MonoBehaviour {
             StopCoroutine(doublePricePanelCoroutine);
         }
     }
-    public void ShowPricePanel()
+    public void ShowPrizePanel()
     {
         StartCoroutine(ShowPricePanelCoroutine(1));
     }
@@ -620,7 +638,7 @@ public class Rad_GuiManager : MonoBehaviour {
         _pricePanelOn = true;
         pricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
         {
-            if (_chestManager.priceAmount > 0)
+            if (_chestManager.prizeAmount > 0)
             {
                 ShowDoublePricePanel();
             }
