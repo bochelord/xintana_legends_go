@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum EnemyType { zazuc, makula, ball, kogi, blackKnight, lavabeast, alchemist, devil, explorer, fireMage, iceBeast}
+public enum EnemyType { zazuc, makula, ball, kogi, blackKnight, lavabeast, alchemist, devil, explorer, fireMage, iceBeast, skeletonMage}
 
 
 public class EnemyStructure {
@@ -76,18 +76,25 @@ public class EnemyStructure {
                 damageGrowth = 0.1f;
                 break;
             case EnemyType.fireMage:
-                this.type = EnemyType.explorer;
+                this.type = EnemyType.fireMage;
                 lifeBase = 5f;
                 lifeGrowth = 0.07f;
                 damageBase = 3.5f;
                 damageGrowth = 0.11f;
                 break;
             case EnemyType.iceBeast:
-                this.type = EnemyType.explorer;
+                this.type = EnemyType.iceBeast;
                 lifeBase = 4f;
                 lifeGrowth = 0.07f;
                 damageBase = 3.5f;
                 damageGrowth = 0.10f;
+                break;
+            case EnemyType.skeletonMage:
+                this.type = EnemyType.skeletonMage;
+                lifeBase = 3f;
+                lifeGrowth = 0.07f;
+                damageBase = 2.75f;
+                damageGrowth = 0.1f;
                 break;
             default:
                 Debug.LogError("This Enemy doesn't exists!");
