@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScreenShot : MonoBehaviour {
 
@@ -36,7 +37,7 @@ public class ScreenShot : MonoBehaviour {
 
     IEnumerator  DeathScreenshot()
     {
-        combinationImage.SetActive(false);
+        //combinationImage.SetActive(false);
         yield return new WaitForEndOfFrame();
         Texture2D tex = new Texture2D(Screen.width, Screen.height/3);
         tex.ReadPixels(new Rect(0, Screen.height/2.5f, Screen.width, Screen.height/3), 0, 0);
@@ -46,7 +47,7 @@ public class ScreenShot : MonoBehaviour {
         {
             RemoveOldestScreenshot();
         }
-        combinationImage.SetActive(true);
+        //combinationImage.SetActive(true);
     }
 
     public Sprite GetScreenshot()
