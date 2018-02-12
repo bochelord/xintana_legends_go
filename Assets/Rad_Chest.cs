@@ -52,7 +52,6 @@ public class Rad_Chest : MonoBehaviour {
     }
     public void ResetChestRotation()
     {
-        Debug.Log("rotating>>>>>>>>>>>>>>>>>>");
         this.transform.DOLocalRotate(new Vector3(0, 0, 0), 0);
     }
     public void PreShowPRize()
@@ -78,12 +77,15 @@ public class Rad_Chest : MonoBehaviour {
         gems.SetActive(false);
     }
    
+
     private void UpdatePrize()
     {
+        _guiManager.SetCointToSpawn(amount);
+
         switch (type)
         {
             case chestType.coins:
-                SIS.DBManager.IncreaseFunds("coins", amount);
+
                 _chestManager.nothingImage.SetActive(false);
                 _chestManager.gemsImage.SetActive(false);
                 _chestManager.coinsImage.SetActive(true);
@@ -93,8 +95,8 @@ public class Rad_Chest : MonoBehaviour {
                 break;
 
             case chestType.gems:
+
                 AnalyticsManager.Instance.ChestPrice_Event("Gems", amount);
-                Rad_SaveManager.profile.gems += amount;
                 _chestManager.nothingImage.SetActive(false);
                 _chestManager.gemsImage.SetActive(true);
                 _chestManager.coinsImage.SetActive(false);
@@ -103,6 +105,7 @@ public class Rad_Chest : MonoBehaviour {
                 break;
 
             case chestType.empty:
+
                 AnalyticsManager.Instance.ChestPrice_Event("Empty", amount);
                 _chestManager.nothingImage.SetActive(false);
                 _chestManager.gemsImage.SetActive(false);

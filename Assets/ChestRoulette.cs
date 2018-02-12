@@ -19,11 +19,15 @@ public class ChestRoulette : MonoBehaviour {
     public GameObject gemsImage;
     public GameObject nothingImage;
     public chestType prizeType;
+    public Transform coinsEndPosition;
+    public Transform gemEndPositon;
+
     [Header("Flash")]
     public Image flashImage;
 
     private Rad_GuiManager _guiManager;
-    private ParticlePooler _pooler;
+    private ParticlePooler _particlePooler;
+    private CoinsPooler _coinsPooler;
     private List<Vector2> initialPosition = new List<Vector2>();
     private bool canOpen;
     
@@ -32,7 +36,8 @@ public class ChestRoulette : MonoBehaviour {
     void Start ()
     {
         _guiManager = FindObjectOfType<Rad_GuiManager>();
-        _pooler = FindObjectOfType<ParticlePooler>();
+        _particlePooler = FindObjectOfType<ParticlePooler>();
+        _coinsPooler = FindObjectOfType<CoinsPooler>();
     }
 	
 
@@ -53,15 +58,43 @@ public class ChestRoulette : MonoBehaviour {
             _guiManager.ShowNoGemsCoroutine(1.5f);
         }
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="position">position where coin wll be spawned</param>
+    public void SpawnCoinAndMoveItToEndPosition()
+    {
+        GameObject obj =_coinsPooler.GetPooledCoin();
+        obj.transform.position = coinsImage.transform.position;
+        obj.SetActive(true);
+        obj.transform.DOMove(coinsEndPosition.position, 0.5f, false).OnComplete(() => 
+        {
+            AudioManager.Instance.Play_CoinCollect();
+            SpawnCoinCollectedParticle(obj.transform.position);
+            _coinsPooler.RemoveElement(obj.transform);
+        });
+    }
 
+    public void SpawnGemAndMoveItToEndPosition()
+    {
+        GameObject obj = _coinsPooler.GetPooledGem();
+        obj.transform.position = gemsImage.transform.position;
+        obj.SetActive(true);
+        obj.transform.DOMove(gemEndPositon.position, 0.5f, false).OnComplete(() =>
+        {
+            AudioManager.Instance.Play_GemCollect();
+            SpawnGemCollectedParticle(obj.transform.position);
+            _coinsPooler.RemoveElement(obj.transform);
+        });
+    }
     IEnumerator StartChestRotation(float time)
     {
+        _guiManager.SetSpawnPrize(false);
         _guiManager.HidePricePanel();
         _guiManager.StopDoublePriceCoroutine();
         ShowChestPrizes();
         yield return new WaitForSeconds(time);
         CloseChests();
-        //RandomChestPositions();
         yield return new WaitForSeconds(1);
         int _randomTime = Random.Range(3, 6);
         chestRotate = true;
@@ -141,7 +174,7 @@ public class ChestRoulette : MonoBehaviour {
             initialPosition.RemoveAt(randomIndex);
         }
     }
-    public void UpdateDoublePrice()
+    public void UpdateDoublePrize()
     {
         if (prizeType == chestType.coins)
         {
@@ -207,32 +240,69 @@ public class ChestRoulette : MonoBehaviour {
     {
         StartCoroutine(SpawnGemParticle(item));
     }
+
     IEnumerator SpawnCoinsParticle(Transform item)
     {
-        GameObject obj = _pooler.GetPooledGoldParticle();
+        GameObject obj = _particlePooler.GetPooledGoldParticle();
         obj.SetActive(true);
         Debug.Log(obj);
         obj.transform.position = item.transform.position;
         yield return new WaitForSeconds(1);
-        _pooler.RemoveElement(obj.transform);
+        _particlePooler.RemoveElement(obj.transform);
     }
     IEnumerator SpawnGemParticle(Transform item)
     {
-        GameObject obj = _pooler.GetPooledGemParticle();
+        GameObject obj = _particlePooler.GetPooledGemParticle();
         obj.SetActive(true);
         Debug.Log(obj);
         obj.transform.position = item.transform.position;
         yield return new WaitForSeconds(1);
-        _pooler.RemoveElement(obj.transform);
+        _particlePooler.RemoveElement(obj.transform);
     }
     IEnumerator SpawnEmptyParticle(Transform item)
     {
-        GameObject obj = _pooler.GetPooledEmptyParticle();
+        GameObject obj = _particlePooler.GetPooledEmptyParticle();
         obj.SetActive(true);
-        Debug.Log(obj);
         obj.transform.position = item.transform.position;
         yield return new WaitForSeconds(1);
-        _pooler.RemoveElement(obj.transform);
+        _particlePooler.RemoveElement(obj.transform);
+    }
+    IEnumerator SpawnCoinCollected(Vector3 position)
+    {
+        GameObject obj = _particlePooler.GetPooledCoinCollectedParticle();
+        obj.SetActive(true);
+        obj.transform.position = position;
+        yield return new WaitForSeconds(1);
+        _particlePooler.RemoveElement(obj.transform);
+    }
+    IEnumerator SpawnGemCollected(Vector3 position)
+    {
+        GameObject obj = _particlePooler.GetPooledGemCollectedParticle();
+        obj.SetActive(true);
+        obj.transform.position = position;
+        yield return new WaitForSeconds(1);
+        _particlePooler.RemoveElement(obj.transform);
+    }
+    public void UpdatePlayerData()
+    {
+        switch (prizeType)
+        {
+            case chestType.coins:
+                SIS.DBManager.IncreaseFunds("coins", prizeAmount);
+                break;
+            case chestType.gems:
+                Rad_SaveManager.profile.gems += prizeAmount;
+                break;
+        }
+        Rad_SaveManager.SaveData();
+    }
+    public void SpawnCoinCollectedParticle(Vector3 position)
+    {
+        StartCoroutine(SpawnCoinCollected(position));
+    }
+    public void SpawnGemCollectedParticle(Vector3 position)
+    {
+        StartCoroutine(SpawnGemCollected(position));
     }
     public void SetCanOpen(bool value) { canOpen = value; }
     public bool GetCanOpen() { return canOpen; }

@@ -79,20 +79,22 @@ public class Rad_GuiManager : MonoBehaviour {
     private bool timerContdownContinue = false;
     private bool _scorePanelOn = false;
     private bool _doubleScorePanelOn = false;
-    private bool _pricePanelOn = false;
+    private bool _prizePanelOn = false;
     private bool _doublePrize = false;
     private bool _mainMenu = false;
     private bool rouletteOn = false;
     private bool _updateScore = false;
-    private int _scorePlayer = 0;
+    private bool _spawnPrize = false;
+
     private int _pDoublePrize = 0;
+    private float _prizeSpawnTime = 0;
     private int _pScorePlayer;
     private int _pHighScore;
-    private int _pZazuAmount;
-    private int _pKogiAmount;
-    private int _pMakulaAmount;
     private int _pWorldReached;
     private int _pFightsNumber;
+    private int _coinsToSpawn = 20;
+    private int _coinsSpawned = 0;
+
     private Coroutine gameOverPanelCoroutine;
     private Coroutine doublePricePanelCoroutine;
     private void Awake()
@@ -134,7 +136,7 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             UpdateScorePanelUI();
         }
-        if (_pricePanelOn)
+        if (_prizePanelOn)
         {
             UpdatePricePanel();
         }
@@ -159,7 +161,23 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             scoreText.text = _levelManager.GetPlayerScoreUI().ToString();
         }
+        if (_spawnPrize)
+        {
+            _prizeSpawnTime += Time.deltaTime;
+            if(_prizeSpawnTime > 0.1f && _coinsSpawned < _coinsToSpawn)
+            {
+                _coinsSpawned++;
+                _prizeSpawnTime = 0;
+                SpawnPrizeUI();
+            }
+            else if(_coinsSpawned > _coinsToSpawn)
+            {
+                _coinsSpawned = 0;
+                _spawnPrize = false;
+            }
+        }
     }
+
     private void UpdatePricePanel()
     {
         if (prizeText && _chestManager.prizeType == chestType.coins)
@@ -180,18 +198,7 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             pScorePlayer.text = _pScorePlayer.ToString();
         }
-        if (pKogiAmount)
-        {
-            pKogiAmount.text = _pKogiAmount.ToString();
-        }
-        if (pZazuAmount)
-        {
-            pZazuAmount.text = _pZazuAmount.ToString();
-        }
-        if (pMakulaAmount)
-        {
-            pMakulaAmount.text = _pMakulaAmount.ToString();
-        }
+
         if (pWorldReached)
         {
             pWorldReached.text = _pWorldReached.ToString();
@@ -256,7 +263,7 @@ public class Rad_GuiManager : MonoBehaviour {
         gmeOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
         if (_doubleScorePanelOn)
         {
-            HideDoublePricePanel();
+            HideDoublePrizePanel();
         }
         if(gameOverPanelCoroutine != null)
         {
@@ -492,31 +499,33 @@ public class Rad_GuiManager : MonoBehaviour {
     IEnumerator ShowDoublePriceCoroutine(float time)
     {
         yield return new WaitForSeconds(time);
+        _spawnPrize = false;
+        _coinsSpawned = 0;
         doublePricePanel.SetActive(true);
         _doubleScorePanelOn = true;
         doublePricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
         //pricePanel.SetActive(false);
     }
-    public void Button_DoublePrice()
+    public void Button_DoublePrize()
     {
-        _adsManager.ShowAdForDoublePrice();
+        _adsManager.ShowAdForDoublePrize();
     }
-    public void DoublePrice()
+    public void DoublePrize()
     {
-        StartCoroutine(DoublePriceFromAd());
+        StartCoroutine(DoublePrizeFromAd());
     }
-    IEnumerator DoublePriceFromAd()
+    IEnumerator DoublePrizeFromAd()
     {
-        backButton.enabled = true;
-        _pricePanelOn = false;
+        _prizePanelOn = false;
         _doublePrize = true;
-        DOTween.To(() =>_pDoublePrize, x => _pDoublePrize = x,(int)_chestManager.prizeAmount * 2, 2f );
-        yield return new WaitForSeconds(2);
-        _chestManager.UpdateDoublePrice();
+        DOTween.To(() =>_pDoublePrize, x => _pDoublePrize = x,(int)_chestManager.prizeAmount * 2, 1f );
+        yield return new WaitForSeconds(1);
+        _chestManager.UpdateDoublePrize();
         _doublePrize = false;
+        backButton.enabled = true;
     }
 
-    public void HideDoublePricePanel()
+    public void HideDoublePrizePanel()
     {
         //pricePanel.SetActive(true);
         doublePricePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
@@ -530,7 +539,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public void Button_HideDoublePricePanel()
     {
         _analyticsManager.DoublePriceAd_Event(false);
-        HideDoublePricePanel();
+        HideDoublePrizePanel();
         Rad_SaveManager.profile.adsSkipped++;
         backButton.enabled = true;
     }
@@ -635,9 +644,10 @@ public class Rad_GuiManager : MonoBehaviour {
             rerollButton.SetActive(false);
         }
         yield return new WaitForSeconds(time);
-        _pricePanelOn = true;
+        _prizePanelOn = true;
         pricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
         {
+
             if (_chestManager.prizeAmount > 0)
             {
                 ShowDoublePricePanel();
@@ -646,13 +656,33 @@ public class Rad_GuiManager : MonoBehaviour {
             {
                 backButton.enabled = true;
             }
-
+            _chestManager.UpdatePlayerData();
+            _spawnPrize = true;
         });
     }
-
+    public void SetCointToSpawn(int value)
+    {
+        _coinsToSpawn = value;
+    }
+    private void SpawnPrizeUI()
+    {
+        switch (_chestManager.prizeType)
+        {
+            case chestType.coins:
+                _chestManager.SpawnCoinAndMoveItToEndPosition();
+                break;
+            case chestType.gems:
+                _chestManager.SpawnGemAndMoveItToEndPosition();
+                break;
+        }
+    }
     public void HidePricePanel()
     {
-        _pricePanelOn = false;
+        _prizePanelOn = false;
         pricePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+    }
+    public void SetSpawnPrize(bool value)
+    {
+        _spawnPrize = value;
     }
 }

@@ -66,16 +66,16 @@ public class AdsManager : MonoBehaviour {
             case ShowResult.Finished:
                 AdsViewed++;
                 adViewed = true;
-                _guiManager.HideDoublePricePanel();
-                _guiManager.DoublePrice();
+                _guiManager.HideDoublePrizePanel();
+                _guiManager.DoublePrize();
                 _analyticsManager.DoublePriceAd_Event(true);
                 break;
             case ShowResult.Skipped:
-                _guiManager.HideDoublePricePanel();
+                _guiManager.HideDoublePrizePanel();
                 _analyticsManager.DoublePriceAd_Event(false);
                 break;
             case ShowResult.Failed:
-                _guiManager.HideDoublePricePanel();
+                _guiManager.HideDoublePrizePanel();
                 break;
         }
     }
@@ -100,7 +100,7 @@ public class AdsManager : MonoBehaviour {
             Advertisement.Show("rewardedVideo", new ShowOptions() { resultCallback = HandlResultNoReward });
         }
     }
-    public void ShowAdForDoublePrice()
+    public void ShowAdForDoublePrize()
     {
         if (Advertisement.IsReady())
         {

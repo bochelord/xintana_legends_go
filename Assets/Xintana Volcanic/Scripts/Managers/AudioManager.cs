@@ -14,8 +14,6 @@ public class AudioManager : MonoBehaviour {
     [Range(0, 1)]
     public float generalVolume;
 
-    [Header("MusicClips")]
-
     [Header("MusicArray")]
     public AudioClip[] musicArray;
 
@@ -36,7 +34,8 @@ public class AudioManager : MonoBehaviour {
     public ScriptableObject Boss;
     public ScriptableObject NextStage;
     public ScriptableObject addScore;
-
+    public ScriptableObject collectCoin;
+    public ScriptableObject collectGem;
     //cached variables
     private AudioClip tempclip;
 
@@ -198,8 +197,23 @@ public class AudioManager : MonoBehaviour {
             ((SimpleAudioEvent)addScore).Play(fxPlayer);
         }
     }
+    public void Play_CoinCollect()
+    {
+        if (collectCoin && audioEnabled)
+        {
+            ((SimpleAudioEvent)collectCoin).Play(fxPlayer);
+        }
+    }
     public void Stop_AddScore()
     {
         fxPlayer.loop = false;
+    }
+
+    public void Play_GemCollect()
+    {
+        if (collectGem && audioEnabled)
+        {
+            ((SimpleAudioEvent)collectGem).Play(fxPlayer);
+        }
     }
 }

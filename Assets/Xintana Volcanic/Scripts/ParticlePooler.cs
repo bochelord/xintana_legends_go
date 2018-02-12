@@ -8,12 +8,16 @@ public class ParticlePooler : Pooler {
     public GameObject gemsChestParticle;
     public GameObject emptyChestParticle;
     public GameObject deadEnemyParticle;
+    public GameObject coinCollectedParticle;
+    public GameObject gemCollectedParticle;
     public int amount;
 
     private List<GameObject> pooledGold;
     private List<GameObject> pooledGems;
     private List<GameObject> pooledEmpty;
     private List<GameObject> pooledDeadEnemy;
+    private List<GameObject> pooledCoinCollected;
+    private List<GameObject> pooledGemCollected;
     // Use this for initialization
 
     public override void Start ()
@@ -55,8 +59,63 @@ public class ParticlePooler : Pooler {
             obj.SetActive(false);
             pooledDeadEnemy.Add(obj);
         }
+        pooledCoinCollected = new List<GameObject>();
+        for (int j = 0; j < amount; j++)
+        {
+            GameObject obj = (GameObject)Instantiate(coinCollectedParticle);
+            obj.transform.parent = this.transform;
+            obj.transform.position = Vector3.zero;
+            obj.SetActive(false);
+            pooledCoinCollected.Add(obj);
+        }
+        pooledGemCollected = new List<GameObject>();
+        for (int j = 0; j < amount; j++)
+        {
+            GameObject obj = (GameObject)Instantiate(gemCollectedParticle);
+            obj.transform.parent = this.transform;
+            obj.transform.position = Vector3.zero;
+            obj.SetActive(false);
+            pooledGemCollected.Add(obj);
+        }
     }
-	
+    public GameObject GetPooledGemCollectedParticle()
+    {
+        for (int i = 0; i < pooledGemCollected.Count; i++)
+        {
+            if (!pooledGemCollected[i].activeInHierarchy)
+            {
+                return pooledGemCollected[i];
+            }
+        }
+        if (willGrow)
+        {
+            GameObject obj = (GameObject)Instantiate(gemCollectedParticle);
+            obj.transform.parent = current.transform;
+            pooledGemCollected.Add(obj);
+            return obj;
+        }
+
+        return null;
+    }
+    public GameObject GetPooledCoinCollectedParticle()
+    {
+        for (int i = 0; i < pooledCoinCollected.Count; i++)
+        {
+            if (!pooledCoinCollected[i].activeInHierarchy)
+            {
+                return pooledCoinCollected[i];
+            }
+        }
+        if (willGrow)
+        {
+            GameObject obj = (GameObject)Instantiate(coinCollectedParticle);
+            obj.transform.parent = current.transform;
+            pooledCoinCollected.Add(obj);
+            return obj;
+        }
+
+        return null;
+    }
     public GameObject GetPooledGoldParticle()
     {
         for (int i = 0; i < pooledGold.Count; i++)
