@@ -526,7 +526,6 @@ public class Rad_GuiManager : MonoBehaviour {
         yield return new WaitForSeconds(1);
         _chestManager.UpdateDoublePrize();
         _doublePrize = false;
-        backButton.enabled = true;
         _coinsToSpawn = 0;
         _spawnPrize = false;
     }
@@ -547,7 +546,6 @@ public class Rad_GuiManager : MonoBehaviour {
         _analyticsManager.DoublePrizeAd_Event(false);
         HideDoublePrizePanel();
         Rad_SaveManager.profile.adsSkipped++;
-        backButton.enabled = true;
     }
 
     public void Button_ShowRoulettePanel()
@@ -626,7 +624,6 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         StopDoublePriceCoroutine();
         rouletteOn = false;
-        HidePricePanel();
         roulettePanel.transform.DOLocalMoveX(-840f, 0.75f).SetEase(Ease.OutBack);
         rouletteTitle.transform.DOLocalMoveX(3000f, 0.75f).SetEase(Ease.OutBack);
         chest1.transform.DOLocalMoveX(2100f, 0.75f).SetEase(Ease.OutBack);
@@ -648,15 +645,9 @@ public class Rad_GuiManager : MonoBehaviour {
 
   IEnumerator ShowPricePanelCoroutine(float time)
     {
-        if(Rad_SaveManager.profile.gems > 0)
-        {
-            rerollButton.SetActive(true);
-        }
-        else
-        {
-            rerollButton.SetActive(false);
-        }
+
         yield return new WaitForSeconds(time);
+
         _prizePanelOn = true;
         pricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
         {
@@ -664,10 +655,6 @@ public class Rad_GuiManager : MonoBehaviour {
             if (_chestManager.prizeAmount > 0)
             {
                 ShowDoublePricePanel();
-            }
-            else
-            {
-                backButton.enabled = true;
             }
             _chestManager.UpdatePlayerData();
             _spawnPrize = true;
@@ -689,10 +676,23 @@ public class Rad_GuiManager : MonoBehaviour {
                 break;
         }
     }
-    public void HidePricePanel()
+    public void Button_HidePricePanel()
     {
+        backButton.enabled = true;
         _prizePanelOn = false;
         pricePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+
+    }
+    public void Button_CheckRerollButton()
+    {
+        if (Rad_SaveManager.profile.gems > 0)
+        {
+            rerollButton.SetActive(true);
+        }
+        else
+        {
+            rerollButton.SetActive(false);
+        }
     }
     public void SetSpawnPrize(bool value)
     {

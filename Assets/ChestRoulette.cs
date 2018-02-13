@@ -89,8 +89,8 @@ public class ChestRoulette : MonoBehaviour {
     }
     IEnumerator StartChestRotation(float time)
     {
+        _guiManager.rerollButton.SetActive(false);
         _guiManager.SetSpawnPrize(false);
-        _guiManager.HidePricePanel();
         _guiManager.StopDoublePriceCoroutine();
         ShowChestPrizes();
         yield return new WaitForSeconds(time);
