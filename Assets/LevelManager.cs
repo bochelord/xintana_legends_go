@@ -249,27 +249,28 @@ public class LevelManager : MonoBehaviour {
         //We start the GIF recording
         //Instantiate(GIFRecordingprefab);
 
-        switch (typein)
-        {
-            case EnemyType.kogi:
-                _enemyPoints = 2000;
-                break;
-            case EnemyType.makula:
-                _enemyPoints = 5000;
-                break;
-            case EnemyType.zazuc:
-                _enemyPoints = 1500;
-                break;
-            case EnemyType.blackKnight:
-                _enemyPoints = 2500;
-                break;
-            case EnemyType.lavabeast:
-                _enemyPoints = 2250;
-                break;
-            default:
-                _enemyPoints = 1000;
-                break;
-        }
+        _enemyPoints = enemyController.score;
+        //switch (typein)
+        //{
+        //    case EnemyType.kogi:
+        //        _enemyPoints = enemy;
+        //        break;
+        //    case EnemyType.makula:
+        //        _enemyPoints = 5000;
+        //        break;
+        //    case EnemyType.zazuc:
+        //        _enemyPoints = 1500;
+        //        break;
+        //    case EnemyType.blackKnight:
+        //        _enemyPoints = 2500;
+        //        break;
+        //    case EnemyType.lavabeast:
+        //        _enemyPoints = 2250;
+        //        break;
+        //    default:
+        //        _enemyPoints = 1000;
+        //        break;
+        //}
 
         //scoreParticle On
         //score sound on

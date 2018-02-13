@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour {
 
     public int level;
     public EnemyType type;
+    public int score;
 
     private Animator animator;
     private _2dxFX_HSV hsv_spriteFX;
