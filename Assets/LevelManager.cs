@@ -184,7 +184,7 @@ public class LevelManager : MonoBehaviour {
             player.GetComponent<Animator>().SetInteger("AnimState",4);
             AnalyticsManager.Instance.GameOver_Event((int)_playerScore, _enemyCount + 1, _worldNumber);
             AddNemesisCount();
-            if (!adManager.adViewed && adManager.AdsViewed <=4 && !Rad_SaveManager.profile.noAds)
+            if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped <= adsSkipped && !Rad_SaveManager.profile.noAds)
             {
                 combinationManager.SetGameOn(false);
                 combinationManager.MoveButtonsOut();
@@ -192,9 +192,15 @@ public class LevelManager : MonoBehaviour {
                 StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowAdPanel,2f));
                 //_guiManager.ShowAdPanel();
             }
+            else if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped >= adsSkipped && !Rad_SaveManager.profile.noAds)
+            {
+                combinationManager.SetGameOn(false);
+                combinationManager.MoveButtonsOut();
+                combinationManager.DestroyCombination();
+                adManager.ShowAdNoReward();
+            }
             else
             {
-
                 StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 2f));
                 adManager.adViewed = false; 
             }
@@ -483,36 +489,7 @@ public class LevelManager : MonoBehaviour {
     /// </summary>
     public void RestartGame()
     {
-        //_extraLifePurchased = Rad_SaveManager.profile.extraLife;
-        //_playerScore = 0;
-        //playerScoreUI = 0;
-        //_zazucKilled = 0;
-        //_makulaKilled = 0;
-        //_kogiKilled = 0;
-        //_enemyCount = 0;
-        //_worldNumber = 0;
-        //combinationManager.MoveButtonsIn();
-        //combinationManager.timeToResolveCombination = combinationManager.original_timeToResolveCombination;
-        //_guiManager.GameOverPanelOff();
-        //enemyPooler.RemoveElement(enemyController.transform);
-        //combinationManager.EnableButtonsInteraction();
-        //_currentEnemyLevel = 0;
-        //combinationManager.ResetCombination();
-        //PrepareBackgroundLevel(1);
-        //AudioManager.Instance.PlayMusicLevel1();
-        //playerManager.OnAttackFinished();
-        //playerManager.life = 9; // TODO remove when real implementation is done
-        //GetNewEnemy(1);
-        //combinationManager.SetGameOn(true);
-        //combinationManager.HideWinLoseText();
-        if(Rad_SaveManager.profile.adsSkipped >= adsSkipped)
-        {
-            adManager.ShowAdNoReward();
-        }
-        else
-        {
-            SceneManager.LoadScene("LoadingScreen");
-        }
+        SceneManager.LoadScene("LoadingScreen");
     }
 
 

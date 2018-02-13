@@ -325,6 +325,7 @@ public class Rad_GuiManager : MonoBehaviour {
     /// </summary>
     public void Button_CloseViewAddPanel()
     {
+        _levelManager.adsSkipped++;
         timerCountdownAdOn = false;
         _timerCountdown = 5;
         viewAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
@@ -542,7 +543,7 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     public void Button_HideDoublePricePanel()
     {
-        _analyticsManager.DoublePriceAd_Event(false);
+        _analyticsManager.DoublePrizeAd_Event(false);
         HideDoublePrizePanel();
         Rad_SaveManager.profile.adsSkipped++;
         backButton.enabled = true;

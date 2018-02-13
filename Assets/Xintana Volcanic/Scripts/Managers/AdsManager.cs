@@ -57,7 +57,7 @@ public class AdsManager : MonoBehaviour {
                 break;
         }
     }
-    private void HandleResultDoublePrice(ShowResult result)
+    private void HandleResultDoublePrize(ShowResult result)
     {
         AnalyticsManager.Instance.AdsViewed_Event(result);
         Debug.Log(result);
@@ -68,11 +68,11 @@ public class AdsManager : MonoBehaviour {
                 adViewed = true;
                 _guiManager.HideDoublePrizePanel();
                 _guiManager.DoublePrize();
-                _analyticsManager.DoublePriceAd_Event(true);
+                _analyticsManager.DoublePrizeAd_Event(true);
                 break;
             case ShowResult.Skipped:
                 _guiManager.HideDoublePrizePanel();
-                _analyticsManager.DoublePriceAd_Event(false);
+                _analyticsManager.DoublePrizeAd_Event(false);
                 break;
             case ShowResult.Failed:
                 _guiManager.HideDoublePrizePanel();
@@ -86,10 +86,10 @@ public class AdsManager : MonoBehaviour {
         {
             case ShowResult.Finished:
                 Rad_SaveManager.profile.adsSkipped = 0;
-                SceneManager.LoadScene("LoadingScreen");
+                StartCoroutine(FunctionLibrary.CallWithDelay(_levelManager.GameOverPanel, 2f));
                 break;
             case ShowResult.Failed:
-                SceneManager.LoadScene("LoadingScreen");
+                StartCoroutine(FunctionLibrary.CallWithDelay(_levelManager.GameOverPanel, 2f));
                 break;
         }
     }
@@ -104,7 +104,7 @@ public class AdsManager : MonoBehaviour {
     {
         if (Advertisement.IsReady())
         {
-            Advertisement.Show("rewardedVideo", new ShowOptions() { resultCallback = HandleResultDoublePrice });
+            Advertisement.Show("rewardedVideo", new ShowOptions() { resultCallback = HandleResultDoublePrize });
         }
     }
 }
