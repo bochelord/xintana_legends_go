@@ -197,11 +197,11 @@ public class LevelManager : MonoBehaviour {
                 combinationManager.SetGameOn(false);
                 combinationManager.MoveButtonsOut();
                 combinationManager.DestroyCombination();
-                adManager.ShowAdNoReward();
+                StartCoroutine(FunctionLibrary.CallWithDelay(adManager.ShowAdNoReward, 2f));
             }
             else
             {
-                StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 2f));
+                StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 2.5f));
                 adManager.adViewed = false; 
             }
         }
@@ -222,6 +222,7 @@ public class LevelManager : MonoBehaviour {
     {
         StartCoroutine(CoroGetNewEnemy(delay));
     }
+
 
     /// <summary>
     /// called in combinationManager, when you kill an enemy
@@ -291,21 +292,34 @@ public class LevelManager : MonoBehaviour {
              GetEnemyDeadParticle();
              enemyPooler.RemoveElement(enemyController.transform);
              AudioManager.Instance.Stop_AddScore();
-             Debug.Log("1");
+
          });
 
     }
     public void GetEnemyDeadParticle()
     {
         StartCoroutine(EnemyDeadParticle(2f, enemyController.transform.position));
-        Debug.Log("2");
+
     }
     IEnumerator EnemyDeadParticle(float time, Vector2 position)
     {
-        Debug.Log("3");
         GameObject obj = particlePooler.GetPooledDeadEnemyParticle();
         obj.SetActive(true);
         obj.transform.position = position;
+        yield return new WaitForSeconds(time);
+        particlePooler.RemoveElement(obj.transform);
+    }
+
+    public void VanishPlayer()
+    {
+        StartCoroutine(PlayerDeadParticle(1.5f, playerManager.particlePosition.position));
+    }
+    IEnumerator PlayerDeadParticle(float time, Vector2 position)
+    {
+        GameObject obj = particlePooler.GetPooledDeadEnemyParticle();
+        obj.SetActive(true);
+        obj.transform.position = position;
+        playerManager.gameObject.SetActive(false);
         yield return new WaitForSeconds(time);
         particlePooler.RemoveElement(obj.transform);
     }
@@ -479,8 +493,9 @@ public class LevelManager : MonoBehaviour {
 
     public void GameOverPanel()
     {
+        VanishPlayer();
         combinationManager.MoveButtonsOut();
-        _guiManager.PlayerGameOverPanelOn();
+        StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.PlayerGameOverPanelOn,2));
         combinationManager.DisableButtonsInteraction();
         combinationManager.SetGameOn(false);
     }

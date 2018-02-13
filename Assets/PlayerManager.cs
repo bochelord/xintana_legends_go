@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
-
+    public Transform particlePosition;
     public float life = 9;
 	// Use this for initialization
 	//void Start () {
@@ -45,7 +45,6 @@ public class PlayerManager : MonoBehaviour {
         this.GetComponent<Animator>().SetBool("Attacking", false);
         this.GetComponent<Animator>().SetInteger("AnimState", 0);
     }
-
 
     public void ReceiveDamage(float damage)
     {

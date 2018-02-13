@@ -279,10 +279,14 @@ public class CombinationManager : MonoBehaviour {
                 gameOn = false;
                 //levelManager.GameOverPanel();
                 levelManager.AddNemesisCount();
-                if (!adManager.adViewed && adManager.AdsViewed <= 4 && !Rad_SaveManager.profile.noAds)
+                if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped <= levelManager.adsSkipped && !Rad_SaveManager.profile.noAds)
                 {
                     MoveButtonsOut();
                     _guiManager.ShowAdPanel();
+                }
+                else if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped >= levelManager.adsSkipped && !Rad_SaveManager.profile.noAds)
+                {
+                    StartCoroutine(FunctionLibrary.CallWithDelay(adManager.ShowAdNoReward,1.5f));
                 }
                 else
                 {

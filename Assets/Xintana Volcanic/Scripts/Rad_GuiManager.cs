@@ -331,7 +331,8 @@ public class Rad_GuiManager : MonoBehaviour {
         viewAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
         viewAdPanel.SetActive(false);
         Rad_SaveManager.profile.adsSkipped++;
-        PlayerGameOverPanelOn();
+        _levelManager.VanishPlayer();
+        StartCoroutine(FunctionLibrary.CallWithDelay(PlayerGameOverPanelOn,2f));
         _analyticsManager.ResurrectionAd_Event(false);
 
     }
