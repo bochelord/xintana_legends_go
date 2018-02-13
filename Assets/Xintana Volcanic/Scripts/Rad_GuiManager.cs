@@ -516,6 +516,8 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     IEnumerator DoublePrizeFromAd()
     {
+        _coinsToSpawn = _chestManager.prizeAmount;
+        _spawnPrize = true;
         _prizePanelOn = false;
         _doublePrize = true;
         DOTween.To(() =>_pDoublePrize, x => _pDoublePrize = x,(int)_chestManager.prizeAmount * 2, 1f );
@@ -523,6 +525,8 @@ public class Rad_GuiManager : MonoBehaviour {
         _chestManager.UpdateDoublePrize();
         _doublePrize = false;
         backButton.enabled = true;
+        _coinsToSpawn = 0;
+        _spawnPrize = false;
     }
 
     public void HideDoublePrizePanel()
@@ -546,10 +550,11 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void Button_ShowRoulettePanel()
     {
-        backButton.enabled = false;
-        rouletteOn = true;
+
         if (Rad_SaveManager.profile.gems > 0)
         {
+            backButton.enabled = false;
+            rouletteOn = true;
             StartRoulettePanel();
         }
         else
@@ -562,21 +567,27 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
         {
-            rouletteTitle.transform.DOMove(posTitle.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+            ShowStartRoulettePanel();
+        });
+    }
+
+    public void ChestPresentation()
+    {
+        rouletteTitle.transform.DOMove(posTitle.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+        {
+            chest1.transform.DOMove(posChest1.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
             {
-                chest1.transform.DOMove(posChest1.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+                chest2.transform.DOMove(posChest2.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
                 {
-                    chest2.transform.DOMove(posChest2.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+                    chest3.transform.DOMove(posChest3.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
                     {
-                        chest3.transform.DOMove(posChest3.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
-                        {
-                            ShowStartRoulettePanel();
-                        });
+                        _chestManager.RestartChestGenerations();
                     });
                 });
             });
         });
     }
+
     public void ShowStartRoulettePanel()
     {
         startRoulettePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
