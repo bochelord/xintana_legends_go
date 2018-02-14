@@ -426,7 +426,7 @@ public class LevelManager : MonoBehaviour {
 
     public IEnumerator ShowHUDText(Vector2 pos, string texto, Color color_in)
     {
-        Vector2 posConverted = RectTransformUtility.WorldToScreenPoint(Camera.main, pos);
+        Vector2 posConverted = RectTransformUtility.WorldToScreenPoint(null, pos);
 
         //Color color_to_show = color_in;
 
@@ -484,6 +484,7 @@ public class LevelManager : MonoBehaviour {
         temptext.transform.DOKill();
 
         temptext.SetActive(false);
+        inactiveHUDTextList.Add(temptext.transform);
     }
 
     public int GetCurrentEnemyLevel()
@@ -523,21 +524,19 @@ public class LevelManager : MonoBehaviour {
         PrepareBackgroundLevel(_worldNumber);
         AudioManager.Instance.PlayMusicLevel1();
         _playerManager.OnAttackFinished();
-        _playerManager.life = 9; // TODO remove when real implementation is done
+        _playerManager.life = _playerManager.GetMaxLife();
         GetNewEnemy(1);
     }
 
     public void PauseGame()
     {
         state = GameState.Paused;
-        _guiManager.PausePanelOn();
         combinationManager.MoveButtonsOut();
     }
 
     public void UnPauseGame()
     {
         state = GameState.Running;
-        _guiManager.PausePanelOff();
         combinationManager.MoveButtonsIn();
     }
     //private int _kogiKilled = 0;
