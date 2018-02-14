@@ -7,15 +7,11 @@ using DG.Tweening;
 public class Rad_GuiManager : MonoBehaviour {
 
     [Header("Panels")]
-    public GameObject gmeOverPanel;
-    public GameObject playerGameOverPanel;
     public GameObject mainMenuPanel;
-    public GameObject settingsPanel;
+    public GameObject playerGameOverPanel;
     public GameObject shop;
     public GameObject viewAdPanel;
     public GameObject ContinueNoAdPanel;
-    public GameObject pausePanel;
-    public GameObject menuButtons;
     public GameObject doublePricePanel;
     public GameObject roulettePanel;
     public GameObject pricePanel;
@@ -246,23 +242,8 @@ public class Rad_GuiManager : MonoBehaviour {
             extraLifeIcon.SetActive(false);
         }
     }
-    /// <summary>
-    /// called from Button, set main menu panel on and turns off the rest
-    /// </summary>
-    public void MainMenuPanelOn()
-    {
-        mainMenuPanel.SetActive(true);
-        settingsPanel.SetActive(false);
-    }
 
-    /// <summary>
-    /// called frm button, turns on settings
-    /// </summary>
-    public void SettingsPanelOn()
-    {
-        mainMenuPanel.SetActive(false);
-        settingsPanel.SetActive(true);
-    }
+
 
     /// <summary>
     /// turns de game over panel on
@@ -272,8 +253,8 @@ public class Rad_GuiManager : MonoBehaviour {
         SetMainMenuStats();
         _mainMenu = true;
         playerGameOverPanel.SetActive(false);
-        gmeOverPanel.SetActive(true);
-        gmeOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
+        mainMenuPanel.SetActive(true);
+        mainMenuPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
         if (_doubleScorePanelOn)
         {
             HideDoublePrizePanel();
@@ -292,29 +273,15 @@ public class Rad_GuiManager : MonoBehaviour {
 
     }
 
-    /// <summary>
-    /// Called from button, playerGameOverPanel closeButton in cartoon scene
-    /// </summary>
-    public void Button_CloseScorePanel()
-    {
-        _mainMenu = true;
-        playerGameOverPanel.transform.DOMoveX(1100f, 1f).SetEase(Ease.OutBack);
-        pausePanel.transform.DOMoveX(midScreen.position.x,1).SetEase(Ease.OutBack);
-        if (menuButtons)
-        {
-            menuButtons.transform.DOLocalMoveY(-556f, 1).SetEase(Ease.OutBack);
 
-        }
-
-    }
     /// <summary>
     /// Turns de Game over panell off
     /// </summary>
     public void GameOverPanelOff()
     {
         //gmeOverPanel.transform.DOLocalMoveX(663f, 1f);
-        gmeOverPanel.transform.localPosition = new Vector3(663f, 0, 0);
-        gmeOverPanel.SetActive(false);
+        mainMenuPanel.transform.localPosition = new Vector3(663f, 0, 0);
+        mainMenuPanel.SetActive(false);
         
     }
     /// <summary>
@@ -354,42 +321,6 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         timerCountdownAdOn = false;
         _adsManager.ShowAdForExtraLife();
-    }
-   public void PausePanelOn()
-    {
-        if (pausePanel)
-        {
-            pausePanel.transform.DOLocalMoveX(1650f, 1f).SetEase(Ease.OutBack);
-            _mainMenu = true;
-        }
-
-    }
-    public void PausePanelOff()
-    {
-        if (pausePanel)
-        {
-            pausePanel.transform.DOLocalMoveX(-1650f, 1f).SetEase(Ease.OutBack);
-            _mainMenu = false;
-        }
-
-    }
-
-    public void OptionsPanelOn()
-    {
-        if (settingsPanel)
-        {
-            pausePanel.transform.DOLocalMoveX(-1650f, 1f).SetEase(Ease.OutBack);
-            settingsPanel.transform.DOLocalMoveX(1650f, 1f).SetEase(Ease.OutBack);
-        }
-    }
-
-    public void OptionsPanelOff()
-    {
-        if (settingsPanel)
-        {
-            pausePanel.transform.DOLocalMoveX(1650f, 1f).SetEase(Ease.OutBack);
-            settingsPanel.transform.DOLocalMoveX(-1650f, 1f).SetEase(Ease.OutBack);
-        }
     }
 
     private IEnumerator refreshHighScore(int newHighScore) {
