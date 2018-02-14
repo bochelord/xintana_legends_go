@@ -330,7 +330,7 @@ public class CombinationManager : MonoBehaviour {
                 gameOn = false;
                 DisableButtonsInteraction();
 
-                levelManager.AttackEnemy(1.5f); //TODO GHet tje damage from the player!!!
+                levelManager.AttackEnemy(_playerManager.attack); //TODO GHet tje damage from the player!!!
 
                 if (levelManager.enemyKilled)
                 {

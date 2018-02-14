@@ -21,6 +21,8 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject pricePanel;
     public GameObject noGemsPanel;
     public GameObject startRoulettePanel;
+    [Header("Experience Slider")]
+    public Slider experienceSlider;
     [Header("PlaceHolders")]
     public Transform midScreen;
     public Transform gemPosition;
@@ -66,6 +68,15 @@ public class Rad_GuiManager : MonoBehaviour {
     [Header("Price Panel")]
     public Text prizeText;
     public GameObject rerollButton;
+    [Header("Main Menu")]
+    public Text attackValue;
+    public Text defenceValue;
+    public Text hpText;
+    public Text levelText;
+    public Text expText;
+    public Slider expSlider;
+    public GameObject xintanaImage;
+    public GameObject[] itemsImages;
 
     private AnalyticsManager _analyticsManager;
     private AdsManager _adsManager;
@@ -73,6 +84,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private LevelManager _levelManager;
     private ChestRoulette _chestManager;
     private ScreenShot _screenshot;
+    private PlayerManager _playerManager;
 
     private float _timerCountdown = 5f;
     private bool timerCountdownAdOn = false;
@@ -105,7 +117,7 @@ public class Rad_GuiManager : MonoBehaviour {
         _adsManager = FindObjectOfType<AdsManager>();
         _chestManager = FindObjectOfType<ChestRoulette>();
         _screenshot = FindObjectOfType<ScreenShot>();
-
+        _playerManager = FindObjectOfType<PlayerManager>();
     }
 
     private void Update()
@@ -257,6 +269,7 @@ public class Rad_GuiManager : MonoBehaviour {
     /// </summary>
     public void GameOverPanelOn()
     {
+        SetMainMenuStats();
         _mainMenu = true;
         playerGameOverPanel.SetActive(false);
         gmeOverPanel.SetActive(true);
@@ -472,7 +485,7 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void Button_CloseShop()
     {
-        //shop.SetActive(false);
+        //shop.SetActive(false); 
         shop.transform.DOLocalMoveX(840f, 0.75f).SetEase(Ease.OutBack);
     }
     public void ShowContinuePanel()
@@ -697,5 +710,36 @@ public class Rad_GuiManager : MonoBehaviour {
     public void SetSpawnPrize(bool value)
     {
         _spawnPrize = value;
+    }
+
+    public void SetMainMenuStats()
+    {
+        attackValue.text = _playerManager.attack.ToString();
+        hpText.text = _playerManager.GetMaxLife().ToString();
+        levelText.text = "Level " + _playerManager.level.ToString();
+        float _tempValue = _playerManager.experience / _playerManager.GetMaxExperience();
+        expSlider.value =  _tempValue; 
+        //Debug.Log(_playerManager.experience);
+        //Debug.Log(experienceSlider.value);
+        //Debug.Log(_playerManager.GetMaxExperience());
+        //Debug.Log(_playerManager.experience / _playerManager.GetMaxExperience());
+    }
+
+    public void AddExperienceToSlider(float value)
+    {
+        float _tempValue = value / _playerManager.GetMaxExperience();
+        if(experienceSlider.value + _tempValue > 1)
+        {
+            float _tempRestValue = 1 - experienceSlider.value;
+            _tempValue -= _tempRestValue;
+            //TODO level Up 
+            experienceSlider.value = _tempValue;
+        }
+        else
+        {
+            experienceSlider.value += _tempValue;
+        }
+
+        
     }
 }

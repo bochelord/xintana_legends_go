@@ -15,6 +15,9 @@ public class XintanaProfile : MonoBehaviour {
     public int timesKilledByMakula;
     public int timesKilledByKogi;
     public int timesKilledByBlackKnight; //TODO add variable for any type of enemy
+    public int level;
+    public int experience;
+    public weapon weaponEquipped;
     public int adsViewed;
     public int adsSkipped;
     public bool audioEnabled;
@@ -41,6 +44,9 @@ public class XintanaProfile : MonoBehaviour {
         profile.gems = 1;
         profile.adsViewed = 0;
         profile.adsSkipped = 0;
+        profile.level = 1;
+        profile.experience = 0;
+        profile.weaponEquipped = weapon.red; // TODO check if this one will be the default weapon
         profile.audioEnabled = true;
         profile.extraLife = false;
         profile.noAds = false;

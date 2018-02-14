@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour {
     public int level;
     public EnemyType type;
     public int score;
+    public int experience;
 
     private Animator animator;
     private _2dxFX_HSV hsv_spriteFX;
@@ -25,6 +26,8 @@ public class EnemyController : MonoBehaviour {
     private EnemiesPooler pooler;
     private LevelManager levelManager;
     private HealthBarControllerBoss healthBarController;
+    private PlayerManager _playerManager;
+
     void Awake()
     {
         animator = this.GetComponent<Animator>();
@@ -32,17 +35,8 @@ public class EnemyController : MonoBehaviour {
         pooler = FindObjectOfType<EnemiesPooler>();
         levelManager = FindObjectOfType<LevelManager>();
         healthBarController = FindObjectOfType<HealthBarControllerBoss>();
+        _playerManager = FindObjectOfType<PlayerManager>();
     }
-
-    //void Start () {
-
-    //    //new_enemy = new EnemyStructure().GenerateWithLevel(type,level);
-    //    //yield return new WaitForSeconds(0.1f);
-    //    animator = this.GetComponent<Animator>();
-    //    hsv_spriteFX = this.GetComponent<_2dxFX_HSV>();
-    //    pooler = this.GetComponentInParent<Pooler>();
-    //}
-
 
     void OnEnable() // On Enable we need to replenish its life otherwise would appear as a Zombie
     {
@@ -117,7 +111,7 @@ public class EnemyController : MonoBehaviour {
         levelManager.AddEnemyCount();
         levelManager.AddPlayerScoreAndGetNewEnemy(this.type, level);
         levelManager.enemyKilled = true;
-        
+        _playerManager.AddExperience(experience);
         //levelManager.GetNewEnemy(2.5f);
         DeadAnimation();
     }
