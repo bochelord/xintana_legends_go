@@ -102,6 +102,7 @@ namespace SIS
         //set up delegates and selection checkboxes
         void Start()
         {
+            //buyButton = GameObject.FindGameObjectWithTag("ShopConfirmationPanel");
             //if a selection of this item is possible
             if (selectButton)
             {

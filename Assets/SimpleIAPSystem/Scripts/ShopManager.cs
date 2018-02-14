@@ -36,6 +36,16 @@ namespace SIS
         public GameObject confirmWindow;
 
         /// <summary>
+        /// Confirmation window with the selected item details
+        /// </summary>
+        public GameObject itemConfirmationPanel;
+
+        /// <summary>
+        /// GameObject Container where all the Shop Items are contained.
+        /// </summary>
+        public GameObject shopItemsContainer;
+
+        /// <summary>
         /// Text component of the errorWindow gameobject.
         /// </summary>
         public Text message;
@@ -64,6 +74,16 @@ namespace SIS
         public static event Action<string> itemDeselectedEvent;
 
 
+        //private void Awake()
+        //{
+        //    foreach (Transform shopItem in shopItemsContainer.transform)
+        //    {
+        //        Debug.Log("shopItem name: " + shopItem.name);
+        //        shopItem.GetComponent<IAPItem>().buyButton = itemConfirmationPanel;
+        //    }
+        //    itemConfirmationPanel.SetActive(false);
+        //}
+
         //if there is no IAP Manager in the scene, the ShopManager
         //will try to instantiate the prefab itself
         IEnumerator Start()
@@ -88,6 +108,8 @@ namespace SIS
                     if (containers[i].parent != null && containers[i].parent.isActiveAndEnabled)
                         containers[i].parent.StartCoroutine(containers[i].parent.Start());
                 }
+
+
             }
         }
 
@@ -113,6 +135,7 @@ namespace SIS
 		/// </summary>
 		public void Init()
         {
+            
 			instance = this;
             IAPItems.Clear();
             DBManager.updatedDataEvent += Refresh;
@@ -130,6 +153,7 @@ namespace SIS
                 #endif
 
                 IAPItems.Add(sceneItems[i].productId, sceneItems[i]);
+
             }
                 
 
@@ -168,6 +192,16 @@ namespace SIS
                     newItem.name = "IAPItem " + string.Format("{0:000}", index + j);
                     //get IAPItem component of the instantiated item
                     IAPItem item = newItem.GetComponent<IAPItem>();
+
+                    //SHOPMANAGER RAD EXTENSIONS ========================
+                    item.buyButton = itemConfirmationPanel; 
+                    newItem.GetComponent<Button>().onClick.AddListener(() => {
+                        itemConfirmationPanel.SetActive(true);
+                        IAPItem shopItem = item;
+                        FillItemConfirmationPanelData(shopItem);
+                    });
+                    //END RAD EXTENSION =================================
+
                     if (item == null) continue;
 
                     //add IAPItem to dictionary for later lookup
@@ -192,12 +226,37 @@ namespace SIS
                 }
 
                 index += group.items.Count;
+                if (itemConfirmationPanel.activeInHierarchy) { itemConfirmationPanel.SetActive(false); }
             }
 
             //refresh all products initially
             RefreshAll();
         }
 
+        /// <summary>
+        /// Method called from Shop Item button listener to display the Shop Item data on the 
+        /// Item Confirmation Panel.
+        /// </summary>
+        /// <param name="shopItem">IAPItem</param>
+        public void FillItemConfirmationPanelData(IAPItem shopItem)
+        {
+            //Debug.Log("shopItem.name: " + shopItem.name);
+            ItemConfirmationPanelData icpd;
+            icpd = itemConfirmationPanel.GetComponent<ItemConfirmationPanelData>();
+            icpd.title.text = shopItem.title.text;
+            //Debug.Log("icpd.title.text: " + shopItem.title.text);
+            icpd.icon.sprite = shopItem.icon.sprite;
+            icpd.description.text = shopItem.description.text;
+            for (int i = 0; i < shopItem.price.Length; i++)
+            {
+                icpd.price[i].text = shopItem.price[i].text;
+            }
+            icpd.okButton.onClick.AddListener(() => {
+                shopItem.Purchase();
+            });
+            //icpd.price[0].text = shopItem.price[0].text;
+
+        }
 
         /// <summary>
         /// Refreshes the visual representation of all shop items based on previous actions
@@ -324,9 +383,11 @@ namespace SIS
 		/// <summary>
         public static void ShowMessage(string text)
         {
+            Debug.Log("Texto que deberia de salir: " + text);
             if (!instance.errorWindow) return;
-
+            Debug.Log("Hay instancia de errorWindow");
             if(instance.message) instance.message.text = text;
+            Debug.Log("instance.message.text = " + text);
             instance.errorWindow.SetActive(true);
         }
 
