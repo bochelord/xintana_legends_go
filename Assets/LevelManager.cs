@@ -369,7 +369,7 @@ public class LevelManager : MonoBehaviour {
         else if (_enemyCount == (bossFightFrecuency *( _worldNumber + numberOfRounds * worldspritesLevelList.Length)) + 1)//after a boss fight we reset the timer to whatever it was before it and
         {
             combinationManager.timeToResolveCombination = timerSafe;
-            enemy = enemyPooler.GetPooledObject();
+            enemy = enemyPooler.GetPooledObject(_worldNumber);
 
             _worldNumber++;
 
@@ -395,7 +395,7 @@ public class LevelManager : MonoBehaviour {
         }
         else
         {
-            enemy = enemyPooler.GetPooledObject();
+            enemy = enemyPooler.GetPooledObject(_worldNumber);
         }
 
 
