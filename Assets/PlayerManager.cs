@@ -27,9 +27,9 @@ public class PlayerManager : MonoBehaviour {
         profile = Rad_SaveManager.profile;
         level = profile.level;
         experience = profile.experience;
-        //TODO damage = level * something, or take damage from sheets
+        //TODO attack = level * something, or take damage from sheets
         //TODO maxLife = level * something , or take life from sheets
-        life = maxLife;
+        life = GetMaxLife();
     }
 
     public float GetMaxLife()
@@ -94,5 +94,11 @@ public class PlayerManager : MonoBehaviour {
         Debug.Log(">>>>>>>>LEVEL>>>>>>>>>" + level);
         Debug.Log(">>>>>>>>MAXEXPERIENCE>>>>>>>>>" + _maxExperience);
         return _maxExperience;
+    }
+
+    public void SavePlayerStats()
+    {
+        profile.experience = experience;
+        profile.level = level;
     }
 }

@@ -16,7 +16,7 @@ public class XintanaProfile : MonoBehaviour {
     public int timesKilledByKogi;
     public int timesKilledByBlackKnight; //TODO add variable for any type of enemy
     public int level;
-    public int experience;
+    public float experience;
     public weapon weaponEquipped;
     public int adsViewed;
     public int adsSkipped;

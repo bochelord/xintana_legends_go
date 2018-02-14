@@ -55,7 +55,7 @@ public class LevelManager : MonoBehaviour {
     private float playerScoreUI;
 
     public ScreenShot screenshot;
-    private PlayerManager playerManager;
+    private PlayerManager _playerManager;
     private CombinationManager combinationManager;
     private Rad_GuiManager _guiManager;
     private AdsManager adManager;
@@ -72,7 +72,7 @@ public class LevelManager : MonoBehaviour {
     {
         screenshot = FindObjectOfType<ScreenShot>();
         combinationManager = FindObjectOfType<CombinationManager>();
-        playerManager = player.GetComponent<PlayerManager>();
+        _playerManager = player.GetComponent<PlayerManager>();
         _guiManager = FindObjectOfType<Rad_GuiManager>();
         adManager = FindObjectOfType<AdsManager>();
         healthBarController = FindObjectOfType<HealthBarControllerBoss>();
@@ -168,12 +168,12 @@ public class LevelManager : MonoBehaviour {
         float _damageDone = enemyController.GetDamageDoneByEnemy();
         LaunchShowHUDText(player.transform.position + new Vector3(0, 1.5f, 0), _damageDone.ToString("F1"), new Color32(245, 141, 12, 255));
 
-        playerManager.ReceiveDamage(_damageDone);
+        _playerManager.ReceiveDamage(_damageDone);
 
         AudioManager.Instance.Play_XintanaHit();
 
 
-        if(playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") <= 0)
+        if(_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") <= 0)
         {
             screenshot.TakeDeathScreenshot();
 
@@ -205,7 +205,7 @@ public class LevelManager : MonoBehaviour {
                 adManager.adViewed = false; 
             }
         }
-        else if (playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") > 0)
+        else if (_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") > 0)
         {
             combinationManager.SetGameOn(false);
             //SIS.DBManager.IncreasePurchase("shop_item_01", -1);
@@ -312,14 +312,14 @@ public class LevelManager : MonoBehaviour {
 
     public void VanishPlayer()
     {
-        StartCoroutine(PlayerDeadParticle(1.5f, playerManager.particlePosition.position));
+        StartCoroutine(PlayerDeadParticle(1.5f, _playerManager.particlePosition.position));
     }
     IEnumerator PlayerDeadParticle(float time, Vector2 position)
     {
         GameObject obj = particlePooler.GetPooledDeadEnemyParticle();
         obj.SetActive(true);
         obj.transform.position = position;
-        playerManager.gameObject.SetActive(false);
+        _playerManager.gameObject.SetActive(false);
         yield return new WaitForSeconds(time);
         particlePooler.RemoveElement(obj.transform);
     }
@@ -493,6 +493,7 @@ public class LevelManager : MonoBehaviour {
 
     public void GameOverPanel()
     {
+        _playerManager.SavePlayerStats();
         VanishPlayer();
         combinationManager.MoveButtonsOut();
         StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.PlayerGameOverPanelOn,2));
@@ -521,8 +522,8 @@ public class LevelManager : MonoBehaviour {
         //combinationManager.ResetCurrentLenghtCombination();
         PrepareBackgroundLevel(_worldNumber);
         AudioManager.Instance.PlayMusicLevel1();
-        playerManager.OnAttackFinished();
-        playerManager.life = 9; // TODO remove when real implementation is done
+        _playerManager.OnAttackFinished();
+        _playerManager.life = 9; // TODO remove when real implementation is done
         GetNewEnemy(1);
     }
 
