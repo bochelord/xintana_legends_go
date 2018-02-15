@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour {
     public int level;
     public EnemyType type;
     public int score;
+    public int experience;
     public int appearsOnWorld;
 
     private Animator animator;
@@ -26,6 +27,7 @@ public class EnemyController : MonoBehaviour {
     private EnemiesPooler pooler;
     private LevelManager levelManager;
     private HealthBarControllerBoss healthBarController;
+    private PlayerManager _playerManager;
     void Awake()
     {
         animator = this.GetComponent<Animator>();
@@ -33,6 +35,7 @@ public class EnemyController : MonoBehaviour {
         pooler = FindObjectOfType<EnemiesPooler>();
         levelManager = FindObjectOfType<LevelManager>();
         healthBarController = FindObjectOfType<HealthBarControllerBoss>();
+        _playerManager = FindObjectOfType<PlayerManager>();
     }
 
     //void Start () {
@@ -118,7 +121,7 @@ public class EnemyController : MonoBehaviour {
         levelManager.AddEnemyCount();
         levelManager.AddPlayerScoreAndGetNewEnemy(this.type, level);
         levelManager.enemyKilled = true;
-        
+        _playerManager.AddExperience(experience);
         //levelManager.GetNewEnemy(2.5f);
         DeadAnimation();
     }
