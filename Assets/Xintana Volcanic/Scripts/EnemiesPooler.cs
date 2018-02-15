@@ -5,14 +5,7 @@ using UnityEngine;
 public class EnemiesPooler : Pooler {
 
     public GameObject[] enemiesPrefabs;
-    //public GameObject[] enemiesPrefabsWorld1;
-    //public GameObject[] enemiesPrefabsWorld2;
-    //public GameObject[] enemiesPrefabsWorld3;
-    //public GameObject[] enemiesPrefabsWorld4;
-    //public GameObject[] enemiesPrefabsWorld5;
-    //public GameObject[] enemiesPrefabsWorld6;
-    //public GameObject[] enemiesPrefabsWorld7;
-    //public GameObject[] enemiesPrefabsWorld8;
+
 
     public GameObject[] bossPrefab;
     public int amountPooledPerType;
@@ -132,30 +125,4 @@ public class EnemiesPooler : Pooler {
     }
 
 
-
-
-    //private void GeneratepooledObjects()
-    //{
-
-
-    //    List<GameObject> listToProcess;
-
-    //    for (int i = 0; i < pooledObjArrayList.Length; i++)
-    //    {
-    //        listToProcess = pooledObjArrayList[levelManager.GetCurrentWorldNumber()];//we get the list of enemies for that world
-
-
-
-
-
-
-
-    //        GameObject obj = (GameObject)Instantiate(listToProcess[]);
-
-    //        obj.transform.parent = current.transform;
-    //        obj.transform.position = Vector3.zero;
-    //        obj.SetActive(false);
-    //        pooledObjects.Add(obj);
-    //    }
-    //}
 }

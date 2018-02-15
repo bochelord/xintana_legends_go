@@ -122,6 +122,7 @@ public class EnemyController : MonoBehaviour {
         levelManager.AddPlayerScoreAndGetNewEnemy(this.type, level);
         levelManager.enemyKilled = true;
         _playerManager.AddExperience(experience);
+        levelManager.LaunchShowHUDText(this.transform.position, "+" + experience + "  XP", new Color32(85, 187, 17, 255));
         //levelManager.GetNewEnemy(2.5f);
         DeadAnimation();
     }
