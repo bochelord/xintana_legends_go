@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour {
     public int level;
     public EnemyType type;
     public int score;
-    public int experience;
+    private int _experience;
     public int appearsOnWorld;
 
     private Animator animator;
@@ -52,6 +52,7 @@ public class EnemyController : MonoBehaviour {
     {
         //yield return new WaitForSeconds(0.1f);
         new_enemy = new EnemyStructure().GenerateWithLevel(type, levelManager.GetCurrentEnemyLevel());
+        _experience = (int)new_enemy.xp;
         //new_enemy = new EnemyStructure().GenerateWithLevel(type, level);
         life = new_enemy.life;
         startLife = new_enemy.life;
@@ -121,8 +122,8 @@ public class EnemyController : MonoBehaviour {
         levelManager.AddEnemyCount();
         levelManager.AddPlayerScoreAndGetNewEnemy(this.type, level);
         levelManager.enemyKilled = true;
-        _playerManager.AddExperience(experience);
-        levelManager.LaunchShowHUDText(this.transform.position, "+" + experience + "  XP", new Color32(85, 187, 17, 255));
+        _playerManager.AddExperience(_experience);
+        levelManager.LaunchShowHUDText(this.transform.position, "+" + _experience + "  XP", new Color32(85, 187, 17, 255));
         //levelManager.GetNewEnemy(2.5f);
         DeadAnimation();
     }

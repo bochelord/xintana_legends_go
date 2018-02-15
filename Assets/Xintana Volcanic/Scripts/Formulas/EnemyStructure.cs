@@ -13,7 +13,8 @@ public class EnemyStructure {
     public float life, lifeBase, lifeGrowth;
     public float damage, damageBase, damageGrowth;
     public float dna_hue, dna_colorsat, dna_brightness;
-
+    public int score;
+    public float xp, xpBase, xpGrowth;
 
     public EnemyStructure GenerateBasic(EnemyType type)
     {
@@ -25,6 +26,7 @@ public class EnemyStructure {
                 lifeGrowth = 0.06f;
                 damageBase = 2f;
                 damageGrowth = 0.08f;
+                score = 1500;
                 break;
             case EnemyType.makula:
                 this.type = EnemyType.makula;
@@ -32,6 +34,7 @@ public class EnemyStructure {
                 lifeGrowth = 0.07f;
                 damageBase = 10f;
                 damageGrowth = 0.08f;
+                score = 2750;
                 break;
             case EnemyType.kogi:
                 this.type = EnemyType.kogi;
@@ -39,6 +42,7 @@ public class EnemyStructure {
                 lifeGrowth = 0.07f;
                 damageBase = 1f;
                 damageGrowth = 0.09f;
+                score = 1000;
                 break;
             case EnemyType.blackKnight:
                 this.type = EnemyType.blackKnight;
@@ -46,6 +50,7 @@ public class EnemyStructure {
                 lifeGrowth = 0.07f;
                 damageBase = 3f;
                 damageGrowth = 0.08f;
+                score = 1750;
                 break;
             case EnemyType.lavabeast:
                 this.type = EnemyType.lavabeast;
@@ -53,6 +58,7 @@ public class EnemyStructure {
                 lifeGrowth = 0.07f;
                 damageBase = 4f;
                 damageGrowth = 0.09f;
+                score = 2000;
                 break;
             case EnemyType.alchemist:
                 this.type = EnemyType.alchemist;
@@ -60,6 +66,7 @@ public class EnemyStructure {
                 lifeGrowth = 0.07f;
                 damageBase = 3f;
                 damageGrowth = 0.1f;
+                score = 2000;
                 break;
             case EnemyType.devil:
                 this.type = EnemyType.devil;
@@ -67,6 +74,7 @@ public class EnemyStructure {
                 lifeGrowth = 0.07f;
                 damageBase = 3f;
                 damageGrowth = 0.09f;
+                score = 2100;
                 break;
             case EnemyType.explorer:
                 this.type = EnemyType.explorer;
@@ -74,6 +82,7 @@ public class EnemyStructure {
                 lifeGrowth = 0.07f;
                 damageBase = 3f;
                 damageGrowth = 0.09f;
+                score = 2200;
                 break;
             case EnemyType.fireMage:
                 this.type = EnemyType.fireMage;
@@ -81,6 +90,7 @@ public class EnemyStructure {
                 lifeGrowth = 0.07f;
                 damageBase = 3.5f;
                 damageGrowth = 0.1f;
+                score = 2300;
                 break;
             case EnemyType.iceBeast:
                 this.type = EnemyType.iceBeast;
@@ -88,6 +98,7 @@ public class EnemyStructure {
                 lifeGrowth = 0.07f;
                 damageBase = 3.5f;
                 damageGrowth = 0.085f;
+                score = 2200;
                 break;
             case EnemyType.skeletonMage:
                 this.type = EnemyType.skeletonMage;
@@ -95,6 +106,7 @@ public class EnemyStructure {
                 lifeGrowth = 0.07f;
                 damageBase = 2.75f;
                 damageGrowth = 0.1f;
+                score = 2150;
                 break;
             default:
                 Debug.LogError("This Enemy doesn't exists!");
@@ -119,6 +131,19 @@ public class EnemyStructure {
         retEnemy.dna_colorsat = UnityEngine.Random.Range(-2f, 2f);
         retEnemy.dna_brightness = UnityEngine.Random.Range(0.50f, 2f);
 
+        if (retEnemy.type == EnemyType.makula)
+        {
+            retEnemy.xpBase = 10f;
+            retEnemy.xpGrowth = 0.15f;
+        }
+        else
+        {
+            retEnemy.xpBase = 2f;
+            retEnemy.xpGrowth = 0.15f;
+        }
+
+        retEnemy.xp = Formulas.ExponentialGrowth(retEnemy.xpBase, retEnemy.xpGrowth, retEnemy.level - 1);
+
         return retEnemy;
     }
 
@@ -128,6 +153,7 @@ public class EnemyStructure {
         retEnemy.level = level;
         retEnemy.life = Mathf.RoundToInt(Formulas.ExponentialGrowth(retEnemy.lifeBase, retEnemy.lifeGrowth, retEnemy.level - 1));
         retEnemy.damage = Formulas.ExponentialGrowth(retEnemy.damageBase, retEnemy.damageGrowth, retEnemy.level - 1);
+        retEnemy.xp = Formulas.ExponentialGrowth(retEnemy.xpBase, retEnemy.xpGrowth, retEnemy.level - 1);
 
         return retEnemy;
     }
