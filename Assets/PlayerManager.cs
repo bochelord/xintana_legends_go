@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum weapon { yellow,red,blue,green}
+public enum weapon { yellow,red,blue,green, black}
 public class PlayerManager : MonoBehaviour {
 
 
@@ -20,6 +20,7 @@ public class PlayerManager : MonoBehaviour {
 
     private XintanaProfile profile;
     private Rad_GuiManager _guiManager;
+    private XintanaStructure _newXintana;
 
     private float totalExpPerGame = 0;
     void Awake()
@@ -27,10 +28,12 @@ public class PlayerManager : MonoBehaviour {
         _guiManager = FindObjectOfType<Rad_GuiManager>();
         profile = Rad_SaveManager.profile;
         level = profile.level;
+        weaponEquipped = profile.weaponEquipped;
         experience = profile.experience;
-        //TODO attack = level * something, or take damage from sheets
-        //TODO maxLife = level * something , or take life from sheets
+        _newXintana = new XintanaStructure().GenerateXintanaWithLevel(weaponEquipped, level);
+        maxLife = _newXintana.life;
         life = GetMaxLife();
+        attack = _newXintana.damage;
     }
 
     public float GetMaxLife()
@@ -107,5 +110,9 @@ public class PlayerManager : MonoBehaviour {
     {
         totalExpPerGame -= GetMaxExperience();
         level++;
+        _newXintana = new XintanaStructure().GenerateXintanaWithLevel(weaponEquipped, level);
+        maxLife = _newXintana.life;
+        life = GetMaxLife();
+        attack = _newXintana.damage;
     }
 }

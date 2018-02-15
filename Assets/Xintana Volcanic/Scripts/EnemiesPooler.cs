@@ -88,7 +88,21 @@ public class EnemiesPooler : Pooler {
 
         int index = Random.Range(0, retEnemies.Count);
 
-        if (retEnemies.Count == 0) { Debug.LogError("godverdomme"); }
+        if (retEnemies.Count == 0)
+        {
+            for (int i = 0; i < enemiesPrefabs.Length; i++)
+            {
+                if (appearInWorld == enemiesPrefabs[i].GetComponentInChildren<EnemyController>().appearsOnWorld)
+                {
+                    GameObject obj = (GameObject)Instantiate(enemiesPrefabs[i]);
+                    obj.transform.parent = current.transform;
+                    obj.transform.position = Vector3.zero;
+                    obj.SetActive(false);
+                    retEnemies.Add(obj);
+                }
+
+            }
+        }
 
         return retEnemies[index];
 
