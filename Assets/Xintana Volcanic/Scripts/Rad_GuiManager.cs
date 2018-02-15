@@ -129,6 +129,7 @@ public class Rad_GuiManager : MonoBehaviour {
         float _tempExp = Rad_SaveManager.profile.experience;
         AddExperienceToSlider(_tempExp);
         Debug.Log(_tempExp);
+        Debug.Log(_tempLevel);
     }
     private void Update()
     {
@@ -235,7 +236,7 @@ public class Rad_GuiManager : MonoBehaviour {
         }
         if (levelScoreText)
         {
-            levelScoreText.text = _playerManager.level.ToString();
+            levelScoreText.text = "Level " + _playerManager.level.ToString();
         }
 
         if (attackScoreValue)
@@ -276,6 +277,7 @@ public class Rad_GuiManager : MonoBehaviour {
     /// </summary>
     public void CloseScorePanelAndMainMenuOn()
     {
+        _scorePanelOn = false;
         SetMainMenuStats();
         _mainMenu = true;
         scorePanel.SetActive(false);
@@ -360,7 +362,7 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         _scorePanelOn = true;
         StartCoroutine(refreshHighScore(Rad_SaveManager.profile.highscore));
-        experienceSlider.value = Rad_SaveManager.profile.experience / ((_playerManager.level + 1)*_playerManager.GetMaxExperience());
+        expScoreSlider.value = Rad_SaveManager.profile.experience / ((_playerManager.level + 1)*_playerManager.GetMaxExperience());
         _pScorePlayer = 0;
         x2Text.SetActive(false);
         scorePanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
@@ -390,22 +392,20 @@ public class Rad_GuiManager : MonoBehaviour {
             clone_HighScoreFxPrefab.transform.position = highScorePlayer.transform.position;
             StartCoroutine(refreshHighScore(Rad_SaveManager.profile.highscore));
         }
-        DOTween.To(() => _pWorldReached, x => _pWorldReached = x, _levelManager.GetCurrentWorldNumber(), 1f);
-
-        yield return new WaitForSeconds(2f);
-        DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled()+1, 1f);
-
-        yield return new WaitForSeconds(1.5f);
-        UpdateExperience();
-        yield return new WaitForSeconds(5f);
-        _scorePanelOn = false; //so we stop constantly refreshing this panel
-        closeButton.enabled = true;
+        DOTween.To(() => _pWorldReached, x => _pWorldReached = x, _levelManager.GetCurrentWorldNumber(), 1f).OnComplete(()=> 
+        {
+            DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled() + 1, 1f).OnComplete(()=> 
+            {
+                UpdateExperience();
+            });
+        });
     }
 
     private void UpdateExperience()
     {
-        if(_playerManager.GetTotalExpPerGame() > _playerManager.GetMaxExperience())
+        if(_playerManager.GetTotalExpPerGame() + Rad_SaveManager.profile.experience >= _playerManager.GetMaxExperience())
         {
+            
             DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, 1 , 1f).OnComplete(() =>
             {
                 DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, 0, 0f).OnComplete(() =>
@@ -418,11 +418,20 @@ public class Rad_GuiManager : MonoBehaviour {
                 });   
 
             });
-        }else
+        }else if (!_playerManager.GetExperienceAddedFromProfile())
+        {
+            float _tempValue = (_playerManager.GetTotalExpPerGame() + Rad_SaveManager.profile.experience) / _playerManager.GetMaxExperience();
+            DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, _tempValue, 2f);
+            closeButton.enabled = true;
+            _playerManager.SavePlayerStats();
+            Rad_SaveManager.SaveData();
+        }
+        else
         {
             float _tempValue = _playerManager.GetTotalExpPerGame() / _playerManager.GetMaxExperience();
             DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, _tempValue, 2f);
-             _playerManager.SavePlayerStats();
+            closeButton.enabled = true;
+            _playerManager.SavePlayerStats();
             Rad_SaveManager.SaveData();
         }
 

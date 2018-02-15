@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour {
     private XintanaProfile profile;
     private Rad_GuiManager _guiManager;
     private XintanaStructure _newXintana;
-
+    private bool _profileExperienceAdded = false;
     private float totalExpPerGame = 0;
     void Awake()
     {
@@ -112,12 +112,24 @@ public class PlayerManager : MonoBehaviour {
     
     public void LevelUpAndUpdateExperience()
     {
-        totalExpPerGame -= GetMaxExperience();
+        if (!_profileExperienceAdded)
+        {
+            totalExpPerGame -= (GetMaxExperience() - Rad_SaveManager.profile.experience);
+            _profileExperienceAdded = true;
+        }
+        else
+        {
+            totalExpPerGame -= GetMaxExperience();
+        }
+       
         level++;
         _newXintana = new XintanaStructure().GenerateXintanaWithLevel(weaponEquipped, level);
         maxLife = _newXintana.life;
         life = GetMaxLife();
         attack = _newXintana.damage;
     }
-
+    public bool GetExperienceAddedFromProfile()
+    {
+        return _profileExperienceAdded;
+    }
 }
