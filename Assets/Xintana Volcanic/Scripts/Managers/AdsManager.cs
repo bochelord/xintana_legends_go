@@ -66,6 +66,7 @@ public class AdsManager : MonoBehaviour {
             case ShowResult.Finished:
                 AdsViewed++;
                 adViewed = true;
+                _guiManager.closePrizePanel.enabled = true;
                 _guiManager.HideDoublePrizePanel();
                 _guiManager.DoublePrize();
                 _analyticsManager.DoublePrizeAd_Event(true);

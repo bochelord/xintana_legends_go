@@ -36,13 +36,13 @@ public class Rad_Chest : MonoBehaviour {
     }
     public void OpenChest()
     {
+        _chestManager.SetCanOpen(false);
         if (_chestManager.GetCanOpen())
         {
             this.transform.DOShakeRotation(2, 20, 2, 25, false).OnComplete(() =>
             {
                 chestClosed.SetActive(false);
                 chestOpen.SetActive(true);
-                _chestManager.SetCanOpen(false);
                 _chestManager.prizeAmount = amount;
                 _chestManager.prizeType = type;
                 UpdatePrize();

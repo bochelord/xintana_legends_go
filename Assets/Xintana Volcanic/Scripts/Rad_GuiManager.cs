@@ -68,6 +68,7 @@ public class Rad_GuiManager : MonoBehaviour {
     [Header("Price Panel")]
     public Text prizeText;
     public GameObject rerollButton;
+    public Button closePrizePanel;
     [Header("Main Menu")]
     public Text attackValue;
     public Text defenceValue;
@@ -495,7 +496,7 @@ public class Rad_GuiManager : MonoBehaviour {
         });
     }
 
-    public void ShowDoublePricePanel()
+    public void ShowDoublePrizePanel()
     {
         doublePricePanelCoroutine = StartCoroutine(ShowDoublePriceCoroutine(2));
     }
@@ -537,6 +538,7 @@ public class Rad_GuiManager : MonoBehaviour {
         //pricePanel.SetActive(true);
         doublePricePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
         {
+            closePrizePanel.enabled = true;
             _doubleScorePanelOn = false;
             doublePricePanel.SetActive(false);
 
@@ -656,7 +658,8 @@ public class Rad_GuiManager : MonoBehaviour {
 
             if (_chestManager.prizeAmount > 0)
             {
-                ShowDoublePricePanel();
+                closePrizePanel.enabled = false; // we wait for double prize ad
+                ShowDoublePrizePanel();
             }
             _chestManager.UpdatePlayerData();
             _spawnPrize = true;
