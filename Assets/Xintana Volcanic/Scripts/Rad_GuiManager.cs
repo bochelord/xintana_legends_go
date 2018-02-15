@@ -8,7 +8,7 @@ public class Rad_GuiManager : MonoBehaviour {
 
     [Header("Panels")]
     public GameObject mainMenuPanel;
-    public GameObject playerGameOverPanel;
+    public GameObject scorePanel;
     public GameObject shop;
     public GameObject viewAdPanel;
     public GameObject ContinueNoAdPanel;
@@ -31,15 +31,18 @@ public class Rad_GuiManager : MonoBehaviour {
     [Header("Icons")]
     public GameObject doubleScoreIcon;
     public GameObject extraLifeIcon;
-    [Header ("Player Game Over")]
-    public Text pKogiAmount;
-    public Text pZazuAmount;
-    public Text pMakulaAmount;
+    [Header ("Score Panel")]
     public Text pScorePlayer;
+    public Text highScorePlayer;
     public Text pWorldReached;
     public Text pFightsNumber;
+    public Slider expScoreSlider;
+    public Text levelScoreText;
+    public Text attackScoreValue;
+    public Text attackIncrease;
+    public Text hpValue;
+    public Text hpIncrease;
     public GameObject x2Text;
-    public GameObject gem;
     public GameObject HighScoreFxPrefab;
     [Header("Share Panel")]
     public Text scorePlayer;
@@ -217,7 +220,7 @@ public class Rad_GuiManager : MonoBehaviour {
         }
         if (highScoreText)
         {
-            highScoreText.text = _pHighScore.ToString();
+            highScorePlayer.text = _pHighScore.ToString();
         }
 
     }
@@ -252,7 +255,7 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         SetMainMenuStats();
         _mainMenu = true;
-        playerGameOverPanel.SetActive(false);
+        scorePanel.SetActive(false);
         mainMenuPanel.SetActive(true);
         mainMenuPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
         if (_doubleScorePanelOn)
@@ -267,7 +270,7 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void PlayerGameOverPanelOn()
     {
-        playerGameOverPanel.SetActive(true);
+        scorePanel.SetActive(true);
         gameOverPanelCoroutine = StartCoroutine(FillGameOverPanel());
 
 
@@ -335,7 +338,7 @@ public class Rad_GuiManager : MonoBehaviour {
         _pHighScore = Rad_SaveManager.profile.highscore;
         _pScorePlayer = 0;
         x2Text.SetActive(false); 
-        playerGameOverPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
+        scorePanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
         yield return new WaitForSeconds(1);
         DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 1f).OnComplete(()=> 
         {
@@ -358,35 +361,34 @@ public class Rad_GuiManager : MonoBehaviour {
             Rad_SaveManager.SaveData();
             GameObject clone_HighScoreFxPrefab;
             clone_HighScoreFxPrefab = Instantiate(HighScoreFxPrefab);
-            clone_HighScoreFxPrefab.transform.SetParent(playerGameOverPanel.transform);
-            clone_HighScoreFxPrefab.transform.position = highScoreText.transform.position;
+            clone_HighScoreFxPrefab.transform.SetParent(scorePanel.transform);
+            clone_HighScoreFxPrefab.transform.position = highScorePlayer.transform.position;
             StartCoroutine(refreshHighScore(Rad_SaveManager.profile.highscore));
         }
-        DOTween.To(() => _pWorldReached, x => _pWorldReached = x, _levelManager.GetCurrentWorldNumber(), 1f).OnComplete(()=> 
-        {
-            if (_pWorldReached > 1)
-            {
-                SpawnGem();
-                Rad_SaveManager.profile.gems++;
-                Rad_SaveManager.SaveData();
-            }
-        });
+        DOTween.To(() => _pWorldReached, x => _pWorldReached = x, _levelManager.GetCurrentWorldNumber(), 1f);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled()+1, 1f);
 
         yield return new WaitForSeconds(1.5f);
+
+        UpdateExperience();
         _scorePanelOn = false; //so we stop constantly refreshing this panel
     }
 
-    private void SpawnGem()
+    private void UpdateExperience()
     {
-        gem.SetActive(true);
-        gem.transform.DOScale(3, 1).OnComplete(()=> 
+        while(_playerManager.GetTotalExpPerGame() > _playerManager.GetMaxExperience())
         {
-            gem.transform.DOScale(1, 0);
-            gem.SetActive(false);
-        });
+            DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, 1 , 2f).OnComplete(() =>
+            {
+                _playerManager.LevelUpAndUpdateExperience();
+            });
+        }
+
+        float _tempValue = _playerManager.GetTotalExpPerGame() / _playerManager.GetMaxExperience();
+        DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, _tempValue, 2f);
+
     }
     public void ShowAdPanel()
     {

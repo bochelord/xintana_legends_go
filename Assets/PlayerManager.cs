@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour {
     private XintanaProfile profile;
     private Rad_GuiManager _guiManager;
 
+    private float totalExpPerGame = 0;
     void Awake()
     {
         _guiManager = FindObjectOfType<Rad_GuiManager>();
@@ -77,22 +78,18 @@ public class PlayerManager : MonoBehaviour {
 
     public void AddExperience(int value)
     {
+        totalExpPerGame += value;
         experience += value;
         _guiManager.AddExperienceToSlider(value);
-        if(experience >= GetMaxExperience())
-        {
-            Debug.Log("subiendo level");
-            experience -= GetMaxExperience(); // Reset experience
-            level++;
-        }
+        //if(experience >= GetMaxExperience())
+        //{
+        //    experience -= GetMaxExperience(); // Reset experience
+        //    level++;
+        //}
     }
     public int GetMaxExperience()
     {
-
         int _maxExperience = (level + 1) * pointsPerLevel;
-        Debug.Log(">>>>>>>>>>>>>>>>>" + pointsPerLevel);
-        Debug.Log(">>>>>>>>LEVEL>>>>>>>>>" + level);
-        Debug.Log(">>>>>>>>MAXEXPERIENCE>>>>>>>>>" + _maxExperience);
         return _maxExperience;
     }
 
@@ -100,5 +97,15 @@ public class PlayerManager : MonoBehaviour {
     {
         profile.experience = experience;
         profile.level = level;
+    }
+    public float GetTotalExpPerGame()
+    {
+        return totalExpPerGame;
+    }
+    
+    public void LevelUpAndUpdateExperience()
+    {
+        totalExpPerGame -= GetMaxExperience();
+        level++;
     }
 }
