@@ -494,7 +494,6 @@ public class LevelManager : MonoBehaviour {
 
     public void GameOverPanel()
     {
-        _playerManager.SavePlayerStats();
         VanishPlayer();
         combinationManager.MoveButtonsOut();
         StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.PlayerGameOverPanelOn,2));

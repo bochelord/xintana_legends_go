@@ -9,7 +9,6 @@ public class ES2UserType_XintanaProfile : ES2Type
 	{
 		XintanaProfile data = (XintanaProfile)obj;
 		// Add your writer.Write calls here.
-		writer.Write(data.gameVersion);
 		writer.Write(data.profileID);
 		writer.Write(data.highscore);
 		writer.Write(data.gems);
@@ -42,7 +41,6 @@ public class ES2UserType_XintanaProfile : ES2Type
 	{
 		XintanaProfile data = (XintanaProfile)c;
 		// Add your reader.Read calls here to read the data into the object.
-		data.gameVersion = reader.Read<System.String>();
 		data.profileID = reader.Read<System.Int32>();
 		data.highscore = reader.Read<System.Int32>();
 		data.gems = reader.Read<System.Int32>();
@@ -51,7 +49,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		data.timesKilledByKogi = reader.Read<System.Int32>();
 		data.timesKilledByBlackKnight = reader.Read<System.Int32>();
 		data.level = reader.Read<System.Int32>();
-		data.experience = reader.Read<System.Int32>();
+		data.experience = reader.Read<System.Single>();
 		data.weaponEquipped = reader.Read<weapon>();
 		data.adsViewed = reader.Read<System.Int32>();
 		data.adsSkipped = reader.Read<System.Int32>();

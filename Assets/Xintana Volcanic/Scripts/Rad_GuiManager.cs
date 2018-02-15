@@ -106,6 +106,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private int _pFightsNumber;
     private int _coinsToSpawn = 20;
     private int _coinsSpawned = 0;
+    private int _tempLevel;
     private float _attackValue;
     private float _hpValue;
     private Coroutine gameOverPanelCoroutine;
@@ -119,8 +120,16 @@ public class Rad_GuiManager : MonoBehaviour {
         _chestManager = FindObjectOfType<ChestRoulette>();
         _screenshot = FindObjectOfType<ScreenShot>();
         _playerManager = FindObjectOfType<PlayerManager>();
+
     }
 
+    private void Start()
+    {
+        _tempLevel = _playerManager.level; //conflicts with timing
+        float _tempExp = Rad_SaveManager.profile.experience;
+        AddExperienceToSlider(_tempExp);
+        Debug.Log(_tempExp);
+    }
     private void Update()
     {
         scoreText.text = _levelManager.GetPlayerScoreUI().ToString();
@@ -351,6 +360,7 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         _scorePanelOn = true;
         StartCoroutine(refreshHighScore(Rad_SaveManager.profile.highscore));
+        experienceSlider.value = Rad_SaveManager.profile.experience / ((_playerManager.level + 1)*_playerManager.GetMaxExperience());
         _pScorePlayer = 0;
         x2Text.SetActive(false);
         scorePanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
@@ -412,6 +422,7 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             float _tempValue = _playerManager.GetTotalExpPerGame() / _playerManager.GetMaxExperience();
             DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, _tempValue, 2f);
+             _playerManager.SavePlayerStats();
             Rad_SaveManager.SaveData();
         }
 
@@ -683,8 +694,8 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void SetMainMenuStats()
     {
-        attackValue.text = _playerManager.attack.ToString();
-        hpText.text = _playerManager.GetMaxLife().ToString();
+        attackValue.text = _playerManager.attack.ToString("f2");
+        hpText.text = _playerManager.GetMaxLife().ToString("f2");
         levelText.text = "Level " + _playerManager.level.ToString();
         float _tempValue = _playerManager.experience / _playerManager.GetMaxExperience();
         expSlider.value =  _tempValue; 
@@ -696,13 +707,14 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void AddExperienceToSlider(float value)
     {
-        float _tempValue = value / _playerManager.GetMaxExperience();
-        if(experienceSlider.value + _tempValue > 1)
+        float _tempValue = value / ((_tempLevel + 1) * _playerManager.pointsPerLevel);
+
+        if (experienceSlider.value + _tempValue >= 1)
         {
             float _tempRestValue = 1 - experienceSlider.value;
             _tempValue -= _tempRestValue;
-            //TODO level Up 
             experienceSlider.value = _tempValue;
+            _tempLevel++;
         }
         else
         {

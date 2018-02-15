@@ -27,13 +27,16 @@ public class PlayerManager : MonoBehaviour {
     {
         _guiManager = FindObjectOfType<Rad_GuiManager>();
         profile = Rad_SaveManager.profile;
-        level = profile.level;
         weaponEquipped = profile.weaponEquipped;
+        level = profile.level;
         experience = profile.experience;
         _newXintana = new XintanaStructure().GenerateXintanaWithLevel(weaponEquipped, level);
         maxLife = _newXintana.life;
         life = GetMaxLife();
         attack = _newXintana.damage;
+       
+
+
     }
 
     public float GetMaxLife()
@@ -83,12 +86,12 @@ public class PlayerManager : MonoBehaviour {
     {
         totalExpPerGame += value;
         experience += value;
+
+        if (experience >= GetMaxExperience())
+        {
+            experience -= GetMaxExperience(); // Reset experience
+        }
         _guiManager.AddExperienceToSlider(value);
-        //if(experience >= GetMaxExperience())
-        //{
-        //    experience -= GetMaxExperience(); // Reset experience
-        //    level++;
-        //}
     }
     public int GetMaxExperience()
     {
@@ -98,6 +101,7 @@ public class PlayerManager : MonoBehaviour {
 
     public void SavePlayerStats()
     {
+        Debug.Log("EXPERIENCE ADDED >>>>>>>>>>>>>>>>>>> " + experience);
         profile.experience = experience;
         profile.level = level;
     }
@@ -115,4 +119,5 @@ public class PlayerManager : MonoBehaviour {
         life = GetMaxLife();
         attack = _newXintana.damage;
     }
+
 }
