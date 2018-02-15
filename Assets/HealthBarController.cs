@@ -19,7 +19,7 @@ public class HealthBarController : MonoBehaviour {
 
         if (playermanager != null)
         {
-            bar.size = playermanager.life * 10 / 100f;
+            bar.size = playermanager.life  / playermanager.GetMaxLife();
         }
         
 
