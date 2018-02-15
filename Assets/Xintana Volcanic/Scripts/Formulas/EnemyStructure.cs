@@ -24,35 +24,35 @@ public class EnemyStructure {
                 lifeBase = 3f;
                 lifeGrowth = 0.06f;
                 damageBase = 2f;
-                damageGrowth = 0.1f;
+                damageGrowth = 0.08f;
                 break;
             case EnemyType.makula:
                 this.type = EnemyType.makula;
                 lifeBase = 7f;
-                lifeGrowth = 0.08f;
-                damageBase = 5f;
-                damageGrowth = 0.1f;
+                lifeGrowth = 0.07f;
+                damageBase = 10f;
+                damageGrowth = 0.08f;
                 break;
             case EnemyType.kogi:
                 this.type = EnemyType.kogi;
                 lifeBase = 2f;
                 lifeGrowth = 0.07f;
                 damageBase = 1f;
-                damageGrowth = 0.1f;
+                damageGrowth = 0.09f;
                 break;
             case EnemyType.blackKnight:
                 this.type = EnemyType.blackKnight;
                 lifeBase = 4f;
                 lifeGrowth = 0.07f;
                 damageBase = 3f;
-                damageGrowth = 0.1f;
+                damageGrowth = 0.08f;
                 break;
             case EnemyType.lavabeast:
                 this.type = EnemyType.lavabeast;
                 lifeBase = 5f;
                 lifeGrowth = 0.07f;
                 damageBase = 4f;
-                damageGrowth = 0.1f;
+                damageGrowth = 0.09f;
                 break;
             case EnemyType.alchemist:
                 this.type = EnemyType.alchemist;
@@ -66,28 +66,28 @@ public class EnemyStructure {
                 lifeBase = 4f;
                 lifeGrowth = 0.07f;
                 damageBase = 3f;
-                damageGrowth = 0.1f;
+                damageGrowth = 0.09f;
                 break;
             case EnemyType.explorer:
                 this.type = EnemyType.explorer;
                 lifeBase = 4f;
                 lifeGrowth = 0.07f;
                 damageBase = 3f;
-                damageGrowth = 0.1f;
+                damageGrowth = 0.09f;
                 break;
             case EnemyType.fireMage:
                 this.type = EnemyType.fireMage;
                 lifeBase = 5f;
                 lifeGrowth = 0.07f;
                 damageBase = 3.5f;
-                damageGrowth = 0.11f;
+                damageGrowth = 0.1f;
                 break;
             case EnemyType.iceBeast:
                 this.type = EnemyType.iceBeast;
                 lifeBase = 4f;
                 lifeGrowth = 0.07f;
                 damageBase = 3.5f;
-                damageGrowth = 0.10f;
+                damageGrowth = 0.085f;
                 break;
             case EnemyType.skeletonMage:
                 this.type = EnemyType.skeletonMage;
