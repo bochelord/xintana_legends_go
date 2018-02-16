@@ -78,8 +78,13 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text levelText;
     public Text expText;
     public Slider expSlider;
-    public GameObject xintanaImage;
     public GameObject[] itemsImages;
+    [Header("Xintana Weapons Images")]
+    public GameObject redXintana;
+    public GameObject greenXintana;
+    public GameObject blueXintana;
+    public GameObject yellowXintana;
+    public GameObject blackXintana;
 
     private AnalyticsManager _analyticsManager;
     private AdsManager _adsManager;
@@ -280,6 +285,7 @@ public class Rad_GuiManager : MonoBehaviour {
     /// </summary>
     public void CloseScorePanelAndMainMenuOn()
     {
+        CheckInventory();
         _scorePanelOn = false;
         SetMainMenuStats();
         _mainMenu = true;
@@ -488,6 +494,7 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void Button_CloseShop()
     {
+        CheckInventory();
         //shop.SetActive(false); 
         shop.transform.DOLocalMoveX(840f, 0.75f).SetEase(Ease.OutBack);
     }
@@ -745,7 +752,99 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             experienceSlider.value += _tempValue;
         }
-
-        
     }
+    public void CheckInventory()
+    {
+        CheckXintanaWeapon();
+        for (int i = 0; i < itemsImages.Length; i++)
+        {
+            InventorySlot item = itemsImages[i].GetComponent<MainMenuInventory>().item;
+            if(SIS.DBManager.GetPurchase("si_1up") > 0 && item == InventorySlot.ExtraLife)
+            {
+                itemsImages[i].SetActive(true);
+            }
+            else if (SIS.DBManager.GetPurchase("si_x2") > 0 && item == InventorySlot.DoubleScore)
+            {
+                itemsImages[i].SetActive(true);
+            }
+            else if (SIS.DBManager.GetPurchase("si_noads") > 0 && item == InventorySlot.NoAds)
+            {
+                itemsImages[i].SetActive(true);
+            }
+            else if (SIS.DBManager.GetPurchase("si_supportdevs") > 0 && item == InventorySlot.EthernalGrattitude)
+            {
+                itemsImages[i].SetActive(true);
+            }
+        }
+    }
+    public void CheckXintanaWeapon()
+    {
+        switch (Rad_SaveManager.profile.weaponEquipped)
+        {
+            case weapon.black:
+                redXintana.SetActive(false);
+                greenXintana.SetActive(false);
+                blueXintana.SetActive(false);
+                yellowXintana.SetActive(false);
+                blackXintana.SetActive(true);
+                break;
+            case weapon.blue:
+                redXintana.SetActive(false);
+                greenXintana.SetActive(false);
+                blueXintana.SetActive(true);
+                yellowXintana.SetActive(false);
+                blackXintana.SetActive(false);
+                break;
+            case weapon.green:
+                redXintana.SetActive(false);
+                greenXintana.SetActive(true);
+                blueXintana.SetActive(false);
+                yellowXintana.SetActive(false);
+                blackXintana.SetActive(false);
+                break;
+            case weapon.red:
+
+                redXintana.SetActive(true);
+                greenXintana.SetActive(false);
+                blueXintana.SetActive(false);
+                yellowXintana.SetActive(false);
+                blackXintana.SetActive(false);
+                break;
+            case weapon.yellow:
+                redXintana.SetActive(false);
+                greenXintana.SetActive(false);
+                blueXintana.SetActive(false);
+                yellowXintana.SetActive(true);
+                blackXintana.SetActive(false);
+                break;
+           
+        }
+    }
+    public void Button_EquipRedWeapon()
+    {
+        Rad_SaveManager.profile.weaponEquipped = weapon.red;
+        CheckXintanaWeapon();
+    }
+    public void Button_EquipYellowWeapon()
+    {
+        Rad_SaveManager.profile.weaponEquipped = weapon.yellow;
+        CheckXintanaWeapon();
+    }
+    public void Button_EquipGreenWeapon()
+    {
+        Rad_SaveManager.profile.weaponEquipped = weapon.green;
+        CheckXintanaWeapon();
+    }
+    public void Button_EquipBlueWeapon()
+    {
+        Rad_SaveManager.profile.weaponEquipped = weapon.blue;
+        CheckXintanaWeapon();
+    }
+    public void Button_EquipBlackWeapon()
+    {
+        Rad_SaveManager.profile.weaponEquipped = weapon.black;
+        CheckXintanaWeapon();
+    }
+
+    
 }
