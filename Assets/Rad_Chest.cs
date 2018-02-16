@@ -18,7 +18,7 @@ public class Rad_Chest : MonoBehaviour {
     private ChestRoulette _chestManager;
     private Rad_GuiManager _guiManager;
     private ParticlePooler _pooler;
-    private bool _rotate = false;
+
     private void Start()
     {
         _pooler = FindObjectOfType<ParticlePooler>();
@@ -36,9 +36,10 @@ public class Rad_Chest : MonoBehaviour {
     }
     public void OpenChest()
     {
-        _chestManager.SetCanOpen(false);
+
         if (_chestManager.GetCanOpen())
         {
+            _chestManager.SetCanOpen(false);
             this.transform.DOShakeRotation(2, 20, 2, 25, false).OnComplete(() =>
             {
                 chestClosed.SetActive(false);
