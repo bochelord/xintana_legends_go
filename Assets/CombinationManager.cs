@@ -29,6 +29,7 @@ public class CombinationManager : MonoBehaviour {
     public GameObject auraCombination;
     [Header("UI Buttons")]
     public GameObject[] uiButtons;
+    
     [HideInInspector]
     public int combinationLength=1;                   //Combination length that the User will has to solve.
 
@@ -39,6 +40,7 @@ public class CombinationManager : MonoBehaviour {
 
     public float timeToResolveCombination = 15;
 
+    private bool _firstTimePressed = false;
     private bool gameOn = true;
     private bool winningCondition = false;
     private float tempTimer;                        //Auxiliary variable to work with the Timer.
@@ -63,7 +65,8 @@ public class CombinationManager : MonoBehaviour {
     }
 
     
-	void Start () {
+	void Start ()
+    {
         combinationArray = new GameObject[combinationLength];
         copyCombinationArray = new GameObject[combinationLength];
         
@@ -120,6 +123,7 @@ public class CombinationManager : MonoBehaviour {
         {
             UpdateTimer();
         }
+
         //if (winningCondition)
         //{
         //    //Debug.Log("YOU WON");
@@ -295,6 +299,25 @@ public class CombinationManager : MonoBehaviour {
                 }
             }
         }
+
+        if (levelManager.state == GameState.Running && Rad_SaveManager.profile.firstTimePlayed && timerSlider.value < 0.66f  && !_firstTimePressed)
+        {
+            _firstTimePressed = true;
+            string buttonColor = combinationArray[currentCombinationPosition].GetComponent<ColorButtonData>().buttonColor;
+            for (int i = 0; i < uiButtons.Length; i++)
+            {
+                if(uiButtons[i].GetComponent<ColorButtonData>().buttonColor == buttonColor)
+                {
+                    uiButtons[i].GetComponent<Image>().DOFade(0.5f, 0.5f).OnComplete(() =>
+                     {
+                         Debug.Log("Restarting>>>>>>>>>>>>>>>>>>");
+                         uiButtons[i].GetComponent<Image>().DORestart();
+                     });
+                    break;
+                }
+            }
+        }
+
     }
 
 
@@ -376,6 +399,20 @@ public class CombinationManager : MonoBehaviour {
             // We STOP the Game as the Player lose.
             gameOn = false;
         }
+
+        if (Rad_SaveManager.profile.firstTimePlayed)
+        {
+            _firstTimePressed = true;
+            Rad_SaveManager.profile.firstTimePlayed = false;
+            for (int i = 0; i < uiButtons.Length; i++)
+            {
+                uiButtons[i].GetComponent<Image>().DOFade(1, 0);
+                uiButtons[i].GetComponent<Image>().DOKill();
+            }
+            
+
+        }
+
     }
 
     public void MoveButtonsOut()

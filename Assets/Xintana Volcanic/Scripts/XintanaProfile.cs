@@ -24,6 +24,7 @@ public class XintanaProfile : MonoBehaviour {
     public bool extraLife;
     public bool noAds;
     public bool doubleScore;
+    public bool firstTimePlayed;
     public System.DateTime timeStamp;
     public int sharedScoreTimes;
     //TODO creat purchases done and equipped_items;
@@ -51,6 +52,7 @@ public class XintanaProfile : MonoBehaviour {
         profile.extraLife = false;
         profile.noAds = false;
         profile.doubleScore = false;
+        profile.firstTimePlayed = true;
         profile.timesKilledByBlackKnight = 0;
         profile.timesKilledByKogi = 0;
         profile.timesKilledByMakula = 0;

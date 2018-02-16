@@ -9,6 +9,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 	{
 		XintanaProfile data = (XintanaProfile)obj;
 		// Add your writer.Write calls here.
+		writer.Write(data.gameVersion);
 		writer.Write(data.profileID);
 		writer.Write(data.highscore);
 		writer.Write(data.gems);
@@ -25,6 +26,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		writer.Write(data.extraLife);
 		writer.Write(data.noAds);
 		writer.Write(data.doubleScore);
+		writer.Write(data.firstTimePlayed);
 		writer.Write(data.timeStamp);
 		writer.Write(data.sharedScoreTimes);
 
@@ -41,6 +43,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 	{
 		XintanaProfile data = (XintanaProfile)c;
 		// Add your reader.Read calls here to read the data into the object.
+		data.gameVersion = reader.Read<System.String>();
 		data.profileID = reader.Read<System.Int32>();
 		data.highscore = reader.Read<System.Int32>();
 		data.gems = reader.Read<System.Int32>();
@@ -57,6 +60,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		data.extraLife = reader.Read<System.Boolean>();
 		data.noAds = reader.Read<System.Boolean>();
 		data.doubleScore = reader.Read<System.Boolean>();
+		data.firstTimePlayed = reader.Read<System.Boolean>();
 		data.timeStamp = reader.Read<System.DateTime>();
 		data.sharedScoreTimes = reader.Read<System.Int32>();
 
