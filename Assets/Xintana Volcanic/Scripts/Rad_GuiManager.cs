@@ -823,28 +823,28 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         switch (Rad_SaveManager.profile.weaponEquipped)
         {
-            case weapon.black:
+            case WeaponType.black:
                 redXintana.SetActive(false);
                 greenXintana.SetActive(false);
                 blueXintana.SetActive(false);
                 yellowXintana.SetActive(false);
                 blackXintana.SetActive(true);
                 break;
-            case weapon.blue:
+            case WeaponType.blue:
                 redXintana.SetActive(false);
                 greenXintana.SetActive(false);
                 blueXintana.SetActive(true);
                 yellowXintana.SetActive(false);
                 blackXintana.SetActive(false);
                 break;
-            case weapon.green:
+            case WeaponType.green:
                 redXintana.SetActive(false);
                 greenXintana.SetActive(true);
                 blueXintana.SetActive(false);
                 yellowXintana.SetActive(false);
                 blackXintana.SetActive(false);
                 break;
-            case weapon.red:
+            case WeaponType.red:
 
                 redXintana.SetActive(true);
                 greenXintana.SetActive(false);
@@ -852,7 +852,7 @@ public class Rad_GuiManager : MonoBehaviour {
                 yellowXintana.SetActive(false);
                 blackXintana.SetActive(false);
                 break;
-            case weapon.yellow:
+            case WeaponType.yellow:
                 redXintana.SetActive(false);
                 greenXintana.SetActive(false);
                 blueXintana.SetActive(false);
@@ -864,28 +864,28 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     public void Button_EquipRedWeapon()
     {
-        Rad_SaveManager.profile.weaponEquipped = weapon.red;
-        StartCoroutine(FunctionLibrary.CallWithDelay(CheckXintanaWeapon,0.1f));
+        Rad_SaveManager.profile.weaponEquipped = WeaponType.red;
+        CheckXintanaWeapon();
     }
     public void Button_EquipYellowWeapon()
     {
-        Rad_SaveManager.profile.weaponEquipped = weapon.yellow;
-        StartCoroutine(FunctionLibrary.CallWithDelay(CheckXintanaWeapon, 0.1f));
+        Rad_SaveManager.profile.weaponEquipped = WeaponType.yellow;
+        CheckXintanaWeapon();
     }
     public void Button_EquipGreenWeapon()
     {
-        Rad_SaveManager.profile.weaponEquipped = weapon.green;
-        StartCoroutine(FunctionLibrary.CallWithDelay(CheckXintanaWeapon, 0.1f));
+        Rad_SaveManager.profile.weaponEquipped = WeaponType.green;
+        CheckXintanaWeapon();
     }
     public void Button_EquipBlueWeapon()
     {
-        Rad_SaveManager.profile.weaponEquipped = weapon.blue;
-        StartCoroutine(FunctionLibrary.CallWithDelay(CheckXintanaWeapon, 0.1f));
+        Rad_SaveManager.profile.weaponEquipped = WeaponType.blue;
+        CheckXintanaWeapon();
     }
     public void Button_EquipBlackWeapon()
     {
-        Rad_SaveManager.profile.weaponEquipped = weapon.black;
-        StartCoroutine(FunctionLibrary.CallWithDelay(CheckXintanaWeapon, 0.1f));
+        Rad_SaveManager.profile.weaponEquipped = WeaponType.black;
+        CheckXintanaWeapon();
     }
 
     

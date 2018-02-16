@@ -8,30 +8,30 @@ public class XintanaStructure
     public float life, lifeBase, lifeGrowth;
     public float damage, damageBase, damageGrouth;
 
-    public weapon weaponType;
+    public WeaponType weaponType;
 
-    public XintanaStructure GenerateXintanaBasic(weapon _weaponType)
+    public XintanaStructure GenerateXintanaBasic(WeaponType _weaponType)
     {
         this.weaponType = _weaponType;
         switch (weaponType)
         {
-            case weapon.blue:
+            case WeaponType.blue:
                 damageBase = 2;
                 damageGrouth = 0.01f;
                 break;
-            case weapon.green:
+            case WeaponType.green:
                 damageBase = 2.5f;
                 damageGrouth = 0.01f;
                 break;
-            case weapon.red:
+            case WeaponType.red:
                 damageBase = 1.5f;
                 damageGrouth = 0.005f;
                 break;
-            case weapon.yellow:
+            case WeaponType.yellow:
                 damageBase = 3;
                 damageGrouth = 0.025f;
                 break;
-            case weapon.black:
+            case WeaponType.black:
                 damageBase = 2f;
                 damageGrouth = 0.03f;
                 break;
@@ -51,7 +51,7 @@ public class XintanaStructure
         return xintana;
     }
 
-    public XintanaStructure GenerateXintanaWithLevel(weapon weaponType, int level)
+    public XintanaStructure GenerateXintanaWithLevel(WeaponType weaponType, int level)
     {
         XintanaStructure xintana = new XintanaStructure().GenerateXintanaBasic(weaponType);
         xintana.level = level;

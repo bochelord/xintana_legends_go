@@ -53,7 +53,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		data.timesKilledByBlackKnight = reader.Read<System.Int32>();
 		data.level = reader.Read<System.Int32>();
 		data.experience = reader.Read<System.Single>();
-		data.weaponEquipped = reader.Read<weapon>();
+		data.weaponEquipped = reader.Read<WeaponType>();
 		data.adsViewed = reader.Read<System.Int32>();
 		data.adsSkipped = reader.Read<System.Int32>();
 		data.audioEnabled = reader.Read<System.Boolean>();

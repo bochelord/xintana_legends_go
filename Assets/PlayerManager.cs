@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum weapon { yellow,red,blue,green, black}
+public enum WeaponType { yellow,red,blue,green, black}
 public class PlayerManager : MonoBehaviour {
 
 
@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour {
     public int level;
     public float experience;
     public float attack = 1.5f;
-    public weapon weaponEquipped;
+    public WeaponType weaponEquipped;
     [Tooltip("Every level will be increased by this amount")]
     public int pointsPerLevel = 1000;
     [Header("Particle")]
@@ -23,6 +23,8 @@ public class PlayerManager : MonoBehaviour {
     private XintanaStructure _newXintana;
     private bool _profileExperienceAdded = false;
     private float totalExpPerGame = 0;
+    private Animator playerAnimator;
+
     void Awake()
     {
         _guiManager = FindObjectOfType<Rad_GuiManager>();
@@ -34,8 +36,16 @@ public class PlayerManager : MonoBehaviour {
         maxLife = _newXintana.life;
         life = GetMaxLife();
         attack = _newXintana.damage;
-       
 
+        playerAnimator = this.GetComponent<Animator>();
+
+        playerAnimator.SetInteger("EquippedWeapon", (int)weaponEquipped);
+
+        playerAnimator.SetInteger("EquippedWeapon", 0);
+        playerAnimator.SetBool("Attacking", false);
+        //playerAnimator.SetInteger("AnimState", 0);
+
+        //Debug.Log("Weapon Equipped is " + weaponEquipped.ToString() + " with this index:" + (int)weaponEquipped);
 
     }
 
@@ -43,6 +53,11 @@ public class PlayerManager : MonoBehaviour {
     {
         return maxLife;
     }
+
+
+
+    #region Animations
+
     /// <summary>
     /// Callback from Animation Event 
     /// </summary>
@@ -56,8 +71,8 @@ public class PlayerManager : MonoBehaviour {
     /// </summary>
     public void OnAirAttackFinished()
     {
-        this.GetComponent<Animator>().SetBool("Attacking", false);
-        this.GetComponent<Animator>().SetInteger("AnimState", 20);
+        playerAnimator.SetBool("Attacking", false);
+        playerAnimator.SetInteger("AnimState", 20);
     }
 
     /// <summary>
@@ -73,9 +88,16 @@ public class PlayerManager : MonoBehaviour {
     /// </summary>
     private void AnimationToIdle()
     {
-        this.GetComponent<Animator>().SetBool("Attacking", false);
-        this.GetComponent<Animator>().SetInteger("AnimState", 0);
+        playerAnimator.SetBool("Attacking", false);
+        playerAnimator.SetInteger("AnimState", 0);
+
+        
+        
     }
+
+    #endregion
+
+
 
     public void ReceiveDamage(float damage)
     {
