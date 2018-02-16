@@ -24,6 +24,11 @@ namespace SIS
         public string productId;
 
         /// <summary>
+        /// Bool to know if the item can be purchased with Gems also.
+        /// </summary>
+        public bool canBePurchasedByGems = false;
+
+        /// <summary>
         /// Product name or title.
         /// </summary>
         public Text title;
@@ -48,16 +53,24 @@ namespace SIS
         /// </summary>
         public Text[] price;
 
+
+
         /// <summary>
         /// Buy button that invokes the actual purchase.
         /// </summary>
         public GameObject buyButton;
 
         /// <summary>
-        /// Buy trigger, used for making the buy button visible.
+        /// Buy trigger coins, used for making the confirmation panel visible.
         /// (optional - could be used for 'double tap to purchase')
         /// </summary>
-        public GameObject buyTrigger;
+        public GameObject buyTriggerCoins;
+
+        /// <summary>
+        /// Buy trigger gems, used for making the confirmation panel visible.
+        /// (optional - could be used for 'double tap to purchase')
+        /// </summary>
+        public GameObject buyTriggerGems;
 
         /// <summary>
         /// Label that displays text while this item is locked.
@@ -118,7 +131,7 @@ namespace SIS
         //hide the buy button when disabling this item to reset it
         void OnDisable()
         {
-            if (buyTrigger)
+            if (buyTriggerCoins || buyTriggerCoins)
                 ConfirmPurchase(false);
         }
 
@@ -249,13 +262,13 @@ namespace SIS
         /// When the buy button has been clicked, here we try to purchase this item.
         /// This calls into the corresponding billing workflow of the IAPManager.
         /// </summary>
-        public void Purchase()
+        public void Purchase(GameObject pressedButton)
         {
 			IAPManager.PurchaseProduct(this.productId);
 		
             //hide buy button once a purchase was made
             //only when an additional buy trigger was set
-            if (buyTrigger)
+            if (buyTriggerCoins || buyTriggerGems)
                 ConfirmPurchase(false);
         }
 
@@ -298,9 +311,14 @@ namespace SIS
             //but don't do that for subscriptions, so that the user could easily renew it
             if ((int)obj.type > 1) return;
 
-            if (buyTrigger)
+            if (buyTriggerCoins)
             {
-                buyTrigger.SetActive(!state);
+                buyTriggerCoins.SetActive(!state);
+                buyButton.SetActive(false);
+            }
+            else if (buyTriggerGems)
+            {
+                buyTriggerGems.SetActive(!state);
                 buyButton.SetActive(false);
             }
             else

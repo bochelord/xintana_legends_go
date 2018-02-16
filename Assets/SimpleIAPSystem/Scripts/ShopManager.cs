@@ -88,6 +88,7 @@ namespace SIS
         //will try to instantiate the prefab itself
         IEnumerator Start()
         {
+
             if (!IAPManager.GetInstance())
             {
                 Debug.LogWarning("ShopManager: Could not find IAPManager prefab. Have you placed it in the first scene "
@@ -105,6 +106,7 @@ namespace SIS
                 yield return new WaitForEndOfFrame();
                 for (int i = 0; i < containers.Count; i++)
                 {
+                    
                     if (containers[i].parent != null && containers[i].parent.isActiveAndEnabled)
                         containers[i].parent.StartCoroutine(containers[i].parent.Start());
                 }
@@ -153,7 +155,7 @@ namespace SIS
                 #endif
 
                 IAPItems.Add(sceneItems[i].productId, sceneItems[i]);
-
+                Debug.Log("sceneItems[i].name: " + sceneItems[i].name);
             }
                 
 
@@ -193,13 +195,33 @@ namespace SIS
                     //get IAPItem component of the instantiated item
                     IAPItem item = newItem.GetComponent<IAPItem>();
 
+
                     //SHOPMANAGER RAD EXTENSIONS ========================
-                    item.buyButton = itemConfirmationPanel; 
-                    newItem.GetComponent<Button>().onClick.AddListener(() => {
+                    //if (list[i+1] != null)
+                    //{
+                        
+                    //}
+                    //GameObject buyItemWithCoinsObject = newItem.FindGameObjectWithTag("");
+                    item.buyButton = itemConfirmationPanel;
+
+                    item.buyTriggerCoins.GetComponent<Button>().onClick.AddListener(() => {
                         itemConfirmationPanel.SetActive(true);
-                        IAPItem shopItem = item;
-                        FillItemConfirmationPanelData(shopItem);
+                        //IAPItem shopItem = item;
+                        FillItemConfirmationPanelData(item, item.buyTriggerCoins);
                     });
+
+                    item.buyTriggerGems.GetComponent<Button>().onClick.AddListener(() => {
+                        itemConfirmationPanel.SetActive(true);
+                        //IAPItem shopItem = item;
+                        FillItemConfirmationPanelData(item, item.buyTriggerGems);
+                    });
+
+                    //newItem.GetComponent<Button>().onClick.AddListener(() => {
+
+                    //    itemConfirmationPanel.SetActive(true);
+                    //    IAPItem shopItem = item;
+                    //    FillItemConfirmationPanelData(shopItem);
+                    //});
                     //END RAD EXTENSION =================================
 
                     if (item == null) continue;
@@ -229,6 +251,26 @@ namespace SIS
                 if (itemConfirmationPanel.activeInHierarchy) { itemConfirmationPanel.SetActive(false); }
             }
 
+            ////If the Item can be purchased by gems then...
+            //if (item.canBePurchasedByGems)
+            //{
+            //    //check if there is a 'next' container where the gem items are stored
+            //    if (list[i + 1] != null)
+            //    {
+            //        IAPGroup groupHelper = list[i + 1];
+            //        ShopContainer containerHelper = GetContainer(groupHelper.id);
+            //        //loop over gem items
+            //        for (int h = 0; h < groupHelper.items.Count; h++)
+            //        {
+            //            IAPObject objHelper = groupHelper.items[h];
+
+            //        }
+            //    }
+            //}
+
+
+
+
             //refresh all products initially
             RefreshAll();
         }
@@ -238,7 +280,7 @@ namespace SIS
         /// Item Confirmation Panel.
         /// </summary>
         /// <param name="shopItem">IAPItem</param>
-        public void FillItemConfirmationPanelData(IAPItem shopItem)
+        public void FillItemConfirmationPanelData(IAPItem shopItem, GameObject pressedButton)
         {
             //Debug.Log("shopItem.name: " + shopItem.name);
             ItemConfirmationPanelData icpd;
@@ -247,12 +289,24 @@ namespace SIS
             //Debug.Log("icpd.title.text: " + shopItem.title.text);
             icpd.icon.sprite = shopItem.icon.sprite;
             icpd.description.text = shopItem.description.text;
-            for (int i = 0; i < shopItem.price.Length; i++)
+
+            if (pressedButton.tag == "buyByCoins")
             {
-                icpd.price[i].text = shopItem.price[i].text;
+                icpd.price[0].text = shopItem.price[0].text;
             }
+            else if (pressedButton.tag == "buyByGems")
+            {
+                icpd.price[0].text = shopItem.price[1].text;
+            }
+
+            //for (int i = 0; i < shopItem.price.Length; i++)
+            //{
+            //    icpd.price[i].text = shopItem.price[i].text;
+            //    //Debug.Log("icpd.price[" + i + "]" + ".text: " + icpd.price[i].text);
+            //}
+
             icpd.okButton.onClick.AddListener(() => {
-                shopItem.Purchase();
+                shopItem.Purchase(pressedButton);
             });
             //icpd.price[0].text = shopItem.price[0].text;
 
