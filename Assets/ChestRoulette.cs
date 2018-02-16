@@ -22,9 +22,6 @@ public class ChestRoulette : MonoBehaviour {
     public Transform coinsEndPosition;
     public Transform gemEndPositon;
 
-    [Header("Flash")]
-    public Image flashImage;
-
     private Rad_GuiManager _guiManager;
     private ParticlePooler _particlePooler;
     private CoinsPooler _coinsPooler;
@@ -106,13 +103,7 @@ public class ChestRoulette : MonoBehaviour {
         _guiManager.backButton.enabled = false;
 
     }
-    public void Flash()
-    {
-        flashImage.DOFade(1, 0.1f).OnComplete(() => 
-        {
-            flashImage.DOFade(0, 0.1f);
-        });
-    }
+
     private void ShowChestPrizes()
     {
         for (int i = 0; i < chests.Length; i++)
