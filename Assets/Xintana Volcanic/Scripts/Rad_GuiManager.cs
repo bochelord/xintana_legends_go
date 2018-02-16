@@ -405,7 +405,7 @@ public class Rad_GuiManager : MonoBehaviour {
         }
         DOTween.To(() => _pWorldReached, x => _pWorldReached = x, _levelManager.GetCurrentWorldNumber(), 0.5f).OnComplete(()=> 
         {
-            DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled() + 1, 0.5f).OnComplete(()=> 
+            DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled() , 0.5f).OnComplete(()=> 
             {
                 UpdateExperience();
             });
