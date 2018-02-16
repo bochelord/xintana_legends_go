@@ -42,6 +42,8 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text attackIncrease;
     public Text hpValue;
     public Text hpIncrease;
+    public Text shareText;
+    public GameObject shareButton;
     public GameObject x2Text;
     public GameObject HighScoreFxPrefab;
     public Button closeButton;
@@ -297,7 +299,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public void PlayerGameOverPanelOn()
     {
         scorePanel.SetActive(true);
-        closeButton.enabled = false;
+        closeButton.gameObject.SetActive(false);
         gameOverPanelCoroutine = StartCoroutine(FillGameOverPanel());
 
 
@@ -361,20 +363,21 @@ public class Rad_GuiManager : MonoBehaviour {
 
     IEnumerator FillGameOverPanel()
     {
+
         _scorePanelOn = true;
         StartCoroutine(refreshHighScore(Rad_SaveManager.profile.highscore));
         expScoreSlider.value = Rad_SaveManager.profile.experience / ((_playerManager.level + 1)*_playerManager.GetMaxExperience());
         _pScorePlayer = 0;
         x2Text.SetActive(false);
-        scorePanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
-        yield return new WaitForSeconds(1);
-        DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 1f).OnComplete(()=> 
+        scorePanel.transform.DOLocalMoveX(0f, 0.5f).SetEase(Ease.OutBack);
+        yield return new WaitForSeconds(0.5f);
+        DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore(), 0.5f).OnComplete(()=> 
         {
             if (SIS.DBManager.GetPurchase("si_x2") > 0)
             {
                 x2Text.SetActive(true);
                 x2Text.transform.DOShakeScale(2, 0.5f, 2, 25, true);
-                DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore() * 2, 1f);
+                DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore() * 2, 0.5f);
                 SIS.DBManager.RemovePurchase("si_x2");
                 SIS.DBManager.RemovePurchaseUI("si_x2");
                 Rad_SaveManager.profile.doubleScore = false;
@@ -382,7 +385,7 @@ public class Rad_GuiManager : MonoBehaviour {
             }
         });
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1f);
         if(Rad_SaveManager.profile.highscore< _levelManager.GetPlayerScore())
         {
             Rad_SaveManager.profile.highscore = (int)_levelManager.GetPlayerScore();
@@ -393,9 +396,9 @@ public class Rad_GuiManager : MonoBehaviour {
             clone_HighScoreFxPrefab.transform.position = highScorePlayer.transform.position;
             StartCoroutine(refreshHighScore(Rad_SaveManager.profile.highscore));
         }
-        DOTween.To(() => _pWorldReached, x => _pWorldReached = x, _levelManager.GetCurrentWorldNumber(), 1f).OnComplete(()=> 
+        DOTween.To(() => _pWorldReached, x => _pWorldReached = x, _levelManager.GetCurrentWorldNumber(), 0.5f).OnComplete(()=> 
         {
-            DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled() + 1, 1f).OnComplete(()=> 
+            DOTween.To(() => _pFightsNumber, x => _pFightsNumber = x, _levelManager.GetTotalEnemyKilled() + 1, 0.5f).OnComplete(()=> 
             {
                 UpdateExperience();
             });
@@ -407,7 +410,7 @@ public class Rad_GuiManager : MonoBehaviour {
         if(_playerManager.GetTotalExpPerGame() + Rad_SaveManager.profile.experience >= _playerManager.GetMaxExperience())
         {
             
-            DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, 1 , 1f).OnComplete(() =>
+            DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, 1 , 0.51f).OnComplete(() =>
             {
                 DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, 0, 0f).OnComplete(() =>
                 {
@@ -422,16 +425,16 @@ public class Rad_GuiManager : MonoBehaviour {
         }else if (!_playerManager.GetExperienceAddedFromProfile())
         {
             float _tempValue = (_playerManager.GetTotalExpPerGame() + Rad_SaveManager.profile.experience) / _playerManager.GetMaxExperience();
-            DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, _tempValue, 2f);
-            closeButton.enabled = true;
+            DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, _tempValue, 0.5f);
+            SetScoreButtonsOn();
             _playerManager.SavePlayerStats();
             Rad_SaveManager.SaveData();
         }
         else
         {
             float _tempValue = _playerManager.GetTotalExpPerGame() / _playerManager.GetMaxExperience();
-            DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, _tempValue, 2f);
-            closeButton.enabled = true;
+            DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, _tempValue, 0.5f);
+            SetScoreButtonsOn();
             _playerManager.SavePlayerStats();
             Rad_SaveManager.SaveData();
         }
@@ -440,6 +443,16 @@ public class Rad_GuiManager : MonoBehaviour {
         return;
 
     }
+    private void SetScoreButtonsOn()
+    {
+        closeButton.gameObject.SetActive(true);
+        shareButton.SetActive(true);
+        shareText.DOFade(0, 1f).OnComplete(() => 
+        {
+            shareText.DORestart();
+        });
+    }
+
     private void IncreaseStatsValue()
     {
         attackIncrease.gameObject.SetActive(true);
