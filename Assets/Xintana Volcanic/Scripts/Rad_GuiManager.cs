@@ -17,8 +17,10 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject pricePanel;
     public GameObject noGemsPanel;
     public GameObject startRoulettePanel;
-    [Header("Experience Slider")]
+    [Header("Sliders")]
     public Slider experienceSlider;
+    public Slider powerUpSlider;
+    public Image powerUpFill;
     [Header("PlaceHolders")]
     public Transform midScreen;
     public Transform gemPosition;
@@ -106,7 +108,9 @@ public class Rad_GuiManager : MonoBehaviour {
     private bool rouletteOn = false;
     private bool _updateScore = false;
     private bool _spawnPrize = false;
+    private bool _changeBrithness = false;
 
+    private float _tempBrightness;
     private int _pDoublePrize = 0;
     private float _prizeSpawnTime = 0;
     private int _pScorePlayer;
@@ -137,8 +141,11 @@ public class Rad_GuiManager : MonoBehaviour {
         _tempLevel = _playerManager.level; //conflicts with timing
         float _tempExp = Rad_SaveManager.profile.experience;
         AddExperienceToSlider(_tempExp);
-        Debug.Log(_tempExp);
-        Debug.Log(_tempLevel);
+        if(Rad_SaveManager.profile.weaponEquipped != weapon.red)
+        {
+            powerUpSlider.gameObject.SetActive(true);
+        }
+
     }
     private void Update()
     {
@@ -207,6 +214,10 @@ public class Rad_GuiManager : MonoBehaviour {
                 _coinsSpawned = 0;
                 _spawnPrize = false;
             }
+        }
+        if (powerUpFill.GetComponent<_2dxFX_HSV>() && _changeBrithness)
+        {
+            powerUpFill.GetComponent<_2dxFX_HSV>()._ValueBrightness = _tempBrightness;
         }
     }
 
@@ -738,6 +749,36 @@ public class Rad_GuiManager : MonoBehaviour {
         //Debug.Log(_playerManager.experience / _playerManager.GetMaxExperience());
     }
 
+    //public void AddPowerUpSlider(float value)
+    //{
+    //    float _tempValue = value / 10;
+    //    if (powerUpSlider.value + _tempValue >= 1 && powerUpSlider.value != 1)
+    //    {
+    //        _changeBrithness = true;
+    //        //TODO add poer Up button
+    //        //add some tweens, shakes and effects
+    //        PowerUpSliderBrightness();
+    //        powerUpSlider.value = 1;
+    //        //we will reset the value once the player use the power up
+    //        //ween.To(() =>_pDoublePrize, x => _pDoublePrize = x,(int)_chestManager.prizeAmount * 2, 1f );
+    //    }
+    //    else
+    //    {
+    //        powerUpSlider.value += _tempValue;
+    //    }
+
+    //}
+
+    //private void PowerUpSliderBrightness()
+    //{
+    //    DOTween.To(() => _tempBrightness, x => _tempBrightness = x, 1f, 0.5f).OnComplete(() =>
+    //    {
+    //        DOTween.To(() => _tempBrightness, x => _tempBrightness = x, 2f, 0.5f).OnComplete(() =>
+    //        {
+    //            PowerUpSliderBrightness();
+    //        });
+    //    });
+    //}
     public void AddExperienceToSlider(float value)
     {
         float _tempValue = value / ((_tempLevel + 1) * _playerManager.pointsPerLevel);
@@ -824,27 +865,27 @@ public class Rad_GuiManager : MonoBehaviour {
     public void Button_EquipRedWeapon()
     {
         Rad_SaveManager.profile.weaponEquipped = weapon.red;
-        CheckXintanaWeapon();
+        StartCoroutine(FunctionLibrary.CallWithDelay(CheckXintanaWeapon,0.1f));
     }
     public void Button_EquipYellowWeapon()
     {
         Rad_SaveManager.profile.weaponEquipped = weapon.yellow;
-        CheckXintanaWeapon();
+        StartCoroutine(FunctionLibrary.CallWithDelay(CheckXintanaWeapon, 0.1f));
     }
     public void Button_EquipGreenWeapon()
     {
         Rad_SaveManager.profile.weaponEquipped = weapon.green;
-        CheckXintanaWeapon();
+        StartCoroutine(FunctionLibrary.CallWithDelay(CheckXintanaWeapon, 0.1f));
     }
     public void Button_EquipBlueWeapon()
     {
         Rad_SaveManager.profile.weaponEquipped = weapon.blue;
-        CheckXintanaWeapon();
+        StartCoroutine(FunctionLibrary.CallWithDelay(CheckXintanaWeapon, 0.1f));
     }
     public void Button_EquipBlackWeapon()
     {
         Rad_SaveManager.profile.weaponEquipped = weapon.black;
-        CheckXintanaWeapon();
+        StartCoroutine(FunctionLibrary.CallWithDelay(CheckXintanaWeapon, 0.1f));
     }
 
     
