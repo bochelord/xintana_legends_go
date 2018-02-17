@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviour {
 
         playerAnimator.SetInteger("EquippedWeapon", (int)weaponEquipped);
 
-        playerAnimator.SetInteger("EquippedWeapon", 0);
+        playerAnimator.SetInteger("EquippedWeapon", 4);
         playerAnimator.SetBool("Attacking", false);
         //playerAnimator.SetInteger("AnimState", 0);
 
@@ -69,11 +69,11 @@ public class PlayerManager : MonoBehaviour {
     /// <summary>
     /// Callback for Animation Event Air Attack
     /// </summary>
-    public void OnAirAttackFinished()
-    {
-        playerAnimator.SetBool("Attacking", false);
-        playerAnimator.SetInteger("AnimState", 20);
-    }
+    //public void OnAirAttackFinished()
+    //{
+    //    playerAnimator.SetBool("Attacking", false);
+    //    playerAnimator.SetInteger("AnimState", 20);
+    //}
 
     /// <summary>
     /// CAllback for Animation Event Wing Jump

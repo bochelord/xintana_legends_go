@@ -104,8 +104,8 @@ public class LevelManager : MonoBehaviour {
 
         if (damagedone > enemyController.GetLife())
         {
-            //we are goinna kill the enemy so we trigger the jumping attack animation
-            player.GetComponent<Animator>().SetInteger("AnimState", 11);
+            //we are goinna kill the enemy so we trigger the double jumping animation
+            player.GetComponent<Animator>().SetInteger("AnimState", 20);
         } 
         else
         {
