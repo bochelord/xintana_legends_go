@@ -141,7 +141,7 @@ public class Rad_GuiManager : MonoBehaviour {
         _tempLevel = _playerManager.level; //conflicts with timing
         float _tempExp = Rad_SaveManager.profile.experience;
         AddExperienceToSlider(_tempExp);
-        if(Rad_SaveManager.profile.weaponEquipped != weapon.red)
+        if(Rad_SaveManager.profile.weaponEquipped != WeaponType.red)
         {
             powerUpSlider.gameObject.SetActive(true);
         }
@@ -215,10 +215,14 @@ public class Rad_GuiManager : MonoBehaviour {
                 _spawnPrize = false;
             }
         }
-        if (powerUpFill.GetComponent<_2dxFX_HSV>() && _changeBrithness)
-        {
-            powerUpFill.GetComponent<_2dxFX_HSV>()._ValueBrightness = _tempBrightness;
-        }
+
+
+        //TODO TODO :: Check the code below since the powerUpFill does not exist on the Canvas. Probably we need to make a bar
+
+        //if (powerUpFill.GetComponent<_2dxFX_HSV>() && _changeBrithness)
+        //{
+        //    powerUpFill.GetComponent<_2dxFX_HSV>()._ValueBrightness = _tempBrightness;
+        //}
     }
 
     private void UpdatePricePanel()
