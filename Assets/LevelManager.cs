@@ -136,7 +136,7 @@ public class LevelManager : MonoBehaviour {
 
         enemyController.DamagedAnimation();
         
-        LaunchShowHUDText(enemyContainer.transform.position + new Vector3(0,1.5f,0), damagedone.ToString("F1"), new Color32(245, 141, 12, 255)); /// TODO This has to be feed with the proper damage coming from the playerManager
+        LaunchShowHUDText(enemyContainer.transform.position + new Vector3(-0.25f,1.5f,0), damagedone.ToString("F1"), new Color32(245, 141, 12, 255)); /// TODO This has to be feed with the proper damage coming from the playerManager
 
         AudioManager.Instance.Play_XintanaAttack_1();
 
@@ -146,7 +146,7 @@ public class LevelManager : MonoBehaviour {
         enemyController.ApplyDamageToEnemy(damagedone);
         if (critico)
         {
-            LaunchShowHUDText(enemyContainer.transform.position + new Vector3(1f, 1.5f, 0), "crit!", new Color32(245, 141, 12, 255));
+            LaunchShowHUDText(enemyContainer.transform.position + new Vector3(0.25f, 1.5f, 0), "crit!", new Color32(234, 57, 4, 255));
         }
     }
     
@@ -477,6 +477,7 @@ public class LevelManager : MonoBehaviour {
         yield return new WaitForSeconds(0.8f);
 
         temptext.GetComponent<Text>().material.DOColor(Color.clear, 2f);
+        temptext.transform.DOMoveY(temptext.transform.position.y + 1f, 1.5f);
         yield return new WaitForSeconds(0.7f);
 
         temptext.GetComponent<Text>().material = text_material;
