@@ -145,7 +145,7 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             powerUpSlider.gameObject.SetActive(true);
         }
-       // UpdatePowerUpColorSlider();
+       UpdatePowerUpColorSlider();
     }
     private void Update()
     {
@@ -775,36 +775,37 @@ public class Rad_GuiManager : MonoBehaviour {
         //Debug.Log(_playerManager.experience / _playerManager.GetMaxExperience());
     }
 
-    //public void AddPowerUpSlider(float value)
-    //{
-    //    float _tempValue = value / 10;
-    //    if (powerUpSlider.value + _tempValue >= 1 && powerUpSlider.value != 1)
-    //    {
-    //        _changeBrithness = true;
-    //        //TODO add poer Up button
-    //        //add some tweens, shakes and effects
-    //        PowerUpSliderBrightness();
-    //        powerUpSlider.value = 1;
-    //        //we will reset the value once the player use the power up
-    //        //ween.To(() =>_pDoublePrize, x => _pDoublePrize = x,(int)_chestManager.prizeAmount * 2, 1f );
-    //    }
-    //    else
-    //    {
-    //        powerUpSlider.value += _tempValue;
-    //    }
+    public void AddPowerUpSlider(float value)
+    {
+        float _tempValue = value / 100;
+        if (powerUpSlider.value + _tempValue >= 1 && powerUpSlider.value != 1)
+        {
+            _changeBrithness = true;
+            //TODO add poer Up button
+            //add some tweens, shakes and effects
+            PowerUpSliderBrightness();
+            powerUpSlider.value = 1;
+            //we will reset the value once the player use the power up
+            //ween.To(() =>_pDoublePrize, x => _pDoublePrize = x,(int)_chestManager.prizeAmount * 2, 1f );
+        }
+        else
+        {
+            powerUpSlider.value += _tempValue;
+        }
 
-    //}
+    }
 
-    //private void PowerUpSliderBrightness()
-    //{
-    //    DOTween.To(() => _tempBrightness, x => _tempBrightness = x, 1f, 0.5f).OnComplete(() =>
-    //    {
-    //        DOTween.To(() => _tempBrightness, x => _tempBrightness = x, 2f, 0.5f).OnComplete(() =>
-    //        {
-    //            PowerUpSliderBrightness();
-    //        });
-    //    });
-    //}
+    private void PowerUpSliderBrightness()
+    {
+        DOTween.To(() => _tempBrightness, x => _tempBrightness = x, 1f, 0.5f).OnComplete(() =>
+        {
+            DOTween.To(() => _tempBrightness, x => _tempBrightness = x, 2f, 0.5f).OnComplete(() =>
+            {
+                PowerUpSliderBrightness();
+            });
+        });
+    }
+
     public void AddExperienceToSlider(float value)
     {
         float _tempValue = value / ((_tempLevel + 1) * _playerManager.pointsPerLevel);
@@ -887,11 +888,7 @@ public class Rad_GuiManager : MonoBehaviour {
                 blackXintana.SetActive(false);
                 break;
         }
-        Transform parent = redXintana.transform.parent;
-        for (int i = 0; i <= parent.childCount; i++)
-        {
-            parent.GetChild(i).transform.localPosition = new Vector3(0, 0, 0);
-        }
+
     }
     public void Button_EquipRedWeapon()
     {

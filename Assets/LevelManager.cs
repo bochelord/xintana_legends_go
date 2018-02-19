@@ -142,7 +142,7 @@ public class LevelManager : MonoBehaviour {
 
         //damage to enemy
         //
-
+        _guiManager.AddPowerUpSlider(damagedone);
         enemyController.ApplyDamageToEnemy(damagedone);
         if (critico)
         {
