@@ -410,7 +410,7 @@ public class Rad_GuiManager : MonoBehaviour {
 
         _scorePanelOn = true;
         StartCoroutine(refreshHighScore(Rad_SaveManager.profile.highscore));
-        expScoreSlider.value = Rad_SaveManager.profile.experience / ((_playerManager.level + 1)*_playerManager.GetMaxExperience());
+        expScoreSlider.value = Rad_SaveManager.profile.experience / ((_playerManager.level + 1)*_playerManager.GetExperienceToLevelUp());
         _pScorePlayer = 0;
         x2Text.SetActive(false);
         scorePanel.transform.DOLocalMoveX(0f, 0.5f).SetEase(Ease.OutBack);
@@ -451,7 +451,7 @@ public class Rad_GuiManager : MonoBehaviour {
 
     private void UpdateExperience()
     {
-        if(_playerManager.GetTotalExpPerGame() + Rad_SaveManager.profile.experience >= _playerManager.GetMaxExperience())
+        if(_playerManager.GetTotalExpPerGame() + Rad_SaveManager.profile.experience >= _playerManager.GetExperienceToLevelUp())
         {
             
             DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, 1 , 0.51f).OnComplete(() =>
@@ -468,7 +468,7 @@ public class Rad_GuiManager : MonoBehaviour {
             });
         }else if (!_playerManager.GetExperienceAddedFromProfile())
         {
-            float _tempValue = (_playerManager.GetTotalExpPerGame() + Rad_SaveManager.profile.experience) / _playerManager.GetMaxExperience();
+            float _tempValue = (_playerManager.GetTotalExpPerGame() + Rad_SaveManager.profile.experience) / _playerManager.GetExperienceToLevelUp();
             DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, _tempValue, 0.5f);
             SetScoreButtonsOn();
             _playerManager.SavePlayerStats();
@@ -476,7 +476,7 @@ public class Rad_GuiManager : MonoBehaviour {
         }
         else
         {
-            float _tempValue = _playerManager.GetTotalExpPerGame() / _playerManager.GetMaxExperience();
+            float _tempValue = _playerManager.GetTotalExpPerGame() / _playerManager.GetExperienceToLevelUp();
             DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, _tempValue, 0.5f);
             SetScoreButtonsOn();
             _playerManager.SavePlayerStats();
@@ -768,7 +768,7 @@ public class Rad_GuiManager : MonoBehaviour {
         attackValue.text = _playerManager.attack.ToString("f2");
         hpText.text = _playerManager.GetMaxLife().ToString("f2");
         levelText.text = "Level " + _playerManager.level.ToString();
-        float _tempValue = _playerManager.experience / _playerManager.GetMaxExperience();
+        float _tempValue = _playerManager.experience / _playerManager.GetExperienceToLevelUp();
         expSlider.value =  _tempValue; 
         //Debug.Log(_playerManager.experience);
         //Debug.Log(experienceSlider.value);

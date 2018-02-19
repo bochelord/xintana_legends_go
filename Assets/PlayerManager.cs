@@ -56,6 +56,9 @@ public class PlayerManager : MonoBehaviour {
 
         //Debug.Log("Weapon Equipped is " + weaponEquipped.ToString() + " with this index:" + (int)weaponEquipped);
 
+        //level = 5;
+        //print("XP TO LEVEL UP FROM level "+level+" is:"+GetExperienceToLevelUp());
+
     }
 
     public float GetMaxLife()
@@ -185,16 +188,20 @@ public class PlayerManager : MonoBehaviour {
         totalExpPerGame += value;
         experience += value;
 
-        if (experience >= GetMaxExperience())
+        if (experience >= GetExperienceToLevelUp())
         {
-            experience -= GetMaxExperience(); // Reset experience
+            experience -= GetExperienceToLevelUp(); // Reset experience
         }
         _guiManager.AddExperienceToSlider(value);
     }
-    public int GetMaxExperience()
+    public int GetExperienceToLevelUp()
     {
-        int _maxExperience = (level + 1) * pointsPerLevel;
-        return _maxExperience;
+        //int _neededToLevelUpExperience = (level + 1) * pointsPerLevel;
+
+        int _neededToLevelUpExperience = Formulas.GetXpToLevelup(level);
+        
+
+        return _neededToLevelUpExperience;
     }
 
     public void SavePlayerStats()
@@ -212,12 +219,12 @@ public class PlayerManager : MonoBehaviour {
     {
         if (!_profileExperienceAdded)
         {
-            totalExpPerGame -= (GetMaxExperience() - Rad_SaveManager.profile.experience);
+            totalExpPerGame -= (GetExperienceToLevelUp() - Rad_SaveManager.profile.experience);
             _profileExperienceAdded = true;
         }
         else
         {
-            totalExpPerGame -= GetMaxExperience();
+            totalExpPerGame -= GetExperienceToLevelUp();
         }
        
         level++;

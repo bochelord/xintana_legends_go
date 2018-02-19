@@ -138,7 +138,7 @@ public class EnemyStructure {
         }
         else
         {
-            retEnemy.xpBase = 2f;
+            retEnemy.xpBase = 4f;
             retEnemy.xpGrowth = 0.15f;
         }
 

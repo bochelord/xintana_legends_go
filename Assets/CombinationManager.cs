@@ -273,7 +273,7 @@ public class CombinationManager : MonoBehaviour {
     {
         if (levelManager.state == GameState.Running)
         {
-            Debug.Log(timerSpeed);
+            //Debug.Log(timerSpeed);
             timerSlider.value -= (Time.deltaTime * timerSpeed) / timeToResolveCombination;
             tempTimer -= (Time.deltaTime * timerSpeed);
             if (timerSlider.value > 0)

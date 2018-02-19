@@ -26,6 +26,13 @@ public static class Formulas : object
         return y;
     }
 
+
+    public static int GetXpToLevelup(int currentlevel)
+    {
+        return Mathf.RoundToInt(Formulas.ExponentialGrowth(25, 0.3f, currentlevel));
+    }
+
+
     /*
     public static int coinsGivenByLevelUp(int coinslevel)
     {
