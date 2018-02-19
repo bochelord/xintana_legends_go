@@ -121,7 +121,7 @@ public class LevelManager : MonoBehaviour {
             if (_healPowerUp)
             {
                 _playerManager.HealForValue(damagedone);
-                LaunchShowHUDText(player.transform.position + new Vector3(0.25f, 1.5f, 0), damagedone.ToString("f1"), new Color32(0,255, 0, 255));
+                LaunchShowHUDText(player.transform.position + new Vector3(0.25f, 1.5f, 0), damagedone.ToString("f1"), new Color32(0,255, 0, 255),false);
             }
         } 
         else
@@ -153,7 +153,7 @@ public class LevelManager : MonoBehaviour {
 
         enemyController.DamagedAnimation();
         
-        LaunchShowHUDText(enemyContainer.transform.position + new Vector3(-0.25f,1.5f,0), damagedone.ToString("F1"), new Color32(245, 141, 12, 255)); /// TODO This has to be feed with the proper damage coming from the playerManager
+        LaunchShowHUDText(enemyContainer.transform.position + new Vector3(-0.25f,1.5f,0), damagedone.ToString("F1"), new Color32(245, 141, 12, 255),false); /// TODO This has to be feed with the proper damage coming from the playerManager
 
         AudioManager.Instance.Play_XintanaAttack_1();
 
@@ -163,7 +163,7 @@ public class LevelManager : MonoBehaviour {
         enemyController.ApplyDamageToEnemy(damagedone);
         if (critico)
         {
-            LaunchShowHUDText(enemyContainer.transform.position + new Vector3(0.25f, 1.5f, 0), "crit!", new Color32(234, 57, 4, 255));
+            LaunchShowHUDText(enemyContainer.transform.position + new Vector3(0.25f, 1.5f, 0), "crit!", new Color32(234, 57, 4, 255),true);
         }
     }
     
@@ -183,7 +183,7 @@ public class LevelManager : MonoBehaviour {
 
 
         float _damageDone = enemyController.GetDamageDoneByEnemy();
-        LaunchShowHUDText(player.transform.position + new Vector3(0, 1.5f, 0), _damageDone.ToString("F1"), new Color32(245, 141, 12, 255));
+        LaunchShowHUDText(player.transform.position + new Vector3(0, 1.5f, 0), _damageDone.ToString("F1"), new Color32(245, 141, 12, 255),false);
 
         _playerManager.ReceiveDamage(_damageDone);
 
@@ -436,12 +436,12 @@ public class LevelManager : MonoBehaviour {
     }
     
 
-    public void LaunchShowHUDText(Vector2 pos, string texto, Color color_in)
+    public void LaunchShowHUDText(Vector2 pos, string texto, Color color_in, bool isCrit)
     {
-        StartCoroutine(ShowHUDText(pos, texto, color_in));
+        StartCoroutine(ShowHUDText(pos, texto, color_in, isCrit));
     }
 
-    public IEnumerator ShowHUDText(Vector2 pos, string texto, Color color_in)
+    public IEnumerator ShowHUDText(Vector2 pos, string texto, Color color_in, bool isCrit)
     {
         Vector2 posConverted = RectTransformUtility.WorldToScreenPoint(null, pos);
 
@@ -490,7 +490,16 @@ public class LevelManager : MonoBehaviour {
         temptext.SetActive(true);
         temptext.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
 
-        temptext.transform.DOShakeScale(0.3f, 0.9f, 8, 80f);
+        if (isCrit)
+        {
+            temptext.transform.DOShakeScale(0.5f, 1f, 10, 90f);
+        }
+        else
+        {
+            temptext.transform.DOShakeScale(0.3f, 0.9f, 8, 80f);
+        }
+        
+        //temptext.transform.DOShakeScale(0.8f, 1f, 8, 80f);
         yield return new WaitForSeconds(0.8f);
 
         temptext.GetComponent<Text>().material.DOColor(Color.clear, 2f);
