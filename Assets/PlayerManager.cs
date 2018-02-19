@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviour {
 
         playerAnimator.SetInteger("EquippedWeapon", (int)weaponEquipped);
 
-        playerAnimator.SetInteger("EquippedWeapon", 4);
+        //playerAnimator.SetInteger("EquippedWeapon", 4);
         playerAnimator.SetBool("Attacking", false);
         //playerAnimator.SetInteger("AnimState", 0);
 

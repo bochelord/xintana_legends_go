@@ -20,7 +20,7 @@ public class Rad_GuiManager : MonoBehaviour {
     [Header("Sliders")]
     public Slider experienceSlider;
     public Slider powerUpSlider;
-    public Image powerUpFill;
+   // public Image powerUpFill;
     [Header("PlaceHolders")]
     public Transform midScreen;
     public Transform gemPosition;
@@ -145,7 +145,7 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             powerUpSlider.gameObject.SetActive(true);
         }
-
+       // UpdatePowerUpColorSlider();
     }
     private void Update()
     {
@@ -294,14 +294,34 @@ public class Rad_GuiManager : MonoBehaviour {
         }
     }
 
-
+    void UpdatePowerUpColorSlider()
+    {
+        switch (_playerManager.weaponEquipped)
+        {
+            case WeaponType.black:
+                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 0, 0);
+                break;
+            case WeaponType.blue:
+                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 0, 255);
+                break;
+            case WeaponType.green:
+                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 255, 0);
+                break;
+            case WeaponType.red:
+                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 0, 0);
+                break;
+            case WeaponType.yellow:
+                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 255, 0);
+                break;
+        }
+    }
 
     /// <summary>
     /// turns de game over panel on
     /// </summary>
     public void CloseScorePanelAndMainMenuOn()
     {
-        CheckInventory();
+
         _scorePanelOn = false;
         SetMainMenuStats();
         _mainMenu = true;
@@ -316,6 +336,7 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             StopCoroutine(gameOverPanelCoroutine);
         }
+        CheckInventory();
     }
 
     public void PlayerGameOverPanelOn()
@@ -467,6 +488,7 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     private void SetScoreButtonsOn()
     {
+        Debug.Log("sdfasdfasdfas>>>>>>>>>>>>>>>>>>>");
         closeButton.gameObject.SetActive(true);
         shareButton.SetActive(true);
         shareText.DOFade(0, 1f).OnComplete(() => 
@@ -825,6 +847,7 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     public void CheckXintanaWeapon()
     {
+
         switch (Rad_SaveManager.profile.weaponEquipped)
         {
             case WeaponType.black:
@@ -863,7 +886,11 @@ public class Rad_GuiManager : MonoBehaviour {
                 yellowXintana.SetActive(true);
                 blackXintana.SetActive(false);
                 break;
-           
+        }
+        Transform parent = redXintana.transform.parent;
+        for (int i = 0; i <= parent.childCount; i++)
+        {
+            parent.GetChild(i).transform.localPosition = new Vector3(0, 0, 0);
         }
     }
     public void Button_EquipRedWeapon()
