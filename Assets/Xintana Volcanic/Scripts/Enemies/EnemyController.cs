@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour {
         life = new_enemy.life;
         startLife = new_enemy.life;
         damage = new_enemy.damage;
-
+        level = levelManager.GetCurrentEnemyLevel();
         //if (new_enemy.type == EnemyType.blackKnight || new_enemy.type == EnemyType.lavabeast || new_enemy.type == EnemyType.alchemist || new_enemy.type == EnemyType.devil || new_enemy.type == EnemyType.explorer || new_enemy.type == EnemyType.fireMage)
 
         if (new_enemy.type != EnemyType.kogi && new_enemy.type != EnemyType.makula && new_enemy.type != EnemyType.zazuc)
