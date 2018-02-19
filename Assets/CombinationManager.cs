@@ -43,6 +43,7 @@ public class CombinationManager : MonoBehaviour {
     private bool _firstTimePressed = false;
     private bool gameOn = true;
     private bool winningCondition = false;
+    private bool _gemsPowerUp = false;
     private float tempTimer;                        //Auxiliary variable to work with the Timer.
     private int currentCombinationPosition = 0;     //The combination position to check, by default 0.
     private int minimCombinationLenght = 1;          
@@ -54,6 +55,8 @@ public class CombinationManager : MonoBehaviour {
     private Rad_GuiManager _guiManager;
     private Vector2 _initialButtonsPosition;
     private Coroutine _auraCoroutine;
+
+
     void Awake()
     {
         levelManager = FindObjectOfType<LevelManager>();
@@ -328,7 +331,8 @@ public class CombinationManager : MonoBehaviour {
     /// Get the Color of the Pressed Button and then compare it with the current combination to solve.
     /// </summary>
     /// <param name="xButton"></param>
-    public void CheckCombination(Button xButton){
+    public void CheckCombination(Button xButton)
+    {
 
         string buttonColor = xButton.GetComponent<ColorButtonData>().buttonColor;
         if(_auraCoroutine != null)
@@ -337,7 +341,7 @@ public class CombinationManager : MonoBehaviour {
         }
         auraCombination.SetActive(false);
         // Correct Combination, USER can continue.
-        if (combinationArray[currentCombinationPosition].GetComponent<ColorButtonData>().buttonColor == buttonColor)
+        if (combinationArray[currentCombinationPosition].GetComponent<ColorButtonData>().buttonColor == buttonColor || _gemsPowerUp)
         {
             audio.PlayOneShot(audioBongoClip, 1F); 
             copyCombinationArray[currentCombinationPosition].GetComponent<Image>().enabled = false;
@@ -513,5 +517,10 @@ public class CombinationManager : MonoBehaviour {
     public void SetCombinationFrecuency(int newfrecu)
     {
         _combinationFrecuency = newfrecu;
+    }
+
+    public void SetGemsPowerUp(bool value)
+    {
+        _gemsPowerUp = value;
     }
 }

@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour {
     public float slowtimerTime = 10;
     public float criticsPowerUpTime = 20;
     public float healPowerUpTime = 30;
+    public float timeGemsPowerUp = 10;
 
     private LevelManager _levelManager;
     private CombinationManager _combinationManager;
@@ -70,6 +71,7 @@ public class PlayerManager : MonoBehaviour {
                 CriticsPowerUp();
                 break;
             case WeaponType.blue:
+                GemsPowerUp();
                 break;
             case WeaponType.green:
                 HealPowerUp();
@@ -115,6 +117,17 @@ public class PlayerManager : MonoBehaviour {
         _levelManager.SetHealPowerUp(true);
         yield return new WaitForSeconds(delay);
         _levelManager.SetHealPowerUp(false);
+    }
+
+    void GemsPowerUp()
+    {
+        StartCoroutine(ChangeGemsPowerUp(timeGemsPowerUp));
+    }
+    IEnumerator ChangeGemsPowerUp(float delay)
+    {
+        _combinationManager.SetGemsPowerUp(true);
+        yield return new WaitForSeconds(delay);
+        _combinationManager.SetGemsPowerUp(false);
     }
     #endregion
     #region Animations
