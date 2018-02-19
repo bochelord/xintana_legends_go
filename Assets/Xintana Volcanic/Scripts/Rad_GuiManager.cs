@@ -309,7 +309,7 @@ public class Rad_GuiManager : MonoBehaviour {
                 powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 255, 0);
                 break;
             case WeaponType.red:
-                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 0, 0);
+                powerUpSlider.transform.DOLocalMoveY(-500, 0, false);
                 break;
             case WeaponType.yellow:
                 powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 255, 0);
@@ -787,7 +787,11 @@ public class Rad_GuiManager : MonoBehaviour {
             PowerUpSliderBrightness();
             powerUpSlider.value = 1;
             //we will reset the value once the player use the power up
-            ShowPowerUpButton();
+            if(_playerManager.weaponEquipped != WeaponType.red)
+            {
+                ShowPowerUpButton();
+            }
+
         }
         else
         {
@@ -807,6 +811,15 @@ public class Rad_GuiManager : MonoBehaviour {
         });
     }
 
+    public void Button_PowerUp()
+    {
+        if(_levelManager.state == GameState.Running)
+        {
+            _playerManager.StartPowerUp();
+            HidePowerUpButton();
+            powerUpSlider.value = 0;
+        }
+    }
     void ShowPowerUpButton()
     {
         powerUpButton.transform.DOLocalMoveX(-250,1).SetEase(Ease.OutBack);

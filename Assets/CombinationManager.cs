@@ -39,7 +39,7 @@ public class CombinationManager : MonoBehaviour {
     public GameObject[] objectsCombinationPool;     //Pool with all the possible GameObjects.
 
     public float timeToResolveCombination = 15;
-
+    public float timerSpeed = 1f;
     private bool _firstTimePressed = false;
     private bool gameOn = true;
     private bool winningCondition = false;
@@ -270,8 +270,9 @@ public class CombinationManager : MonoBehaviour {
     {
         if (levelManager.state == GameState.Running)
         {
-            timerSlider.value -= Time.deltaTime / timeToResolveCombination;
-            tempTimer -= Time.deltaTime;
+            Debug.Log(timerSpeed);
+            timerSlider.value -= (Time.deltaTime * timerSpeed) / timeToResolveCombination;
+            tempTimer -= (Time.deltaTime * timerSpeed);
             if (timerSlider.value > 0)
             {
                 sliderTimerText.text = tempTimer.ToString("f0");

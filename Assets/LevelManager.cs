@@ -64,8 +64,9 @@ public class LevelManager : MonoBehaviour {
 
     private bool musiclevel2_AlreadyPlayed = false;
     private bool musiclevel3_AlreadyPlayed = false;
-
+    private bool _criticsPowerUp = false;
     private bool _extraLifePurchased = false;
+    private bool _healPowerUp = false;
     //private int currentWorld = 1;
 
     void Awake()
@@ -100,12 +101,28 @@ public class LevelManager : MonoBehaviour {
 
         float damagedone = 0;
         bool critico = false;
-        damagedone = Formulas.GetDamageCalculated(in_damage, out critico);
+
+        if (_criticsPowerUp)
+        {
+            damagedone = in_damage * 2;
+            critico = true;
+        }
+        else
+        {
+            damagedone = Formulas.GetDamageCalculated(in_damage, out critico);
+        }
+
+
 
         if (damagedone > enemyController.GetLife())
         {
             //we are goinna kill the enemy so we trigger the double jumping animation
             player.GetComponent<Animator>().SetInteger("AnimState", 20);
+            if (_healPowerUp)
+            {
+                _playerManager.HealForValue(damagedone);
+                LaunchShowHUDText(player.transform.position + new Vector3(0.25f, 1.5f, 0), damagedone.ToString("f1"), new Color32(0,255, 0, 255));
+            }
         } 
         else
         {
@@ -603,4 +620,13 @@ public class LevelManager : MonoBehaviour {
         return _worldNumber + (numberOfRounds * worldspritesLevelList.Length);
     }
 
+    public void SetCriticsPowerUp(bool value)
+    {
+        _criticsPowerUp = value;
+    }
+
+    public void SetHealPowerUp(bool value)
+    {
+        _healPowerUp = value;
+    }
 }
