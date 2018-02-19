@@ -8,10 +8,10 @@ public class HealthBarController : MonoBehaviour {
 
     public PlayerManager playermanager;
 
-    private Scrollbar bar;
+    private Slider bar;
 	// Use this for initialization
 	void Start () {
-        bar = GetComponent<Scrollbar>();
+        bar = GetComponent<Slider>();
 	}
 	
 	// Update is called once per frame
@@ -19,7 +19,7 @@ public class HealthBarController : MonoBehaviour {
 
         if (playermanager != null)
         {
-            bar.size = playermanager.life  / playermanager.GetMaxLife();
+            bar.value = playermanager.life  / playermanager.GetMaxLife();
         }
         
 

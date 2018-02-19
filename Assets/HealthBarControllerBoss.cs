@@ -9,11 +9,11 @@ public class HealthBarControllerBoss : MonoBehaviour
 
     public LevelManager levelManager;
 
-    private Scrollbar bar;
+    private Slider bar;
     private float initialValue;
 	// Use this for initialization
 	void Start () {
-        bar = GetComponent<Scrollbar>();
+        bar = GetComponent<Slider>();
 	}
 	
 	// Update is called once per frame
@@ -21,7 +21,7 @@ public class HealthBarControllerBoss : MonoBehaviour
 
         if (levelManager.enemyController != null)
         {
-            bar.size = (levelManager.enemyController.GetLife()*0.1f) / initialValue;
+            bar.value = (levelManager.enemyController.GetLife()) / initialValue;
         }
 	}
 
@@ -29,7 +29,7 @@ public class HealthBarControllerBoss : MonoBehaviour
     {
         if (levelManager.enemyController)
         {
-            initialValue = levelManager.enemyController.GetLife() * 0.1f;
+            initialValue = levelManager.enemyController.GetLife();
         }
     }
 }

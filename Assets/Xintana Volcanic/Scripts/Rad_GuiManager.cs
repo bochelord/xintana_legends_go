@@ -30,6 +30,8 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text highScoreText;
     public Text worldText;
     public Text gemsText;
+    public Text playerLevelText;
+    public Text enemyLevelText;
     [Header("Icons")]
     public GameObject doubleScoreIcon;
     public GameObject extraLifeIcon;
@@ -146,7 +148,7 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             powerUpSlider.gameObject.SetActive(true);
         }
-       UpdatePowerUpColorSlider();
+       //UpdatePowerUpColorSlider();
     }
     private void Update()
     {
@@ -217,7 +219,15 @@ public class Rad_GuiManager : MonoBehaviour {
             }
         }
 
+        if (playerLevelText)
+        {
+            playerLevelText.text = _playerManager.level.ToString();
+        }
 
+        if(enemyLevelText && _levelManager.enemyController)
+        {
+            enemyLevelText.text = _levelManager.enemyController.level.ToString();
+        }
         //TODO TODO :: Check the code below since the powerUpFill does not exist on the Canvas. Probably we need to make a bar
 
         //if (powerUpFill.GetComponent<_2dxFX_HSV>() && _changeBrithness)
