@@ -88,7 +88,8 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject blueXintana;
     public GameObject yellowXintana;
     public GameObject blackXintana;
-
+    [Header("Power Up")]
+    public GameObject powerUpButton;
     private AnalyticsManager _analyticsManager;
     private AdsManager _adsManager;
     private SIS.ShopManager _shopManager;
@@ -777,7 +778,7 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void AddPowerUpSlider(float value)
     {
-        float _tempValue = value / 100;
+        float _tempValue = value / 10;
         if (powerUpSlider.value + _tempValue >= 1 && powerUpSlider.value != 1)
         {
             _changeBrithness = true;
@@ -786,7 +787,7 @@ public class Rad_GuiManager : MonoBehaviour {
             PowerUpSliderBrightness();
             powerUpSlider.value = 1;
             //we will reset the value once the player use the power up
-            //ween.To(() =>_pDoublePrize, x => _pDoublePrize = x,(int)_chestManager.prizeAmount * 2, 1f );
+            ShowPowerUpButton();
         }
         else
         {
@@ -806,6 +807,14 @@ public class Rad_GuiManager : MonoBehaviour {
         });
     }
 
+    void ShowPowerUpButton()
+    {
+        powerUpButton.transform.DOLocalMoveX(-250,1).SetEase(Ease.OutBack);
+    }
+    public void HidePowerUpButton()
+    {
+        powerUpButton.transform.DOLocalMoveX(-900, 1).SetEase(Ease.OutBack);
+    }
     public void AddExperienceToSlider(float value)
     {
         float _tempValue = value / ((_tempLevel + 1) * _playerManager.pointsPerLevel);
