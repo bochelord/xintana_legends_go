@@ -828,8 +828,9 @@ public class Rad_GuiManager : MonoBehaviour {
         //        PowerUpSliderBrightness();
         //    });
         //});
-        powerUpSlider.transform.parent.transform.DOPunchPosition(new Vector3(5f, 5f, 5f), 1, 3, 0.4f, false).OnComplete(() => 
+        powerUpSlider.transform.parent.transform.DOPunchScale(new Vector3(0.05f, 0.05f, 0.05f),1,4,0.4f).OnComplete(() => 
         {
+            powerUpButton.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 1, 2, 0.4f);
             powerUpSlider.transform.parent.transform.DORestart();
         });
     }
@@ -849,6 +850,7 @@ public class Rad_GuiManager : MonoBehaviour {
             _playerManager.StartPowerUp();
             powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 0, 255);
             powerUpSlider.transform.parent.transform.DOKill();
+            powerUpButton.transform.DOKill();
         }
     }
     void ShowPowerUpButton()
