@@ -84,53 +84,64 @@ public class PlayerManager : MonoBehaviour {
                 break;
         }
 
-
     }
     #region PowerUps
     void SlowTimerPowerUp()
     {
         StartCoroutine(SlowTimer(slowtimerTime));
+        _guiManager.RemovePowerUpSliderValueForPowerUpTime(slowtimerTime);
     }
 
     IEnumerator SlowTimer(float delay)
     {
+        _guiManager.SetPowerUpOn(true);
         _combinationManager.timerSpeed = 0.5f;
         yield return new WaitForSeconds(delay);
         _combinationManager.timerSpeed = 1f;
+        _guiManager.SetPowerUpOn(false);
     }
 
     void CriticsPowerUp()
     {
         StartCoroutine(Critics(criticsPowerUpTime));
+        _guiManager.RemovePowerUpSliderValueForPowerUpTime(criticsPowerUpTime);
     }
     IEnumerator Critics(float delay)
     {
+        _guiManager.SetPowerUpOn(true);
         _levelManager.SetCriticsPowerUp(true);
         yield return new WaitForSeconds(delay);
         _levelManager.SetCriticsPowerUp(false);
+        _guiManager.SetPowerUpOn(false);
     }
 
     void HealPowerUp()
     {
         StartCoroutine(Heal(healPowerUpTime));
+        _guiManager.RemovePowerUpSliderValueForPowerUpTime(healPowerUpTime);
     }
 
     IEnumerator Heal(float delay)
     {
+        _guiManager.SetPowerUpOn(true);
         _levelManager.SetHealPowerUp(true);
         yield return new WaitForSeconds(delay);
         _levelManager.SetHealPowerUp(false);
+        _guiManager.SetPowerUpOn(false);
     }
 
     void GemsPowerUp()
     {
         StartCoroutine(ChangeGemsPowerUp(timeGemsPowerUp));
+        _guiManager.RemovePowerUpSliderValueForPowerUpTime(timeGemsPowerUp);
     }
     IEnumerator ChangeGemsPowerUp(float delay)
     {
+        _guiManager.SetPowerUpOn(true);
         _combinationManager.SetGemsPowerUp(true);
         yield return new WaitForSeconds(delay);
         _combinationManager.SetGemsPowerUp(false);
+        _guiManager.SetPowerUpOn(false);
     }
     #endregion
     #region Animations

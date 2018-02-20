@@ -112,6 +112,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private bool _updateScore = false;
     private bool _spawnPrize = false;
     private bool _changeBrithness = false;
+    private bool _powerUpOn = false;
 
     private float _tempBrightness;
     private int _pDoublePrize = 0;
@@ -148,7 +149,7 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             powerUpSlider.gameObject.SetActive(true);
         }
-       //UpdatePowerUpColorSlider();
+       UpdatePowerUpColorSlider();
     }
     private void Update()
     {
@@ -234,6 +235,7 @@ public class Rad_GuiManager : MonoBehaviour {
         //{
         //    powerUpFill.GetComponent<_2dxFX_HSV>()._ValueBrightness = _tempBrightness;
         //}
+
     }
 
     private void UpdatePricePanel()
@@ -309,21 +311,21 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         switch (_playerManager.weaponEquipped)
         {
-            case WeaponType.black:
-                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 0, 0);
-                break;
-            case WeaponType.blue:
-                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 0, 255);
-                break;
-            case WeaponType.green:
-                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 255, 0);
-                break;
+            //case WeaponType.blac:
+            //    powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 0, 0);
+            //    break;
+            //case WeaponType.blue:
+            //    powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 0, 255);
+            //    break;
+            //case WeaponType.green:
+            //    powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 255, 0);
+            //    break;
             case WeaponType.red:
-                powerUpSlider.transform.DOLocalMoveY(-500, 0, false);
+                powerUpSlider.transform.parent.transform.DOLocalMoveY(-500, 0, false);
                 break;
-            case WeaponType.yellow:
-                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 255, 0);
-                break;
+            //case WeaponType.yellow:
+            //    powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 255, 0);
+            //    break;
         }
     }
 
@@ -791,25 +793,29 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void AddPowerUpSlider(float value)
     {
-        float _tempValue = value / 10;
-        if (powerUpSlider.value + _tempValue >= 1 && powerUpSlider.value != 1)
+        if (!_powerUpOn)
         {
-            _changeBrithness = true;
-            //TODO add poer Up button
-            //add some tweens, shakes and effects
-            PowerUpSliderBrightness();
-            powerUpSlider.value = 1;
-            //we will reset the value once the player use the power up
-            if(_playerManager.weaponEquipped != WeaponType.red)
+            float _tempValue = value / 10;
+            if (powerUpSlider.value + _tempValue >= 1 && powerUpSlider.value != 1)
             {
-                ShowPowerUpButton();
-            }
+                _changeBrithness = true;
+                //TODO add poer Up button
+                //add some tweens, shakes and effects
+                PowerUpSliderBrightness();
+                powerUpSlider.value = 1;
+                //we will reset the value once the player use the power up
+                if (_playerManager.weaponEquipped != WeaponType.red)
+                {
+                    ShowPowerUpButton();
+                }
 
+            }
+            else
+            {
+                powerUpSlider.value += _tempValue;
+            }
         }
-        else
-        {
-            powerUpSlider.value += _tempValue;
-        }
+
 
     }
 
@@ -824,22 +830,29 @@ public class Rad_GuiManager : MonoBehaviour {
         });
     }
 
+    public void RemovePowerUpSliderValueForPowerUpTime(float time)
+    {
+        DOTween.To(() => powerUpSlider.value, x => powerUpSlider.value = x, 0, time).OnComplete(()=> 
+        {
+            HidePowerUpButton();
+        });
+    }
     public void Button_PowerUp()
     {
         if(_levelManager.state == GameState.Running)
         {
             _playerManager.StartPowerUp();
-            HidePowerUpButton();
-            powerUpSlider.value = 0;
         }
     }
     void ShowPowerUpButton()
     {
-        powerUpButton.transform.DOLocalMoveX(-250,1).SetEase(Ease.OutBack);
+        powerUpButton.transform.DOLocalMoveY(180,2).SetEase(Ease.OutBack);
+        powerUpButton.transform.DOScale(2, 2);
     }
     public void HidePowerUpButton()
     {
         powerUpButton.transform.DOLocalMoveX(-900, 1).SetEase(Ease.OutBack);
+        powerUpButton.transform.DOScale(0.5f, 1);
     }
     public void AddExperienceToSlider(float value)
     {
@@ -951,5 +964,8 @@ public class Rad_GuiManager : MonoBehaviour {
         CheckXintanaWeapon();
     }
 
-    
+    public void SetPowerUpOn(bool value)
+    {
+        _powerUpOn = value;
+    }
 }
