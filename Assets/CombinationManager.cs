@@ -314,7 +314,6 @@ public class CombinationManager : MonoBehaviour {
                 {
                     uiButtons[i].GetComponent<Image>().DOFade(0.5f, 0.5f).OnComplete(() =>
                      {
-                         Debug.Log("Restarting>>>>>>>>>>>>>>>>>>");
                          uiButtons[i].GetComponent<Image>().DORestart();
                      });
                     break;
@@ -411,8 +410,8 @@ public class CombinationManager : MonoBehaviour {
             Rad_SaveManager.profile.firstTimePlayed = false;
             for (int i = 0; i < uiButtons.Length; i++)
             {
-                uiButtons[i].GetComponent<Image>().DOFade(1, 0);
                 uiButtons[i].GetComponent<Image>().DOKill();
+                uiButtons[i].GetComponent<Image>().DOFade(1, 0);
             }
             
 
