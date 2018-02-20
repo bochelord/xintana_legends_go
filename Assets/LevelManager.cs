@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour {
     private int _zazucKilled = 0;
     private int _makulaKilled = 0;
     private float _playerScore = 0;
-    private int _currentEnemyLevel = 0;
+    private int _currentEnemyLevel = 1;
     private int _enemyCount = 0;
     private int _eachthreetimes = 3;
     private float timerSafe;
@@ -61,6 +61,7 @@ public class LevelManager : MonoBehaviour {
     private AdsManager adManager;
     private HealthBarControllerBoss healthBarController;
     private List<Transform> inactiveHUDTextList = new List<Transform>();
+
 
     private bool musiclevel2_AlreadyPlayed = false;
     private bool musiclevel3_AlreadyPlayed = false;
@@ -122,6 +123,9 @@ public class LevelManager : MonoBehaviour {
             {
                 _playerManager.HealForValue(damagedone);
                 LaunchShowHUDText(player.transform.position + new Vector3(0.25f, 1.5f, 0), damagedone.ToString("f1"), new Color32(0,255, 0, 255),false);
+                StartCoroutine(HealParticle(3));
+                Debug.Log("asdasdada");
+
             }
         } 
         else
@@ -167,6 +171,13 @@ public class LevelManager : MonoBehaviour {
         }
     }
     
+    IEnumerator HealParticle(float delay)
+    {
+        GameObject obj = particlePooler.GetPooledHealPlayerParticle();
+        obj.transform.position = player.transform.position;
+        yield return new WaitForSeconds(delay);
+        particlePooler.RemoveElement(obj.transform);
+    }
     /// <summary>
     /// called when player miss combination
     /// </summary>

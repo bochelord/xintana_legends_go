@@ -78,7 +78,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public Button closePrizePanel;
     [Header("Main Menu")]
     public Text attackValue;
-    public Text defenceValue;
+    public Text highscoreMainMenuText;
     public Text hpText;
     public Text levelText;
     public Text expText;
@@ -776,10 +776,13 @@ public class Rad_GuiManager : MonoBehaviour {
     public void SetMainMenuStats()
     {
         attackValue.text = _playerManager.attack.ToString("f2");
+        highscoreMainMenuText.text = Rad_SaveManager.profile.highscore.ToString();
         hpText.text = _playerManager.GetMaxLife().ToString("f2");
         levelText.text = "Level " + _playerManager.level.ToString();
+
         float _tempValue = _playerManager.experience / _playerManager.GetExperienceToLevelUp();
         expSlider.value =  _tempValue; 
+
         //Debug.Log(_playerManager.experience);
         //Debug.Log(experienceSlider.value);
         //Debug.Log(_playerManager.GetMaxExperience());
