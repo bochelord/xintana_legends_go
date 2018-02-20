@@ -23,10 +23,12 @@ namespace SIS
         /// </summary>
         public string productId;
 
+        //RAD EXTENSION =====================================================================
         /// <summary>
         /// Bool to know if the item can be purchased with Gems also.
         /// </summary>
         public bool canBePurchasedByGems = false;
+        //===================================================================================
 
         /// <summary>
         /// Product name or title.
@@ -65,12 +67,13 @@ namespace SIS
         /// (optional - could be used for 'double tap to purchase')
         /// </summary>
         public GameObject buyTriggerCoins;
-
+        //RAD EXTENSION =====================================================================
         /// <summary>
         /// Buy trigger gems, used for making the confirmation panel visible.
         /// (optional - could be used for 'double tap to purchase')
         /// </summary>
         public GameObject buyTriggerGems;
+        //===================================================================================
 
         /// <summary>
         /// Label that displays text while this item is locked.
@@ -183,6 +186,15 @@ namespace SIS
             if (lockedLabel && !string.IsNullOrEmpty(obj.req.entry)
                 && !string.IsNullOrEmpty(obj.req.labelText))
                 lockedLabel.text = lockText;
+
+            if (productId.Contains("_gems")){
+                canBePurchasedByGems = true;
+                buyTriggerCoins.SetActive(false);
+            }
+            else
+            {
+                buyTriggerGems.SetActive(false);
+            }
         }
 
 
