@@ -311,21 +311,25 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         switch (_playerManager.weaponEquipped)
         {
-            //case WeaponType.blac:
-            //    powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 0, 0);
-            //    break;
-            //case WeaponType.blue:
-            //    powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 0, 255);
-            //    break;
-            //case WeaponType.green:
-            //    powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 255, 0);
-            //    break;
+            case WeaponType.black:
+                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 0, 0);
+                break;
+            case WeaponType.blue:
+                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 255, 255);
+                powerUpSlider.fillRect.GetComponent<_2dxFX_ColorChange>()._HueShift = 131;
+                break;
+            case WeaponType.green:
+                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 255, 255);
+                powerUpSlider.fillRect.GetComponent<_2dxFX_ColorChange>()._HueShift = 190;
+                break;
             case WeaponType.red:
+                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 255, 255);
                 powerUpSlider.transform.parent.transform.DOLocalMoveY(-500, 0, false);
                 break;
-            //case WeaponType.yellow:
-            //    powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 255, 0);
-            //    break;
+            case WeaponType.yellow:
+                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 255, 255);
+                powerUpSlider.fillRect.GetComponent<_2dxFX_ColorChange>()._HueShift = 303;
+                break;
         }
     }
 

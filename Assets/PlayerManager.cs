@@ -39,6 +39,7 @@ public class PlayerManager : MonoBehaviour {
         _guiManager = FindObjectOfType<Rad_GuiManager>();
         profile = Rad_SaveManager.profile;
         weaponEquipped = profile.weaponEquipped;
+        //weaponEquipped = WeaponType.black;
         level = profile.level;
         experience = profile.experience;
         _newXintana = new XintanaStructure().GenerateXintanaWithLevel(weaponEquipped, level);
