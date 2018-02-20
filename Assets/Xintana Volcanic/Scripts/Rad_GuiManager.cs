@@ -801,7 +801,7 @@ public class Rad_GuiManager : MonoBehaviour {
                 _changeBrithness = true;
                 //TODO add poer Up button
                 //add some tweens, shakes and effects
-                PowerUpSliderBrightness();
+                PunchPowerUpSlider();
                 powerUpSlider.value = 1;
                 //we will reset the value once the player use the power up
                 if (_playerManager.weaponEquipped != WeaponType.red)
@@ -819,14 +819,18 @@ public class Rad_GuiManager : MonoBehaviour {
 
     }
 
-    private void PowerUpSliderBrightness()
+    private void PunchPowerUpSlider()
     {
-        DOTween.To(() => _tempBrightness, x => _tempBrightness = x, 1f, 0.5f).OnComplete(() =>
+        //DOTween.To(() => _tempBrightness, x => _tempBrightness = x, 1f, 0.5f).OnComplete(() =>
+        //{
+        //    DOTween.To(() => _tempBrightness, x => _tempBrightness = x, 2f, 0.5f).OnComplete(() =>
+        //    {
+        //        PowerUpSliderBrightness();
+        //    });
+        //});
+        powerUpSlider.transform.parent.transform.DOPunchPosition(new Vector3(5f, 5f, 5f), 1, 3, 0.4f, false).OnComplete(() => 
         {
-            DOTween.To(() => _tempBrightness, x => _tempBrightness = x, 2f, 0.5f).OnComplete(() =>
-            {
-                PowerUpSliderBrightness();
-            });
+            powerUpSlider.transform.parent.transform.DORestart();
         });
     }
 
@@ -835,6 +839,7 @@ public class Rad_GuiManager : MonoBehaviour {
         DOTween.To(() => powerUpSlider.value, x => powerUpSlider.value = x, 0, time).OnComplete(()=> 
         {
             HidePowerUpButton();
+            powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 255, 255);
         });
     }
     public void Button_PowerUp()
@@ -842,6 +847,8 @@ public class Rad_GuiManager : MonoBehaviour {
         if(_levelManager.state == GameState.Running)
         {
             _playerManager.StartPowerUp();
+            powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 0, 255);
+            powerUpSlider.transform.parent.transform.DOKill();
         }
     }
     void ShowPowerUpButton()
