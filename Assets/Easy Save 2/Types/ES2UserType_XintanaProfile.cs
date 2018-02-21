@@ -13,6 +13,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		writer.Write(data.profileID);
 		writer.Write(data.highscore);
 		writer.Write(data.gems);
+		writer.Write(data.shells);
 		writer.Write(data.timesKilledByZazuc);
 		writer.Write(data.timesKilledByMakula);
 		writer.Write(data.timesKilledByKogi);
@@ -47,6 +48,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		data.profileID = reader.Read<System.Int32>();
 		data.highscore = reader.Read<System.Int32>();
 		data.gems = reader.Read<System.Int32>();
+		data.shells = reader.Read<System.Int32>();
 		data.timesKilledByZazuc = reader.Read<System.Int32>();
 		data.timesKilledByMakula = reader.Read<System.Int32>();
 		data.timesKilledByKogi = reader.Read<System.Int32>();

@@ -772,6 +772,10 @@ public class Rad_GuiManager : MonoBehaviour {
             case PrizeType.GEMS:
                 _chestManager.SpawnGemAndMoveItToEndPosition();
                 break;
+            case PrizeType.SHELLS:
+                _chestManager.SpawnShellAndMoveItToEndPosition();
+                break;
+
         }
 
     }

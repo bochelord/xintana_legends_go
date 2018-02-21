@@ -6,7 +6,9 @@ public class CoinsPooler : Pooler {
 
     public GameObject coinPrefab;
     public GameObject gemPrefab;
+    public GameObject shellPrefab;
 
+    private List<GameObject> pooledShells;
     private List<GameObject> pooledCoins;
     private List<GameObject> pooledGems;
 
@@ -32,6 +34,16 @@ public class CoinsPooler : Pooler {
             obj.transform.position = Vector3.zero;
             obj.SetActive(false);
             pooledGems.Add(obj);
+        }
+
+        pooledShells = new List<GameObject>();
+        for (int i = 0; i < pooledAmount; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(shellPrefab);
+            obj.transform.parent = parent;
+            obj.transform.position = Vector3.zero;
+            obj.SetActive(false);
+            pooledShells.Add(obj);
         }
     }
 	
@@ -69,6 +81,24 @@ public class CoinsPooler : Pooler {
         if (activeGems.Count == 0) { Debug.LogError("godverdomme"); }
 
         return activeGems[index];
+    }
+
+    public GameObject GetPooledShell()
+    {
+        List<GameObject> activeShell = new List<GameObject>();
+        foreach (GameObject shell in pooledShells)
+        {
+            if (!shell.activeInHierarchy)
+            {
+                activeShell.Add(shell);
+            }
+        }
+
+        int index = Random.Range(0, pooledShells.Count);
+
+        if (activeShell.Count == 0) { Debug.LogError("godverdomme"); }
+
+        return activeShell[index];
     }
 
     public override void RemoveElement(Transform item)

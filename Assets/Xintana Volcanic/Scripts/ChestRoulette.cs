@@ -22,6 +22,7 @@ public class ChestRoulette : MonoBehaviour {
     public PrizesListScriptableObject.PrizeListClass prizeType;
     public Transform coinsEndPosition;
     public Transform gemEndPositon;
+    public Transform shellsEndPosition;
     [Header(" Prizes Scriptable Object")]
     public PrizesListScriptableObject prizesList;
 
@@ -82,6 +83,20 @@ public class ChestRoulette : MonoBehaviour {
         obj.transform.position = gemsImage.transform.position;
         obj.SetActive(true);
         obj.transform.DOMove(gemEndPositon.position, 0.5f, false).OnComplete(() =>
+        {
+            AudioManager.Instance.Play_GemCollect();
+            SpawnGemCollectedParticle(obj.transform.position);
+            _coinsPooler.RemoveElement(obj.transform);
+        });
+    }
+
+    public void SpawnShellAndMoveItToEndPosition()
+    {
+        Debug.Log("Pennis");
+        GameObject obj = _coinsPooler.GetPooledShell();
+        obj.transform.position = shellsImage.transform.position;
+        obj.SetActive(true);
+        obj.transform.DOMove(shellsEndPosition.position, 0.5f, false).OnComplete(() =>
         {
             AudioManager.Instance.Play_GemCollect();
             SpawnGemCollectedParticle(obj.transform.position);
