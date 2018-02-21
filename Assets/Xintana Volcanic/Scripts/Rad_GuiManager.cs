@@ -42,6 +42,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text pFightsNumber;
     public Slider expScoreSlider;
     public Text levelScoreText;
+    public Text expScoreText;
     public Text attackScoreValue;
     public Text attackIncrease;
     public Text hpValue;
@@ -60,7 +61,6 @@ public class Rad_GuiManager : MonoBehaviour {
     [Header("ViewAdsPanel")]
     public Text timeCountdown;
     public Text timeCountDownContinuePanel;
-
     [Header("Roulette")]
     public GameObject chest1;
     public GameObject chest2;
@@ -294,7 +294,11 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             levelScoreText.text = "Level " + _playerManager.level.ToString();
         }
-
+        if (expScoreText)
+        {
+            //TODO MAKE IT DYNAMIC -> tweenable
+            expScoreText.text = _playerManager.experience.ToString() + "/" + _playerManager.GetExperienceToLevelUp().ToString();
+        }
         if (attackScoreValue)
         {
             attackScoreValue.text = _playerManager.attack.ToString("f2");
@@ -817,7 +821,7 @@ public class Rad_GuiManager : MonoBehaviour {
         hpText.text = _playerManager.GetMaxLife().ToString("f2");
         levelText.text = "Level " + _playerManager.level.ToString();
         shellsText.text = Rad_SaveManager.profile.shells.ToString();
-
+        expText.text = _playerManager.experience.ToString() + "/" + _playerManager.GetExperienceToLevelUp().ToString();
         float _tempValue = _playerManager.experience / _playerManager.GetExperienceToLevelUp();
         expSlider.value =  _tempValue; 
 
