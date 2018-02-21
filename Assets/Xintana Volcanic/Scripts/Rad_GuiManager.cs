@@ -76,6 +76,7 @@ public class Rad_GuiManager : MonoBehaviour {
     [Header("Price Panel")]
     public Text prizeText;
     public GameObject rerollButton;
+    public GameObject goToShopButton;
     public Button closePrizePanel;
     [Header("Main Menu")]
     public Text attackValue;
@@ -523,7 +524,6 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     private void SetScoreButtonsOn()
     {
-        Debug.Log("sdfasdfasdfas>>>>>>>>>>>>>>>>>>>");
         closeButton.gameObject.SetActive(true);
         shareButton.SetActive(true);
         shareText.DOFade(0, 1f).OnComplete(() => 
@@ -791,11 +791,19 @@ public class Rad_GuiManager : MonoBehaviour {
         if (Rad_SaveManager.profile.shells > 0)
         {
             rerollButton.SetActive(true);
+            goToShopButton.SetActive(false);
         }
         else
         {
             rerollButton.SetActive(false);
+            goToShopButton.SetActive(true);
         }
+    }
+
+    public void Button_GoToShopFromChest()
+    {
+        HideRoulette();
+        Button_OpenShop();
     }
     public void SetSpawnPrize(bool value)
     {
