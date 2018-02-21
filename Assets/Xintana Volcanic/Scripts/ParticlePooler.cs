@@ -11,6 +11,7 @@ public class ParticlePooler : Pooler {
     public GameObject coinCollectedParticle;
     public GameObject gemCollectedParticle;
     public GameObject healPlayerParticle;
+    public GameObject shellCollectedParticle;
     public int amount;
 
     private List<GameObject> pooledGold;
@@ -20,6 +21,7 @@ public class ParticlePooler : Pooler {
     private List<GameObject> pooledCoinCollected;
     private List<GameObject> pooledGemCollected;
     private List<GameObject> pooledHealPlayer;
+    private List<GameObject> pooledShellCollected;
     // Use this for initialization
 
     public override void Start ()
@@ -88,6 +90,15 @@ public class ParticlePooler : Pooler {
             obj.SetActive(false);
             pooledHealPlayer.Add(obj);
         }
+        pooledShellCollected = new List<GameObject>();
+        for (int j = 0; j < amount; j++)
+        {
+            GameObject obj = (GameObject)Instantiate(shellCollectedParticle);
+            obj.transform.parent = this.transform;
+            obj.transform.position = Vector3.zero;
+            obj.SetActive(false);
+            pooledShellCollected.Add(obj);
+        }
     }
     public GameObject GetPooledGemCollectedParticle()
     {
@@ -108,7 +119,25 @@ public class ParticlePooler : Pooler {
 
         return null;
     }
+    public GameObject GetPooledShellCollectedParticle()
+    {
+        for (int i = 0; i < pooledShellCollected.Count; i++)
+        {
+            if (!pooledShellCollected[i].activeInHierarchy)
+            {
+                return pooledShellCollected[i];
+            }
+        }
+        if (willGrow)
+        {
+            GameObject obj = (GameObject)Instantiate(shellCollectedParticle);
+            obj.transform.parent = current.transform;
+            pooledShellCollected.Add(obj);
+            return obj;
+        }
 
+        return null;
+    }
     public GameObject GetPooledHealPlayerParticle()
     {
         for (int i = 0; i < pooledHealPlayer.Count; i++)

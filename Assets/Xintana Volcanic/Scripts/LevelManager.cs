@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject HUDTextPrefab;
     public GameObject HUDPlayAgainContainer;
 
+    public CoinsPooler coinsPooler;
     public ParticlePooler particlePooler;
     public EnemiesPooler enemyPooler;
     public Transform enemyContainer;
@@ -285,27 +286,6 @@ public class LevelManager : MonoBehaviour {
         //Instantiate(GIFRecordingprefab);
 
         _enemyPoints = enemyController.score;
-        //switch (typein)
-        //{
-        //    case EnemyType.kogi:
-        //        _enemyPoints = enemy;
-        //        break;
-        //    case EnemyType.makula:
-        //        _enemyPoints = 5000;
-        //        break;
-        //    case EnemyType.zazuc:
-        //        _enemyPoints = 1500;
-        //        break;
-        //    case EnemyType.blackKnight:
-        //        _enemyPoints = 2500;
-        //        break;
-        //    case EnemyType.lavabeast:
-        //        _enemyPoints = 2250;
-        //        break;
-        //    default:
-        //        _enemyPoints = 1000;
-        //        break;
-        //}
 
         //scoreParticle On
         //score sound on
@@ -331,13 +311,42 @@ public class LevelManager : MonoBehaviour {
     }
     IEnumerator EnemyDeadParticle(float time, Vector2 position)
     {
+        if (enemyController.type == EnemyType.makula)
+        {
+            SpawnShellForEndWorld();
+        }
         GameObject obj = particlePooler.GetPooledDeadEnemyParticle();
         obj.SetActive(true);
         obj.transform.position = position;
         yield return new WaitForSeconds(time);
         particlePooler.RemoveElement(obj.transform);
+
     }
 
+    private void SpawnShellForEndWorld()
+    {
+        Rad_SaveManager.profile.shells++;
+        GameObject _shell = coinsPooler.GetPooledShell();
+        _shell.SetActive(true);
+        _shell.transform.position = enemyController.transform.position;
+        _shell.transform.DOScale(0, 0);
+        _shell.transform.DOScale(2, 1.5f).OnComplete(() =>
+        {
+            AudioManager.Instance.Play_GemCollect();
+            _shell.transform.DOScale(1, 0);
+            StartCoroutine(SpawnShellCollecetedParticle(_shell.transform.position));
+            coinsPooler.RemoveElement(_shell.transform);
+            
+        });
+    }
+    IEnumerator SpawnShellCollecetedParticle(Vector3 pos)
+    {
+        GameObject _shellparticle = particlePooler.GetPooledShellCollectedParticle();
+        _shellparticle.transform.position = pos;
+        _shellparticle.SetActive(true);
+        yield return new WaitForSeconds(2);
+        particlePooler.RemoveElement(_shellparticle.transform);
+    }
     public void VanishPlayer()
     {
         StartCoroutine(PlayerDeadParticle(1.5f, _playerManager.particlePosition.position));
