@@ -25,7 +25,7 @@ namespace SIS
 
         //RAD EXTENSION =====================================================================
         /// <summary>
-        /// Bool to know if the item can be purchased with Gems also.
+        /// Bool to know if the item can be purchased with Gems.
         /// </summary>
         public bool canBePurchasedByGems = false;
         //===================================================================================

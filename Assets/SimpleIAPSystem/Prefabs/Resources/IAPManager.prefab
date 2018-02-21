@@ -54,13 +54,13 @@ MonoBehaviour:
       type: 0
       title: X2
       description: Double your score!
-      realPrice: 500
+      realPrice: 
       fetch: 0
       icon: {fileID: 21300000, guid: 872a9e34ce83aac45b69d1d3140d0ff7, type: 3}
       usageCount: 1
       virtualPrice:
       - name: coins
-        amount: 1000
+        amount: 500
       - name: gems
         amount: 0
       req:
@@ -75,7 +75,7 @@ MonoBehaviour:
       type: 0
       title: 1UP
       description: One extra life!
-      realPrice: 1000
+      realPrice: 
       fetch: 0
       icon: {fileID: 21300000, guid: dd8ed8b3a8186394994205dbc3648505, type: 3}
       usageCount: 1
@@ -95,7 +95,7 @@ MonoBehaviour:
       storeIDs:
       - store: GooglePlay
         id: 
-      type: 0
+      type: 1
       title: No ADS!
       description: Get rid of Ads!
       realPrice: $1.99
@@ -110,13 +110,13 @@ MonoBehaviour:
         target: 0
         labelText: 
         nextId: 
-      editorType: 1
+      editorType: 0
       platformFoldout: 0
     - id: si_1gem
       storeIDs:
       - store: GooglePlay
         id: 
-      type: 0
+      type: 1
       title: 1 Gem
       description: 
       realPrice: $1
@@ -131,13 +131,13 @@ MonoBehaviour:
         target: 0
         labelText: 
         nextId: 
-      editorType: 1
+      editorType: 0
       platformFoldout: 0
     - id: si_5gems
       storeIDs:
       - store: GooglePlay
         id: 
-      type: 0
+      type: 1
       title: 5 Gems
       description: 20% Discount
       realPrice: $3.99
@@ -152,13 +152,13 @@ MonoBehaviour:
         target: 0
         labelText: 
         nextId: 
-      editorType: 1
+      editorType: 0
       platformFoldout: 0
     - id: si_10gems
       storeIDs:
       - store: GooglePlay
         id: 
-      type: 0
+      type: 1
       title: 10 Gems
       description: 25% Discount
       realPrice: $7.99
@@ -173,13 +173,13 @@ MonoBehaviour:
         target: 0
         labelText: 
         nextId: 
-      editorType: 1
+      editorType: 0
       platformFoldout: 0
     - id: si_20gems
       storeIDs:
       - store: GooglePlay
         id: 
-      type: 0
+      type: 1
       title: 20 Gems
       description: 30% Discount
       realPrice: $15.99
@@ -194,13 +194,13 @@ MonoBehaviour:
         target: 0
         labelText: 
         nextId: 
-      editorType: 1
+      editorType: 0
       platformFoldout: 0
     - id: si_supportdevs
       storeIDs:
       - store: GooglePlay
         id: 
-      type: 0
+      type: 1
       title: Support Devs!
       description: Eternal gratitude.
       realPrice: $3.99
@@ -215,13 +215,13 @@ MonoBehaviour:
         target: 0
         labelText: 
         nextId: 
-      editorType: 1
+      editorType: 0
       platformFoldout: 0
     - id: si_yellowsword
       storeIDs: []
-      type: 0
-      title: Yellow Sword
-      description: Yellow sword description
+      type: 1
+      title: Timerifter
+      description: Slow time when fighting.
       realPrice: 
       fetch: 0
       icon: {fileID: 21300000, guid: e36463ef87cf1d3499dbbf3b5f7246a5, type: 3}
@@ -240,9 +240,9 @@ MonoBehaviour:
       platformFoldout: 0
     - id: si_bluesword
       storeIDs: []
-      type: 0
-      title: Blue Sword
-      description: Blue sword description
+      type: 1
+      title: Gembreaker
+      description: Press any gem, break any gem.
       realPrice: 
       fetch: 0
       icon: {fileID: 21300000, guid: e36463ef87cf1d3499dbbf3b5f7246a5, type: 3}
@@ -261,9 +261,30 @@ MonoBehaviour:
       platformFoldout: 0
     - id: si_greensword
       storeIDs: []
-      type: 0
-      title: Green Sword
-      description: Green sword description
+      type: 1
+      title: Soulbringer
+      description: Drain life per kill.
+      realPrice: 
+      fetch: 0
+      icon: {fileID: 21300000, guid: e36463ef87cf1d3499dbbf3b5f7246a5, type: 3}
+      usageCount: 1
+      virtualPrice:
+      - name: coins
+        amount: 5000
+      - name: gems
+        amount: 0
+      req:
+        entry: 
+        target: 0
+        labelText: 
+        nextId: 
+      editorType: 2
+      platformFoldout: 0
+    - id: si_blacksword
+      storeIDs: []
+      type: 1
+      title: Berserker
+      description: All Crits while active.
       realPrice: 
       fetch: 0
       icon: {fileID: 21300000, guid: e36463ef87cf1d3499dbbf3b5f7246a5, type: 3}
@@ -285,9 +306,9 @@ MonoBehaviour:
     items:
     - id: si_yellowsword_gems
       storeIDs: []
-      type: 0
-      title: Yellow Sword Gems
-      description: Yellow sword Gems description
+      type: 1
+      title: Timerifter
+      description: Slow time when fighting.
       realPrice: 
       fetch: 0
       icon: {fileID: 21300000, guid: e36463ef87cf1d3499dbbf3b5f7246a5, type: 3}
@@ -306,9 +327,9 @@ MonoBehaviour:
       platformFoldout: 0
     - id: si_bluesword_gems
       storeIDs: []
-      type: 0
-      title: Blue Sword Gems
-      description: Blue sword Gems description
+      type: 1
+      title: Gembreaker
+      description: Press any gem, break any gem.
       realPrice: 
       fetch: 0
       icon: {fileID: 21300000, guid: e36463ef87cf1d3499dbbf3b5f7246a5, type: 3}
@@ -327,9 +348,30 @@ MonoBehaviour:
       platformFoldout: 0
     - id: si_greensword_gems
       storeIDs: []
-      type: 0
-      title: Green Sword Gems
-      description: Green sword Gems description
+      type: 1
+      title: Soulbringer
+      description: Drain life per kill.
+      realPrice: 
+      fetch: 0
+      icon: {fileID: 21300000, guid: e36463ef87cf1d3499dbbf3b5f7246a5, type: 3}
+      usageCount: 1
+      virtualPrice:
+      - name: coins
+        amount: 0
+      - name: gems
+        amount: 5
+      req:
+        entry: 
+        target: 0
+        labelText: 
+        nextId: 
+      editorType: 2
+      platformFoldout: 0
+    - id: si_blacksword_gems
+      storeIDs: []
+      type: 1
+      title: Berserker
+      description: All Crits while active.
       realPrice: 
       fetch: 0
       icon: {fileID: 21300000, guid: e36463ef87cf1d3499dbbf3b5f7246a5, type: 3}
@@ -348,9 +390,9 @@ MonoBehaviour:
       platformFoldout: 0
   currencies:
   - name: coins
-    amount: 10000
+    amount: 500
   - name: gems
-    amount: 5
+    amount: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
