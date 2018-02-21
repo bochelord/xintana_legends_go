@@ -67,6 +67,13 @@ namespace SIS
         /// (optional - could be used for 'double tap to purchase')
         /// </summary>
         public GameObject buyTriggerCoins;
+
+        /// <summary>
+        /// Buy trigger coins Icon, used to be able to disable it when currency price is displayed
+        /// so user don't get misleaded by this coins icon.
+        /// </summary>
+        public GameObject buyTriggerCoinsIcon;
+
         //RAD EXTENSION =====================================================================
         /// <summary>
         /// Buy trigger gems, used for making the confirmation panel visible.
@@ -173,6 +180,10 @@ namespace SIS
                 //purchases for real money have only one price value,
                 //so we just use the first entry of the price label array
                 if (price.Length > 0) price[0].text = obj.realPrice;
+
+                buyTriggerCoinsIcon.SetActive(false);
+
+
             }
             else if (obj.virtualPrice.Count > 0)
             {

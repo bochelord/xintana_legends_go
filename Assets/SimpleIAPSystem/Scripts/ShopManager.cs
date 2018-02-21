@@ -40,6 +40,9 @@ namespace SIS
         /// </summary>
         public GameObject itemConfirmationPanel;
 
+        public GameObject itemConfirmationPanelCoinsIcon;
+        public GameObject itemConfirmationPanelGemsIcon;
+
         /// <summary>
         /// GameObject Container where all the Shop Items are contained.
         /// </summary>
@@ -203,15 +206,17 @@ namespace SIS
                     //}
                     //GameObject buyItemWithCoinsObject = newItem.FindGameObjectWithTag("");
                     item.buyButton = itemConfirmationPanel;
-
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
                     item.buyTriggerCoins.GetComponent<Button>().onClick.AddListener(() => {
                         itemConfirmationPanel.SetActive(true);
+                        itemConfirmationPanelGemsIcon.SetActive(false);
                         //IAPItem shopItem = item;
                         FillItemConfirmationPanelData(item, item.buyTriggerCoins);
                     });
 
                     item.buyTriggerGems.GetComponent<Button>().onClick.AddListener(() => {
                         itemConfirmationPanel.SetActive(true);
+                        itemConfirmationPanelCoinsIcon.SetActive(false);
                         //IAPItem shopItem = item;
                         FillItemConfirmationPanelData(item, item.buyTriggerGems);
                     });
