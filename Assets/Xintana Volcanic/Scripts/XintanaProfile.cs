@@ -11,6 +11,7 @@ public class XintanaProfile : MonoBehaviour {
     public int profileID;
     public int highscore;
     public int gems;
+    public int shells;
     public int timesKilledByZazuc;
     public int timesKilledByMakula;
     public int timesKilledByKogi;
@@ -43,6 +44,7 @@ public class XintanaProfile : MonoBehaviour {
         profile.profileID = id;
         profile.highscore = 0;
         profile.gems = 1;
+        profile.shells = 10;
         profile.adsViewed = 0;
         profile.adsSkipped = 0;
         profile.level = 1;
