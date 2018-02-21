@@ -15,7 +15,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject doublePricePanel;
     public GameObject roulettePanel;
     public GameObject pricePanel;
-    public GameObject noShellsPanel;
+    public GameObject noGemsPanel;
     public GameObject startRoulettePanel;
     [Header("Sliders")]
     public Slider experienceSlider;
@@ -72,7 +72,6 @@ public class Rad_GuiManager : MonoBehaviour {
     public Transform posTitle;
     public Button backButton;
     public Text gemsTextRoulette;
-    public Text shellsTextRoulette;
     [Header("Price Panel")]
     public Text prizeText;
     public GameObject rerollButton;
@@ -82,7 +81,6 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text highscoreMainMenuText;
     public Text hpText;
     public Text levelText;
-    public Text shellsText;
     public Text expText;
     public Slider expSlider;
     public GameObject[] itemsImages;
@@ -188,18 +186,14 @@ public class Rad_GuiManager : MonoBehaviour {
         if (rouletteOn)
         {
             gemsTextRoulette.text = Rad_SaveManager.profile.gems.ToString();
-            shellsTextRoulette.text = Rad_SaveManager.profile.shells.ToString();
         }
-        if (_doublePrize && _chestManager.prizeType.categoryType == PrizeType.COINS  )
+        if (_doublePrize && _chestManager.prizeType == chestType.coins)
         {
             prizeText.text = _pDoublePrize.ToString() + " Coins !!";
         }
-        else if (_doublePrize &&_chestManager.prizeType.categoryType == PrizeType.GEMS)
+        else if (_doublePrize &&_chestManager.prizeType == chestType.gems)
         {
             prizeText.text = _pDoublePrize.ToString() + " Gems !!";
-        }else if(_doublePrize && _chestManager.prizeType.categoryType == PrizeType.SHELLS)
-        {
-            prizeText.text = _pDoublePrize.ToString() + " Shells !!";
         }
         if (_mainMenu)
         {
@@ -246,26 +240,17 @@ public class Rad_GuiManager : MonoBehaviour {
 
     private void UpdatePricePanel()
     {
-        if (prizeText && _chestManager.prizeType.categoryType == PrizeType.COINS)
+        if (prizeText && _chestManager.prizeType == chestType.coins)
         {
             prizeText.text = _chestManager.prizeAmount.ToString() + " Coins !!";
         }
-        else if (prizeText && _chestManager.prizeType.categoryType == PrizeType.GEMS) 
+        else if (prizeText && _chestManager.prizeType == chestType.gems)
         {
             prizeText.text = _chestManager.prizeAmount.ToString() + " Gems !!";
-        }
-        else if (prizeText && _chestManager.prizeType.categoryType == PrizeType.SHELLS)
+        }else if(prizeText && _chestManager.prizeType == chestType.empty)
         {
-            prizeText.text = _chestManager.prizeAmount.ToString() + " Shells !!";
+            prizeText.text = "  You chose poorly!!";
         }
-        else if (prizeText && _chestManager.prizeType.categoryType == PrizeType.WEAPON)
-        {
-            prizeText.text = _chestManager.prizeAmount.ToString() + " " + _chestManager.prizeType.description;
-        }
-        //else if(prizeText && _chestManager.prizeType == chestType.empty)
-        //{
-        //    prizeText.text = "  You chose poorly!!";
-        //}
     }
     private void UpdateScorePanelUI()
     {
@@ -588,7 +573,7 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void ShowDoublePrizePanel()
     {
-         doublePricePanelCoroutine = StartCoroutine(ShowDoublePriceCoroutine(2));
+        doublePricePanelCoroutine = StartCoroutine(ShowDoublePriceCoroutine(2));
     }
 
     IEnumerator ShowDoublePriceCoroutine(float time)
@@ -645,7 +630,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public void Button_ShowRoulettePanel()
     {
 
-        if (Rad_SaveManager.profile.shells > 0)
+        if (Rad_SaveManager.profile.gems > 0)
         {
             backButton.enabled = false;
             rouletteOn = true;
@@ -653,7 +638,7 @@ public class Rad_GuiManager : MonoBehaviour {
         }
         else
         {
-            ShowNoShellsCoroutine(1.5f);
+            ShowNoGemsCoroutine(1.5f);
         }
 
     }
@@ -695,24 +680,24 @@ public class Rad_GuiManager : MonoBehaviour {
         _chestManager.RestartChestGenerations();
     }
 
-    public void ShowNoShellsCoroutine(float time)
+    public void ShowNoGemsCoroutine(float time)
     {
-        StartCoroutine(ShowNoShellsPanelCoroutine(time));
+        StartCoroutine(ShowNoGemsPanelCoroutine(time));
     }
-    IEnumerator ShowNoShellsPanelCoroutine(float time)
+    IEnumerator ShowNoGemsPanelCoroutine(float time)
     {
-        ShowNoShellsPanel();
+        ShowNoGemsPanel();
         yield return new WaitForSeconds(time);
-        HideNoShellsPanel();
+        HideNoGemsPanel();
     }
 
-    private void ShowNoShellsPanel()
+    private void ShowNoGemsPanel()
     {
-        noShellsPanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+        noGemsPanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
     }
-    private void HideNoShellsPanel()
+    private void HideNoGemsPanel()
     {
-        noShellsPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+        noGemsPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
     }
     public void HideRoulette()
     {
@@ -746,7 +731,7 @@ public class Rad_GuiManager : MonoBehaviour {
         pricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
         {
 
-            if (_chestManager.prizeAmount > 0 && _chestManager.prizeType.categoryType != PrizeType.WEAPON)
+            if (_chestManager.prizeAmount > 0)
             {
                 closePrizePanel.enabled = false; // we wait for double prize ad
                 ShowDoublePrizePanel();
@@ -761,12 +746,12 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     private void SpawnPrizeUI()
     {
-        switch (_chestManager.prizeType.categoryType)
+        switch (_chestManager.prizeType)
         {
-            case PrizeType.COINS:
+            case chestType.coins:
                 _chestManager.SpawnCoinAndMoveItToEndPosition();
                 break;
-            case PrizeType.GEMS:
+            case chestType.gems:
                 _chestManager.SpawnGemAndMoveItToEndPosition();
                 break;
         }
@@ -780,7 +765,7 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     public void Button_CheckRerollButton()
     {
-        if (Rad_SaveManager.profile.shells > 0)
+        if (Rad_SaveManager.profile.gems > 0)
         {
             rerollButton.SetActive(true);
         }
@@ -800,7 +785,7 @@ public class Rad_GuiManager : MonoBehaviour {
         highscoreMainMenuText.text = Rad_SaveManager.profile.highscore.ToString();
         hpText.text = _playerManager.GetMaxLife().ToString("f2");
         levelText.text = "Level " + _playerManager.level.ToString();
-        shellsText.text = Rad_SaveManager.profile.shells.ToString();
+
         float _tempValue = _playerManager.experience / _playerManager.GetExperienceToLevelUp();
         expSlider.value =  _tempValue; 
 

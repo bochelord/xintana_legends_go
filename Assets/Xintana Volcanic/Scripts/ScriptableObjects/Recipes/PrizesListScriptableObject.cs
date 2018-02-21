@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum PrizeType { COINS,GEMS,SHELLS,WEAPON}
+public enum PrizeType { COINS,GEMS,TOKENS,WEAPON}
 [SerializeField]
 public class PrizesListScriptableObject : ScriptableObject {
 
@@ -15,7 +15,7 @@ public class PrizesListScriptableObject : ScriptableObject {
         public string name;
         public string description;
         public Sprite itemSprite;
-        public int itemValue;
+        public float itemValue;
         public int prizePercentaje;
 
     }

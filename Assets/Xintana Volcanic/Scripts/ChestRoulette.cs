@@ -17,15 +17,11 @@ public class ChestRoulette : MonoBehaviour {
     public int prizeAmount;
     public GameObject coinsImage;
     public GameObject gemsImage;
-    public GameObject weaponImage;
-    public GameObject shellsImage;
-    public PrizesListScriptableObject.PrizeListClass prizeType;
+    public GameObject nothingImage;
+    public chestType prizeType;
     public Transform coinsEndPosition;
     public Transform gemEndPositon;
-    [Header("Prizes Scriptable Object")]
-    public PrizesListScriptableObject prizesList;
 
-    private WeaponType weaponType;
     private Rad_GuiManager _guiManager;
     private ParticlePooler _particlePooler;
     private CoinsPooler _coinsPooler;
@@ -49,14 +45,14 @@ public class ChestRoulette : MonoBehaviour {
             initialPosition.Add(chests[i].transform.position);
         }
 
-        if (Rad_SaveManager.profile.shells > 0)
+        if (Rad_SaveManager.profile.gems > 0)
         {
             GeneratePrizes();
             StartCoroutine(StartChestRotation(2));
         }
         else
         {
-            _guiManager.ShowNoShellsCoroutine(1.5f);
+            _guiManager.ShowNoGemsCoroutine(1.5f);
         }
     }
     /// <summary>
@@ -99,7 +95,7 @@ public class ChestRoulette : MonoBehaviour {
         yield return new WaitForSeconds(1);
         int _randomTime = Random.Range(3, 6);
         chestRotate = true;
-        Rad_SaveManager.profile.shells--;
+        Rad_SaveManager.profile.gems--;
         yield return new WaitForSeconds(_randomTime);
         chestRotate = false;
         ResetRotationChest();
@@ -145,29 +141,15 @@ public class ChestRoulette : MonoBehaviour {
   
     private void GeneratePrizes()
     {
-        bool weaponIn = false; // so, in case we add any weapon in prizes, we only add one
         for (int i = 0; i < chests.Length; i++)
         {
-            int randomPrize = RadUtils.d100();
-            if(randomPrize == 1 && !weaponIn)
+            if(chests[i].type == chestType.coins)
             {
-                int _rWeapon = Random.Range(0, prizesList.weaponsItemsList.Count);
-                chests[i].prize = prizesList.weaponsItemsList[_rWeapon];
+                GeneratePriceAmountGold(chests[i]);
             }
-            else if(randomPrize == 2)
+            else if(chests[i].type == chestType.gems)
             {
-                int _rGem = Random.Range(0, prizesList.gemsItemsList.Count);
-                chests[i].prize = prizesList.gemsItemsList[_rGem];
-            }
-            else if( randomPrize % 2 == 0)
-            {
-                int _rGold = Random.Range(0, prizesList.coinsItemsList.Count);
-                chests[i].prize = prizesList.coinsItemsList[_rGold];
-            }
-            else
-            {
-                int _rtoken = Random.Range(0, prizesList.tokensItemsList.Count);
-                chests[i].prize = prizesList.tokensItemsList[_rtoken];
+                GeneratePriceAmountGems(chests[i]);
             }
             chests[i].CloseChest();
         }
@@ -185,22 +167,57 @@ public class ChestRoulette : MonoBehaviour {
     }
     public void UpdateDoublePrize()
     {
-        if (prizeType.categoryType == PrizeType.COINS) 
+        if (prizeType == chestType.coins)
         {
             SIS.DBManager.IncreaseFunds("coins", prizeAmount);
         }
-        else if (prizeType.categoryType == PrizeType.GEMS)
+        else if (prizeType == chestType.gems)
         {
             Rad_SaveManager.profile.gems += prizeAmount;
-        }
-        else if(prizeType.categoryType == PrizeType.SHELLS)
-        {
-            Rad_SaveManager.profile.shells += prizeAmount;
         }
 
         Rad_SaveManager.SaveData();
     }
+    private void GeneratePriceAmountGold(Rad_Chest chest)
+    {
+        float diceroll = 0;
+        diceroll = RadUtils.d100();
 
+        if(diceroll < 5)
+        {
+            chest.amount = 1500;
+        }
+        else if(diceroll >= 5 && diceroll < 20)
+        {
+            chest.amount = 750;
+        }
+        else if (diceroll >= 20 && diceroll < 60)
+        {
+            chest.amount = 125;
+        }
+        else if (diceroll >= 60)
+        {
+            chest.amount = 50;
+        }
+    }
+    private void GeneratePriceAmountGems(Rad_Chest chest)
+    {
+        float diceroll = 0;
+        diceroll = RadUtils.d100();
+
+        if (diceroll < 5)
+        {
+            chest.amount = 3;
+        }
+        else if (diceroll >= 5 && diceroll < 20)
+        {
+            chest.amount = 2;
+        }
+        else if (diceroll >= 20)
+        {
+            chest.amount = 1;
+        }
+    }
 
     public void SpawnGoldParticleChest(Transform item)
     {
@@ -259,24 +276,14 @@ public class ChestRoulette : MonoBehaviour {
     }
     public void UpdatePlayerData()
     {
-        switch (prizeType.categoryType)
+        switch (prizeType)
         {
-            case PrizeType.COINS:
+            case chestType.coins:
                 SIS.DBManager.IncreaseFunds("coins", prizeAmount);
                 break;
-            case PrizeType.GEMS:
+            case chestType.gems:
                 Rad_SaveManager.profile.gems += prizeAmount;
                 break;
-            case PrizeType.SHELLS:
-                Rad_SaveManager.profile.shells += prizeAmount;
-                break;
-            case PrizeType.WEAPON:
-                switch (weaponType)
-                {
-                    //TODO ADD WEAPONS TO IAPURCHASES DB
-                }
-                break;
-
         }
         Rad_SaveManager.SaveData();
     }
