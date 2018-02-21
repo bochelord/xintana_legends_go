@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
-public enum chestType { coins, herb, shells, empty, gems}
 public class Rad_Chest : MonoBehaviour {
 
     public GameObject chestClosed;
     public GameObject chestOpen;
     public GameObject gold;
     public GameObject gems;
-    public chestType type;
-    public int amount;
+    public GameObject shells;
+    public GameObject weapon;
+    public PrizesListScriptableObject.PrizeListClass prize;
     public Transform midPoint;
     public float rotationSpeed;
 
@@ -44,8 +45,8 @@ public class Rad_Chest : MonoBehaviour {
             {
                 chestClosed.SetActive(false);
                 chestOpen.SetActive(true);
-                _chestManager.prizeAmount = amount;
-                _chestManager.prizeType = type;
+                _chestManager.prizeAmount = prize.itemValue;
+                _chestManager.prizeType = prize;
                 UpdatePrize();
                 _guiManager.ShowPrizePanel();
             });
@@ -59,15 +60,25 @@ public class Rad_Chest : MonoBehaviour {
     {
         chestClosed.SetActive(false);
         chestOpen.SetActive(true);
-        switch (type)
+        switch (prize.categoryType)
         {
-            case chestType.coins:
+            case PrizeType.COINS:
                 gold.SetActive(true);
                 break;
 
-            case chestType.gems:
+            case PrizeType.GEMS:
                 gems.SetActive(true);
                 break;
+
+            case PrizeType.SHELLS:
+                shells.SetActive(true);
+                break;
+
+            case PrizeType.WEAPON:
+                weapon.GetComponent<Image>().sprite = prize.itemSprite;
+                weapon.SetActive(true);
+                break;
+
         }
     }
     public void CloseChest()
@@ -76,42 +87,55 @@ public class Rad_Chest : MonoBehaviour {
         chestOpen.SetActive(false);
         gold.SetActive(false);
         gems.SetActive(false);
+        shells.SetActive(false);
+        weapon.SetActive(false);
     }
    
 
     private void UpdatePrize()
     {
-        _guiManager.SetCointToSpawn(amount);
-
-        switch (type)
+        _guiManager.SetCointToSpawn(prize.itemValue);
+        switch (_chestManager.prizeType.categoryType)
         {
-            case chestType.coins:
+            case PrizeType.COINS:
 
-                _chestManager.nothingImage.SetActive(false);
+                _chestManager.weaponImage.SetActive(false);
                 _chestManager.gemsImage.SetActive(false);
                 _chestManager.coinsImage.SetActive(true);
-                AnalyticsManager.Instance.ChestPrice_Event("Coins", amount);
+                AnalyticsManager.Instance.ChestPrice_Event("Coins", prize.itemValue);
                 _chestManager.SpawnGoldParticleChest(this.transform);
+                _chestManager.shellsImage.SetActive(false);
                 gold.SetActive(true);
                 break;
 
-            case chestType.gems:
-
-                AnalyticsManager.Instance.ChestPrice_Event("Gems", amount);
-                _chestManager.nothingImage.SetActive(false);
+            case PrizeType.GEMS:
+                AnalyticsManager.Instance.ChestPrice_Event("Gems", prize.itemValue);
+                _chestManager.weaponImage.SetActive(false);
                 _chestManager.gemsImage.SetActive(true);
                 _chestManager.coinsImage.SetActive(false);
                 _chestManager.SpawnGemParticleChest(this.transform);
+                _chestManager.shellsImage.SetActive(false);
                 gems.SetActive(true);
                 break;
 
-            case chestType.empty:
-
-                AnalyticsManager.Instance.ChestPrice_Event("Empty", amount);
-                _chestManager.nothingImage.SetActive(false);
+            case PrizeType.WEAPON:
+                //TODO analytics for weapon
+                _chestManager.weaponImage.GetComponent<Image>().sprite = prize.itemSprite;
+                _chestManager.weaponImage.SetActive(true);
                 _chestManager.gemsImage.SetActive(false);
                 _chestManager.coinsImage.SetActive(false);
-                _chestManager.SpawnEmptyParticleChest(this.transform);
+                _chestManager.shellsImage.SetActive(false);
+                weapon.SetActive(true);
+                //TODO WEAPON PARTICLES
+                break;
+            case PrizeType.SHELLS:
+                _chestManager.weaponImage.SetActive(false);
+                _chestManager.gemsImage.SetActive(false);
+                _chestManager.coinsImage.SetActive(false);
+                _chestManager.shellsImage.SetActive(true);
+                shells.SetActive(true);
+                //TODO SHELLS ANALYTICS
+                //TODO SHELLS PARTICLES 
                 break;
         }
         Rad_SaveManager.SaveData();
