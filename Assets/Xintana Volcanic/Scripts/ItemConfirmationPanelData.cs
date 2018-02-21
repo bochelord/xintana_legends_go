@@ -11,5 +11,7 @@ public class ItemConfirmationPanelData : MonoBehaviour {
     public Text description;
     public Text[] price;
     public Button okButton;
+    public GameObject coinsIcon;
+    public GameObject gemsIcon;
 
 }

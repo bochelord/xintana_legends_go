@@ -287,21 +287,33 @@ namespace SIS
         /// <param name="shopItem">IAPItem</param>
         public void FillItemConfirmationPanelData(IAPItem shopItem, GameObject pressedButton)
         {
-            //Debug.Log("shopItem.name: " + shopItem.name);
+            //Get the Metaclass of the productId (IAP item). <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            IAPObject obj = IAPManager.GetIAPObject(shopItem.productId);
+
+            //Get access to the Confirmation panel gameobject links <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             ItemConfirmationPanelData icpd;
             icpd = itemConfirmationPanel.GetComponent<ItemConfirmationPanelData>();
             icpd.title.text = shopItem.title.text;
-            //Debug.Log("icpd.title.text: " + shopItem.title.text);
             icpd.icon.sprite = shopItem.icon.sprite;
             icpd.description.text = shopItem.description.text;
 
             if (pressedButton.tag == "buyByCoins")
             {
                 icpd.price[0].text = shopItem.price[0].text;
+                if (obj.editorType != IAPType.Default){
+                    icpd.coinsIcon.SetActive(true);
+                }
+                else
+                {
+                    icpd.coinsIcon.SetActive(false);
+                    icpd.gemsIcon.SetActive(false);
+                }
+                
             }
             else if (pressedButton.tag == "buyByGems")
             {
                 icpd.price[0].text = shopItem.price[1].text;
+                icpd.gemsIcon.SetActive(true);
             }
 
             //for (int i = 0; i < shopItem.price.Length; i++)
@@ -442,11 +454,11 @@ namespace SIS
 		/// <summary>
         public static void ShowMessage(string text)
         {
-            Debug.Log("Texto que deberia de salir: " + text);
+            //Debug.Log("Texto que deberia de salir: " + text);
             if (!instance.errorWindow) return;
-            Debug.Log("Hay instancia de errorWindow");
+            //Debug.Log("Hay instancia de errorWindow");
             if(instance.message) instance.message.text = text;
-            Debug.Log("instance.message.text = " + text);
+            //Debug.Log("instance.message.text = " + text);
             instance.errorWindow.SetActive(true);
         }
 
