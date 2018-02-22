@@ -26,6 +26,7 @@ public class XintanaProfile : MonoBehaviour {
     public bool noAds;
     public bool doubleScore;
     public bool firstTimePlayed;
+    public bool freeTokenDay;
     public System.DateTime timeStamp;
     public int sharedScoreTimes;
     //TODO creat purchases done and equipped_items;
@@ -43,8 +44,8 @@ public class XintanaProfile : MonoBehaviour {
 #endif
         profile.profileID = id;
         profile.highscore = 0;
-        profile.gems = 1;
-        profile.shells = 10;
+        profile.gems = 0;
+        profile.shells = 0;
         profile.adsViewed = 0;
         profile.adsSkipped = 0;
         profile.level = 1;
@@ -55,6 +56,7 @@ public class XintanaProfile : MonoBehaviour {
         profile.noAds = false;
         profile.doubleScore = false;
         profile.firstTimePlayed = true;
+        profile.freeTokenDay = false;
         profile.timesKilledByBlackKnight = 0;
         profile.timesKilledByKogi = 0;
         profile.timesKilledByMakula = 0;

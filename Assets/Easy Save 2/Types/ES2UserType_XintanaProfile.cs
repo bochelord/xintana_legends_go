@@ -28,6 +28,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		writer.Write(data.noAds);
 		writer.Write(data.doubleScore);
 		writer.Write(data.firstTimePlayed);
+		writer.Write(data.freeTokenDay);
 		writer.Write(data.timeStamp);
 		writer.Write(data.sharedScoreTimes);
 
@@ -63,6 +64,7 @@ public class ES2UserType_XintanaProfile : ES2Type
 		data.noAds = reader.Read<System.Boolean>();
 		data.doubleScore = reader.Read<System.Boolean>();
 		data.firstTimePlayed = reader.Read<System.Boolean>();
+		data.freeTokenDay = reader.Read<System.Boolean>();
 		data.timeStamp = reader.Read<System.DateTime>();
 		data.sharedScoreTimes = reader.Read<System.Int32>();
 

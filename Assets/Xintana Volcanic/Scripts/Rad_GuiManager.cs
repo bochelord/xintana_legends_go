@@ -17,6 +17,8 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject pricePanel;
     public GameObject noShellsPanel;
     public GameObject startRoulettePanel;
+    public GameObject freeShellpanel;
+    public GameObject blockButtonsPanel;
     [Header("Sliders")]
     public Slider experienceSlider;
     public Slider powerUpSlider;
@@ -492,7 +494,6 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         if(_playerManager.GetTotalExpPerGame() + Rad_SaveManager.profile.experience >= _playerManager.GetExperienceToLevelUp())
         {
-            
             DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, 1 , 0.51f).OnComplete(() =>
             {
                 DOTween.To(() => expScoreSlider.value, x => expScoreSlider.value = x, 0, 0f).OnComplete(() =>
@@ -503,8 +504,8 @@ public class Rad_GuiManager : MonoBehaviour {
                     IncreaseStatsValue();
                     StartCoroutine(FunctionLibrary.CallWithDelay(UpdateExperience, 0.5f));
                 });   
-
             });
+
         }else if (!_playerManager.GetExperienceAddedFromProfile())
         {
             float _tempValue = (_playerManager.GetTotalExpPerGame() + Rad_SaveManager.profile.experience) / _playerManager.GetExperienceToLevelUp();
@@ -565,14 +566,12 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     public void Button_OpenShop()
     {
-        //shop.SetActive(true);
         shop.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack);
     }
 
     public void Button_CloseShop()
     {
         CheckInventory();
-        //shop.SetActive(false); 
         shop.transform.DOLocalMoveX(840f, 0.75f).SetEase(Ease.OutBack);
     }
     public void ShowContinuePanel()
@@ -654,9 +653,11 @@ public class Rad_GuiManager : MonoBehaviour {
 
         if (Rad_SaveManager.profile.shells > 0)
         {
-            backButton.enabled = false;
-            rouletteOn = true;
             StartRoulettePanel();
+        }
+        else if (!_adsManager.GetFreeShellAdViewed())
+        {
+            ShowFreeShellPanel();
         }
         else
         {
@@ -664,14 +665,26 @@ public class Rad_GuiManager : MonoBehaviour {
         }
 
     }
-    private void StartRoulettePanel()
+    public void StartRoulettePanel()
     {
+        backButton.enabled = false;
+        rouletteOn = true;
         roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
         {
             ShowStartRoulettePanel();
         });
     }
 
+    public void ShowFreeShellPanel()
+    {
+        blockButtonsPanel.SetActive(true);
+        freeShellpanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+    }
+    public void HideFreeShellPanel()
+    {
+        blockButtonsPanel.SetActive(false);
+        freeShellpanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+    }
     public void ChestPresentation()
     {
         rouletteTitle.transform.DOMove(posTitle.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
@@ -691,6 +704,7 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void ShowStartRoulettePanel()
     {
+        Debug.Log("<<<<<<<<<<<<<< BLA BLA BLA");
         startRoulettePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
     }
     public void HideStartRoulettePanel()

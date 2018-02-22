@@ -241,7 +241,6 @@ public class ChestRoulette : MonoBehaviour {
     {
         GameObject obj = _particlePooler.GetPooledGemParticle();
         obj.SetActive(true);
-        Debug.Log(obj);
         obj.transform.position = item.transform.position;
         yield return new WaitForSeconds(1);
         _particlePooler.RemoveElement(obj.transform);
@@ -275,7 +274,6 @@ public class ChestRoulette : MonoBehaviour {
 
         switch (prizeType.categoryType)
         {
-
             case PrizeType.COINS:
                 SIS.DBManager.IncreaseFunds("coins", prizeAmount);
                 break;
@@ -291,7 +289,6 @@ public class ChestRoulette : MonoBehaviour {
                     //TODO ADD WEAPONS TO IAPURCHASES DB
                 }
                 break;
-
         }
         Rad_SaveManager.SaveData();
     }

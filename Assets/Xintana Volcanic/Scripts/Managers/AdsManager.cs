@@ -13,6 +13,8 @@ public class AdsManager : MonoBehaviour {
     private System.DateTime timeStamp;
     [HideInInspector]
     public int AdsViewed;
+
+    private bool _freeShellAdViewed = false;
     void Awake()
     {
         _guiManager = FindObjectOfType<Rad_GuiManager>();
@@ -22,9 +24,11 @@ public class AdsManager : MonoBehaviour {
 
     void Start()
     {
+        _freeShellAdViewed = Rad_SaveManager.profile.freeTokenDay;
         timeStamp = System.DateTime.Now;
         if (timeStamp.Day > Rad_SaveManager.profile.timeStamp.Day)
         {
+            Rad_SaveManager.profile.freeTokenDay = false; // 1 free token per day
             AdsViewed = 0;
             Rad_SaveManager.profile.timeStamp = timeStamp;
         }
@@ -94,6 +98,22 @@ public class AdsManager : MonoBehaviour {
                 break;
         }
     }
+
+    private void HandlResultFreeShell(ShowResult result)
+    {
+        AnalyticsManager.Instance.AdsViewed_Event(result);
+        switch (result)
+        {
+            case ShowResult.Finished:
+                Rad_SaveManager.profile.freeTokenDay = true;
+                _freeShellAdViewed = true;
+                Rad_SaveManager.profile.shells++;
+                _guiManager.HideFreeShellPanel();
+                _guiManager.StartRoulettePanel();
+                break;
+
+        }
+    }
     public void ShowAdNoReward()
     {
         if (Advertisement.IsReady())
@@ -107,5 +127,17 @@ public class AdsManager : MonoBehaviour {
         {
             Advertisement.Show("rewardedVideo", new ShowOptions() { resultCallback = HandleResultDoublePrize });
         }
+    }
+
+    public void ShowAddForFreeShell()
+    {
+        if (Advertisement.IsReady())
+        {
+            Advertisement.Show("rewardedVideo", new ShowOptions() { resultCallback = HandlResultFreeShell });
+        }
+    }
+    public bool GetFreeShellAdViewed()
+    {
+        return _freeShellAdViewed;
     }
 }
