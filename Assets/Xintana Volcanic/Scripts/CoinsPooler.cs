@@ -49,56 +49,63 @@ public class CoinsPooler : Pooler {
 	
     public GameObject GetPooledCoin()
     {
-        List<GameObject> activeCoins = new List<GameObject>();
-        foreach (GameObject coin in pooledCoins)
+
+        for (int i = 0; i < pooledCoins.Count; i++)
         {
-            if (!coin.activeInHierarchy)
+            if (!pooledCoins[i].activeInHierarchy)
             {
-                activeCoins.Add(coin);
+                return pooledCoins[i];
             }
         }
 
-        int index = Random.Range(0, activeCoins.Count);
-
-        if (activeCoins.Count == 0) { Debug.LogError("godverdomme"); }
-
-        return activeCoins[index];
+        if (willGrow)
+        {
+            GameObject obj = (GameObject)Instantiate(coinPrefab);
+            obj.transform.parent = current.transform;
+            pooledCoins.Add(obj);
+            return obj;
+        }
+        return null;
     }
 
     public GameObject GetPooledGem()
     {
-        List<GameObject> activeGems = new List<GameObject>();
-        foreach (GameObject gem in pooledGems)
+        for (int i = 0; i < pooledGems.Count; i++)
         {
-            if (!gem.activeInHierarchy)
+            if (!pooledGems[i].activeInHierarchy)
             {
-                activeGems.Add(gem);
+                return pooledGems[i];
             }
         }
 
-        int index = Random.Range(0, activeGems.Count);
-
-        if (activeGems.Count == 0) { Debug.LogError("godverdomme"); }
-
-        return activeGems[index];
+        if (willGrow)
+        {
+            GameObject obj = (GameObject)Instantiate(gemPrefab);
+            obj.transform.parent = current.transform;
+            pooledGems.Add(obj);
+            return obj;
+        }
+        return null;
     }
 
     public GameObject GetPooledShell()
     {
-        List<GameObject> activeShell = new List<GameObject>();
-        foreach (GameObject shell in pooledShells)
+        for (int i = 0; i < pooledShells.Count; i++)
         {
-            if (!shell.activeInHierarchy)
+            if (!pooledShells[i].activeInHierarchy)
             {
-                activeShell.Add(shell);
+                return pooledShells[i];
             }
         }
 
-        int index = Random.Range(0, pooledShells.Count);
-
-        if (activeShell.Count == 0) { Debug.LogError("godverdomme"); }
-
-        return activeShell[index];
+        if (willGrow)
+        {
+            GameObject obj = (GameObject)Instantiate(shellPrefab);
+            obj.transform.parent = current.transform;
+            pooledGems.Add(obj);
+            return obj;
+        }
+        return null;
     }
 
     public override void RemoveElement(Transform item)
