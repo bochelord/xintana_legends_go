@@ -460,12 +460,16 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             if (SIS.DBManager.GetPurchase("si_x2") > 0)
             {
+                Rad_SaveManager.profile.doubleScorePurchased--;
+                if(Rad_SaveManager.profile.doubleScorePurchased <= 0)
+                {
+                    SIS.DBManager.RemovePurchase("si_x2");
+                    SIS.DBManager.RemovePurchaseUI("si_x2");
+                    Rad_SaveManager.profile.doubleScore = false;
+                }
                 x2Text.SetActive(true);
                 x2Text.transform.DOShakeScale(2, 0.5f, 2, 25, true);
                 DOTween.To(() => _pScorePlayer, x => _pScorePlayer = x, (int)_levelManager.GetPlayerScore() * 2, 0.5f);
-                SIS.DBManager.RemovePurchase("si_x2");
-                SIS.DBManager.RemovePurchaseUI("si_x2");
-                Rad_SaveManager.profile.doubleScore = false;
                 _levelManager.SetPlayerScore((int)_levelManager.GetPlayerScore() * 2);
             }
         });
@@ -704,7 +708,6 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void ShowStartRoulettePanel()
     {
-        Debug.Log("<<<<<<<<<<<<<< BLA BLA BLA");
         startRoulettePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
     }
     public void HideStartRoulettePanel()

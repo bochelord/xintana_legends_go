@@ -286,7 +286,7 @@ public class CombinationManager : MonoBehaviour {
                 // We STOP the Game as the Player lose.
                 gameOn = false;
                 //levelManager.GameOverPanel();
-                levelManager.AddNemesisCount();
+                //levelManager.AddNemesisCount();
                 if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped <= levelManager.adsSkipped && !Rad_SaveManager.profile.noAds)
                 {
                     MoveButtonsOut();

@@ -17,7 +17,8 @@ public class PrizesListScriptableObject : ScriptableObject {
         public Sprite itemSprite;
         public int itemValue;
         public int prizePercentaje;
-
+        [Header("In case if it's a weapon")]
+        public WeaponType weaponType;
     }
 
     [Header(" Coins Items List")]

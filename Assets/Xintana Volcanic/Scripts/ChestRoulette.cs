@@ -26,7 +26,7 @@ public class ChestRoulette : MonoBehaviour {
     [Header(" Prizes Scriptable Object")]
     public PrizesListScriptableObject prizesList;
 
-    private WeaponType weaponType;
+
     private Rad_GuiManager _guiManager;
     private ParticlePooler _particlePooler;
     private CoinsPooler _coinsPooler;
@@ -284,9 +284,24 @@ public class ChestRoulette : MonoBehaviour {
                 Rad_SaveManager.profile.shells += prizeAmount;
                 break;
             case PrizeType.WEAPON:
-                switch (weaponType)
+                switch (prizeType.weaponType)
                 {
-                    //TODO ADD WEAPONS TO IAPURCHASES DB
+                    case WeaponType.black:
+                        SIS.DBManager.IncreasePurchase("si_blacksword", 1);
+                        SIS.DBManager.IncreasePurchase("si_blacksword_gems", 1);
+                        break;
+                    case WeaponType.blue:
+                        SIS.DBManager.IncreasePurchase("si_bluesword", 1);
+                        SIS.DBManager.IncreasePurchase("si_bluesword_gems", 1);
+                        break;
+                    case WeaponType.green:
+                        SIS.DBManager.IncreasePurchase("si_greensword", 1);
+                        SIS.DBManager.IncreasePurchase("si_greensword_gems", 1);
+                        break;
+                    case WeaponType.yellow:
+                        SIS.DBManager.IncreasePurchase("si_yellowsword", 1);
+                        SIS.DBManager.IncreasePurchase("si_yellowword_gems", 1);
+                        break;
                 }
                 break;
         }
