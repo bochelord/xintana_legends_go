@@ -53,6 +53,7 @@ namespace SIS
                     //the user bought the item "coins", show appropriate feedback
                     ShowMessage("Your score will be double!!!");
                     DBManager.IncreasePurchase("si_x2", 1);
+                    Rad_SaveManager.profile.doubleScorePurchased++;
                     Rad_SaveManager.profile.doubleScore = true;
                     AnalyticsManager.Instance.Item_Bought_Event("Double Score");
                     break;
@@ -60,6 +61,7 @@ namespace SIS
                     DBManager.IncreasePurchase("si_1up", 1);
                     ShowMessage("Now you have an extra life in combat!");
                     Rad_SaveManager.profile.extraLife = true;
+                    Rad_SaveManager.profile.extraLifePurchased++;
                     AnalyticsManager.Instance.Item_Bought_Event("Extra Life");
                     break;
                 case "si_noads":
@@ -70,25 +72,21 @@ namespace SIS
                     break;
 
                 case "si_1gem":
-                    //DBManager.IncreasePurchase("shop_item_04", 1);
                     Rad_SaveManager.profile.gems++;
                     ShowMessage("1 Gem Purchased !");
                     AnalyticsManager.Instance.Item_Bought_Event("1 Gem");
                     break;
                 case "si_5gems":
-                    //DBManager.IncreasePurchase("shop_item_05", 1);
                     Rad_SaveManager.profile.gems += 5;
                     ShowMessage("5 Gems Purchased !");
                     AnalyticsManager.Instance.Item_Bought_Event("5 Gems");
                     break;
                 case "si_10gems":
-                    // DBManager.IncreasePurchase("shop_item_06", 1);
                     Rad_SaveManager.profile.gems += 10;
                     AnalyticsManager.Instance.Item_Bought_Event("10 Gems");
                     ShowMessage("10 Gems Purchased !");
                     break;
                 case "si_20gems":
-                    //DBManager.IncreasePurchase("shop_item_07", 1);
                     Rad_SaveManager.profile.gems += 20;
                     AnalyticsManager.Instance.Item_Bought_Event("20 Gems");
                     ShowMessage("20 Gems Purchased !");

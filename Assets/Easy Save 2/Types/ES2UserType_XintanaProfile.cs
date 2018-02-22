@@ -14,10 +14,8 @@ public class ES2UserType_XintanaProfile : ES2Type
 		writer.Write(data.highscore);
 		writer.Write(data.gems);
 		writer.Write(data.shells);
-		writer.Write(data.timesKilledByZazuc);
-		writer.Write(data.timesKilledByMakula);
-		writer.Write(data.timesKilledByKogi);
-		writer.Write(data.timesKilledByBlackKnight);
+		writer.Write(data.extraLifePurchased);
+		writer.Write(data.doubleScorePurchased);
 		writer.Write(data.level);
 		writer.Write(data.experience);
 		writer.Write(data.weaponEquipped);
@@ -50,10 +48,8 @@ public class ES2UserType_XintanaProfile : ES2Type
 		data.highscore = reader.Read<System.Int32>();
 		data.gems = reader.Read<System.Int32>();
 		data.shells = reader.Read<System.Int32>();
-		data.timesKilledByZazuc = reader.Read<System.Int32>();
-		data.timesKilledByMakula = reader.Read<System.Int32>();
-		data.timesKilledByKogi = reader.Read<System.Int32>();
-		data.timesKilledByBlackKnight = reader.Read<System.Int32>();
+		data.extraLifePurchased = reader.Read<System.Int32>();
+		data.doubleScorePurchased = reader.Read<System.Int32>();
 		data.level = reader.Read<System.Int32>();
 		data.experience = reader.Read<System.Single>();
 		data.weaponEquipped = reader.Read<WeaponType>();

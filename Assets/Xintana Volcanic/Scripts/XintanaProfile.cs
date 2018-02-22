@@ -12,10 +12,8 @@ public class XintanaProfile : MonoBehaviour {
     public int highscore;
     public int gems;
     public int shells;
-    public int timesKilledByZazuc;
-    public int timesKilledByMakula;
-    public int timesKilledByKogi;
-    public int timesKilledByBlackKnight; //TODO add variable for any type of enemy
+    public int extraLifePurchased;
+    public int doubleScorePurchased;
     public int level;
     public float experience;
     public WeaponType weaponEquipped;
@@ -48,6 +46,8 @@ public class XintanaProfile : MonoBehaviour {
         profile.shells = 0;
         profile.adsViewed = 0;
         profile.adsSkipped = 0;
+        profile.extraLifePurchased = 0;
+        profile.doubleScorePurchased = 0;
         profile.level = 1;
         profile.experience = 0;
         profile.weaponEquipped = WeaponType.red; // TODO check if this one will be the default weapon
@@ -57,10 +57,6 @@ public class XintanaProfile : MonoBehaviour {
         profile.doubleScore = false;
         profile.firstTimePlayed = true;
         profile.freeTokenDay = false;
-        profile.timesKilledByBlackKnight = 0;
-        profile.timesKilledByKogi = 0;
-        profile.timesKilledByMakula = 0;
-        profile.timesKilledByZazuc = 0;
         profile.timeStamp = System.DateTime.Now;
         profile.sharedScoreTimes = 0;
         return profile;

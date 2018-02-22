@@ -206,13 +206,11 @@ public class LevelManager : MonoBehaviour {
         {
             screenshot.TakeDeathScreenshot();
 
-            //screenshot.GetCombatScreenshot();
-
             //Continue or go to main menu
             AudioManager.Instance.Play_XintanaDeath();
             player.GetComponent<Animator>().SetInteger("AnimState",4);
             AnalyticsManager.Instance.GameOver_Event((int)_playerScore, _enemyCount + 1, _worldNumber);
-            AddNemesisCount();
+            //AddNemesisCount();
             if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped <= adsSkipped && !Rad_SaveManager.profile.noAds)
             {
                 combinationManager.SetGameOn(false);
@@ -237,11 +235,14 @@ public class LevelManager : MonoBehaviour {
         else if (_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") > 0)
         {
             combinationManager.SetGameOn(false);
-            //SIS.DBManager.IncreasePurchase("shop_item_01", -1);
-            SIS.DBManager.RemovePurchase("si_1up");
-            SIS.DBManager.RemovePurchaseUI("si_1up");
-            Rad_SaveManager.profile.extraLife = false;
-            _extraLifePurchased = false;
+            Rad_SaveManager.profile.extraLifePurchased--;
+            if(Rad_SaveManager.profile.extraLifePurchased <= 0)
+            {
+                SIS.DBManager.RemovePurchase("si_1up");
+                SIS.DBManager.RemovePurchaseUI("si_1up");
+                Rad_SaveManager.profile.extraLife = false;
+                _extraLifePurchased = false;
+            }
             combinationManager.MoveButtonsOut();
             StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowContinuePanel, 2f));
         }
@@ -360,25 +361,25 @@ public class LevelManager : MonoBehaviour {
         yield return new WaitForSeconds(time);
         particlePooler.RemoveElement(obj.transform);
     }
-    public void AddNemesisCount()
-    {
-        switch (enemyController.type)
-        {
-            case EnemyType.blackKnight:
-                Rad_SaveManager.profile.timesKilledByBlackKnight++;
-                break;
-            case EnemyType.kogi:
-                Rad_SaveManager.profile.timesKilledByKogi++;
-                break;
-            case EnemyType.makula:
-                Rad_SaveManager.profile.timesKilledByMakula++;
-                break;
-            case EnemyType.zazuc:
-                Rad_SaveManager.profile.timesKilledByZazuc++;
-                break;
+    //public void AddNemesisCount()
+    //{
+    //    switch (enemyController.type)
+    //    {
+    //        case EnemyType.blackKnight:
+    //            Rad_SaveManager.profile.timesKilledByBlackKnight++;
+    //            break;
+    //        case EnemyType.kogi:
+    //            Rad_SaveManager.profile.timesKilledByKogi++;
+    //            break;
+    //        case EnemyType.makula:
+    //            Rad_SaveManager.profile.timesKilledByMakula++;
+    //            break;
+    //        case EnemyType.zazuc:
+    //            Rad_SaveManager.profile.timesKilledByZazuc++;
+    //            break;
 
-        }
-    }
+    //    }
+    //}
     private IEnumerator CoroGetNewEnemy(float delay)
     {
         yield return new WaitForSeconds(delay);

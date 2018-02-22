@@ -49,7 +49,7 @@ public class Rad_Chest : MonoBehaviour {
                 chestOpen.SetActive(true);
                 _chestManager.prizeAmount = prize.itemValue;
                 _chestManager.prizeType = prize;
-
+                
                 UpdatePrize();
                 _guiManager.ShowPrizePanel();
             });
@@ -104,8 +104,6 @@ public class Rad_Chest : MonoBehaviour {
         {
 
             case PrizeType.COINS:
-
-
                 _chestManager.weaponImage.SetActive(false);
                 _chestManager.gemsImage.SetActive(false);
                 _chestManager.coinsImage.SetActive(true);
@@ -126,7 +124,7 @@ public class Rad_Chest : MonoBehaviour {
                 break;
 
             case PrizeType.WEAPON:
-                //TODO analytics for weapon
+                AnalyticsManager.Instance.ChestPrice_Event("Weapon", prize.itemValue);
                 _chestManager.weaponImage.GetComponent<Image>().sprite = prize.itemSprite;
                 _chestManager.weaponImage.SetActive(true);
                 _chestManager.gemsImage.SetActive(false);
@@ -142,8 +140,9 @@ public class Rad_Chest : MonoBehaviour {
                 _chestManager.SpawnEmptyParticleChest(this.transform);
                 _chestManager.shellsImage.SetActive(true);
                 shells.SetActive(true);
-                //TODO SHELLS ANALYTICS
-                //TODO SHELLS PARTICLES 
+                AnalyticsManager.Instance.ChestPrice_Event("Shells", prize.itemValue);
+                //TODO SHELLS PARTICLES
+                 
                 break;
         }
 
