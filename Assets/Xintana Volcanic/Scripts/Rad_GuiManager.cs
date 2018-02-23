@@ -132,6 +132,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private int _tempLevel;
     private float _attackValue;
     private float _hpValue;
+    private AndroidLeaderboard _leaderboardManager;
     private Coroutine gameOverPanelCoroutine;
     private Coroutine doublePricePanelCoroutine;
     private void Awake()
@@ -144,6 +145,7 @@ public class Rad_GuiManager : MonoBehaviour {
         _screenshot = FindObjectOfType<ScreenShot>();
         _playerManager = FindObjectOfType<PlayerManager>();
         _audioManager = FindObjectOfType<AudioManager>();
+        _leaderboardManager = FindObjectOfType<AndroidLeaderboard>();
     }
 
     private void Start()
@@ -481,6 +483,9 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             Rad_SaveManager.profile.highscore = (int)_levelManager.GetPlayerScore();
             Rad_SaveManager.SaveData();
+
+            _leaderboardManager.OnAddScoreToLeaderBorad();
+
             GameObject clone_HighScoreFxPrefab;
             clone_HighScoreFxPrefab = Instantiate(HighScoreFxPrefab);
             clone_HighScoreFxPrefab.transform.SetParent(scorePanel.transform);
@@ -845,11 +850,6 @@ public class Rad_GuiManager : MonoBehaviour {
         expText.text = _playerManager.experience.ToString() + "/" + _playerManager.GetExperienceToLevelUp().ToString();
         float _tempValue = _playerManager.experience / _playerManager.GetExperienceToLevelUp();
         expSlider.value =  _tempValue; 
-
-        //Debug.Log(_playerManager.experience);
-        //Debug.Log(experienceSlider.value);
-        //Debug.Log(_playerManager.GetMaxExperience());
-        //Debug.Log(_playerManager.experience / _playerManager.GetMaxExperience());
     }
 
     public void AddPowerUpSlider(float value)
