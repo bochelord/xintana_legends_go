@@ -11,12 +11,17 @@ public class ES2UserType_XintanaProfile : ES2Type
 		// Add your writer.Write calls here.
 		writer.Write(data.gameVersion);
 		writer.Write(data.profileID);
-		writer.Write(data.highscore);
 		writer.Write(data.gems);
 		writer.Write(data.shells);
+		writer.Write(data.highscore);
 		writer.Write(data.extraLifePurchased);
 		writer.Write(data.doubleScorePurchased);
+		writer.Write(data.playerKills);
+		writer.Write(data.gemsCollected);
+		writer.Write(data.gemsComboLength);
 		writer.Write(data.level);
+		writer.Write(data.doubleScoreOwned);
+		writer.Write(data.extraLifeOwned);
 		writer.Write(data.experience);
 		writer.Write(data.weaponEquipped);
 		writer.Write(data.adsViewed);
@@ -27,6 +32,8 @@ public class ES2UserType_XintanaProfile : ES2Type
 		writer.Write(data.doubleScore);
 		writer.Write(data.firstTimePlayed);
 		writer.Write(data.freeTokenDay);
+		writer.Write(data.reviveAdWatched);
+		writer.Write(data.tokenAdWatched);
 		writer.Write(data.timeStamp);
 		writer.Write(data.sharedScoreTimes);
 
@@ -45,12 +52,17 @@ public class ES2UserType_XintanaProfile : ES2Type
 		// Add your reader.Read calls here to read the data into the object.
 		data.gameVersion = reader.Read<System.String>();
 		data.profileID = reader.Read<System.Int32>();
-		data.highscore = reader.Read<System.Int32>();
 		data.gems = reader.Read<System.Int32>();
 		data.shells = reader.Read<System.Int32>();
+		data.highscore = reader.Read<System.Int32>();
 		data.extraLifePurchased = reader.Read<System.Int32>();
 		data.doubleScorePurchased = reader.Read<System.Int32>();
+		data.playerKills = reader.Read<System.Int32>();
+		data.gemsCollected = reader.Read<System.Int32>();
+		data.gemsComboLength = reader.Read<System.Int32>();
 		data.level = reader.Read<System.Int32>();
+		data.doubleScoreOwned = reader.Read<System.Int32>();
+		data.extraLifeOwned = reader.Read<System.Int32>();
 		data.experience = reader.Read<System.Single>();
 		data.weaponEquipped = reader.Read<WeaponType>();
 		data.adsViewed = reader.Read<System.Int32>();
@@ -61,6 +73,8 @@ public class ES2UserType_XintanaProfile : ES2Type
 		data.doubleScore = reader.Read<System.Boolean>();
 		data.firstTimePlayed = reader.Read<System.Boolean>();
 		data.freeTokenDay = reader.Read<System.Boolean>();
+		data.reviveAdWatched = reader.Read<System.Boolean>();
+		data.tokenAdWatched = reader.Read<System.Boolean>();
 		data.timeStamp = reader.Read<System.DateTime>();
 		data.sharedScoreTimes = reader.Read<System.Int32>();
 

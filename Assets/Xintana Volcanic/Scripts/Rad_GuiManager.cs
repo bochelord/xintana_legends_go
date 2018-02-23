@@ -958,6 +958,22 @@ public class Rad_GuiManager : MonoBehaviour {
             {
                 itemsImages[i].SetActive(true);
             }
+            else if (SIS.DBManager.GetPurchase("si_yellowsword") > 0  && item == InventorySlot.YellowWeapon)
+            {
+                itemsImages[i].SetActive(true);
+            }
+            else if (SIS.DBManager.GetPurchase("si_greensword") > 0 && item == InventorySlot.GreenWeapon)
+            {
+                itemsImages[i].SetActive(true);
+            }
+            else if (SIS.DBManager.GetPurchase("si_bluesword") > 0 && item == InventorySlot.BlueWeapon)
+            {
+                itemsImages[i].SetActive(true);
+            }
+            else if (SIS.DBManager.GetPurchase("si_blacksword") > 0 && item == InventorySlot.BlackWeapon)
+            {
+                itemsImages[i].SetActive(true);
+            }
         }
     }
     public void CheckXintanaWeapon()

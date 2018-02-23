@@ -28,6 +28,7 @@ public class EnemyController : MonoBehaviour {
     private LevelManager levelManager;
     private HealthBarControllerBoss healthBarController;
     private PlayerManager _playerManager;
+
     void Awake()
     {
         animator = this.GetComponent<Animator>();
@@ -36,6 +37,7 @@ public class EnemyController : MonoBehaviour {
         levelManager = FindObjectOfType<LevelManager>();
         healthBarController = FindObjectOfType<HealthBarControllerBoss>();
         _playerManager = FindObjectOfType<PlayerManager>();
+
     }
 
     //void Start () {
@@ -119,9 +121,10 @@ public class EnemyController : MonoBehaviour {
     private void KillEnemy()
     {
         levelManager.state = GameState.Paused;
-        levelManager.AddEnemyCount();
+        levelManager.AddEnemiesKilledCount();
         levelManager.AddPlayerScoreAndGetNewEnemy(this.type, level);
         levelManager.enemyKilled = true;
+        AchievementsManager.Instance.IncrementKillsAchievements();
         _playerManager.AddExperience(_experience);
         levelManager.LaunchShowHUDText(this.transform.position + new Vector3(-0.25f,1f,0f), "+" + _experience + "  XP", new Color32(85, 187, 17, 255),false);
         //levelManager.GetNewEnemy(2.5f);

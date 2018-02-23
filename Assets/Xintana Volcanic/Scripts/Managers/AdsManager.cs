@@ -47,11 +47,12 @@ public class AdsManager : MonoBehaviour {
         switch (result)
         {
             case ShowResult.Finished:
-                AdsViewed++;
+                AdsViewedIncrement();
                 adViewed = true;
                 _levelManager.ContinueGame();
                 _guiManager.HideAdPanel();
                 _analyticsManager.ResurrectionAd_Event(true);
+                AchievementsManager.Instance.ReviveAdAchievement();
                 break;
             case ShowResult.Skipped:
                 _guiManager.HideAdPanelAndStartGameOverPanel();
@@ -68,7 +69,7 @@ public class AdsManager : MonoBehaviour {
         switch (result)
         {
             case ShowResult.Finished:
-                AdsViewed++;
+                AdsViewedIncrement();
                 adViewed = true;
                 _guiManager.closePrizePanel.enabled = true;
                 _guiManager.HideDoublePrizePanel();
@@ -90,6 +91,7 @@ public class AdsManager : MonoBehaviour {
         switch (result)
         {
             case ShowResult.Finished:
+                AdsViewedIncrement();
                 Rad_SaveManager.profile.adsSkipped = 0;
                 StartCoroutine(FunctionLibrary.CallWithDelay(_levelManager.GameOverPanel, 2f));
                 break;
@@ -105,14 +107,23 @@ public class AdsManager : MonoBehaviour {
         switch (result)
         {
             case ShowResult.Finished:
+                AdsViewedIncrement();
                 Rad_SaveManager.profile.freeTokenDay = true;
                 _freeShellAdViewed = true;
                 Rad_SaveManager.profile.shells++;
                 _guiManager.HideFreeShellPanel();
                 _guiManager.StartRoulettePanel();
+                AchievementsManager.Instance.TokenAdAchievement();
                 break;
 
         }
+    }
+
+    private void AdsViewedIncrement()
+    {
+        AdsViewed++;
+        Rad_SaveManager.profile.adsViewed++;
+        AchievementsManager.Instance.IncrementAdsWatchedAchievements();
     }
     public void ShowAdNoReward()
     {

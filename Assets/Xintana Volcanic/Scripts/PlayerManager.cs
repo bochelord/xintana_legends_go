@@ -218,7 +218,6 @@ public class PlayerManager : MonoBehaviour {
 
     public void SavePlayerStats()
     {
-        Debug.Log("EXPERIENCE ADDED >>>>>>>>>>>>>>>>>>> " + experience);
         profile.experience = experience;
         profile.level = level;
     }
@@ -238,12 +237,12 @@ public class PlayerManager : MonoBehaviour {
         {
             totalExpPerGame -= GetExperienceToLevelUp();
         }
-       
         level++;
         _newXintana = new XintanaStructure().GenerateXintanaWithLevel(weaponEquipped, level);
         maxLife = _newXintana.life;
         life = GetMaxLife();
         attack = _newXintana.damage;
+        AchievementsManager.Instance.IncrementLevelAchievements(level);
     }
     public bool GetExperienceAddedFromProfile()
     {

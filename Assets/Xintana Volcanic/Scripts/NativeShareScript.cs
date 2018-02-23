@@ -11,6 +11,7 @@ public class NativeShareScript : MonoBehaviour
     private Rad_GuiManager guiManager;
     private bool didShare = false;
     private XintanaProfile _xintanaProfile;
+
     private Texture2D _texture;
     private int count = 0;
 
@@ -29,6 +30,7 @@ public class NativeShareScript : MonoBehaviour
             guiManager.FillSharePanel();
             _xintanaProfile.sharedScoreTimes++;
             AnalyticsManager.Instance.Shared_Screen(_xintanaProfile.sharedScoreTimes);
+            AchievementsManager.Instance.IncrementShareScoreAchievement();
         }
 
         if (!isProcessing)

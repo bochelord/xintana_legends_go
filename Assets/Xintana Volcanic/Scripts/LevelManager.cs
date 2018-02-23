@@ -257,20 +257,9 @@ public class LevelManager : MonoBehaviour {
     /// <summary>
     /// called in combinationManager, when you kill an enemy
     /// </summary>
-    public void AddEnemyCount()
+    public void AddEnemiesKilledCount()
     {
-        switch (enemyController.type)
-        {
-            case EnemyType.kogi:
-                _kogiKilled++;
-                break;
-            case EnemyType.makula:
-                _makulaKilled++;
-                break;
-            case EnemyType.zazuc:
-                _zazucKilled++;
-                break;
-        }
+        Rad_SaveManager.profile.playerKills++;
     }
 
     public void AddPlayerScoreAndGetNewEnemy(EnemyType typein, int levelin)
@@ -301,7 +290,7 @@ public class LevelManager : MonoBehaviour {
              GetEnemyDeadParticle();
              enemyPooler.RemoveElement(enemyController.transform);
              AudioManager.Instance.Stop_AddScore();
-
+             AchievementsManager.Instance.IncrementScoreAchievements(_playerScore);
          });
 
     }
