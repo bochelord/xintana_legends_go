@@ -511,4 +511,3 @@ public class AchievementsManager : MonoBehaviour
 }
 
 
-//TODO MISSING ACHIEVEMENTS IMPLEMENTATION FOR GOLD GEMS AND SWORDS

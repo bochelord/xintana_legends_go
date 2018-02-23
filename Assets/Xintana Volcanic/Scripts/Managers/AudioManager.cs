@@ -65,7 +65,13 @@ public class AudioManager : MonoBehaviour {
             audioEnabled = false;
         }
     }
-
+    public void ResumeMusic()
+    {
+        if (audioEnabled)
+        {
+            musicPlayer.UnPause();
+        }
+    }
     public void PlayMusicLevel1()
     {
         if (musicLevel1 && audioEnabled)

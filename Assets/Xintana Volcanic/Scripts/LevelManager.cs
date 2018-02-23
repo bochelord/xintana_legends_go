@@ -558,7 +558,7 @@ public class LevelManager : MonoBehaviour {
         combinationManager.MoveButtonsIn();
         //combinationManager.ResetCurrentLenghtCombination();
         PrepareBackgroundLevel(_worldNumber);
-        AudioManager.Instance.PlayMusicLevel1();
+        AudioManager.Instance.ResumeMusic();
         _playerManager.OnAttackFinished();
         _playerManager.life = _playerManager.GetMaxLife();
         GetNewEnemy(1);
