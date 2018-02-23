@@ -358,7 +358,8 @@ namespace SIS
 
             bool isSelected = DBManager.GetSelected(id);
             bool isPurchased;
-            if (id != "si_noads" && id != "si_supportdevs")
+            //if (id != "si_noads" && id != "si_supportdevs")
+            if(id == "si_x2" || id == "si_1up" || id == "si_1gem" || id == "si_5gems" || id == "si_10gems" || id == "si_20gems")
             {
                 isPurchased = false;
 
