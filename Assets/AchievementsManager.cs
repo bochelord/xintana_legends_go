@@ -145,28 +145,28 @@ public class AchievementsManager : MonoBehaviour
     {
         if (Social.localUser.authenticated)
         {
-            if (value > 3)
+            if (value >= 3)
             {
                 PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_3_gems_combo, 100.0f, (bool success) =>
                 {
                     Debug.Log("3 gems combo: " + success);
                 });
             }
-            if (value > 5)
+            if (value >= 5)
             {
                 PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_5_gems_combo, 100.0f, (bool success) =>
                 {
                     Debug.Log("5 gems combo: " + success);
                 });
             }
-            if (value > 7)
+            if (value >= 7)
             {
                 PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_7_gems_combo, 100.0f, (bool success) =>
                 {
                     Debug.Log("7 gems combo: " + success);
                 });
             }
-            if (value > 9)
+            if (value >= 9)
             {
                 PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_9_gems_combo, 100.0f, (bool success) =>
                 {
@@ -266,35 +266,35 @@ public class AchievementsManager : MonoBehaviour
     {
         if (Social.localUser.authenticated)
         {
-            if (value > 10000)
+            if (value >= 10000)
             {
                 PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_score_10_000_points, 100.0f, (bool success) =>
                 {
                     Debug.Log("10k score: " + success);
                 });
             }
-            if (value > 250000)
+            if (value >= 250000)
             {
                 PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_score_25_000_points, 100.0f, (bool success) =>
                 {
                     Debug.Log("25k score: " + success);
                 });
             }
-            if (value > 50000)
+            if (value >= 50000)
             {
                 PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_score_50_000_points, 100.0f, (bool success) =>
                 {
                     Debug.Log("50k score: " + success);
                 });
             }
-            if (value > 75000)
+            if (value >= 75000)
             {
                 PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_score_75_000_points, 100.0f, (bool success) =>
                 {
                     Debug.Log("75k score: " + success);
                 });
             }
-            if (value > 100000)
+            if (value >= 100000)
             {
                 PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_score_100_000_points, 100.0f, (bool success) =>
                 {
@@ -327,35 +327,35 @@ public class AchievementsManager : MonoBehaviour
         {
             int _tempSum = profile.coinsEarned + value;
 
-            if(_tempSum > 100)
+            if(_tempSum >= 100)
             {
                 PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_earn_100_coins, value, (bool success) =>
                 {
                     Debug.Log("100 coins Earned: " + success);
                 });
             }
-            if (_tempSum > 500)
+            if (_tempSum >= 500)
             {
                 PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_earn_500_coins, value, (bool success) =>
                 {
                     Debug.Log("500 coins Earned: " + success);
                 });
             }
-            if (_tempSum > 1000)
+            if (_tempSum >= 1000)
             {
                 PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_earn_1000_coins, value, (bool success) =>
                 {
                     Debug.Log("1000 coins Earned: " + success);
                 });
             }
-            if (_tempSum > 5000)
+            if (_tempSum >= 5000)
             {
                 PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_earn_5000_coins, value, (bool success) =>
                 {
                     Debug.Log("5000 coins Earned: " + success);
                 });
             }
-            if (_tempSum > 10000)
+            if (_tempSum >= 10000)
             {
                 PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_earn_10_000_coins, value, (bool success) =>
                 {
@@ -370,28 +370,28 @@ public class AchievementsManager : MonoBehaviour
         {
             int _tempSum = profile.gemsCollected + value;
 
-            if (_tempSum > 5)
+            if (_tempSum >= 5)
             {
                 PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_collect_5_gems, value, (bool success) =>
                 {
                     Debug.Log("5 gems Earned: " + success);
                 });
             }
-            if (_tempSum > 10)
+            if (_tempSum >= 10)
             {
                 PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_collect_10_gems, value, (bool success) =>
                 {
                     Debug.Log("10 gems Earned: " + success);
                 });
             }
-            if (_tempSum > 20)
+            if (_tempSum >= 20)
             {
                 PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_collect_20_gems, value, (bool success) =>
                 {
                     Debug.Log("20 gems Earned: " + success);
                 });
             }
-            if (_tempSum > 50)
+            if (_tempSum >= 50)
             {
                 PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_collect_50_gems, value, (bool success) =>
                 {
