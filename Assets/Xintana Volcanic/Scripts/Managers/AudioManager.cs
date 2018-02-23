@@ -17,11 +17,9 @@ public class AudioManager : MonoBehaviour {
     [Header("MusicArray")]
     public AudioClip[] musicArray;
 
-    public AudioClip musicLevel1;
-    public AudioClip musicLevel2;
-    public AudioClip musicLevel3;
     public AudioClip musicBossFight;
-
+    public AudioClip musicMainMenu;
+    public AudioClip musicRoulette;
     [Header("FX SO")]
     public ScriptableObject xintana_attack_weapon_1;
     public ScriptableObject xintana_attack_weapon_2;
@@ -53,7 +51,7 @@ public class AudioManager : MonoBehaviour {
         musicPlayer.volume = generalVolume;
         fxPlayer.volume = generalVolume;
 
-        musicPlayer.clip = musicLevel1;
+        musicPlayer.clip = musicArray[0];
 
         if (Rad_SaveManager.profile.audioEnabled)
         {
@@ -72,33 +70,33 @@ public class AudioManager : MonoBehaviour {
             musicPlayer.UnPause();
         }
     }
-    public void PlayMusicLevel1()
-    {
-        if (musicLevel1 && audioEnabled)
-        {
-            musicPlayer.clip = musicLevel1;
-            musicPlayer.Play();
-        }
-    }
+    //public void PlayMusicLevel1()
+    //{
+    //    if (musicLevel1 && audioEnabled)
+    //    {
+    //        musicPlayer.clip = musicLevel1;
+    //        musicPlayer.Play();
+    //    }
+    //}
 
 
-    public void PlayMusicLevel2()
-    {
-        if (musicLevel2 && audioEnabled)
-        {
-            musicPlayer.clip = musicLevel2;
-            musicPlayer.Play();
-        }
-    }
+    //public void PlayMusicLevel2()
+    //{
+    //    if (musicLevel2 && audioEnabled)
+    //    {
+    //        musicPlayer.clip = musicLevel2;
+    //        musicPlayer.Play();
+    //    }
+    //}
 
-    public void PlayMusicLevel3()
-    {
-        if (musicLevel3 && audioEnabled)
-        {
-            musicPlayer.clip = musicLevel3;
-            musicPlayer.Play();
-        }
-    }
+    //public void PlayMusicLevel3()
+    //{
+    //    if (musicLevel3 && audioEnabled)
+    //    {
+    //        musicPlayer.clip = musicLevel3;
+    //        musicPlayer.Play();
+    //    }
+    //}
 
     public void PlayMusicLevel(int level)
     {
@@ -119,7 +117,22 @@ public class AudioManager : MonoBehaviour {
         }
      }
 
-
+    public void PlayMainMenuMusic()
+    {
+        if (musicBossFight && audioEnabled)
+        {
+            musicPlayer.clip = musicMainMenu;
+            musicPlayer.Play();
+        }
+    }
+    public void PlayRouletteMusic()
+    {
+        if (musicBossFight && audioEnabled)
+        {
+            musicPlayer.clip = musicRoulette;
+            musicPlayer.Play();
+        }
+    }
     //public void PlayBossMusicAndPauseMain()
     //{
     //    if (musicBossFight && audioEnabled)

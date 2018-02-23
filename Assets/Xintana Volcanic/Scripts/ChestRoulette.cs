@@ -92,7 +92,6 @@ public class ChestRoulette : MonoBehaviour {
 
     public void SpawnShellAndMoveItToEndPosition()
     {
-        Debug.Log("Pennis");
         GameObject obj = _coinsPooler.GetPooledShell();
         obj.transform.position = shellsImage.transform.position;
         obj.SetActive(true);

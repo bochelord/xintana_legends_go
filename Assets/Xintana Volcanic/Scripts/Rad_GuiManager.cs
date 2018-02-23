@@ -104,6 +104,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private ChestRoulette _chestManager;
     private ScreenShot _screenshot;
     private PlayerManager _playerManager;
+    private AudioManager _audioManager;
 
     private float _timerCountdown = 5f;
     private bool timerCountdownAdOn = false;
@@ -142,7 +143,7 @@ public class Rad_GuiManager : MonoBehaviour {
         _chestManager = FindObjectOfType<ChestRoulette>();
         _screenshot = FindObjectOfType<ScreenShot>();
         _playerManager = FindObjectOfType<PlayerManager>();
-
+        _audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Start()
@@ -369,6 +370,7 @@ public class Rad_GuiManager : MonoBehaviour {
         _mainMenu = true;
         scorePanel.SetActive(false);
         mainMenuPanel.SetActive(true);
+        _audioManager.PlayMainMenuMusic();
         mainMenuPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
         if (_doubleScorePanelOn)
         {
@@ -673,6 +675,7 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         backButton.enabled = false;
         rouletteOn = true;
+        _audioManager.PlayRouletteMusic();
         roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
         {
             ShowStartRoulettePanel();
@@ -742,6 +745,7 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         StopDoublePriceCoroutine();
         rouletteOn = false;
+        _audioManager.PlayMainMenuMusic();
         roulettePanel.transform.DOLocalMoveX(-840f, 0.75f).SetEase(Ease.OutBack);
         rouletteTitle.transform.DOLocalMoveX(3000f, 0.75f).SetEase(Ease.OutBack);
         chest1.transform.DOLocalMoveX(2100f, 0.75f).SetEase(Ease.OutBack);
