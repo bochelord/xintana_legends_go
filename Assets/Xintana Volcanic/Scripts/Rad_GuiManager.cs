@@ -9,6 +9,7 @@ public class Rad_GuiManager : MonoBehaviour {
     [Header("Canvas")]
     public GameObject inGameCanvas;
     public GameObject menuCanvas;
+    public GameObject shopCanvas;
     [Header("Panels")]
     public GameObject mainMenuPanel;
     public GameObject scorePanel;
@@ -104,7 +105,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private AdsManager _adsManager;
     private SIS.ShopManager _shopManager;
     private LevelManager _levelManager;
-    private ChestRoulette _chestManager;
+    public ChestRoulette _chestManager;
     private ScreenShot _screenshot;
     private PlayerManager _playerManager;
     private AudioManager _audioManager;
@@ -144,7 +145,6 @@ public class Rad_GuiManager : MonoBehaviour {
         _levelManager = FindObjectOfType<LevelManager>();
         _shopManager = FindObjectOfType<SIS.ShopManager>();
         _adsManager = FindObjectOfType<AdsManager>();
-        _chestManager = FindObjectOfType<ChestRoulette>();
         _screenshot = FindObjectOfType<ScreenShot>();
         _playerManager = FindObjectOfType<PlayerManager>();
         _audioManager = FindObjectOfType<AudioManager>();
@@ -583,13 +583,17 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     public void Button_OpenShop()
     {
+        shopCanvas.SetActive(true);
         shop.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack);
     }
 
     public void Button_CloseShop()
     {
         CheckInventory();
-        shop.transform.DOLocalMoveX(840f, 0.75f).SetEase(Ease.OutBack);
+        shop.transform.DOLocalMoveX(840f, 0.75f).SetEase(Ease.OutBack).OnComplete(()=> 
+        {
+            shopCanvas.SetActive(false);
+        });
     }
     public void ShowContinuePanel()
     {
@@ -762,6 +766,7 @@ public class Rad_GuiManager : MonoBehaviour {
         chest1.transform.DOLocalMoveX(2100f, 0.75f).SetEase(Ease.OutBack);
         chest2.transform.DOLocalMoveX(-2110f, 0.75f).SetEase(Ease.OutBack);
         chest3.transform.DOLocalMoveX(2110f, 0.75f).SetEase(Ease.OutBack);
+        
         _chestManager.CloseChests();
     }
     public void StopDoublePriceCoroutine()
