@@ -6,6 +6,9 @@ using DG.Tweening;
 
 public class Rad_GuiManager : MonoBehaviour {
 
+    [Header("Canvas")]
+    public GameObject inGameCanvas;
+    public GameObject menuCanvas;
     [Header("Panels")]
     public GameObject mainMenuPanel;
     public GameObject scorePanel;
@@ -366,14 +369,17 @@ public class Rad_GuiManager : MonoBehaviour {
     /// </summary>
     public void CloseScorePanelAndMainMenuOn()
     {
-
+        menuCanvas.SetActive(true);
         _scorePanelOn = false;
         SetMainMenuStats();
         _mainMenu = true;
         scorePanel.SetActive(false);
         mainMenuPanel.SetActive(true);
         _audioManager.PlayMainMenuMusic();
-        mainMenuPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack);
+        mainMenuPanel.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.OutBack).OnComplete(()=> 
+        {
+            inGameCanvas.SetActive(false);
+        });
         if (_doubleScorePanelOn)
         {
             HideDoublePrizePanel();
@@ -383,6 +389,7 @@ public class Rad_GuiManager : MonoBehaviour {
             StopCoroutine(gameOverPanelCoroutine);
         }
         CheckInventory();
+
     }
 
     public void PlayerGameOverPanelOn()
@@ -390,7 +397,6 @@ public class Rad_GuiManager : MonoBehaviour {
         scorePanel.SetActive(true);
         closeButton.gameObject.SetActive(false);
         gameOverPanelCoroutine = StartCoroutine(FillGameOverPanel());
-
 
     }
 

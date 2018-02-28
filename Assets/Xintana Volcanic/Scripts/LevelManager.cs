@@ -38,10 +38,8 @@ public class LevelManager : MonoBehaviour {
     [Header("Max ads skipped")]
     public int adsSkipped = 5;
     [Header("Backgrounds")]
-    //public GameObject worldspritesLevel1;
-    //public GameObject worldspritesLevel2;
-    //public GameObject worldspritesLevel3;
     public GameObject[] worldspritesLevelList;
+    public GameObject commonSprites;
 
     private int _kogiKilled = 0;
     private int _zazucKilled = 0;
