@@ -51,7 +51,7 @@ public class Rad_Chest : MonoBehaviour {
                 _chestManager.prizeType = prize;
                 
                 UpdatePrize();
-                _guiManager.ShowPrizePanel();
+                _chestManager.ShowPrizePanel();
             });
         }
     }
@@ -98,7 +98,7 @@ public class Rad_Chest : MonoBehaviour {
 
     private void UpdatePrize()
     {
-        _guiManager.SetCointToSpawn(prize.itemValue);
+        _chestManager.SetCointToSpawn(prize.itemValue);
 
         switch (_chestManager.prizeType.categoryType)
         {

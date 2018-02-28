@@ -500,7 +500,12 @@ namespace SIS
             }
             return null;
         }
+        public void Button_Menu()
+        {
+            SceneManager.LoadScene("XintanaLegendsGo_Menu");
+        }
     }
+
 
 
     /// <summary>

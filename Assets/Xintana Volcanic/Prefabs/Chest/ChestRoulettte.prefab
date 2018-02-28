@@ -2383,6 +2383,17 @@ MonoBehaviour:
   chestContainer: {fileID: 0}
   numChests: 3
   chestRotate: 0
+  chest1: {fileID: 1328697194585288}
+  chest2: {fileID: 1902673881775732}
+  chest3: {fileID: 1242883746917302}
+  rouletteTitle: {fileID: 114674451556304226}
+  posChest1: {fileID: 224761058557489260}
+  posChest2: {fileID: 224652942517235782}
+  posChest3: {fileID: 224505673946830894}
+  posTitle: {fileID: 224362824932055680}
+  backButton: {fileID: 114168374440574920}
+  gemsTextRoulette: {fileID: 114609970865446746}
+  shellsTextRoulette: {fileID: 114932548938360998}
   prizeAmount: 0
   coinsImage: {fileID: 1257544967544086}
   gemsImage: {fileID: 1646941435724698}
@@ -2400,7 +2411,14 @@ MonoBehaviour:
   coinsEndPosition: {fileID: 224336118052343584}
   gemEndPositon: {fileID: 224719833369501984}
   shellsEndPosition: {fileID: 224816268017358672}
+  prizeText: {fileID: 114049938666080102}
+  rerollButton: {fileID: 1851494879031264}
+  goToShopButton: {fileID: 1966185158420070}
+  closePrizePanel: {fileID: 114528810912203346}
   prizesList: {fileID: 11400000, guid: 8656a9714039a6e4ba00e119f497fe48, type: 2}
+  pricePanel: {fileID: 1564117618202090}
+  doublePricePanel: {fileID: 1867143879177720}
+  startRoulettePanel: {fileID: 1241975360012274}
 --- !u!114 &114329861781243562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4898,7 +4916,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4, y: 953}
+  m_AnchoredPosition: {x: -4, y: 1642}
   m_SizeDelta: {x: 2746.9, y: 1695.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224083831811887154
@@ -5107,7 +5125,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -831.26605, y: 105.033615}
+  m_AnchoredPosition: {x: -1554.9976, y: 105.033615}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224197002317166926
@@ -5387,7 +5405,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1100.494}
+  m_AnchoredPosition: {x: 0, y: 1819.494}
   m_SizeDelta: {x: 1934.01, y: 1193.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224336118052343584
@@ -5647,7 +5665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1643}
+  m_AnchoredPosition: {x: 0, y: 2362}
   m_SizeDelta: {x: 1934.01, y: 1193.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224570754106642252
@@ -6186,7 +6204,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -838.26825, y: -218.06976}
+  m_AnchoredPosition: {x: -1562, y: -218.06976}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224869142958832680
@@ -6286,7 +6304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1361, y: 0}
+  m_AnchoredPosition: {x: -1023, y: 0}
   m_SizeDelta: {x: 0.010009766, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224903529557579770
@@ -6322,7 +6340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -883, y: -296}
+  m_AnchoredPosition: {x: -1678, y: -296}
   m_SizeDelta: {x: 302, y: 79.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224952043689597568

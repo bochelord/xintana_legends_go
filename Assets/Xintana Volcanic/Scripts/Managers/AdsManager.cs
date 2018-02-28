@@ -9,6 +9,8 @@ public class AdsManager : MonoBehaviour {
     private Rad_GuiManager _guiManager;
     private LevelManager _levelManager;
     private AnalyticsManager _analyticsManager;
+    private MainMenuManager _menuManager;
+    private ChestRoulette _chestManager;
 
     private System.DateTime timeStamp;
     [HideInInspector]
@@ -20,6 +22,8 @@ public class AdsManager : MonoBehaviour {
         _guiManager = FindObjectOfType<Rad_GuiManager>();
         _levelManager = FindObjectOfType<LevelManager>();
         _analyticsManager = FindObjectOfType<AnalyticsManager>();
+        _menuManager = FindObjectOfType<MainMenuManager>();
+        _chestManager = FindObjectOfType<ChestRoulette>();
     }
 
     void Start()
@@ -71,17 +75,17 @@ public class AdsManager : MonoBehaviour {
             case ShowResult.Finished:
                 AdsViewedIncrement();
                 adViewed = true;
-                _guiManager.closePrizePanel.enabled = true;
-                _guiManager.HideDoublePrizePanel();
-                _guiManager.DoublePrize();
+                _chestManager.closePrizePanel.enabled = true;
+                _chestManager.HideDoublePrizePanel();
+                _chestManager.DoublePrize();
                 _analyticsManager.DoublePrizeAd_Event(true);
                 break;
             case ShowResult.Skipped:
-                _guiManager.HideDoublePrizePanel();
+                _chestManager.HideDoublePrizePanel();
                 _analyticsManager.DoublePrizeAd_Event(false);
                 break;
             case ShowResult.Failed:
-                _guiManager.HideDoublePrizePanel();
+                _chestManager.HideDoublePrizePanel();
                 break;
         }
     }
@@ -111,8 +115,8 @@ public class AdsManager : MonoBehaviour {
                 Rad_SaveManager.profile.freeTokenDay = true;
                 _freeShellAdViewed = true;
                 Rad_SaveManager.profile.shells++;
-                _guiManager.HideFreeShellPanel();
-                _guiManager.StartRoulettePanel();
+                _menuManager.HideFreeShellPanel();
+                _chestManager.StartRoulettePanel();
                 AchievementsManager.Instance.TokenAdAchievement();
                 break;
 
