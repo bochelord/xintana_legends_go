@@ -584,9 +584,14 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     public void Button_OpenShop()
     {
+
         //shopCanvas.SetActive(true);
         //shop.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack);
         SceneManager.LoadScene("XintanaLegendsGo_Shop");
+
+        shopCanvas.SetActive(true);
+        menuCanvas.SetActive(false);
+        shop.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack);
     }
 
     public void Button_CloseShop()
@@ -596,6 +601,7 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             shopCanvas.SetActive(false);
         });
+        menuCanvas.SetActive(true);
     }
     public void ShowContinuePanel()
     {
