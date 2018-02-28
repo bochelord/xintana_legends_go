@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class Rad_GuiManager : MonoBehaviour {
 
@@ -583,8 +584,9 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     public void Button_OpenShop()
     {
-        shopCanvas.SetActive(true);
-        shop.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack);
+        //shopCanvas.SetActive(true);
+        //shop.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack);
+        SceneManager.LoadScene("XintanaLegendsGo_Shop");
     }
 
     public void Button_CloseShop()
