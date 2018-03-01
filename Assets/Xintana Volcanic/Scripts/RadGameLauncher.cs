@@ -15,7 +15,7 @@ public class RadGameLauncher : MonoBehaviour {
         if (ES2.Exists(Rad_SaveManager.xintanaProfileFilename))
         {
             Rad_SaveManager.LoadData();
-            SceneManager.LoadScene("LoadingScreen");
+            SceneManager.LoadScene("XintanaLegendsGo_Menu");
         }
         else
         {

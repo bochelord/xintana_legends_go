@@ -20,7 +20,7 @@ public class CombinationManager : MonoBehaviour {
     public GameObject explosionPrefab;
     public Slider timerSlider;
     public Text sliderTimerText;
-    public AudioSource audio;
+    private AudioSource audio;
     public AudioClip audioBongoClip;
 
     [Header("UI Elements")]
@@ -65,6 +65,7 @@ public class CombinationManager : MonoBehaviour {
         adManager = FindObjectOfType<AdsManager>();
         _guiManager = FindObjectOfType<Rad_GuiManager>();
         _initialButtonsPosition = combinationButtons.transform.localPosition;
+        audio = AudioManager.Instance.fxPlayer;
     }
 
     
@@ -83,7 +84,6 @@ public class CombinationManager : MonoBehaviour {
     {
         combinationArray = null;
         copyCombinationArray = null;
-
         int _tempLength = Random.Range(minimCombinationLenght, combinationLength);
         combinationArray = new GameObject[_tempLength];
         copyCombinationArray = new GameObject[_tempLength];
