@@ -89,6 +89,8 @@ public class LevelManager : MonoBehaviour {
         GetNewEnemy(0);
         //fixscreeperra();
         //LaunchShowHUDText(enemyContainer.transform.position, enemyController.GetDamageDoneByEnemy().ToString("F1"), new Color32(245, 141, 12, 255));
+        AudioManager.Instance.PlayMusicLevel(1);
+
     }
 
 

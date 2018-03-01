@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+public enum RouletteState { READY, SPIN, WAITING}
 public class ChestRoulette : MonoBehaviour {
 
-
+    public RouletteState state = RouletteState.READY;
     public Sprite[] available_chest_contents;
     public Rad_Chest[] chests;
     public Transform chestContainer;
@@ -55,7 +56,7 @@ public class ChestRoulette : MonoBehaviour {
     private bool _spawnPrize = false;
     private bool _prizePanelOn = false;
     private bool _doublePrize = false;
-    private bool rouletteOn = false;
+    public bool rouletteOn = false;
     private bool _doubleScorePanelOn = false;
 
     private int _coinsToSpawn = 20;
@@ -177,6 +178,7 @@ public class ChestRoulette : MonoBehaviour {
     }
     IEnumerator StartChestRotation(float time)
     {
+        state = RouletteState.SPIN;
         rerollButton.SetActive(false);
         SetSpawnPrize(false);
         StopDoublePriceCoroutine();
@@ -192,7 +194,7 @@ public class ChestRoulette : MonoBehaviour {
         ResetRotationChest();
         canOpen = true;
         backButton.enabled = false;
-
+        state = RouletteState.WAITING;
     }
 
     private void ShowChestPrizes()
@@ -528,6 +530,7 @@ public class ChestRoulette : MonoBehaviour {
 
     public void Button_HidePricePanel()
     {
+
         backButton.enabled = true;
         _prizePanelOn = false;
         pricePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
@@ -545,9 +548,11 @@ public class ChestRoulette : MonoBehaviour {
             rerollButton.SetActive(false);
             goToShopButton.SetActive(true);
         }
+        state = RouletteState.READY;
     }
     public void StartRoulettePanel()
     {
+        rouletteOn = true;
         backButton.enabled = false;
         _audioManager.PlayRouletteMusic();
         _menuManager.roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
@@ -555,10 +560,7 @@ public class ChestRoulette : MonoBehaviour {
             ShowStartRoulettePanel();
         });
     }
-    public void Button_GoToShopFromChest()
-    {
-        
-    }
+
     public void SetSpawnPrize(bool value)
     {
         _spawnPrize = value;

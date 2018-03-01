@@ -113,7 +113,10 @@ namespace SIS
                     if (containers[i].parent != null && containers[i].parent.isActiveAndEnabled)
                         containers[i].parent.StartCoroutine(containers[i].parent.Start());
                 }
-
+                if (!AudioManager.Instance.musicPlayer.isPlaying || AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicMainMenu)
+                {
+                    AudioManager.Instance.PlayMainMenuMusic();
+                }
 
             }
         }
@@ -505,8 +508,6 @@ namespace SIS
             SceneManager.LoadScene("XintanaLegendsGo_Menu");
         }
     }
-
-
 
     /// <summary>
     /// Correlation between IAP group and scene-specific properties.

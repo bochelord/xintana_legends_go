@@ -32,7 +32,6 @@ public class MainMenuManager : MonoBehaviour {
     private bool _mainMenu = false;
 
     private ChestRoulette _chestManager;
-    private AudioManager _audioManager;
     private AnalyticsManager _analyticsManager;
     private AdsManager _adsManager;
     private PlayerManager _playerManager;
@@ -42,13 +41,17 @@ public class MainMenuManager : MonoBehaviour {
         _chestManager = FindObjectOfType<ChestRoulette>();
         _analyticsManager = FindObjectOfType<AnalyticsManager>();
         _adsManager = FindObjectOfType<AdsManager>();
-        _audioManager = FindObjectOfType<AudioManager>();
         _playerManager = FindObjectOfType<PlayerManager>();
     }
     void Start()
     {
         CheckInventory();
         SetMainMenuStats();
+        if(!AudioManager.Instance.musicPlayer.isPlaying || AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicMainMenu)
+        {
+            AudioManager.Instance.PlayMainMenuMusic();
+        }
+
     }
     // Update is called once per frame
     void Update ()
@@ -59,6 +62,14 @@ public class MainMenuManager : MonoBehaviour {
         }
     }
 
+    private void PlayRouletteMusic()
+    {
+        if (AudioManager.Instance.audioEnabled)
+        {
+            AudioManager.Instance.musicPlayer.clip = AudioManager.Instance.musicRoulette;
+            AudioManager.Instance.musicPlayer.Play();
+        }
+    }
     public void CheckXintanaWeapon()
     {
 
@@ -193,11 +204,14 @@ public class MainMenuManager : MonoBehaviour {
     }
     public void Button_Shop()
     {
-        SceneManager.LoadScene("XintanaLegendsGo_Shop");   
+        if(_chestManager.state == RouletteState.READY)
+        {
+            SceneManager.LoadScene("XintanaLegendsGo_Shop");
+        }
     }
     public void Button_Play()
     {
-        SceneManager.LoadScene("combinationDisplay_safe_portrait");
+        SceneManager.LoadScene("LoadingScreen");
     }
 
     public void ShowFreeShellPanel()
@@ -213,8 +227,9 @@ public class MainMenuManager : MonoBehaviour {
 
     public void HideRoulette()
     {
+        _chestManager.rouletteOn = false;
         _chestManager.StopDoublePriceCoroutine();
-        _audioManager.PlayMainMenuMusic();
+        AudioManager.Instance.PlayMainMenuMusic();
         roulettePanel.transform.DOLocalMoveX(-840f, 0.75f).SetEase(Ease.OutBack);
         _chestManager.rouletteTitle.transform.DOLocalMoveX(3000f, 0.75f).SetEase(Ease.OutBack);
         _chestManager.chest1.transform.DOLocalMoveX(2100f, 0.75f).SetEase(Ease.OutBack);

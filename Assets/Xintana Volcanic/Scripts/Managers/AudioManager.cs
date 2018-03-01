@@ -42,27 +42,34 @@ public class AudioManager : MonoBehaviour {
     public static AudioManager Instance { get { return instance; } }
 
 
-    private bool audioEnabled;
+    public bool audioEnabled;
 
     // Use this for initialization
-    void Start () {
-        instance = this;
+    void Awake()
+    {
+        if (!instance)
+        {
+            instance = this;
+        }
+        else
+        {
+            DestroyObject(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
 
         musicPlayer.volume = generalVolume;
         fxPlayer.volume = generalVolume;
-
-        musicPlayer.clip = musicArray[0];
-
         if (Rad_SaveManager.profile.audioEnabled)
         {
             audioEnabled = true;
-            musicPlayer.Play();
 
-        } else
+        }
+        else
         {
             audioEnabled = false;
         }
     }
+
     public void ResumeMusic()
     {
         if (audioEnabled)
@@ -70,14 +77,16 @@ public class AudioManager : MonoBehaviour {
             musicPlayer.UnPause();
         }
     }
-    //public void PlayMusicLevel1()
-    //{
-    //    if (musicLevel1 && audioEnabled)
-    //    {
-    //        musicPlayer.clip = musicLevel1;
-    //        musicPlayer.Play();
-    //    }
-    //}
+    public void PlayMusicLevel1()
+    {
+        musicPlayer.clip = musicArray[0];
+
+        if (audioEnabled)
+        {
+            musicPlayer.Play();
+
+        }
+    }
 
 
     //public void PlayMusicLevel2()

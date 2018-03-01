@@ -21,7 +21,7 @@ public class RadLauncher : MonoBehaviour {
         yield return new WaitForSeconds(10.5f);
         Fader.DOFade(1f, 0.7f);
         yield return new WaitForSeconds(0.7f);
-        SceneManager.LoadScene("LoadingScreen");
+        SceneManager.LoadScene("XintanaLegendsGo_Menu");
 	}
 	
 	
