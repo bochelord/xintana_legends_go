@@ -560,7 +560,48 @@ public class ChestRoulette : MonoBehaviour {
             ShowStartRoulettePanel();
         });
     }
+    public void ChangeChestPrizes(Rad_Chest _chest)
+    {
+        int randomCHest = Random.Range(0, 1);
+        Rad_Chest tempChest = _chest;
 
+        if(_chest.prize == chests[0].prize)
+        {
+            switch (randomCHest)
+            {
+                case 0:
+                    _chest.prize = chests[1].prize;
+                    break;
+                case 1:
+                    _chest.prize = chests[2].prize;
+                    break;
+            }
+        }
+        if (_chest.prize == chests[1].prize)
+        {
+            switch (randomCHest)
+            {
+                case 0:
+                    _chest.prize = chests[0].prize;
+                    break;
+                case 1:
+                    _chest.prize = chests[2].prize;
+                    break;
+            }
+        }
+        if (_chest.prize == chests[2].prize)
+        {
+            switch (randomCHest)
+            {
+                case 0:
+                    _chest.prize = chests[1].prize;
+                    break;
+                case 1:
+                    _chest.prize = chests[0].prize;
+                    break;
+            }
+        }
+    }
     public void SetSpawnPrize(bool value)
     {
         _spawnPrize = value;

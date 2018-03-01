@@ -42,6 +42,14 @@ public class Rad_Chest : MonoBehaviour {
 
         if (_chestManager.GetCanOpen())
         {
+            if(prize.categoryType == PrizeType.WEAPON)
+            {
+                float randomFlip = Random.Range(0, 10);
+                if(randomFlip > 1)
+                {
+                    _chestManager.ChangeChestPrizes(this);
+                }
+            }
             _chestManager.SetCanOpen(false);
             this.transform.DOShakeRotation(2, 20, 2, 25, false).OnComplete(() =>
             {
