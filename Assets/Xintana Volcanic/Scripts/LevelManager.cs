@@ -123,7 +123,7 @@ public class LevelManager : MonoBehaviour {
             if (_healPowerUp)
             {
                 _playerManager.HealForValue(damagedone);
-                LaunchShowHUDText(player.transform.position + new Vector3(0.25f, 1.5f, 0), damagedone.ToString("f1"), new Color32(0,255, 0, 255),false);
+                LaunchShowHUDText(player.transform.position + new Vector3(0.25f, 0.75f, 0), damagedone.ToString("f1"), new Color32(0,255, 0, 255),false);
                 StartCoroutine(HealParticle(3));
                 Debug.Log("asdasdada");
 
@@ -158,7 +158,7 @@ public class LevelManager : MonoBehaviour {
 
         enemyController.DamagedAnimation();
         
-        LaunchShowHUDText(enemyContainer.transform.position + new Vector3(-0.25f,1.5f,0), damagedone.ToString("F1"), new Color32(245, 141, 12, 255),false); /// TODO This has to be feed with the proper damage coming from the playerManager
+        LaunchShowHUDText(enemyContainer.transform.position + new Vector3(-0.25f,0.75f,0), damagedone.ToString("F1"), new Color32(245, 141, 12, 255),false); /// TODO This has to be feed with the proper damage coming from the playerManager
 
         AudioManager.Instance.Play_XintanaAttack_1();
 
@@ -168,7 +168,7 @@ public class LevelManager : MonoBehaviour {
         enemyController.ApplyDamageToEnemy(damagedone);
         if (critico)
         {
-            LaunchShowHUDText(enemyContainer.transform.position + new Vector3(0.25f, 1.5f, 0), "crit!", new Color32(234, 57, 4, 255),true);
+            LaunchShowHUDText(enemyContainer.transform.position + new Vector3(0.25f, 0.75f, 0), "crit!", new Color32(234, 57, 4, 255),true);
         }
     }
     
@@ -195,7 +195,7 @@ public class LevelManager : MonoBehaviour {
 
 
         float _damageDone = enemyController.GetDamageDoneByEnemy();
-        LaunchShowHUDText(player.transform.position + new Vector3(0, 1.5f, 0), _damageDone.ToString("F1"), new Color32(245, 141, 12, 255),false);
+        LaunchShowHUDText(player.transform.position + new Vector3(0, 0.75f, 0), _damageDone.ToString("F1"), new Color32(245, 141, 12, 255),false);
 
         _playerManager.ReceiveDamage(_damageDone);
 
