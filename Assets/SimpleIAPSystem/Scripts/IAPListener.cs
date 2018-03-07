@@ -72,24 +72,28 @@ namespace SIS
 
                 case "si_1gem":
                     Rad_SaveManager.profile.gems++;
+                    DBManager.IncreaseFunds("gems", 1);
                     ShowMessage("1 Gem Purchased !");
                     AnalyticsManager.Instance.Item_Bought_Event("1 Gem");
                     AchievementsManager.Instance.IncrementGemsEarnedAchievements(1);
                     break;
                 case "si_5gems":
                     Rad_SaveManager.profile.gems += 5;
+                    DBManager.IncreaseFunds("gems", 5);
                     ShowMessage("5 Gems Purchased !");
                     AnalyticsManager.Instance.Item_Bought_Event("5 Gems");
                     AchievementsManager.Instance.IncrementGemsEarnedAchievements(5);
                     break;
                 case "si_10gems":
                     Rad_SaveManager.profile.gems += 10;
+                    DBManager.IncreaseFunds("gems", 10);
                     AnalyticsManager.Instance.Item_Bought_Event("10 Gems");
                     AchievementsManager.Instance.IncrementGemsEarnedAchievements(10);
                     ShowMessage("10 Gems Purchased !");
                     break;
                 case "si_20gems":
                     Rad_SaveManager.profile.gems += 20;
+                    DBManager.IncreaseFunds("gems", 20);
                     AnalyticsManager.Instance.Item_Bought_Event("20 Gems");
                     AchievementsManager.Instance.IncrementGemsEarnedAchievements(20);
                     ShowMessage("20 Gems Purchased !");
