@@ -598,7 +598,7 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     public void HidePowerUpButton()
     {
-        powerUpButton.transform.DOLocalMoveX(-900, 1).SetEase(Ease.OutBack);
+        powerUpButton.transform.DOLocalMoveY(-900, 1).SetEase(Ease.OutBack);
         powerUpButton.transform.DOScale(0.5f, 1);
     }
     public void AddExperienceToSlider(float value)
