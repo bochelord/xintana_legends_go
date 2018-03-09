@@ -588,6 +588,7 @@ public class Rad_GuiManager : MonoBehaviour {
             powerUpSlider.fillRect.GetComponent<Image>().color = new Color(0, 0, 255);
             powerUpSlider.transform.parent.transform.DOKill();
             powerUpButton.transform.DOKill();
+            HidePowerUpButton();
         }
     }
     void ShowPowerUpButton()

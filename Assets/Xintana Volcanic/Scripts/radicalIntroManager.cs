@@ -124,7 +124,7 @@ public class radicalIntroManager : MonoBehaviour
         //Application.LoadLevel("GameIntroStart");
         
 
-        SceneManager.LoadScene("newIntroMenu");
+        SceneManager.LoadScene("GameLauncher");
 
     }
 
