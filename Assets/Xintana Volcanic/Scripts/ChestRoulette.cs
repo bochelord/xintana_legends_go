@@ -23,7 +23,6 @@ public class ChestRoulette : MonoBehaviour {
     public Transform posChest3;
     public Transform posTitle;
     public Button backButton;
-    public Text gemsTextRoulette;
     public Text shellsTextRoulette;
     [Header("Price Panel")]
     public int prizeAmount;
@@ -96,7 +95,6 @@ public class ChestRoulette : MonoBehaviour {
         }
         if (rouletteOn)
         {
-            gemsTextRoulette.text = Rad_SaveManager.profile.gems.ToString();
             shellsTextRoulette.text = Rad_SaveManager.profile.shells.ToString();
         }
 
