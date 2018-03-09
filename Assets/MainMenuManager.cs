@@ -120,37 +120,60 @@ public class MainMenuManager : MonoBehaviour {
         for (int i = 0; i < itemsImages.Length; i++)
         {
             InventorySlot item = itemsImages[i].GetComponent<MainMenuInventory>().item;
-            if (SIS.DBManager.GetPurchase("si_1up") > 0 && item == InventorySlot.ExtraLife)
+            switch (item)
             {
-                itemsImages[i].SetActive(true);
-            }
-            else if (SIS.DBManager.GetPurchase("si_x2") > 0 && item == InventorySlot.DoubleScore)
-            {
-                itemsImages[i].SetActive(true);
-            }
-            else if (SIS.DBManager.GetPurchase("si_noads") > 0 && item == InventorySlot.NoAds)
-            {
-                itemsImages[i].SetActive(true);
-            }
-            else if (SIS.DBManager.GetPurchase("si_supportdevs") > 0 && item == InventorySlot.EthernalGrattitude)
-            {
-                itemsImages[i].SetActive(true);
-            }
-            else if (SIS.DBManager.GetPurchase("si_yellowsword") > 0 && item == InventorySlot.YellowWeapon)
-            {
-                itemsImages[i].SetActive(true);
-            }
-            else if (SIS.DBManager.GetPurchase("si_greensword") > 0 && item == InventorySlot.GreenWeapon)
-            {
-                itemsImages[i].SetActive(true);
-            }
-            else if (SIS.DBManager.GetPurchase("si_bluesword") > 0 && item == InventorySlot.BlueWeapon)
-            {
-                itemsImages[i].SetActive(true);
-            }
-            else if (SIS.DBManager.GetPurchase("si_blacksword") > 0 && item == InventorySlot.BlackWeapon)
-            {
-                itemsImages[i].SetActive(true);
+                case InventorySlot.BlackWeapon:
+                    Debug.Log(SIS.DBManager.GetPurchase("si_blacksword"));
+                    if (SIS.DBManager.GetPurchase("si_blacksword") > 0)
+                    {
+                        itemsImages[i].SetActive(true);
+                    }
+                    break;
+                case InventorySlot.BlueWeapon:
+                    Debug.Log(SIS.DBManager.GetPurchase("si_bluesword"));
+                    if (SIS.DBManager.GetPurchase("si_bluesword") > 0)
+                    {
+                        itemsImages[i].SetActive(true);
+                    }
+                    break;
+                case InventorySlot.DoubleScore:
+                    Debug.Log(SIS.DBManager.GetPurchase("si_x2"));
+                    if (SIS.DBManager.GetPurchase("si_x2") > 0)
+                    {
+                        itemsImages[i].SetActive(true);
+                    }
+                    break;
+                case InventorySlot.EthernalGrattitude:
+                    if (SIS.DBManager.GetPurchase("si_supportdevs") > 0)
+                    {
+                        itemsImages[i].SetActive(true);
+                    }
+                    break;
+                case InventorySlot.ExtraLife:
+                    if(SIS.DBManager.GetPurchase("si_1up") > 0)
+                    {
+                        itemsImages[i].SetActive(true);
+                    }
+                    break;
+                case InventorySlot.GreenWeapon:
+                    Debug.Log(SIS.DBManager.GetPurchase("si_greensword"));
+                    if (SIS.DBManager.GetPurchase("si_greensword") > 0)
+                    {
+                        itemsImages[i].SetActive(true);
+                    }
+                    break;
+                case InventorySlot.NoAds:
+                    if (SIS.DBManager.GetPurchase("si_noads") > 0)
+                    {
+                        itemsImages[i].SetActive(true);
+                    }
+                    break;
+                case InventorySlot.YellowWeapon:
+                    if (SIS.DBManager.GetPurchase("si_yellowsword") > 0)
+                    {
+                        itemsImages[i].SetActive(true);
+                    }
+                    break;
             }
         }
     }

@@ -108,6 +108,43 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!21 &44857385
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 2DxFX/Standard/ColorChange
+  m_Shader: {fileID: 4800000, guid: 9f1ae124906dd1a41bee3c95860f3a4f, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Alpha: 0
+    - _ColorMask: 15
+    - _HueShift: 100
+    - _Sat: 0.97
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _Tolerance: 1
+    - _Val: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorX: {r: 0, g: 0.9294118, b: 0, a: 1}
 --- !u!114 &80949918 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114992816694399614, guid: c8e776074e24a91478b037074d8e010c,
@@ -410,14 +447,14 @@ MonoBehaviour:
   shellPrefab: {fileID: 1709270865343176, guid: cb55ab3412ca89741acbf99194429ca4,
     type: 2}
   parent: {fileID: 1401443142}
---- !u!21 &412470657
+--- !u!21 &385437609
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: 2DxFX/Standard/ColorChange
-  m_Shader: {fileID: 4800000, guid: 9f1ae124906dd1a41bee3c95860f3a4f, type: 3}
+  m_Name: 2DxFX/Standard/HSV
+  m_Shader: {fileID: 4800000, guid: a67566ebba7c8114cbabea0a3e357150, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -435,18 +472,16 @@ Material:
     m_Floats:
     - _Alpha: 0
     - _ColorMask: 15
-    - _HueShift: 100
-    - _Sat: 0.97
+    - _HueShift: 265
+    - _Sat: 1
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
-    - _Tolerance: 1
-    - _Val: 1
+    - _Val: 2
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorX: {r: 0, g: 0.9294118, b: 0, a: 1}
 --- !u!21 &450295874
 Material:
   serializedVersion: 6
@@ -523,7 +558,15 @@ MonoBehaviour:
   expText: {fileID: 1835541474}
   gemsText: {fileID: 975461303}
   expSlider: {fileID: 1278666428}
-  itemsImages: []
+  itemsImages:
+  - {fileID: 545044928}
+  - {fileID: 545044927}
+  - {fileID: 545044926}
+  - {fileID: 545044925}
+  - {fileID: 545044924}
+  - {fileID: 545044923}
+  - {fileID: 545044922}
+  - {fileID: 545044921}
   redXintana: {fileID: 327312832}
   greenXintana: {fileID: 1913947110}
   blueXintana: {fileID: 313740567}
@@ -542,6 +585,43 @@ Transform:
   m_Father: {fileID: 2060982780}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &512962110
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 2DxFX/Standard/ColorChange
+  m_Shader: {fileID: 4800000, guid: 9f1ae124906dd1a41bee3c95860f3a4f, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Alpha: 0
+    - _ColorMask: 15
+    - _HueShift: 100
+    - _Sat: 0.97
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _Tolerance: 1
+    - _Val: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorX: {r: 0, g: 0.9294118, b: 0, a: 1}
 --- !u!1 &537324968 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1912832970918564, guid: 188aa3dbe54ab7645be89bec21d02228,
@@ -887,6 +967,46 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8e776074e24a91478b037074d8e010c, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &545044921 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1863944656777134, guid: c8e776074e24a91478b037074d8e010c,
+    type: 2}
+  m_PrefabInternal: {fileID: 545044920}
+--- !u!1 &545044922 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1925907730215058, guid: c8e776074e24a91478b037074d8e010c,
+    type: 2}
+  m_PrefabInternal: {fileID: 545044920}
+--- !u!1 &545044923 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1038935863484646, guid: c8e776074e24a91478b037074d8e010c,
+    type: 2}
+  m_PrefabInternal: {fileID: 545044920}
+--- !u!1 &545044924 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1009441100627510, guid: c8e776074e24a91478b037074d8e010c,
+    type: 2}
+  m_PrefabInternal: {fileID: 545044920}
+--- !u!1 &545044925 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1730454677093526, guid: c8e776074e24a91478b037074d8e010c,
+    type: 2}
+  m_PrefabInternal: {fileID: 545044920}
+--- !u!1 &545044926 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1043096672478726, guid: c8e776074e24a91478b037074d8e010c,
+    type: 2}
+  m_PrefabInternal: {fileID: 545044920}
+--- !u!1 &545044927 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1706909758944236, guid: c8e776074e24a91478b037074d8e010c,
+    type: 2}
+  m_PrefabInternal: {fileID: 545044920}
+--- !u!1 &545044928 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1860382513488588, guid: c8e776074e24a91478b037074d8e010c,
+    type: 2}
+  m_PrefabInternal: {fileID: 545044920}
 --- !u!1 &548024344 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1732987402714986, guid: c8e776074e24a91478b037074d8e010c,
@@ -1427,43 +1547,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 188aa3dbe54ab7645be89bec21d02228, type: 2}
   m_IsPrefabParent: 0
---- !u!21 &933109213
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 2DxFX/Standard/ColorChange
-  m_Shader: {fileID: 4800000, guid: 9f1ae124906dd1a41bee3c95860f3a4f, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _Alpha: 0
-    - _ColorMask: 15
-    - _HueShift: 100
-    - _Sat: 0.97
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _Tolerance: 1
-    - _Val: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorX: {r: 0, g: 0.9294118, b: 0, a: 1}
 --- !u!114 &937638049 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114184197270376470, guid: c8e776074e24a91478b037074d8e010c,
@@ -1482,43 +1565,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 545044920}
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
---- !u!21 &988491991
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 2DxFX/Standard/ColorChange
-  m_Shader: {fileID: 4800000, guid: 9f1ae124906dd1a41bee3c95860f3a4f, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _Alpha: 0
-    - _ColorMask: 15
-    - _HueShift: 100
-    - _Sat: 0.97
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _Tolerance: 1
-    - _Val: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorX: {r: 0, g: 0.9294118, b: 0, a: 1}
 --- !u!1 &1047343541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,6 +1656,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &1120644674
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 2DxFX/Standard/ColorChange
+  m_Shader: {fileID: 4800000, guid: 9f1ae124906dd1a41bee3c95860f3a4f, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Alpha: 0
+    - _ColorMask: 15
+    - _HueShift: 100
+    - _Sat: 0.97
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _Tolerance: 1
+    - _Val: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorX: {r: 0, g: 0.9294118, b: 0, a: 1}
 --- !u!21 &1148764408
 Material:
   serializedVersion: 6
@@ -1855,41 +1938,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224268323972847752, guid: c8e776074e24a91478b037074d8e010c,
     type: 2}
   m_PrefabInternal: {fileID: 545044920}
---- !u!21 &1755930301
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 2DxFX/Standard/HSV
-  m_Shader: {fileID: 4800000, guid: a67566ebba7c8114cbabea0a3e357150, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _Alpha: 0
-    - _ColorMask: 15
-    - _HueShift: 265
-    - _Sat: 1
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _Val: 2
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1827003603
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,6 +2138,43 @@ GameObject:
   m_PrefabParentObject: {fileID: 1142389237883164, guid: c8e776074e24a91478b037074d8e010c,
     type: 2}
   m_PrefabInternal: {fileID: 545044920}
+--- !u!21 &1959073126
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 2DxFX/Standard/ColorChange
+  m_Shader: {fileID: 4800000, guid: 9f1ae124906dd1a41bee3c95860f3a4f, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Alpha: 0
+    - _ColorMask: 15
+    - _HueShift: 100
+    - _Sat: 0.97
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _Tolerance: 1
+    - _Val: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorX: {r: 0, g: 0.9294118, b: 0, a: 1}
 --- !u!1 &1995937427 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1383887922730794, guid: c8e776074e24a91478b037074d8e010c,
@@ -2211,43 +2296,6 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!21 &2078831912
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 2DxFX/Standard/ColorChange
-  m_Shader: {fileID: 4800000, guid: 9f1ae124906dd1a41bee3c95860f3a4f, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _Alpha: 0
-    - _ColorMask: 15
-    - _HueShift: 100
-    - _Sat: 0.97
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _Tolerance: 1
-    - _Val: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorX: {r: 0, g: 0.9294118, b: 0, a: 1}
 --- !u!1 &2116331445 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1087360796166290, guid: c8e776074e24a91478b037074d8e010c,
