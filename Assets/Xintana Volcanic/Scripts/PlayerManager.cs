@@ -23,6 +23,7 @@ public class PlayerManager : MonoBehaviour {
     public float healPowerUpTime = 30;
     public float timeGemsPowerUp = 10;
 
+    private ParticlePooler _particlePooler;
     private LevelManager _levelManager;
     private CombinationManager _combinationManager;
     private XintanaProfile profile;
@@ -31,9 +32,11 @@ public class PlayerManager : MonoBehaviour {
     private bool _profileExperienceAdded = false;
     private float totalExpPerGame = 0;
     private Animator playerAnimator;
+    private GameObject _powerUpParticle;
 
     void Awake()
     {
+        _particlePooler = FindObjectOfType<ParticlePooler>();
         _levelManager = FindObjectOfType<LevelManager>();
         _combinationManager = FindObjectOfType<CombinationManager>();
         _guiManager = FindObjectOfType<Rad_GuiManager>();
@@ -86,64 +89,85 @@ public class PlayerManager : MonoBehaviour {
         }
 
     }
+    public void StopPowerUp()
+    {
+        switch (weaponEquipped)
+        {
+            case WeaponType.black:
+                StopCriticsPowerUp();
+                break;
+            case WeaponType.blue:
+                StopGemsPowerUp();
+                break;
+            case WeaponType.green:
+                StopHealPowerUp();
+                break;
+            case WeaponType.yellow:
+                StopTimerPowerUp();
+                break;
+        }
+
+    }
     #region PowerUps
     void SlowTimerPowerUp()
     {
-        StartCoroutine(SlowTimer(slowtimerTime));
+        _powerUpParticle = _particlePooler.GetPooledFreezeParticle();
+        _powerUpParticle.SetActive(true);
         _guiManager.RemovePowerUpSliderValueForPowerUpTime(slowtimerTime);
-    }
-
-    IEnumerator SlowTimer(float delay)
-    {
         _guiManager.SetPowerUpOn(true);
         _combinationManager.timerSpeed = 0.5f;
-        yield return new WaitForSeconds(delay);
+    }
+
+    void StopTimerPowerUp()
+    {
+        _particlePooler.RemoveElement(_powerUpParticle.transform);
         _combinationManager.timerSpeed = 1f;
         _guiManager.SetPowerUpOn(false);
     }
 
     void CriticsPowerUp()
     {
-        StartCoroutine(Critics(criticsPowerUpTime));
+        _powerUpParticle = _particlePooler.GetPooledCriticsParticle();
+        _powerUpParticle.SetActive(true);
         _guiManager.RemovePowerUpSliderValueForPowerUpTime(criticsPowerUpTime);
-    }
-    IEnumerator Critics(float delay)
-    {
         _guiManager.SetPowerUpOn(true);
         _levelManager.SetCriticsPowerUp(true);
-        yield return new WaitForSeconds(delay);
+    }
+    void StopCriticsPowerUp()
+    {
+        _particlePooler.RemoveElement(_powerUpParticle.transform);
         _levelManager.SetCriticsPowerUp(false);
         _guiManager.SetPowerUpOn(false);
     }
-
     void HealPowerUp()
     {
-        StartCoroutine(Heal(healPowerUpTime));
+        _powerUpParticle = _particlePooler.GetPooledHealParticle();
+        _powerUpParticle.SetActive(true);
         _guiManager.RemovePowerUpSliderValueForPowerUpTime(healPowerUpTime);
-    }
-
-    IEnumerator Heal(float delay)
-    {
         _guiManager.SetPowerUpOn(true);
         _levelManager.SetHealPowerUp(true);
-        yield return new WaitForSeconds(delay);
+    }
+    void StopHealPowerUp()
+    {
+        _particlePooler.RemoveElement(_powerUpParticle.transform);
         _levelManager.SetHealPowerUp(false);
         _guiManager.SetPowerUpOn(false);
     }
-
     void GemsPowerUp()
     {
-        StartCoroutine(ChangeGemsPowerUp(timeGemsPowerUp));
+        _powerUpParticle = _particlePooler.GetPooledGemsPowerUpParticle();
+        _powerUpParticle.SetActive(true);
         _guiManager.RemovePowerUpSliderValueForPowerUpTime(timeGemsPowerUp);
-    }
-    IEnumerator ChangeGemsPowerUp(float delay)
-    {
         _guiManager.SetPowerUpOn(true);
         _combinationManager.SetGemsPowerUp(true);
-        yield return new WaitForSeconds(delay);
+    }
+    void StopGemsPowerUp()
+    {
+        _particlePooler.RemoveElement(_powerUpParticle.transform);
         _combinationManager.SetGemsPowerUp(false);
         _guiManager.SetPowerUpOn(false);
     }
+
     #endregion
     #region Animations
     /// <summary>

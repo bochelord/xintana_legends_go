@@ -575,12 +575,6 @@ public class LevelManager : MonoBehaviour {
         state = GameState.Running;
         combinationManager.MoveButtonsIn();
     }
-    //private int _kogiKilled = 0;
-    //private int _zazucKilled = 0;
-    //private int _makulaKilled = 0;
-    //private int _playerScore = 0;
-    //private int _currentEnemyLevel = 0;
-    //private int _enemyCount = 0;
 
     #region World Level Generation
 
@@ -603,6 +597,7 @@ public class LevelManager : MonoBehaviour {
 
     #endregion
 
+    #region Get/Set
     public int GetKogiKilled()
     {
         return _kogiKilled;
@@ -648,4 +643,5 @@ public class LevelManager : MonoBehaviour {
     {
         _healPowerUp = value;
     }
+    #endregion
 }

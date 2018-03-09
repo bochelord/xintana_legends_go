@@ -12,7 +12,12 @@ public class ParticlePooler : Pooler {
     public GameObject gemCollectedParticle;
     public GameObject healPlayerParticle;
     public GameObject shellCollectedParticle;
+    public GameObject criticsPowerUpParticle;
+    public GameObject freezePowerUpParticle;
+    public GameObject healPowerUpParticle;
+    public GameObject gemsPowerUpParticle;
     public int amount;
+    public int powerUpAmount;
 
     private List<GameObject> pooledGold;
     private List<GameObject> pooledGems;
@@ -22,6 +27,10 @@ public class ParticlePooler : Pooler {
     private List<GameObject> pooledGemCollected;
     private List<GameObject> pooledHealPlayer;
     private List<GameObject> pooledShellCollected;
+    private List<GameObject> pooledCriticsPowerUp;
+    private List<GameObject> pooledFreezePowerUp;
+    private List<GameObject> pooledHealPowerUp;
+    private List<GameObject> pooledGemsPowerUp;
     // Use this for initialization
 
     public override void Start ()
@@ -98,6 +107,42 @@ public class ParticlePooler : Pooler {
             obj.transform.position = Vector3.zero;
             obj.SetActive(false);
             pooledShellCollected.Add(obj);
+        }
+        pooledFreezePowerUp = new List<GameObject>();
+        for (int j = 0; j < amount; j++)
+        {
+            GameObject obj = (GameObject)Instantiate(freezePowerUpParticle);
+            obj.transform.parent = this.transform;
+            obj.transform.position = Vector3.zero;
+            obj.SetActive(false);
+            pooledFreezePowerUp.Add(obj);
+        }
+        pooledGemsPowerUp = new List<GameObject>();
+        for (int j = 0; j < amount; j++)
+        {
+            GameObject obj = (GameObject)Instantiate(gemsPowerUpParticle);
+            obj.transform.parent = this.transform;
+            obj.transform.position = Vector3.zero;
+            obj.SetActive(false);
+            pooledGemsPowerUp.Add(obj);
+        }
+        pooledCriticsPowerUp = new List<GameObject>();
+        for (int j = 0; j < amount; j++)
+        {
+            GameObject obj = (GameObject)Instantiate(criticsPowerUpParticle);
+            obj.transform.parent = this.transform;
+            obj.transform.position = Vector3.zero;
+            obj.SetActive(false);
+            pooledCriticsPowerUp.Add(obj);
+        }
+        pooledHealPowerUp = new List<GameObject>();
+        for (int j = 0; j < amount; j++)
+        {
+            GameObject obj = (GameObject)Instantiate(healPowerUpParticle);
+            obj.transform.parent = this.transform;
+            obj.transform.position = Vector3.zero;
+            obj.SetActive(false);
+            pooledHealPowerUp.Add(obj);
         }
     }
     public GameObject GetPooledGemCollectedParticle()
@@ -249,6 +294,82 @@ public class ParticlePooler : Pooler {
             GameObject obj = (GameObject)Instantiate(deadEnemyParticle);
             obj.transform.parent = current.transform;
             pooledDeadEnemy.Add(obj);
+            return obj;
+        }
+
+        return null;
+    }
+    public GameObject GetPooledHealParticle()
+    {
+        for (int i = 0; i < pooledHealPowerUp.Count; i++)
+        {
+            if (!pooledHealPowerUp[i].activeInHierarchy)
+            {
+                return pooledHealPowerUp[i];
+            }
+        }
+        if (willGrow)
+        {
+            GameObject obj = (GameObject)Instantiate(healPowerUpParticle);
+            obj.transform.parent = current.transform;
+            pooledHealPowerUp.Add(obj);
+            return obj;
+        }
+
+        return null;
+    }
+    public GameObject GetPooledGemsPowerUpParticle()
+    {
+        for (int i = 0; i < pooledGemsPowerUp.Count; i++)
+        {
+            if (!pooledGemsPowerUp[i].activeInHierarchy)
+            {
+                return pooledGemsPowerUp[i];
+            }
+        }
+        if (willGrow)
+        {
+            GameObject obj = (GameObject)Instantiate(gemsPowerUpParticle);
+            obj.transform.parent = current.transform;
+            pooledGemsPowerUp.Add(obj);
+            return obj;
+        }
+
+        return null;
+    }
+    public GameObject GetPooledCriticsParticle()
+    {
+        for (int i = 0; i < pooledCriticsPowerUp.Count; i++)
+        {
+            if (!pooledCriticsPowerUp[i].activeInHierarchy)
+            {
+                return pooledCriticsPowerUp[i];
+            }
+        }
+        if (willGrow)
+        {
+            GameObject obj = (GameObject)Instantiate(criticsPowerUpParticle);
+            obj.transform.parent = current.transform;
+            pooledCriticsPowerUp.Add(obj);
+            return obj;
+        }
+
+        return null;
+    }
+    public GameObject GetPooledFreezeParticle()
+    {
+        for (int i = 0; i < pooledFreezePowerUp.Count; i++)
+        {
+            if (!pooledFreezePowerUp[i].activeInHierarchy)
+            {
+                return pooledFreezePowerUp[i];
+            }
+        }
+        if (willGrow)
+        {
+            GameObject obj = (GameObject)Instantiate(freezePowerUpParticle);
+            obj.transform.parent = current.transform;
+            pooledFreezePowerUp.Add(obj);
             return obj;
         }
 

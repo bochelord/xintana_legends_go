@@ -69,17 +69,16 @@ public class Rad_GuiManager : MonoBehaviour {
     private AudioManager _audioManager;
 
     private float _timerCountdown = 5f;
+    private float _timerPowerUp = 1f;
+    private float _powerUpTime = 1f;
     private bool timerCountdownAdOn = false;
     private bool timerContdownContinue = false;
     private bool _scorePanelOn = false;
 
 
     private bool _updateScore = false;
-
-    private bool _changeBrithness = false;
     private bool _powerUpOn = false;
 
-    private float _tempBrightness;
     private int _pScorePlayer;
     private int _pHighScore;
     private int _pWorldReached;
@@ -129,7 +128,18 @@ public class Rad_GuiManager : MonoBehaviour {
                 Button_CloseViewAddPanel();
             }
         }
-
+        if (_powerUpOn && _levelManager.state == GameState.Running)
+        {
+            _timerPowerUp -= (Time.deltaTime / _powerUpTime);
+            powerUpSlider.value = _timerPowerUp;
+            if(_timerPowerUp <= 0)
+            {
+                _playerManager.StopPowerUp();
+                _powerUpOn = false;
+                _timerPowerUp = 1f;
+                powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 255, 255);
+            }
+        }
         if (timerContdownContinue)
         {
             _timerCountdown -= Time.deltaTime;
@@ -524,7 +534,6 @@ public class Rad_GuiManager : MonoBehaviour {
             float _tempValue = value / 10;
             if (powerUpSlider.value + _tempValue >= 1 && powerUpSlider.value != 1)
             {
-                _changeBrithness = true;
                 //TODO add poer Up button
                 //add some tweens, shakes and effects
                 PunchPowerUpSlider();
@@ -563,11 +572,13 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void RemovePowerUpSliderValueForPowerUpTime(float time)
     {
-        DOTween.To(() => powerUpSlider.value, x => powerUpSlider.value = x, 0, time).OnComplete(()=> 
-        {
-            HidePowerUpButton();
-            powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 255, 255);
-        });
+        _powerUpTime = time;
+        _powerUpOn = true;
+        //DOTween.To(() => powerUpSlider.value, x => powerUpSlider.value = x, 0, time).OnComplete(()=> 
+        //{
+        //    HidePowerUpButton();
+        //    powerUpSlider.fillRect.GetComponent<Image>().color = new Color(255, 255, 255);
+        //});
     }
     public void Button_PowerUp()
     {
