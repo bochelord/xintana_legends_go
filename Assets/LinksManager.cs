@@ -16,5 +16,20 @@ public class LinksManager : MonoBehaviour {
     {
         Application.OpenURL("https://twitter.com/bochelord");
     }
+
+    public void Button_Linkedinalex()
+    {
+        Application.OpenURL("https://www.linkedin.com/in/alex-lasheras/");
+    }
+
+    public void Button_TwitterPere()
+    {
+        Application.OpenURL("https://twitter.com/peresef");
+    }
+
+    public void Button_TwitterAndre()
+    {
+        Application.OpenURL("https://twitter.com/artcadev");
+    }
 }
 
