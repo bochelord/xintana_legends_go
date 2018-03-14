@@ -31,5 +31,15 @@ public class LinksManager : MonoBehaviour {
     {
         Application.OpenURL("https://twitter.com/artcadev");
     }
+
+    public void Button_Doubleringgames()
+    {
+        Application.OpenURL("https://twitter.com/doubleringgames");
+    }
+
+    public void Button_twitterMorten()
+    {
+        Application.OpenURL("https://twitter.com/littlerobotsfx");
+    }
 }
 
