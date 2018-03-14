@@ -38,6 +38,7 @@ public class radicalIntroManager : MonoBehaviour
         first = true;
         timepassed = 0;
         StartCoroutine(Kickstart());
+        Rad_SaveManager.LoadData();
 	}
 
     void Update()

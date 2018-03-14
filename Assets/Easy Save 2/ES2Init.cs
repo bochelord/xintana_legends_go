@@ -67,6 +67,7 @@ public class ES2Init : MonoBehaviour
 		ES2TypeManager.types[typeof(System.UInt16)] = new ES2_ushort();
 		ES2TypeManager.types[typeof(UnityEngine.AudioClip)] = new ES2_AudioClip();
 		ES2TypeManager.types[typeof(XintanaProfile)] = new ES2UserType_XintanaProfile();
+		ES2TypeManager.types[typeof(PokedexProfile)] = new ES2UserType_PokedexProfile();
 
 		ES2.initialised = true;
 	}

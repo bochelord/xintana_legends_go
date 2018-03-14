@@ -70,6 +70,7 @@ public class EnemiesPooler : Pooler {
 
     public  GameObject GetPooledObject(int appearInWorld)
     {
+
         List<GameObject> retEnemies = new List<GameObject>();
         foreach (GameObject enemyobj in pooledObjects)
         {
@@ -97,11 +98,28 @@ public class EnemiesPooler : Pooler {
             }
         }
 
+        AddEnemyToPokedex(retEnemies[index]);
+
         return retEnemies[index];
 
 
     }
-
+    private void AddEnemyToPokedex(GameObject _obj)
+    {
+        EnemyController _tempController;
+        if(_tempController = _obj.GetComponent<EnemyController>())
+        {
+            _tempController = _obj.GetComponent<EnemyController>();
+        }else
+        {
+            _tempController = _obj.GetComponentInChildren<EnemyController>();
+        }
+        
+        if (!Rad_SaveManager.pokedex.enemiesKnown[_tempController.type])
+        {
+            Rad_SaveManager.pokedex.enemiesKnown[_tempController.type] = true;
+        }
+    }
     public GameObject GetBossObject()
     {
         List<GameObject> activeEnemies = new List<GameObject>();
@@ -117,6 +135,7 @@ public class EnemiesPooler : Pooler {
 
         if (activeEnemies.Count == 0) { Debug.LogError("godverdomme"); }
 
+        AddEnemyToPokedex(activeEnemies[index]);
         return activeEnemies[index];
     }
     public override void RemoveElement(Transform item)

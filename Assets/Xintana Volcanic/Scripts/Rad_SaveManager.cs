@@ -7,11 +7,14 @@ public class Rad_SaveManager : MonoBehaviour {
     public static bool debugmode = false;
 
     public static string xintanaProfileFilename = "xintanaprofile.rad";
+    public static string pokedexProfileFilename = "xintanapokedex.rad";
     public static XintanaProfile profile = new XintanaProfile().GenerateXintanaProfile(0);
+    public static PokedexProfile pokedex = new PokedexProfile().GeneratePokedex();
 
     public static void SaveData()
     {
         ES2.Save(profile, xintanaProfileFilename + "?tag=profile-" + profile.profileID); //TODO 
+        ES2.Save(pokedex, pokedexProfileFilename);
         Debug.Log("====SAVING PROFILE====");
     }
 
@@ -33,6 +36,19 @@ public class Rad_SaveManager : MonoBehaviour {
             profile = new XintanaProfile().GenerateXintanaProfile(0);
         }
 
+        
+        if (ES2.Exists(pokedexProfileFilename))
+        {
+
+            pokedex = ES2.Load<PokedexProfile>(pokedexProfileFilename);
+            Debug.Log("Pokedex " + pokedex + " loaded");
+        }
+        else
+        {
+            pokedex = new PokedexProfile().GeneratePokedex();
+            Debug.Log("Pokedex " + pokedex + " created");
+        }
+        SaveData();
     }
 
     public static void Button_DebugModeOn()
