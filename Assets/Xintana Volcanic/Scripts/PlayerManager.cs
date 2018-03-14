@@ -75,15 +75,19 @@ public class PlayerManager : MonoBehaviour {
         switch (weaponEquipped)
         {
             case WeaponType.black:
+                _guiManager.SetAndActivatePowerUpText("Critics!!");
                 CriticsPowerUp();
                 break;
             case WeaponType.blue:
+                _guiManager.SetAndActivatePowerUpText("Break any gem !!");
                 GemsPowerUp();
                 break;
             case WeaponType.green:
+                _guiManager.SetAndActivatePowerUpText("Heal!!");
                 HealPowerUp();
                 break;
             case WeaponType.yellow:
+                _guiManager.SetAndActivatePowerUpText("Time Freezed !!");
                 SlowTimerPowerUp();
                 break;
         }

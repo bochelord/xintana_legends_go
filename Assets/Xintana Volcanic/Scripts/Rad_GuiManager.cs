@@ -56,9 +56,9 @@ public class Rad_GuiManager : MonoBehaviour {
     public Text timeCountdown;
     public Text timeCountDownContinuePanel;
 
-
     [Header("Power Up")]
     public GameObject powerUpButton;
+    public Text PowerUpText;
 
     private AnalyticsManager _analyticsManager;
     private AdsManager _adsManager;
@@ -617,7 +617,15 @@ public class Rad_GuiManager : MonoBehaviour {
             experienceSlider.value += _tempValue;
         }
     }
-
+    public void SetAndActivatePowerUpText(string _value)
+    {
+        PowerUpText.gameObject.SetActive(true);
+        PowerUpText.text = _value;
+        PowerUpText.transform.DOPunchScale(new Vector3(1, 1, 1), 2, 5, 0).OnComplete(() =>
+        {
+            PowerUpText.gameObject.SetActive(false);
+        });
+    }
     public void SetPowerUpOn(bool value)
     {
         _powerUpOn = value;

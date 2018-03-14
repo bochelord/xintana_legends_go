@@ -123,21 +123,18 @@ public class MainMenuManager : MonoBehaviour {
             switch (item)
             {
                 case InventorySlot.BlackWeapon:
-                    Debug.Log(SIS.DBManager.GetPurchase("si_blacksword"));
                     if (SIS.DBManager.GetPurchase("si_blacksword") > 0)
                     {
                         itemsImages[i].SetActive(true);
                     }
                     break;
                 case InventorySlot.BlueWeapon:
-                    Debug.Log(SIS.DBManager.GetPurchase("si_bluesword"));
                     if (SIS.DBManager.GetPurchase("si_bluesword") > 0)
                     {
                         itemsImages[i].SetActive(true);
                     }
                     break;
                 case InventorySlot.DoubleScore:
-                    Debug.Log(SIS.DBManager.GetPurchase("si_x2"));
                     if (SIS.DBManager.GetPurchase("si_x2") > 0)
                     {
                         itemsImages[i].SetActive(true);
@@ -156,7 +153,6 @@ public class MainMenuManager : MonoBehaviour {
                     }
                     break;
                 case InventorySlot.GreenWeapon:
-                    Debug.Log(SIS.DBManager.GetPurchase("si_greensword"));
                     if (SIS.DBManager.GetPurchase("si_greensword") > 0)
                     {
                         itemsImages[i].SetActive(true);
