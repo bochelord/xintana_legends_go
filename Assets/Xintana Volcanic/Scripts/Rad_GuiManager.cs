@@ -455,6 +455,7 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         closeButton.gameObject.SetActive(true);
         shareButton.SetActive(true);
+        shareText.DOKill();
         shareText.DOFade(0, 1f).OnComplete(() => 
         {
             shareText.DORestart();
