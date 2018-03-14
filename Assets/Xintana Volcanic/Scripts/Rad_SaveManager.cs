@@ -41,12 +41,10 @@ public class Rad_SaveManager : MonoBehaviour {
         {
 
             pokedex = ES2.Load<PokedexProfile>(pokedexProfileFilename);
-            Debug.Log("Pokedex " + pokedex + " loaded");
         }
         else
         {
             pokedex = new PokedexProfile().GeneratePokedex();
-            Debug.Log("Pokedex " + pokedex + " created");
         }
         SaveData();
     }
