@@ -531,6 +531,10 @@ public class LevelManager : MonoBehaviour {
 
     public void GameOverPanel()
     {
+        if (_playerManager.GetPowerUpOn())
+        {
+            _playerManager.StopPowerUp();
+        }
         VanishPlayer();
         combinationManager.MoveButtonsOut();
         StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.PlayerGameOverPanelOn,2));

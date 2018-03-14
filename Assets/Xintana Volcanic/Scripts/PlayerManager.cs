@@ -33,7 +33,7 @@ public class PlayerManager : MonoBehaviour {
     private float totalExpPerGame = 0;
     private Animator playerAnimator;
     private GameObject _powerUpParticle;
-
+    private bool _powerUpOn = false;
     void Awake()
     {
         _particlePooler = FindObjectOfType<ParticlePooler>();
@@ -72,6 +72,7 @@ public class PlayerManager : MonoBehaviour {
 
     public void StartPowerUp()
     {
+        _powerUpOn = true;
         switch (weaponEquipped)
         {
             case WeaponType.black:
@@ -95,6 +96,7 @@ public class PlayerManager : MonoBehaviour {
     }
     public void StopPowerUp()
     {
+        _powerUpOn = false;
         switch (weaponEquipped)
         {
             case WeaponType.black:
@@ -275,5 +277,9 @@ public class PlayerManager : MonoBehaviour {
     public bool GetExperienceAddedFromProfile()
     {
         return _profileExperienceAdded;
+    }
+    public bool GetPowerUpOn()
+    {
+        return _powerUpOn;
     }
 }
