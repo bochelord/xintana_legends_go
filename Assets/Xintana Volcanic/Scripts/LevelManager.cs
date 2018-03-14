@@ -209,7 +209,6 @@ public class LevelManager : MonoBehaviour {
             //Continue or go to main menu
             AudioManager.Instance.Play_XintanaDeath();
             player.GetComponent<Animator>().SetInteger("AnimState",4);
-            AnalyticsManager.Instance.GameOver_Event((int)_playerScore, _enemyCount + 1, _worldNumber);
             //AddNemesisCount();
             if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped <= adsSkipped && !Rad_SaveManager.profile.noAds)
             {
@@ -281,14 +280,14 @@ public class LevelManager : MonoBehaviour {
         //score sound on
         combinationManager.ChangeTimerSliderColor(-1);
         AudioManager.Instance.Play_AddScore();
+        GetEnemyDeadParticle();
+        enemyPooler.RemoveElement(enemyController.transform);
         DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + _enemyPoints * levelin * timeRemaining, 3);
         DOTween.To(() => combinationManager.timerSlider.value, x => combinationManager.timerSlider.value = x, 0, 3f).OnComplete(() =>
          {
              combinationManager.ChangeTimerSliderColor(1);
              GetNewEnemy(1.5f);
              _playerScore += _enemyPoints * levelin * timeRemaining;
-             GetEnemyDeadParticle();
-             enemyPooler.RemoveElement(enemyController.transform);
              AudioManager.Instance.Stop_AddScore();
              AchievementsManager.Instance.IncrementScoreAchievements(_playerScore);
          });
@@ -535,6 +534,7 @@ public class LevelManager : MonoBehaviour {
         {
             _playerManager.StopPowerUp();
         }
+        AnalyticsManager.Instance.GameOver_Event((int)_playerScore, _enemyCount + 1, _worldNumber);
         VanishPlayer();
         combinationManager.MoveButtonsOut();
         StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.PlayerGameOverPanelOn,2));

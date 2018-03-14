@@ -7,7 +7,7 @@ public class ParticlePooler : Pooler {
     public GameObject goldChestParticle;
     public GameObject gemsChestParticle;
     public GameObject emptyChestParticle;
-    public GameObject deadEnemyParticle;
+    public GameObject[] deadEnemyParticle;
     public GameObject coinCollectedParticle;
     public GameObject gemCollectedParticle;
     public GameObject healPlayerParticle;
@@ -18,7 +18,7 @@ public class ParticlePooler : Pooler {
     public GameObject gemsPowerUpParticle;
     public int amount;
     public int powerUpAmount;
-
+    public int deadParticleAmount;
     private List<GameObject> pooledGold;
     private List<GameObject> pooledGems;
     private List<GameObject> pooledEmpty;
@@ -64,14 +64,18 @@ public class ParticlePooler : Pooler {
             pooledEmpty.Add(obj);
         }
         pooledDeadEnemy = new List<GameObject>();
-        for (int j = 0; j < amount; j++)
+        for (int i = 0; i < deadEnemyParticle.Length; i++)
         {
-            GameObject obj = (GameObject)Instantiate(deadEnemyParticle);
-            obj.transform.parent = this.transform;
-            obj.transform.position = Vector3.zero;
-            obj.SetActive(false);
-            pooledDeadEnemy.Add(obj);
+            for (int j = 0; j < deadParticleAmount; j++)
+            {
+                GameObject obj = (GameObject)Instantiate(deadEnemyParticle[i]);
+                obj.transform.parent = this.transform;
+                obj.transform.position = Vector3.zero;
+                obj.SetActive(false);
+                pooledDeadEnemy.Add(obj);
+            }
         }
+
         pooledCoinCollected = new List<GameObject>();
         for (int j = 0; j < amount; j++)
         {
@@ -282,16 +286,16 @@ public class ParticlePooler : Pooler {
     }
     public GameObject GetPooledDeadEnemyParticle()
     {
-        for (int i = 0; i < pooledDeadEnemy.Count; i++)
+        int _randomParticle = Random.Range(0, deadEnemyParticle.Length);
+        if(!pooledDeadEnemy[_randomParticle].activeInHierarchy)
         {
-            if (!pooledDeadEnemy[i].activeInHierarchy)
-            {
-                return pooledDeadEnemy[i];
-            }
+            return pooledDeadEnemy[_randomParticle];
+
         }
+
         if (willGrow)
         {
-            GameObject obj = (GameObject)Instantiate(deadEnemyParticle);
+            GameObject obj = (GameObject)Instantiate(deadEnemyParticle[_randomParticle]);
             obj.transform.parent = current.transform;
             pooledDeadEnemy.Add(obj);
             return obj;
