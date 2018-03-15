@@ -53,13 +53,22 @@ public class EnemyController : MonoBehaviour {
     void OnEnable() // On Enable we need to replenish its life otherwise would appear as a Zombie
     {
         //yield return new WaitForSeconds(0.1f);
-        new_enemy = new EnemyStructure().GenerateWithLevel(type, levelManager.GetCurrentEnemyLevel());
+        if (levelManager)
+        {
+            new_enemy = new EnemyStructure().GenerateWithLevel(type, levelManager.GetCurrentEnemyLevel());
+            level = levelManager.GetCurrentEnemyLevel();
+        }else
+        {
+            new_enemy = new EnemyStructure().GenerateWithLevel(type, 1);
+            level = 1;
+        }
+
         _experience = (int)new_enemy.xp;
         //new_enemy = new EnemyStructure().GenerateWithLevel(type, level);
         life = new_enemy.life;
         startLife = new_enemy.life;
         damage = new_enemy.damage;
-        level = levelManager.GetCurrentEnemyLevel();
+
         //if (new_enemy.type == EnemyType.blackKnight || new_enemy.type == EnemyType.lavabeast || new_enemy.type == EnemyType.alchemist || new_enemy.type == EnemyType.devil || new_enemy.type == EnemyType.explorer || new_enemy.type == EnemyType.fireMage)
 
         if (new_enemy.type != EnemyType.kogi && new_enemy.type != EnemyType.makula && new_enemy.type != EnemyType.zazuc)
@@ -79,8 +88,11 @@ public class EnemyController : MonoBehaviour {
             this.GetComponent<_2dxFX_HSV>()._ValueBrightness = new_enemy.dna_brightness;
         }
 
-        
-        healthBarController.SetScrollbarValue();
+        if (healthBarController)
+        {
+            healthBarController.SetScrollbarValue();
+        }
+
     }
     /// <summary>
     /// Retu rns damage done by enemy based on standard fumble,critic (Fumble: less than 4 , Critic: more than 95)
