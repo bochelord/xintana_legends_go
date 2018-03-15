@@ -233,6 +233,12 @@ public class MainMenuManager : MonoBehaviour {
         SceneManager.LoadScene("LoadingScreen");
     }
 
+    public void Button_Settings()
+    {
+        SceneManager.LoadScene("SettingsScreen");
+    }
+
+
     public void ShowFreeShellPanel()
     {
         blockButtonsPanel.SetActive(true);
