@@ -57,7 +57,7 @@ public class ChestRoulette : MonoBehaviour {
     private bool _doublePrize = false;
     public bool rouletteOn = false;
     private bool _doubleScorePanelOn = false;
-
+    private bool shellPrizeAdded = false;
     private int _coinsToSpawn = 20;
     private int _coinsSpawned = 0;
     private int _pDoublePrize = 0;
@@ -122,6 +122,7 @@ public class ChestRoulette : MonoBehaviour {
         for (int i = 0; i < 3; i++)
         {
             initialPosition.Add(chests[i].transform.position);
+            shellPrizeAdded = false;
         }
 
         if (Rad_SaveManager.profile.shells > 0)
@@ -231,6 +232,9 @@ public class ChestRoulette : MonoBehaviour {
     private void GeneratePrizes()
     {
         bool weaponIn = false; // so, in case we add any weapon in prizes, we only add one
+        //1 coin
+        //1 gem
+        //1 random between coin shell weapon power up ?
         for (int i = 0; i < chests.Length; i++)
         {
             int randomPrize = RadUtils.d100();
@@ -244,15 +248,18 @@ public class ChestRoulette : MonoBehaviour {
                 int _rGem = Random.Range(0, prizesList.gemsItemsList.Count);
                 chests[i].prize = prizesList.gemsItemsList[_rGem];
             }
-            else if (randomPrize % 2 == 0 && Rad_SaveManager.profile.shells <= 2)
+            else if (randomPrize % 2 == 0 && Rad_SaveManager.profile.shells <= 2 && !shellPrizeAdded)
             {
-                int _rGold = Random.Range(0, prizesList.coinsItemsList.Count);
-                chests[i].prize = prizesList.coinsItemsList[_rGold];
+                shellPrizeAdded = true;
+
+                int _rtoken = Random.Range(0, prizesList.tokensItemsList.Count);
+                chests[i].prize = prizesList.tokensItemsList[_rtoken];
             }
             else
             {
-                int _rtoken = Random.Range(0, prizesList.tokensItemsList.Count);
-                chests[i].prize = prizesList.tokensItemsList[_rtoken];
+
+                int _rGold = Random.Range(0, prizesList.coinsItemsList.Count);
+                chests[i].prize = prizesList.coinsItemsList[_rGold];
             }
             chests[i].CloseChest();
         }
