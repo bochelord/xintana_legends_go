@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LinksManager : MonoBehaviour {
 
@@ -40,6 +41,11 @@ public class LinksManager : MonoBehaviour {
     public void Button_twitterMorten()
     {
         Application.OpenURL("https://twitter.com/littlerobotsfx");
+    }
+
+    public void Button_back()
+    {
+        SceneManager.LoadScene("SettingsScreen");
     }
 }
 
