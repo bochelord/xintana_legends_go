@@ -72,6 +72,7 @@ public class LevelManager : MonoBehaviour {
     private List<Transform> inactiveHUDTextList = new List<Transform>();
 
     private bool kogiSpawned = false;
+    private bool shellSpawned = false;
     private bool musiclevel2_AlreadyPlayed = false;
     private bool musiclevel3_AlreadyPlayed = false;
     private bool _criticsPowerUp = false;
@@ -299,6 +300,7 @@ public class LevelManager : MonoBehaviour {
              _playerScore += _enemyPoints * levelin * timeRemaining;
              AudioManager.Instance.Stop_AddScore();
              AchievementsManager.Instance.IncrementScoreAchievements(_playerScore);
+             shellSpawned = false; // reset
          });
 
     }
@@ -311,7 +313,11 @@ public class LevelManager : MonoBehaviour {
     {
         if (enemyController.type == EnemyType.makula)
         {
-            SpawnShellForEndWorld();
+            if (!shellSpawned)
+            {
+                SpawnShellForEndWorld();
+            }
+
         }
         GameObject obj = particlePooler.GetPooledDeadEnemyParticle();
         obj.SetActive(true);
@@ -323,6 +329,7 @@ public class LevelManager : MonoBehaviour {
 
     private void SpawnShellForEndWorld()
     {
+        shellSpawned = true;
         Rad_SaveManager.profile.shells++;
         GameObject _shell = coinsPooler.GetPooledShell();
         _shell.SetActive(true);
@@ -330,6 +337,7 @@ public class LevelManager : MonoBehaviour {
         _shell.transform.DOScale(0, 0);
         _shell.transform.DOScale(2, 1.5f).OnComplete(() =>
         {
+            Debug.Log("SPawn SHELL >>>>>>>>><<<<<<<<<<");
             AudioManager.Instance.Play_GemCollect();
             _shell.transform.DOScale(1, 0);
             StartCoroutine(SpawnShellCollecetedParticle(_shell.transform.position));
@@ -594,7 +602,7 @@ public class LevelManager : MonoBehaviour {
     {
         if (!kogiSpawned)
         {
-            bool _flip = (Random.value > 0.5f);
+            bool _flip = (Random.value < 0.5f);
             int _randomInt;
             _kogi = enemyPooler.GetPooledKogiBounty();
             _kogi.SetActive(true);
