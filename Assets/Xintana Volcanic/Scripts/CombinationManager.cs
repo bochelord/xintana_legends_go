@@ -45,6 +45,7 @@ public class CombinationManager : MonoBehaviour {
     private bool winningCondition = false;
     private bool _gemsPowerUp = false;
     private float tempTimer;                        //Auxiliary variable to work with the Timer.
+    private float kogiTimer;                        //
     private int currentCombinationPosition = 0;     //The combination position to check, by default 0.
     private int minimCombinationLenght = 1;          
     private LevelManager levelManager;
@@ -274,6 +275,7 @@ public class CombinationManager : MonoBehaviour {
         if (levelManager.state == GameState.Running)
         {
             //Debug.Log(timerSpeed);
+            kogiTimer += (Time.deltaTime * timerSpeed);
             timerSlider.value -= (Time.deltaTime * timerSpeed) / timeToResolveCombination;
             tempTimer -= (Time.deltaTime * timerSpeed);
             if (timerSlider.value > 0)
@@ -300,6 +302,15 @@ public class CombinationManager : MonoBehaviour {
                 {
                     StartCoroutine(FunctionLibrary.CallWithDelay(levelManager.GameOverPanel, 1.5f));
                     adManager.adViewed = false;
+                }
+            }
+            if(kogiTimer >= levelManager.kogiSpawnTime)
+            {
+                kogiTimer = 0;
+                bool _flip = (Random.value > 0.5f);
+                if (_flip)
+                {
+                    levelManager.SpawnKogiBounty();
                 }
             }
         }
@@ -466,7 +477,11 @@ public class CombinationManager : MonoBehaviour {
             }
         }
     }
-
+    public void CombinationButtons(bool _value)
+    {
+        combinationButtons.SetActive(_value);
+    }
+    
     public void ShowWinText(){
         youWin_Text.gameObject.SetActive(true);
         AudioManager.Instance.Play_YouWin();

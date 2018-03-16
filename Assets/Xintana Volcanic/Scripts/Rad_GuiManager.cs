@@ -11,6 +11,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject scorePanel;
     public GameObject viewAdPanel;
     public GameObject ContinueNoAdPanel;
+    public GameObject rewardPanel;
 
     [Header("Sliders")]
     public Slider experienceSlider;
@@ -55,7 +56,9 @@ public class Rad_GuiManager : MonoBehaviour {
     [Header("ViewAdsPanel")]
     public Text timeCountdown;
     public Text timeCountDownContinuePanel;
-
+    [Header("Reward Panel")]
+    public Text rewardText;
+    public Image rewardImage;
     [Header("Power Up")]
     public GameObject powerUpButton;
     public Text PowerUpText;
@@ -67,6 +70,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private ScreenShot _screenshot;
     private PlayerManager _playerManager;
     private AudioManager _audioManager;
+    private CombinationManager _combinationManager;
 
     private float _timerCountdown = 5f;
     private float _timerPowerUp = 1f;
@@ -100,6 +104,7 @@ public class Rad_GuiManager : MonoBehaviour {
         _playerManager = FindObjectOfType<PlayerManager>();
         _audioManager = FindObjectOfType<AudioManager>();
         _leaderboardManager = FindObjectOfType<AndroidLeaderboard>();
+        _combinationManager = FindObjectOfType<CombinationManager>();
     }
 
     private void Start()
@@ -631,4 +636,26 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         _powerUpOn = value;
     }
+
+    /// <summary>
+    /// set reward to panel and move it
+    /// </summary>
+    /// <param name="_reward">reward to show</param>
+    public void SetKogiRewardPanel(string _reward,Sprite _sprite)
+    {
+        rewardText.text = _reward;
+        rewardImage.sprite = _sprite;
+        StartCoroutine(KogiRewardPanel(3));
+    }
+
+    IEnumerator KogiRewardPanel(float _time)
+    {
+        rewardPanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+        yield return new WaitForSeconds(_time);
+        rewardPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack).OnComplete(()=> 
+        {
+            _levelManager.state = GameState.Running;
+            _combinationManager.CombinationButtons(true);
+        });
+     }
 }

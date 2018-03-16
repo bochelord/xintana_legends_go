@@ -41,6 +41,14 @@ public class LevelManager : MonoBehaviour {
     public GameObject[] worldspritesLevelList;
     public GameObject commonSprites;
 
+    [Header("Kogi Reward")]
+    public PrizesListScriptableObject kogiRewardsList;
+    public Transform[] spawnPoints;
+    public Transform[] endPoints;
+    public float kogiTimeToMove;
+    public float kogiSpawnTime;
+    private GameObject _kogi;
+
     private int _kogiKilled = 0;
     private int _zazucKilled = 0;
     private int _makulaKilled = 0;
@@ -53,6 +61,8 @@ public class LevelManager : MonoBehaviour {
     private int numberOfRounds = 0;
     private float playerScoreUI;
 
+    private PrizesListScriptableObject.PrizeListClass kogiReward;
+
     public ScreenShot screenshot;
     private PlayerManager _playerManager;
     private CombinationManager combinationManager;
@@ -61,7 +71,7 @@ public class LevelManager : MonoBehaviour {
     private HealthBarControllerBoss healthBarController;
     private List<Transform> inactiveHUDTextList = new List<Transform>();
 
-
+    private bool kogiSpawned = false;
     private bool musiclevel2_AlreadyPlayed = false;
     private bool musiclevel3_AlreadyPlayed = false;
     private bool _criticsPowerUp = false;
@@ -125,7 +135,6 @@ public class LevelManager : MonoBehaviour {
                 _playerManager.HealForValue(damagedone);
                 LaunchShowHUDText(player.transform.position + new Vector3(0.25f, 0.75f, 0), damagedone.ToString("f1"), new Color32(0,255, 0, 255),false);
                 StartCoroutine(HealParticle(3));
-                Debug.Log("asdasdada");
 
             }
         } 
@@ -579,6 +588,70 @@ public class LevelManager : MonoBehaviour {
         state = GameState.Running;
         combinationManager.MoveButtonsIn();
     }
+
+    #region KogiBounty
+    public void SpawnKogiBounty()
+    {
+        if (!kogiSpawned)
+        {
+            bool _flip = (Random.value > 0.5f);
+            int _randomInt;
+            _kogi = enemyPooler.GetPooledKogiBounty();
+            _kogi.SetActive(true);
+            if (_flip)
+            {
+
+                _randomInt = Random.Range(0, spawnPoints.Length);
+                _kogi.transform.position = spawnPoints[_randomInt].position;
+                _randomInt = Random.Range(0, endPoints.Length);
+                _kogi.transform.DOMove(endPoints[_randomInt].position, kogiTimeToMove, false).OnComplete(() =>
+                {
+                    enemyPooler.RemoveElement(_kogi.transform);
+                });
+            }
+            else
+            {
+                _randomInt = Random.Range(0, endPoints.Length);
+                _kogi.transform.position = endPoints[_randomInt].position;
+                _randomInt = Random.Range(0, spawnPoints.Length);
+                _kogi.transform.DOMove(spawnPoints[_randomInt].position, kogiTimeToMove, false).OnComplete(() =>
+                {
+                    enemyPooler.RemoveElement(_kogi.transform);
+                });
+            }
+        }
+    }
+
+
+    public void SpawnKogiReward()
+    {
+        state = GameState.Paused;
+        GenerateAndShowKogiReward();
+        enemyPooler.RemoveElement(_kogi.transform);
+        combinationManager.CombinationButtons(false);
+        kogiSpawned = true;
+    }
+
+    private void GenerateAndShowKogiReward()
+    {
+        bool _price = Random.value > 0.5f;
+        int _randomprice;
+        if (_price)
+        {
+            _randomprice = Random.Range(0, kogiRewardsList.coinsItemsList.Count);
+            kogiReward = kogiRewardsList.coinsItemsList[_randomprice];
+            SIS.DBManager.IncreaseFunds("coins", kogiReward.itemValue);
+        }
+        else
+        {
+            _randomprice = Random.Range(0, kogiRewardsList.tokensItemsList.Count);
+            kogiReward = kogiRewardsList.tokensItemsList[_randomprice];
+            Rad_SaveManager.profile.shells += kogiReward.itemValue;
+        }
+        _guiManager.SetKogiRewardPanel(kogiReward.description,kogiReward.itemSprite);
+        
+    }
+    #endregion
 
     #region World Level Generation
 

@@ -272,18 +272,11 @@ public class PokedexManager : MonoBehaviour {
             {
                 for (int i = 0; i < _sprites.Length; i++)
                 {
+                    //hardcoded like a boss
                     _sprites[i]._HueShift = 0;
                     _sprites[i]._Saturation = 0.87f;
                     _sprites[i]._ValueBrightness = 0;
 
-                }
-            }else
-            {
-                //no 2dfx like makula 
-                SpriteRenderer[] _spritesR = _enemies[pokedexIndex].GetComponentsInChildren<SpriteRenderer>();
-                for (int i = 0; i < _spritesR.Length; i++)
-                {
-                    _spritesR[i].color = new Color(0, 0, 0);
                 }
             }
 
