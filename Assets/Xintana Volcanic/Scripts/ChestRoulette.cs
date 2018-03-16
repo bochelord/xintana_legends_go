@@ -63,7 +63,6 @@ public class ChestRoulette : MonoBehaviour {
     private int _pDoublePrize = 0;
 
     private float _prizeSpawnTime = 0;
-    private AudioManager _audioManager;
     private AnalyticsManager _analyticsManager;
     private AdsManager _adsManager;
 
@@ -74,7 +73,6 @@ public class ChestRoulette : MonoBehaviour {
         _menuManager = FindObjectOfType<MainMenuManager>();
         _particlePooler = FindObjectOfType<ParticlePooler>();
         _coinsPooler = FindObjectOfType<CoinsPooler>();
-        _audioManager = FindObjectOfType<AudioManager>();
         _analyticsManager = FindObjectOfType<AnalyticsManager>();
         _adsManager = FindObjectOfType<AdsManager>();
     }
@@ -246,7 +244,7 @@ public class ChestRoulette : MonoBehaviour {
                 int _rGem = Random.Range(0, prizesList.gemsItemsList.Count);
                 chests[i].prize = prizesList.gemsItemsList[_rGem];
             }
-            else if (randomPrize % 2 == 0)
+            else if (randomPrize % 2 == 0 && Rad_SaveManager.profile.shells <= 2)
             {
                 int _rGold = Random.Range(0, prizesList.coinsItemsList.Count);
                 chests[i].prize = prizesList.coinsItemsList[_rGold];
@@ -552,7 +550,7 @@ public class ChestRoulette : MonoBehaviour {
     {
         rouletteOn = true;
         backButton.enabled = false;
-        _audioManager.PlayRouletteMusic();
+        AudioManager.Instance.PlayRouletteMusic();
         _menuManager.roulettePanel.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
         {
             ShowStartRoulettePanel();
