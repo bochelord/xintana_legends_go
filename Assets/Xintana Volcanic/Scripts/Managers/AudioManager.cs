@@ -89,23 +89,29 @@ public class AudioManager : MonoBehaviour {
     }
 
 
-    //public void PlayMusicLevel2()
-    //{
-    //    if (musicLevel2 && audioEnabled)
-    //    {
-    //        musicPlayer.clip = musicLevel2;
-    //        musicPlayer.Play();
-    //    }
-    //}
+    public void MuteAudio()
+    {
+        musicPlayer.mute = true;
+        fxPlayer.mute = true;
+        musicBossPlayer.mute = true;
 
-    //public void PlayMusicLevel3()
-    //{
-    //    if (musicLevel3 && audioEnabled)
-    //    {
-    //        musicPlayer.clip = musicLevel3;
-    //        musicPlayer.Play();
-    //    }
-    //}
+    }
+
+    public bool isAudioMuted()
+    {
+        return musicPlayer.mute;
+    }
+
+
+    public void UnMuteAudio()
+    {
+        musicPlayer.mute = false;
+        fxPlayer.mute = false;
+        musicBossPlayer.mute = false;
+
+    }
+
+
 
     public void PlayMusicLevel(int level)
     {
