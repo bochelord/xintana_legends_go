@@ -128,7 +128,7 @@ public class ChestRoulette : MonoBehaviour {
         if (Rad_SaveManager.profile.shells > 0)
         {
             GeneratePrizes();
-            StartCoroutine(StartChestRotation(2));
+            StartCoroutine(StartChestRotation(1.25f));
         }
     }
     /// <summary>
@@ -182,8 +182,8 @@ public class ChestRoulette : MonoBehaviour {
         ShowChestPrizes();
         yield return new WaitForSeconds(time);
         CloseChests();
-        yield return new WaitForSeconds(1);
-        int _randomTime = Random.Range(3, 6);
+        yield return new WaitForSeconds(0.5f);
+        int _randomTime = Random.Range(2, 4);
         chestRotate = true;
         Rad_SaveManager.profile.shells--;
         yield return new WaitForSeconds(_randomTime);
