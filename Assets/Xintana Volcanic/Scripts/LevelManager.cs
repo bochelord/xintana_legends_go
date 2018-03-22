@@ -290,8 +290,22 @@ public class LevelManager : MonoBehaviour {
         //score sound on
         combinationManager.ChangeTimerSliderColor(-1);
         AudioManager.Instance.Play_AddScore();
-        GetEnemyDeadParticle();
-        enemyPooler.RemoveElement(enemyController.transform);
+
+        if (typein == EnemyType.kogi || typein == EnemyType.zazuc)
+        {
+            GetEnemyDeadParticle();
+            enemyPooler.RemoveElement(enemyController.transform);
+        } 
+        else
+        {
+            StartCoroutine(FunctionLibrary.CallWithDelay(GetEnemyDeadParticle, 1.5f));
+
+            StartCoroutine(removeEnemy(1.85f,enemyController.transform));
+            //StartCoroutine(FunctionLibrary.CallWithDelay(enemyPooler.RemoveElement(enemyController.transform),1.7f));
+        }
+
+        
+        
         DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + _enemyPoints * levelin * timeRemaining, 3);
         DOTween.To(() => combinationManager.timerSlider.value, x => combinationManager.timerSlider.value = x, 0, 3f).OnComplete(() =>
          {
@@ -304,6 +318,14 @@ public class LevelManager : MonoBehaviour {
          });
 
     }
+
+    IEnumerator removeEnemy(float delay, Transform toremove)
+    {
+        yield return new WaitForSeconds(delay);
+        enemyPooler.RemoveElement(toremove);
+    }
+
+
     public void GetEnemyDeadParticle()
     {
         StartCoroutine(EnemyDeadParticle(2f, enemyController.transform.position));
