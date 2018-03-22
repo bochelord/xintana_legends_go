@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour {
     public EnemyController enemyController;
     public GameState state = GameState.Running;
     public GameObject HitPrefabRight;
-    public GameObject damageFxPrefab;
+    //public GameObject[] damageFxPrefabArray;
     public GameObject player;
     public GameObject HUDTextContainer;
     public GameObject HUDTextPrefab;
@@ -163,9 +163,11 @@ public class LevelManager : MonoBehaviour {
         ///Effect on Enemy
         ///
         GameObject clone_damageFxprefab;
-        clone_damageFxprefab = Instantiate(damageFxPrefab);
+        //clone_damageFxprefab = Instantiate(damageFxPrefabArray[Random.Range(0,damageFxPrefabArray.Length-1)]);
+        clone_damageFxprefab = particlePooler.GetHitParticle();
         clone_damageFxprefab.transform.position = enemy.transform.position;
-
+        clone_damageFxprefab.SetActive(true);
+        StartCoroutine(particlePooler.RemoveElement(clone_damageFxprefab.transform, 2.2f));
         enemyController.DamagedAnimation();
         
         LaunchShowHUDText(enemyContainer.transform.position + new Vector3(-0.25f,0.75f,0), damagedone.ToString("F1"), new Color32(245, 141, 12, 255),false); /// TODO This has to be feed with the proper damage coming from the playerManager
@@ -198,8 +200,11 @@ public class LevelManager : MonoBehaviour {
         player.GetComponent<Animator>().SetInteger("AnimState", 3);
 
         GameObject clone_damageFxprefab;
-        clone_damageFxprefab = Instantiate(damageFxPrefab);
+        //clone_damageFxprefab = Instantiate(damageFxPrefabArray[Random.Range(0, damageFxPrefabArray.Length - 1)]);
+        clone_damageFxprefab = particlePooler.GetHitParticle();
         clone_damageFxprefab.transform.position = player.transform.position;
+        clone_damageFxprefab.SetActive(true);
+        StartCoroutine(particlePooler.RemoveElement(clone_damageFxprefab.transform,2.2f));
 
         enemyController.AttackAnimation();
 

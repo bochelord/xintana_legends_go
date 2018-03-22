@@ -16,9 +16,11 @@ public class ParticlePooler : Pooler {
     public GameObject freezePowerUpParticle;
     public GameObject healPowerUpParticle;
     public GameObject gemsPowerUpParticle;
+    public GameObject[] hitParticles;
     public int amount;
     public int powerUpAmount;
     public int deadParticleAmount;
+    //public int hitAmount;
     private List<GameObject> pooledGold;
     private List<GameObject> pooledGems;
     private List<GameObject> pooledEmpty;
@@ -31,6 +33,8 @@ public class ParticlePooler : Pooler {
     private List<GameObject> pooledFreezePowerUp;
     private List<GameObject> pooledHealPowerUp;
     private List<GameObject> pooledGemsPowerUp;
+    private List<GameObject> pooledHits;
+
     // Use this for initialization
 
     public override void Start ()
@@ -148,6 +152,36 @@ public class ParticlePooler : Pooler {
             obj.SetActive(false);
             pooledHealPowerUp.Add(obj);
         }
+
+        pooledHits = new List<GameObject>();
+        for (int j = 0; j < hitParticles.Length; j++)
+        {
+            GameObject obj = (GameObject)Instantiate(hitParticles[j]);
+            obj.transform.parent = this.transform;
+            obj.transform.position = Vector3.zero;
+            obj.SetActive(false);
+            pooledHits.Add(obj);
+        }
+
+    }
+    public GameObject GetHitParticle()
+    {
+        for (int i = 0; i < pooledHits.Count; i++)
+        {
+            if (!pooledHits[i].activeInHierarchy)
+            {
+                return pooledHits[i];
+            }
+        }
+        if (willGrow)
+        {
+            GameObject obj = (GameObject)Instantiate(hitParticles[Random.Range(0, hitParticles.Length - 1)]);
+            obj.transform.parent = current.transform;
+            pooledHits.Add(obj);
+            return obj;
+        }
+
+        return null;
     }
     public GameObject GetPooledGemCollectedParticle()
     {
@@ -381,6 +415,13 @@ public class ParticlePooler : Pooler {
     }
     public override void RemoveElement(Transform item)
     {
+        base.RemoveElement(item);
+    }
+
+    public IEnumerator RemoveElement(Transform item, float delay)
+    {
+        
+        yield return new WaitForSeconds(delay);
         base.RemoveElement(item);
     }
 }
