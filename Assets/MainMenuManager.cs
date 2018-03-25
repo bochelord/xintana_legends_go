@@ -238,6 +238,11 @@ public class MainMenuManager : MonoBehaviour {
         SceneManager.LoadScene("SettingsScreen");
     }
 
+    public void Button_Bestiary()
+    {
+        SceneManager.LoadScene("XintanaLegendsGo_Pokedex");
+    }
+
 
     public void ShowFreeShellPanel()
     {
