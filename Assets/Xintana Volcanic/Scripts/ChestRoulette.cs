@@ -368,19 +368,19 @@ public class ChestRoulette : MonoBehaviour {
                 {
                     case WeaponType.black:
                         SIS.DBManager.IncreasePurchase("si_blacksword", 1);
-                        SIS.DBManager.IncreasePurchase("si_blacksword_gems", 1);
+                        //SIS.DBManager.IncreasePurchase("si_blacksword_gems", 1);
                         break;
                     case WeaponType.blue:
                         SIS.DBManager.IncreasePurchase("si_bluesword", 1);
-                        SIS.DBManager.IncreasePurchase("si_bluesword_gems", 1);
+                        //SIS.DBManager.IncreasePurchase("si_bluesword_gems", 1);
                         break;
                     case WeaponType.green:
                         SIS.DBManager.IncreasePurchase("si_greensword", 1);
-                        SIS.DBManager.IncreasePurchase("si_greensword_gems", 1);
+                        //SIS.DBManager.IncreasePurchase("si_greensword_gems", 1);
                         break;
                     case WeaponType.yellow:
                         SIS.DBManager.IncreasePurchase("si_yellowsword", 1);
-                        SIS.DBManager.IncreasePurchase("si_yellowword_gems", 1);
+                        //SIS.DBManager.IncreasePurchase("si_yellowword_gems", 1);
                         break;
                 }
                 break;
