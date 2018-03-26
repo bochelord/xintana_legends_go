@@ -76,11 +76,16 @@ public class UnitControl : MonoBehaviour {
 					} else if (keyCode == KeyCode.J) {
 						animator.SetTrigger("skill_2");
 					} else if (keyCode == KeyCode.K) {
-						animator.SetTrigger("idle_2");
+						animator.SetTrigger("skill_3");
 					} else if (keyCode == KeyCode.L) {
+						animator.SetTrigger("idle_2");
+					} else if (keyCode == KeyCode.Y) {
+					//	animator.SetTrigger("idle_2");
+					} else if (keyCode == KeyCode.W) {
+						animator.SetTrigger("jump");
 					} else if (keyCode == KeyCode.Space) {
-						animator.SetTrigger("evade_1");
-						StartCoroutine (Evade ());
+						//animator.SetTrigger("evade");
+						//StartCoroutine (Evade ());
 					} 
 				}  
 			}  
@@ -88,9 +93,9 @@ public class UnitControl : MonoBehaviour {
 	}
 
 	public IEnumerator Evade(){
-		yield return new WaitForSeconds (0.8f);
+		yield return new WaitForSeconds (0.2f);
 		isEvade = true;
-		yield return new WaitForSeconds (0.4f);
+		yield return new WaitForSeconds (0.2f);
 		isEvade = false;
 	}
 
