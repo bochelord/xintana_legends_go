@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [System.Serializable]
-public enum EnemyType { zazuc, makula, ball, kogi, blackKnight, lavabeast, alchemist, devil, explorer, fireMage, iceBeast, skeletonMage, smileZombie}
+public enum EnemyType { zazuc, makula, ball, kogi, blackKnight, lavabeast, alchemist, devil, explorer, fireMage, iceBeast, skeletonMage, smileZombie, parasite}
 
 
 public class EnemyStructure {
@@ -117,6 +117,15 @@ public class EnemyStructure {
                 damageGrowth = 0.1f;
                 score = 1550;
                 break;
+            case EnemyType.parasite:
+                this.type = EnemyType.parasite;
+                lifeBase = 2.5f;
+                lifeGrowth = 0.05f;
+                damageBase = 1.25f;
+                damageGrowth = 0.1f;
+                score = 750;
+                break;
+
             default:
                 Debug.LogError("This Enemy doesn't exists!");
                 break;
