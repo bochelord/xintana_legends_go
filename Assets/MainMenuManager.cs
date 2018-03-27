@@ -158,12 +158,12 @@ public class MainMenuManager : MonoBehaviour {
                         itemsImages[i].SetActive(true);
                     }
                     break;
-                case InventorySlot.NoAds:
-                    if (SIS.DBManager.GetPurchase("si_noads") > 0)
-                    {
-                        itemsImages[i].SetActive(true);
-                    }
-                    break;
+                //case InventorySlot.NoAds:
+                //    if (SIS.DBManager.GetPurchase("si_noads") > 0)
+                //    {
+                //        itemsImages[i].SetActive(true);
+                //    }
+                //    break;
                 case InventorySlot.YellowWeapon:
                     if (SIS.DBManager.GetPurchase("si_yellowsword") > 0)
                     {

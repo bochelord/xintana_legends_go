@@ -66,12 +66,12 @@ namespace SIS
                     AnalyticsManager.Instance.Item_Bought_Event("Extra Life");
                     AchievementsManager.Instance.BuyReviveAchievement();
                     break;
-                case "si_noads":
-                    Rad_SaveManager.profile.noAds = true;
-                    DBManager.IncreasePurchase("si_noads", 1);
-                    ShowMessage("No more ads!");
-                    AnalyticsManager.Instance.Item_Bought_Event("No ads");
-                    break;
+                //case "si_noads":
+                //    Rad_SaveManager.profile.noAds = true;
+                //    DBManager.IncreasePurchase("si_noads", 1);
+                //    ShowMessage("No more ads!");
+                //    AnalyticsManager.Instance.Item_Bought_Event("No ads");
+                //    break;
 
                 case "si_1gem":
                     Rad_SaveManager.profile.gems++;
