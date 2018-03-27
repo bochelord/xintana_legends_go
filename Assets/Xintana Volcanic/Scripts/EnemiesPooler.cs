@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemiesPooler : Pooler {
 
     public GameObject[] enemiesPrefabs;
-
+    public XintanaEnemiesBestiary enemiesList;
 
     public GameObject[] bossPrefab;
     public int amountPooledPerType;
@@ -110,7 +110,14 @@ public class EnemiesPooler : Pooler {
             }
         }
 
-        AddEnemyToPokedex(retEnemies[index]);
+        if (retEnemies[index]!=null)
+        {
+            AddEnemyToPokedex(retEnemies[index]);
+        }
+        else
+        {
+            Debug.Log("ARF it does not exist! tried:" + retEnemies[index]);
+        }
 
         return retEnemies[index];
 
