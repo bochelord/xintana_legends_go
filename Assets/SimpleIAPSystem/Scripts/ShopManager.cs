@@ -299,14 +299,16 @@ namespace SIS
             icpd.title.text = shopItem.title.text;
             icpd.icon.sprite = shopItem.icon.sprite;
             icpd.description.text = shopItem.description.text;
-
+            Debug.Log("Item " + shopItem.title.text + " with obj.editorType: " + obj.editorType.ToString());
             //if (pressedButton.tag == "buyByCoins")
             if (obj.editorType == IAPType.Virtual)
             {
+
                 icpd.price[0].text = shopItem.price[0].text;
                 //if (obj.editorType != IAPType.Default)
                 //{
-                    icpd.coinsIcon.SetActive(true);
+                icpd.coinsIcon.SetActive(true);
+                icpd.gemsIcon.SetActive(false);
                 //}
                 //else
                 //{
@@ -318,10 +320,13 @@ namespace SIS
             else if (obj.editorType == IAPType.Default)
             {
                 icpd.price[0].text = shopItem.price[1].text;
+                icpd.coinsIcon.SetActive(false);
                 icpd.gemsIcon.SetActive(true);
+
             }
             else if (obj.editorType == IAPType.Currency)
             {
+                icpd.price[0].text = shopItem.price[0].text;
                 icpd.coinsIcon.SetActive(false);
                 icpd.gemsIcon.SetActive(true);
             }

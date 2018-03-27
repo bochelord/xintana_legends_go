@@ -175,22 +175,36 @@ namespace SIS
             if (title) title.text = name;
             if (description) description.text = descr;
 
+            //Debug.Log("obj.editorType " + obj.editorType.ToString());
             if (obj.editorType != IAPType.Virtual)
             {
                 //purchases for real money have only one price value,
                 //so we just use the first entry of the price label array
                 if (price.Length > 0) price[0].text = obj.realPrice;
 
-                buyTriggerCoinsIcon.SetActive(false);
-
-
+                if (obj.editorType == IAPType.Currency)
+                {
+                    buyTriggerCoins.SetActive(false);
+                    buyTriggerGems.SetActive(true);
+                }
+                else
+                {
+                    buyTriggerCoinsIcon.SetActive(false);
+                    buyTriggerGems.SetActive(false);
+                }
             }
             else if (obj.virtualPrice.Count > 0)
             {
                 //purchases for virtual currency could have more than one price value,
                 //so we loop over all entries and set the corresponding price label
                 for (int i = 0; i < price.Length; i++)
-                    if (price[i]) price[i].text = obj.virtualPrice[i].amount.ToString();
+                {
+                    if (price[i])
+                    {
+                        price[i].text = obj.virtualPrice[i].amount.ToString();
+                    }
+                }
+                buyTriggerGems.SetActive(false);
             }
 
             //set locked label text in case a requirement has been set
@@ -198,14 +212,14 @@ namespace SIS
                 && !string.IsNullOrEmpty(obj.req.labelText))
                 lockedLabel.text = lockText;
 
-            if (productId.Contains("_gems")){
-                canBePurchasedByGems = true;
-                buyTriggerCoins.SetActive(false);
-            }
-            else
-            {
-                buyTriggerGems.SetActive(false);
-            }
+            //if (productId.Contains("_gems")){
+            //    canBePurchasedByGems = true;
+            //    buyTriggerCoins.SetActive(false);
+            //}
+            //else
+            //{
+            //    buyTriggerGems.SetActive(false);
+            //}
         }
 
 
