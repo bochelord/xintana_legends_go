@@ -6,7 +6,7 @@
 #if UNITY_PURCHASING
 using UnityEngine.Purchasing;
 #endif
-
+using UnityEngine.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -301,6 +301,8 @@ namespace SIS
         /// </summary>
         public void Purchase(GameObject pressedButton)
         {
+            UnityEventBase asd = ShopManager.GetInstance().itemConfirmationPanel.GetComponent<ItemConfirmationPanelData>().okButton.onClick;
+            asd.RemoveAllListeners();
 			IAPManager.PurchaseProduct(this.productId);
 		
             //hide buy button once a purchase was made
