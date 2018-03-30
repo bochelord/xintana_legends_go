@@ -405,6 +405,7 @@ public class PokedexManager : MonoBehaviour {
 
     public void BUTTON_ExitBestiary()
     {
-        SceneManager.LoadScene("XintanaLegendsGo_Menu");
+        //SceneManager.LoadScene("XintanaLegendsGo_Menu");
+        AsyncLoadLevel.LoadScene("XintanaLegendsGo_Menu");
     }
 }

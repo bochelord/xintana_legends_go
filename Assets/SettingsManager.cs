@@ -28,12 +28,14 @@ public class SettingsManager : MonoBehaviour {
 
     public void Button_Credits()
     {
-        SceneManager.LoadScene("credits");
+        //SceneManager.LoadScene("credits");
+        AsyncLoadLevel.LoadScene("credits");
     }
 
     public void Button_back()
     {
-        SceneManager.LoadScene("XintanaLegendsGo_Menu");
+        //SceneManager.LoadScene("XintanaLegendsGo_Menu");
+        AsyncLoadLevel.LoadScene("XintanaLegendsGo_Menu");
     }
 
     public void Toggle_Sound()

@@ -6,44 +6,77 @@ using UnityEngine.SceneManagement;
 
 public class AsyncLoadLevel : MonoBehaviour {
 
+
+    [Header("Binding")]
+    public static string LoadingScreenSceneName = "LoadingScreen";
+
+
     //private ProgressBarBehaviour barBehaviour;
-    private AsyncOperation async; // When assigned, load is in progress.
-    //public int selectedLevel = 0; // 0 is the default level - Spacecraft Fortress.
-    //private string levelName;
-    //private int levelNumber;
-    //private LoadLevelData loadLevelData;
-    //float UpdateDelay = 2f;
-    //void Awake()
-    //{
-    //    DontDestroyOnLoad(this.gameObject);
-    //}
-    IEnumerator Start()
+    private AsyncOperation _asyncOperation; // When assigned, load is in progress.
+    protected static string _sceneToLoad = "";
+
+    /// <summary>
+    /// Call this static method to load a scene from anywhere
+    /// </summary>
+    /// <param name="sceneToLoad">Level name.</param>
+    public static void LoadScene(string sceneToLoad)
     {
-        //loadLevelData = GameObject.Find("PermanentData").GetComponent<LoadLevelData>();
-        //levelName = loadLevelData.GetSelectedLevelName();
-        //levelNumber = loadLevelData.GetSelectedLevel();
-        //Debug.Log("CallProgressBar level name: " + levelName);
-        //async = Application.LoadLevelAsync("combinationDisplay_safe_portrait");
-
-        async = SceneManager.LoadSceneAsync("combinationDisplay_safe_portrait");
-        //if (async.isDone)
-        //{
-        //    loadLevelData.SetSelectedLevel(levelNumber + 1);
-        //}
-
-        yield return 0;
-        //barBehaviour = GetComponent<ProgressBarBehaviour>();
-        
-        
-        //while (!async.isDone)
-        //{
-        //    barBehaviour.Value = async.progress * 100;
-        //    yield return (0);
-        //}
+        _sceneToLoad = sceneToLoad;
+        Application.backgroundLoadingPriority = ThreadPriority.High;
+        if (LoadingScreenSceneName != null)
+        {
+            SceneManager.LoadScene(LoadingScreenSceneName);
+        }
     }
 
-    //public void SetSelectedLevel(int level)
-    //{
-    //    selectedLevel = level;
-    //}
+    protected virtual void Start()
+    {
+        if (_sceneToLoad != "")
+        {
+            StartCoroutine(LoadAsynchronously());
+        }
+    }
+
+
+    /// <summary>
+    /// Loads the scene to load asynchronously.
+    /// </summary>
+    protected virtual IEnumerator LoadAsynchronously()
+    {
+        // we setup our various visual elements
+        //LoadingSetup();
+
+        // we start loading the scene
+        _asyncOperation = SceneManager.LoadSceneAsync(_sceneToLoad, LoadSceneMode.Single);
+        _asyncOperation.allowSceneActivation = false;
+
+        // while the scene loads, we assign its progress to a target that we'll use to fill the progress bar smoothly
+        while (_asyncOperation.progress < 0.9f)
+        {
+            //_fillTarget = _asyncOperation.progress;
+            yield return null;
+        }
+        //// when the load is close to the end (it'll never reach it), we set it to 100%
+        //_fillTarget = 1f;
+
+        //Debug.Log("filltarget esta lleno");
+
+        // we wait for the bar to be visually filled to continue
+        //while (LoadingProgressBar.GetComponent<Image>().fillAmount != _fillTarget)
+        //{
+        //    yield return null;
+        //}
+
+        // the load is now complete, we replace the bar with the complete animation
+        //LoadingComplete();
+        //yield return new WaitForSeconds(LoadCompleteDelay);
+
+        // we fade to black
+        //EduoLoadingGUIManager.Instance.FaderOn(true, ExitFadeDuration);
+        //yield return new WaitForSeconds(ExitFadeDuration);
+
+        // we switch to the new scene
+        _asyncOperation.allowSceneActivation = true;
+    }
+
 }

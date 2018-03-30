@@ -300,8 +300,8 @@ public class Rad_GuiManager : MonoBehaviour {
         //    StopCoroutine(gameOverPanelCoroutine);
         //}
         //CheckInventory();
-        SceneManager.LoadScene("XintanaLegendsGo_Menu");
-
+        //SceneManager.LoadScene("XintanaLegendsGo_Menu");
+        AsyncLoadLevel.LoadScene("XintanaLegendsGo_Menu");
     }
 
     public void PlayerGameOverPanelOn()

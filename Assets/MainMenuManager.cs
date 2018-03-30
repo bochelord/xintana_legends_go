@@ -225,22 +225,26 @@ public class MainMenuManager : MonoBehaviour {
     {
         if(_chestManager.state == RouletteState.READY)
         {
-            SceneManager.LoadScene("XintanaLegendsGo_Shop");
+            //SceneManager.LoadScene("XintanaLegendsGo_Shop");
+            AsyncLoadLevel.LoadScene("XintanaLegendsGo_Shop");
         }
     }
     public void Button_Play()
     {
-        SceneManager.LoadScene("LoadingScreen");
+        //SceneManager.LoadScene("LoadingScreen");
+        AsyncLoadLevel.LoadScene("combinationDisplay_safe_portrait");
     }
 
     public void Button_Settings()
     {
-        SceneManager.LoadScene("SettingsScreen");
+        //SceneManager.LoadScene("SettingsScreen");
+        AsyncLoadLevel.LoadScene("SettingsScreen");
     }
 
     public void Button_Bestiary()
     {
-        SceneManager.LoadScene("XintanaLegendsGo_Pokedex");
+        //SceneManager.LoadScene("XintanaLegendsGo_Pokedex");
+        AsyncLoadLevel.LoadScene("XintanaLegendsGo_Pokedex");
     }
 
 

@@ -517,7 +517,8 @@ namespace SIS
         }
         public void Button_Menu()
         {
-            SceneManager.LoadScene("XintanaLegendsGo_Menu");
+            //SceneManager.LoadScene("XintanaLegendsGo_Menu");
+            AsyncLoadLevel.LoadScene("XintanaLegendsGo_Menu");
         }
     }
 
