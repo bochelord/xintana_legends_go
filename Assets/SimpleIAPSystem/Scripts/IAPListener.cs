@@ -135,17 +135,17 @@ namespace SIS
                     break;
                 case "si_goldbig":
                     ShowMessage("Some gold to start or acomplish something?");
-                    DBManager.IncreasePurchase("si_goldbig", 1);
+                    //DBManager.IncreasePurchase("si_goldbig", 1);
                     DBManager.IncreaseFunds("coins", 750);
                     break;
                 case "si_goldchest":
                     ShowMessage("You got a Chest fuld of Gold!");
-                    DBManager.IncreasePurchase("si_goldchest", 1);
+                    //DBManager.IncreasePurchase("si_goldchest", 1);
                     DBManager.IncreaseFunds("coins", 2000);
                     break;
                 case "si_goldcave":
                     ShowMessage("You just found 'El Dorado'!!!");
-                    DBManager.IncreasePurchase("si_goldcave", 1);
+                    //DBManager.IncreasePurchase("si_goldcave", 1);
                     DBManager.IncreaseFunds("coins", 7500);
                     break;
                     //case "si_yellowsword_gems":
