@@ -304,22 +304,25 @@ namespace SIS
             if (obj.editorType == IAPType.Virtual)
             {
 
-                icpd.price[0].text = shopItem.price[0].text;
-                //if (obj.editorType != IAPType.Default)
-                //{
-                icpd.coinsIcon.SetActive(true);
-                icpd.gemsIcon.SetActive(false);
-                //}
-                //else
-                //{
-                //    icpd.coinsIcon.SetActive(false);
-                //    icpd.gemsIcon.SetActive(false);
-                //}
+                if (obj.virtualPrice[0].amount > 0)
+                {
+                    icpd.price[0].text = shopItem.price[0].text;
+                    icpd.coinsIcon.SetActive(true);
+                    icpd.gemsIcon.SetActive(false);
+                }
+                else
+                {
+                    icpd.price[1].text = shopItem.price[1].text;
+                    icpd.coinsIcon.SetActive(false);
+                    icpd.gemsIcon.SetActive(true);
+                }
+               
+                
             }
             //else if (pressedButton.tag == "buyByGems")
             else if (obj.editorType == IAPType.Default)
             {
-                icpd.price[0].text = shopItem.price[1].text;
+                icpd.price[0].text = shopItem.price[0].text;
                 icpd.coinsIcon.SetActive(false);
                 icpd.gemsIcon.SetActive(true);
 

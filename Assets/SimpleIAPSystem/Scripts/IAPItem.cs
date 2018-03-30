@@ -203,8 +203,12 @@ namespace SIS
                     {
                         price[i].text = obj.virtualPrice[i].amount.ToString();
                     }
+                    if (obj.virtualPrice[0].amount > 0)
+                    {
+                        buyTriggerGems.SetActive(false);
+                    }
                 }
-                buyTriggerGems.SetActive(false);
+                
             }
 
             //set locked label text in case a requirement has been set
