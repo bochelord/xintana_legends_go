@@ -14,7 +14,7 @@ public class EnemyStructure {
     public float life, lifeBase, lifeGrowth;
     public float damage, damageBase, damageGrowth;
     public float dna_hue, dna_colorsat, dna_brightness;
-    public int score;
+    public int score,world;
     public float xp, xpBase, xpGrowth;
 
     public EnemyStructure GenerateBasic(EnemyType type)

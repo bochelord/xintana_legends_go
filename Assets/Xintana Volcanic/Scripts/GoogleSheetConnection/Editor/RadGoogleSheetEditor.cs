@@ -34,7 +34,7 @@ public class RadGoogleSheetEditor : MonoBehaviour
 
     //}
 
-    [MenuItem("Radical Graphics/Connect")]
+    [MenuItem("Radical Graphics/Connect&FetchEnemies")]
     static void ConnectaJoder()
     {
         RadUnityConnector conn = GameObject.FindObjectOfType<RadUnityConnector>();
