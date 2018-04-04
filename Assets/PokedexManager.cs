@@ -90,6 +90,7 @@ public class PokedexManager : MonoBehaviour {
     }
     void checkSwipeTouch()
     {
+
         if (Input.touches.Length > 0)
         {
             Touch t = Input.GetTouch(0);
@@ -99,7 +100,7 @@ public class PokedexManager : MonoBehaviour {
                 firstPressPos = new Vector2(t.position.x, t.position.y);
             }
 
-            if (t.phase == TouchPhase.Ended)
+            else if (t.phase == TouchPhase.Ended)
             {
                 //save ended touch 2d point
                 secondPressPos = new Vector2(t.position.x, t.position.y);
@@ -110,9 +111,8 @@ public class PokedexManager : MonoBehaviour {
                 //normalize the 2d vector
                 currentSwipe.Normalize();
 
-
                 //swipe left
-                if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+                if (currentSwipe.x < 0 && currentSwipe.y > -1f && currentSwipe.y < 1f)
                 {
                     _swipe = Swipe.Left;
                     if(pokedexIndex >= _enemies.Count - 1)
@@ -123,10 +123,11 @@ public class PokedexManager : MonoBehaviour {
                     {
                         pokedexIndex++;
                     }
+                    _step = PokedexStep.CheckAnimation;
                 }
 
                 //swipe right
-                if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+                if (currentSwipe.x > 0 && currentSwipe.y > -1f && currentSwipe.y < 1f)
                 {
                     _swipe = Swipe.Right;
                     if (pokedexIndex <= 0)
@@ -137,8 +138,9 @@ public class PokedexManager : MonoBehaviour {
                     {
                         pokedexIndex--;
                     }
+                    _step = PokedexStep.CheckAnimation;
                 }
-                _step = PokedexStep.CheckAnimation;
+                
             }
         }
     }
