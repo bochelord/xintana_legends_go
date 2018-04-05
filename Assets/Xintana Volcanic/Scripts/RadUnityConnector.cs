@@ -317,13 +317,21 @@ public class RadUnityConnector : MonoBehaviour
                      
                     //we check the string where the format comes as : 1,2,3
                     int counter = 0;
-                    tempEnemy.world = new int[2];
+                    tempEnemy.world = new int[tempstring.Split(',').Length];
                     for (int j = 0; j < tempstring.Length; j++)
                     {
                         if (tempstring[j] != ',')
                         {
-                            tempEnemy.world[counter] = tempstring[j];
+                            //Debug.Log("j: " + j);
+                            //Debug.Log("counter: " + counter);
+
+                            tempEnemy.world[counter] = int.Parse(tempstring[j].ToString());
                             counter++;
+                            //Debug.Log("tempstring.Length: " + tempstring.Length);
+                            
+                            //print("tempEnemy.world[counter]: " + tempEnemy.world[counter]);
+                            //Debug.Log("char.Parse(tempstring[j].ToString(): " + char.Parse(tempstring[j].ToString()));
+
                         }
                     }
 

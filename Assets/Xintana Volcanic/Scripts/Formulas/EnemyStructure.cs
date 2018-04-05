@@ -16,7 +16,7 @@ public class EnemyStructure {
     public float dna_hue, dna_colorsat, dna_brightness;
     public int score;
     public float xp, xpBase, xpGrowth;
-    public int[] world = new int[2];
+    public int[] world;
 
     public EnemyStructure GenerateBasic(EnemyType type)
     {
