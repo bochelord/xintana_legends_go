@@ -70,6 +70,8 @@ public class ChestRoulette : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+
+        
         _menuManager = FindObjectOfType<MainMenuManager>();
         _particlePooler = FindObjectOfType<ParticlePooler>();
         _coinsPooler = FindObjectOfType<CoinsPooler>();
@@ -183,7 +185,7 @@ public class ChestRoulette : MonoBehaviour {
         yield return new WaitForSeconds(time);
         CloseChests();
         yield return new WaitForSeconds(0.5f);
-        int _randomTime = Random.Range(2, 4);
+        float _randomTime = Random.Range(1, 1.8f);
         chestRotate = true;
         Rad_SaveManager.profile.shells--;
         yield return new WaitForSeconds(_randomTime);

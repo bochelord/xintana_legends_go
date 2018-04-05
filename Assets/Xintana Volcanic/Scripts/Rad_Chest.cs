@@ -9,7 +9,10 @@ public class Rad_Chest : MonoBehaviour {
 
     public GameObject chestClosed;
     public GameObject chestOpen;
-    public GameObject gold;
+    public GameObject gold_max;
+    public GameObject gold_2;
+    public GameObject gold_3;
+    public GameObject gold_min;
     public GameObject gems;
     public GameObject shells;
     public GameObject weapon;
@@ -74,7 +77,23 @@ public class Rad_Chest : MonoBehaviour {
         switch (prize.categoryType)
         {
             case PrizeType.COINS:
-                gold.SetActive(true);
+                if (prize.itemValue < 100)
+                {
+                    gold_min.SetActive(true);
+                }
+                else if (prize.itemValue >=100 && prize.itemValue < 150)
+                {
+                    gold_3.SetActive(true);
+                }
+                else if (prize.itemValue >= 150 && prize.itemValue < 250)
+                {
+                    gold_2.SetActive(true);
+                }
+                else
+                {
+                    gold_max.SetActive(true);
+                }
+                
                 break;
 
             case PrizeType.GEMS:
@@ -96,7 +115,10 @@ public class Rad_Chest : MonoBehaviour {
     {
         chestClosed.SetActive(true);
         chestOpen.SetActive(false);
-        gold.SetActive(false);
+        gold_max.SetActive(false);
+        gold_2.SetActive(false);
+        gold_3.SetActive(false);
+        gold_min.SetActive(false);
         gems.SetActive(false);
         shells.SetActive(false);
         weapon.SetActive(false);
@@ -118,7 +140,19 @@ public class Rad_Chest : MonoBehaviour {
                 AnalyticsManager.Instance.ChestPrice_Event("Coins", prize.itemValue);
                 _chestManager.SpawnGoldParticleChest(this.transform);
                 _chestManager.shellsImage.SetActive(false);
-                gold.SetActive(true);
+                if (prize.itemValue < 100)
+                {
+                    gold_min.SetActive(true);
+                } else if (prize.itemValue >= 100 && prize.itemValue < 150)
+                {
+                    gold_3.SetActive(true);
+                } else if (prize.itemValue >= 150 && prize.itemValue < 250)
+                {
+                    gold_2.SetActive(true);
+                } else
+                {
+                    gold_max.SetActive(true);
+                }
                 break;
 
             case PrizeType.GEMS:
