@@ -11,7 +11,7 @@ public class XintanaEnemiesBestiary : ScriptableObject {
         public string nameId;
         public EnemyType type;
         public string description;
-        public int appearsInWorld;
+        public int[] appearsInWorld;
         public GameObject prefab;
 
         public int level, minLevel, maxLevel;

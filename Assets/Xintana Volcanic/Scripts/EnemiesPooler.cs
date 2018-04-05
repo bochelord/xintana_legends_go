@@ -22,7 +22,7 @@ public class EnemiesPooler : Pooler {
         levelManager = FindObjectOfType<LevelManager>();
 
         pooledObjects = new List<GameObject>();
-        for (int j = 0; j < enemiesPrefabs.Length; j++)
+        for (int j = 0; j < enemiesList.xintanaEnemies.Count; j++)
         {
             for (int i = 0; i < amountPooledPerType; i++)
             {
