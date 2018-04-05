@@ -41,6 +41,7 @@ public class RadUnityConnector : MonoBehaviour
         updating = false;
         currentStatus = "Offline";
         saveToGS = false;
+        //bestiaryList = new XintanaEnemiesBestiary();
     }
 
     #region Connection
@@ -126,13 +127,13 @@ public class RadUnityConnector : MonoBehaviour
     {
 
         EnemyStructure tempEnemy = new EnemyStructure();
-        XintanaEnemiesBestiary.XintanaEnemy bestiary_enemy = new XintanaEnemiesBestiary.XintanaEnemy();
+        
         //XintanaEnemiesBestiary.XintanaEnemy tempEnemy = new XintanaEnemiesBestiary.XintanaEnemy(); 
         //We manipulate the data for the first Json object
         for (int i = 0; i < ssObjects.Length; i++)
         {
             //Debug.Log("Key lifeBase:" + ssObjects[i]["lifeBase"].GetJsonType().ToString());
-            
+            XintanaEnemiesBestiary.XintanaEnemy bestiary_enemy = new XintanaEnemiesBestiary.XintanaEnemy();
             //Key name marks the beginning of a new enemy
             if (ssObjects[i].Keys.Contains("name"))
             {
@@ -305,6 +306,10 @@ public class RadUnityConnector : MonoBehaviour
                     tempEnemy.world = (int)ssObjects[i]["world"];
                 } else if (ssObjects[i]["world"].GetJsonType() == JsonType.String)
                 {
+
+
+
+
                     tempEnemy.world = int.Parse(ssObjects[i]["world"].ToString());
                 }
 
@@ -338,7 +343,7 @@ public class RadUnityConnector : MonoBehaviour
 
             bestiaryList.xintanaEnemies.Add(bestiary_enemy);
             Debug.Log("Added to Bestiary:" + bestiary_enemy.type.ToString());
-            tempEnemy = new EnemyStructure();
+            //tempEnemy = new EnemyStructure();
 
         }
 
