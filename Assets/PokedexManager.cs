@@ -44,6 +44,10 @@ public class PokedexManager : MonoBehaviour {
         CheckAnimation,
         ShowEnemy
     }
+
+    private LevelManager _levelManager;
+    private int _currentWorld;
+
     void Awake()
     {
         SpawnEnemies();
@@ -55,6 +59,7 @@ public class PokedexManager : MonoBehaviour {
         _pokedex = Rad_SaveManager.pokedex;
         _enemies[0].transform.DOMove(centerScreenPosition.position, timeForMoving, false);
         _step = PokedexStep.ShowEnemy;
+        _levelManager = FindObjectOfType<LevelManager>();
     }
 
     void Update()
@@ -292,8 +297,22 @@ public class PokedexManager : MonoBehaviour {
 
     private void ChangeBackground()
     {
+        int _backgroundWorldNumber = 0;
+        _currentWorld = _levelManager.GetCurrentWorldNumber();
         //select worldsprite 
-        switch (bestiaryList.xintanaEnemies[pokedexIndex].appearsInWorld)
+        for (int i = 0; i < bestiaryList.xintanaEnemies[pokedexIndex].appearsInWorld[i]; i++)
+        {
+            if (_currentWorld == bestiaryList.xintanaEnemies[pokedexIndex].appearsInWorld[i])
+            {
+                _backgroundWorldNumber = i;
+            }
+            else
+            {
+                _backgroundWorldNumber = _currentWorld;
+            }
+        }
+
+        switch (_backgroundWorldNumber)
         {
             case 1:
 
