@@ -364,12 +364,11 @@ public class RadUnityConnector : MonoBehaviour
             bestiary_enemy.lifeBase = tempEnemy.lifeBase;
             bestiary_enemy.lifeGrowth = tempEnemy.lifeGrowth;
             bestiary_enemy.appearsInWorld = tempEnemy.world;
-            //bestiary_enemy.prefab = tempEnemy.
-            //bestiary_enemy.appearsInWorld = tempEnemy.world;
-
             bestiary_enemy.score = tempEnemy.score;
 
 
+
+            ///Get the prefabs
             for (int x = 0; x < enemiesPrefabs.Length; x++)
             {
                 if (enemiesPrefabs[x].GetComponentInChildren<EnemyController>().type == bestiary_enemy.type)
@@ -377,6 +376,25 @@ public class RadUnityConnector : MonoBehaviour
                     bestiary_enemy.prefab = enemiesPrefabs[x];
                 }
             }
+
+
+            ///fill in the rest of the data needed
+            bestiary_enemy.level = 1;
+            bestiary_enemy.minLevel = 1;
+            bestiary_enemy.maxLevel = 50;
+            bestiary_enemy.life = Mathf.RoundToInt(Formulas.ExponentialGrowth(bestiary_enemy.lifeBase, bestiary_enemy.lifeGrowth, bestiary_enemy.level - 1));
+            bestiary_enemy.damage = Formulas.ExponentialGrowth(bestiary_enemy.damageBase, bestiary_enemy.damageGrowth, bestiary_enemy.level - 1);
+
+            ///Genotype DNA for HSV spriteFX
+            bestiary_enemy.dna_hue = UnityEngine.Random.Range(0f, 360f);
+            bestiary_enemy.dna_colorsat = UnityEngine.Random.Range(-2f, 2f);
+            bestiary_enemy.dna_brightness = UnityEngine.Random.Range(0.50f, 2f);
+
+            ///XP calculations
+            bestiary_enemy.xpBase = 5f;
+            bestiary_enemy.xpGrowth = 0.15f;
+            bestiary_enemy.xp = Formulas.ExponentialGrowth(bestiary_enemy.xpBase, bestiary_enemy.xpGrowth, bestiary_enemy.level - 1);
+
 
 
             bestiaryList.xintanaEnemies.Add(bestiary_enemy);
