@@ -306,10 +306,12 @@ public class PokedexManager : MonoBehaviour {
             {
                 _backgroundWorldNumber = i;
             }
-            else
-            {
-                _backgroundWorldNumber = _currentWorld;
-            }
+
+        }
+
+        if (_backgroundWorldNumber == 0)
+        { 
+            _backgroundWorldNumber = _currentWorld;
         }
 
         switch (_backgroundWorldNumber)
