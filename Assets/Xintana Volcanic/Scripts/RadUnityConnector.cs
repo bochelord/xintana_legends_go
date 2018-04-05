@@ -16,6 +16,8 @@ public class RadUnityConnector : MonoBehaviour
     [Header("Enemies Scriptable Object")]
     public XintanaEnemiesBestiary bestiaryList;
 
+    [Header("EnemyPrefabs")]
+    public GameObject[] enemiesPrefabs;
 
     [Header("Enemy List")]
     
@@ -300,17 +302,34 @@ public class RadUnityConnector : MonoBehaviour
 
                 if (ssObjects[i]["world"].GetJsonType() == JsonType.Double)
                 {
-                    tempEnemy.world = (int)(double)ssObjects[i]["world"];
-                } else if (ssObjects[i]["world"].GetJsonType() == JsonType.Int)
+                    //tempEnemy.world = (int)(double)ssObjects[i]["world"];
+                    Debug.LogError("world is a double :( (it should be a string)");
+                } 
+                else if (ssObjects[i]["world"].GetJsonType() == JsonType.Int)
                 {
-                    tempEnemy.world = (int)ssObjects[i]["world"];
-                } else if (ssObjects[i]["world"].GetJsonType() == JsonType.String)
+                    //tempEnemy.world = (int)ssObjects[i]["world"];
+                    Debug.LogError("world is a double :( (it should be a string)");
+                } 
+                else if (ssObjects[i]["world"].GetJsonType() == JsonType.String)
                 {
 
+                    string tempstring = ssObjects[i]["world"].ToString();
+                     
+                    //we check the string where the format comes as : 1,2,3
+                    int counter = 0;
+                    tempEnemy.world = new int[2];
+                    for (int j = 0; j < tempstring.Length; j++)
+                    {
+                        if (tempstring[j] != ',')
+                        {
+                            tempEnemy.world[counter] = tempstring[j];
+                            counter++;
+                        }
+                    }
 
 
 
-                    tempEnemy.world = int.Parse(ssObjects[i]["world"].ToString());
+                    //tempEnemy.world = int.Parse(ssObjects[i]["world"].ToString());
                 }
 
 
@@ -337,8 +356,19 @@ public class RadUnityConnector : MonoBehaviour
             bestiary_enemy.lifeBase = tempEnemy.lifeBase;
             bestiary_enemy.lifeGrowth = tempEnemy.lifeGrowth;
             bestiary_enemy.appearsInWorld = tempEnemy.world;
+            //bestiary_enemy.prefab = tempEnemy.
+            //bestiary_enemy.appearsInWorld = tempEnemy.world;
 
             bestiary_enemy.score = tempEnemy.score;
+
+
+            for (int x = 0; x < enemiesPrefabs.Length; x++)
+            {
+                if (enemiesPrefabs[x].GetComponentInChildren<EnemyController>().type == bestiary_enemy.type)
+                {
+                    bestiary_enemy.prefab = enemiesPrefabs[x];
+                }
+            }
 
 
             bestiaryList.xintanaEnemies.Add(bestiary_enemy);
