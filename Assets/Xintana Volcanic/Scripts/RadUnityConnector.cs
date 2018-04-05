@@ -16,10 +16,11 @@ public class RadUnityConnector : MonoBehaviour
     [Header("Enemies Scriptable Object")]
     public XintanaEnemiesBestiary bestiaryList;
 
+
     [Header("Enemy List")]
-    [SerializeField]
-    public List<EnemyStructure> EnemyList;
-    public int world;
+    
+    public static List<EnemyStructure> EnemyList = new List<EnemyStructure>();
+    //public int world;
 
 
 
@@ -125,12 +126,13 @@ public class RadUnityConnector : MonoBehaviour
     {
 
         EnemyStructure tempEnemy = new EnemyStructure();
-
+        XintanaEnemiesBestiary.XintanaEnemy bestiary_enemy = new XintanaEnemiesBestiary.XintanaEnemy();
         //XintanaEnemiesBestiary.XintanaEnemy tempEnemy = new XintanaEnemiesBestiary.XintanaEnemy(); 
         //We manipulate the data for the first Json object
         for (int i = 0; i < ssObjects.Length; i++)
         {
-
+            //Debug.Log("Key lifeBase:" + ssObjects[i]["lifeBase"].GetJsonType().ToString());
+            
             //Key name marks the beginning of a new enemy
             if (ssObjects[i].Keys.Contains("name"))
             {
@@ -197,41 +199,174 @@ public class RadUnityConnector : MonoBehaviour
 
                 if (ssObjects[i]["lifeBase"].GetJsonType() == JsonType.Double)
                 {
-                    Debug.Log("KEY: lifeBase is: " + JsonType.Double.ToString() );
+                    tempEnemy.lifeBase = (float)(double)ssObjects[i]["lifeBase"];
                 }
-                //else 
+                else if (ssObjects[i]["lifeBase"].GetJsonType() == JsonType.Int)
+                {
+                    tempEnemy.lifeBase = (float)(int)ssObjects[i]["lifeBase"];
+                }
+                else if (ssObjects[i]["lifeBase"].GetJsonType() == JsonType.String)
+                {
+                    tempEnemy.lifeBase = float.Parse(ssObjects[i]["lifeBase"].ToString());
+                }
 
-                Debug.Log("Key lifeBase:"+ ssObjects[i]["lifeBase"].GetJsonType().ToString());
-                tempEnemy.lifeBase = (float)(double)ssObjects[i]["lifeBase"];
+                //Debug.Log("Key lifeBase:"+ ssObjects[i]["lifeBase"].GetJsonType().ToString());
+                //Debug.Log(tempEnemy.lifeBase);
+                //tempEnemy.lifeBase = (float)(double)ssObjects[i]["lifeBase"];
             }
 
             if (ssObjects[i].Keys.Contains("lifeGrowth"))
             {
-                tempEnemy.lifeGrowth = (float)(double)ssObjects[i]["lifeGrowth"];
+
+                if (ssObjects[i]["lifeGrowth"].GetJsonType() == JsonType.Double)
+                {
+                    tempEnemy.lifeGrowth = (float)(double)ssObjects[i]["lifeGrowth"];
+                } 
+                else if (ssObjects[i]["lifeGrowth"].GetJsonType() == JsonType.Int)
+                {
+                    tempEnemy.lifeGrowth = (float)(int)ssObjects[i]["lifeGrowth"];
+                } 
+                else if (ssObjects[i]["lifeGrowth"].GetJsonType() == JsonType.String)
+                {
+                    tempEnemy.lifeGrowth = float.Parse(ssObjects[i]["lifeGrowth"].ToString());
+                }
+
+
+                //tempEnemy.lifeGrowth = (float)(double)ssObjects[i]["lifeGrowth"];
             }
 
             if (ssObjects[i].Keys.Contains("damageBase"))
             {
-                tempEnemy.damageBase = (float)(double)ssObjects[i]["damageBase"];
+
+                if (ssObjects[i]["damageBase"].GetJsonType() == JsonType.Double)
+                {
+                    tempEnemy.damageBase = (float)(double)ssObjects[i]["damageBase"];
+                } 
+                else if (ssObjects[i]["damageBase"].GetJsonType() == JsonType.Int)
+                {
+                    tempEnemy.damageBase = (float)(int)ssObjects[i]["damageBase"];
+                } 
+                else if (ssObjects[i]["damageBase"].GetJsonType() == JsonType.String)
+                {
+                    tempEnemy.damageBase = float.Parse(ssObjects[i]["damageBase"].ToString());
+                }
+
+
+
+                //tempEnemy.damageBase = (float)(double)ssObjects[i]["damageBase"];
             }
 
             if (ssObjects[i].Keys.Contains("damageGrowth"))
             {
-                tempEnemy.damageGrowth = (float)(double)ssObjects[i]["damageGrowth"];
+
+                if (ssObjects[i]["damageGrowth"].GetJsonType() == JsonType.Double)
+                {
+                    tempEnemy.damageGrowth = (float)(double)ssObjects[i]["damageGrowth"];
+                } 
+                else if (ssObjects[i]["damageGrowth"].GetJsonType() == JsonType.Int)
+                {
+                    tempEnemy.damageGrowth = (float)(int)ssObjects[i]["damageGrowth"];
+                } 
+                else if (ssObjects[i]["damageGrowth"].GetJsonType() == JsonType.String)
+                {
+                    tempEnemy.damageGrowth = float.Parse(ssObjects[i]["damageGrowth"].ToString());
+                }
+
+                //tempEnemy.damageGrowth = (float)(double)ssObjects[i]["damageGrowth"];
             }
 
             if (ssObjects[i].Keys.Contains("score"))
             {
-                tempEnemy.score = (int)ssObjects[i]["score"];
+
+                if (ssObjects[i]["score"].GetJsonType() == JsonType.Double)
+                {
+                    tempEnemy.score = (int)(double)ssObjects[i]["score"];
+                } else if (ssObjects[i]["score"].GetJsonType() == JsonType.Int)
+                {
+                    tempEnemy.score = (int)ssObjects[i]["score"];
+                } else if (ssObjects[i]["score"].GetJsonType() == JsonType.String)
+                {
+                    tempEnemy.score = int.Parse(ssObjects[i]["score"].ToString());
+                }
+
+
+
+                //tempEnemy.score = (int)ssObjects[i]["score"];
             }
 
             if (ssObjects[i].Keys.Contains("world"))
             {
-                world = (int)ssObjects[i]["world"];
+
+                if (ssObjects[i]["world"].GetJsonType() == JsonType.Double)
+                {
+                    tempEnemy.world = (int)(double)ssObjects[i]["world"];
+                } else if (ssObjects[i]["world"].GetJsonType() == JsonType.Int)
+                {
+                    tempEnemy.world = (int)ssObjects[i]["world"];
+                } else if (ssObjects[i]["world"].GetJsonType() == JsonType.String)
+                {
+                    tempEnemy.world = int.Parse(ssObjects[i]["world"].ToString());
+                }
+
+
+
+                //world = (int)ssObjects[i]["world"];
             }
 
-            EnemyList.Add(tempEnemy);
-            //bestiaryList.xintanaEnemies.Add()
+            //EnemyList.Add(tempEnemy);
+            //Debug.Log("Added Enemy as:" + tempEnemy.type.ToString());
+
+
+
+            //Adding to the Scriptable Object
+
+            
+
+            bestiary_enemy.nameId = tempEnemy.type.ToString();
+
+            bestiary_enemy.type = tempEnemy.type;
+
+            bestiary_enemy.damageBase = tempEnemy.damageBase;
+            bestiary_enemy.damageGrowth = tempEnemy.damageGrowth;
+            bestiary_enemy.damage = tempEnemy.damage;
+            bestiary_enemy.lifeBase = tempEnemy.lifeBase;
+            bestiary_enemy.lifeGrowth = tempEnemy.lifeGrowth;
+            bestiary_enemy.appearsInWorld = tempEnemy.world;
+
+            bestiary_enemy.score = tempEnemy.score;
+
+
+            bestiaryList.xintanaEnemies.Add(bestiary_enemy);
+            Debug.Log("Added to Bestiary:" + bestiary_enemy.type.ToString());
+            tempEnemy = new EnemyStructure();
+
         }
+
+        //XintanaEnemiesBestiary.XintanaEnemy temp_enemy = new XintanaEnemiesBestiary.XintanaEnemy();
+
+        //foreach (EnemyStructure item in EnemyList)
+        //{
+
+            
+
+        //    temp_enemy.nameId = item.type.ToString();
+        //    temp_enemy.type = item.type;
+            
+        //    temp_enemy.damageBase = item.damageBase;
+        //    temp_enemy.damageGrowth = item.damageGrowth;
+        //    temp_enemy.damage = item.damage;
+        //    temp_enemy.lifeBase = item.lifeBase;
+        //    temp_enemy.lifeGrowth = item.lifeGrowth;
+        //    temp_enemy.appearsInWorld = item.world;
+
+        //    temp_enemy.score = item.score;
+            
+
+        //    bestiaryList.xintanaEnemies.Add(temp_enemy);
+        //    Debug.Log("Added to Bestiary:" + temp_enemy.type.ToString());
+
+        //}
+
+        //bestiaryList.xintanaEnemies = EnemyList;
     }
 }
