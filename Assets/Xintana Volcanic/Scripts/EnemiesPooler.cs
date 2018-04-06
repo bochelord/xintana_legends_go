@@ -26,11 +26,16 @@ public class EnemiesPooler : Pooler {
         {
             for (int i = 0; i < amountPooledPerType; i++)
             {
-                GameObject obj = (GameObject)Instantiate(enemiesPrefabs[j]);
-                obj.transform.parent = this.transform;
-                obj.transform.position = Vector3.zero;
-                obj.SetActive(false);
-                pooledObjects.Add(obj);
+
+                if (!isThisinTheArray(enemiesList.xintanaEnemies[j].prefab, bossPrefab))
+                {
+                    GameObject obj = (GameObject)Instantiate(enemiesList.xintanaEnemies[j].prefab);
+                    obj.transform.parent = this.transform;
+                    obj.transform.position = Vector3.zero;
+                    obj.SetActive(false);
+                    pooledObjects.Add(obj);
+                }
+                
             }
         }
 
@@ -58,6 +63,7 @@ public class EnemiesPooler : Pooler {
                 obj.transform.position = Vector3.zero;
                 obj.SetActive(false);
                 pooledBoss.Add(obj);
+                pooledObjects.Remove(obj); //we remove it from the normal enemy list...
             }
         }
     }
@@ -65,8 +71,8 @@ public class EnemiesPooler : Pooler {
     public override GameObject GetPooledObject()
     {
         List<GameObject> activeEnemies = new List<GameObject>();
-        foreach(GameObject enemyobj in pooledObjects){
-            if (!enemyobj.activeInHierarchy)
+        foreach (GameObject enemyobj in pooledObjects) {
+            if (!enemyobj.activeInHierarchy && !isThisinTheArray(enemyobj,bossPrefab))//we only get the enemies that are not bosses...
             {
                 activeEnemies.Add(enemyobj);
             }
@@ -80,7 +86,7 @@ public class EnemiesPooler : Pooler {
 
     }
 
-    public  GameObject GetPooledObject(int appearInWorld)
+    public GameObject GetPooledObject(int appearInWorld)
     {
 
         List<GameObject> retEnemies = new List<GameObject>();
@@ -110,11 +116,10 @@ public class EnemiesPooler : Pooler {
             }
         }
 
-        if (retEnemies[index]!=null)
+        if (retEnemies[index] != null)
         {
             AddEnemyToPokedex(retEnemies[index]);
-        }
-        else
+        } else
         {
             Debug.Log("ARF it does not exist! tried:" + retEnemies[index]);
         }
@@ -126,14 +131,14 @@ public class EnemiesPooler : Pooler {
     private void AddEnemyToPokedex(GameObject _obj)
     {
         EnemyController _tempController;
-        if(_tempController = _obj.GetComponent<EnemyController>())
+        if (_tempController = _obj.GetComponent<EnemyController>())
         {
             _tempController = _obj.GetComponent<EnemyController>();
-        }else
+        } else
         {
             _tempController = _obj.GetComponentInChildren<EnemyController>();
         }
-        
+
         if (!Rad_SaveManager.pokedex.enemiesKnown[_tempController.type])
         {
             Rad_SaveManager.pokedex.enemiesKnown[_tempController.type] = true;
@@ -158,6 +163,45 @@ public class EnemiesPooler : Pooler {
         return activeEnemies[index];
     }
 
+    public GameObject GetBossObject(int appearinWorld)
+    {
+        List<GameObject> inactiveBosses = new List<GameObject>();
+        foreach (GameObject enemyobj in pooledBoss)
+        {
+            if (!enemyobj.activeInHierarchy)
+            {
+                inactiveBosses.Add(enemyobj);
+            }
+        }
+
+
+        bool found = false;
+        GameObject ret = null;
+        for (int i = 0; i < inactiveBosses.Count; i++)
+        {
+            if (inactiveBosses[i].GetComponentInChildren<EnemyController>().appearsOnWorld == appearinWorld)
+            {
+                found = true;
+                ret = inactiveBosses[i];
+            }
+
+            if (found)
+            {
+                i = inactiveBosses.Count;
+            }
+        }
+
+        if (ret == null)
+        {
+            Debug.LogError("No boss found for world: "+ appearinWorld);
+        }
+
+        return ret;
+
+    }
+
+
+
     public GameObject GetPooledKogiBounty()
     {
         List<GameObject> activeKogi = new List<GameObject>();
@@ -180,5 +224,20 @@ public class EnemiesPooler : Pooler {
         base.RemoveElement(item);
     }
 
+
+    private bool isThisinTheArray(GameObject element, GameObject[] array)
+    {
+        bool ret = false;
+
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (element == array[i])
+            {
+                ret = true;
+            }
+        }
+
+        return ret;
+    }
 
 }
