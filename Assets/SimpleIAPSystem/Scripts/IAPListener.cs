@@ -148,6 +148,22 @@ namespace SIS
                     //DBManager.IncreasePurchase("si_goldcave", 1);
                     DBManager.IncreaseFunds("coins", 7500);
                     break;
+                case "si_shell01":
+                    ShowMessage("Good luck in the Treasure Chest!");
+                    Rad_SaveManager.profile.shells += 1;
+                    break;
+                case "si_shell02":
+                    ShowMessage("Good luck in the Treasure Chest!");
+                    Rad_SaveManager.profile.shells += 3;
+                    break;
+                case "si_shell03":
+                    ShowMessage("Good luck in the Treasure Chest!");
+                    Rad_SaveManager.profile.shells += 5;
+                    break;
+                case "si_shell04":
+                    ShowMessage("Good luck in the Treasure Chest!");
+                    Rad_SaveManager.profile.shells += 10;
+                    break;
                     //case "si_yellowsword_gems":
                     //    ShowMessage("Slow time when fighting.");
                     //    DBManager.IncreasePurchase("si_yellowsword_gems", 1);
