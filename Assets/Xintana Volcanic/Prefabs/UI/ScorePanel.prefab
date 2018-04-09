@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 224855875960030692}
   - component: {fileID: 222337753534372552}
   - component: {fileID: 114773368738810134}
+  - component: {fileID: 114302014022008670}
   m_Layer: 5
   m_Name: World
   m_TagString: Untagged
@@ -153,6 +154,7 @@ GameObject:
   - component: {fileID: 224108709030628124}
   - component: {fileID: 222313430642251428}
   - component: {fileID: 114511416738232470}
+  - component: {fileID: 114677513041704018}
   m_Layer: 5
   m_Name: Level
   m_TagString: Untagged
@@ -239,6 +241,7 @@ GameObject:
   - component: {fileID: 224505996419586872}
   - component: {fileID: 222399890834377024}
   - component: {fileID: 114660204990725908}
+  - component: {fileID: 114582157956837856}
   m_Layer: 5
   m_Name: HighScoreText
   m_TagString: Untagged
@@ -502,6 +505,7 @@ GameObject:
   - component: {fileID: 224049034675656002}
   - component: {fileID: 222772620557233078}
   - component: {fileID: 114734064508808816}
+  - component: {fileID: 114506333400661242}
   m_Layer: 5
   m_Name: attackText
   m_TagString: Untagged
@@ -519,6 +523,7 @@ GameObject:
   - component: {fileID: 224053509250862540}
   - component: {fileID: 222524089147031632}
   - component: {fileID: 114105242898215612}
+  - component: {fileID: 114551831096756848}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -686,6 +691,7 @@ GameObject:
   - component: {fileID: 224278355907662298}
   - component: {fileID: 222613808519543826}
   - component: {fileID: 114848565921266074}
+  - component: {fileID: 114437392728819906}
   m_Layer: 5
   m_Name: ShareText
   m_TagString: Untagged
@@ -703,6 +709,7 @@ GameObject:
   - component: {fileID: 224170855512857830}
   - component: {fileID: 222464862121806636}
   - component: {fileID: 114242183209708976}
+  - component: {fileID: 114079305119408982}
   m_Layer: 5
   m_Name: Fight
   m_TagString: Untagged
@@ -1012,6 +1019,39 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114079305119408982
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1804074162591654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: FIGHT
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  Source: {fileID: 0}
+  mTarget: {fileID: 114242183209708976}
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  TranslatedObjects: []
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  AlwaysForceLocalize: 0
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
 --- !u!114 &114105052052361722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1060,10 +1100,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: e0dbaed584a363c428962336a5609edd, type: 3}
-    m_FontSize: 46
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 4
     m_MaxSize: 56
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1071,7 +1111,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: SCORE
+  m_Text: Score
 --- !u!114 &114117359427791592
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1332,7 +1372,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: FIGHT
+  m_Text: Fight
 --- !u!114 &114247395690310824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1446,7 +1486,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.56078434, g: 0.56078434, b: 0.56078434, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -1544,6 +1584,39 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: HP
+--- !u!114 &114302014022008670
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1106255695275248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: WORLD
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  Source: {fileID: 0}
+  mTarget: {fileID: 114773368738810134}
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  TranslatedObjects: []
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  AlwaysForceLocalize: 0
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
 --- !u!114 &114330610682428146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1617,6 +1690,39 @@ MonoBehaviour:
   _Saturation: 1
   _ValueBrightness: 2
   ShaderChange: 0
+--- !u!114 &114437392728819906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1799130524480198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: SHARE YOUR SCORE
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  Source: {fileID: 0}
+  mTarget: {fileID: 114848565921266074}
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  TranslatedObjects: []
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  AlwaysForceLocalize: 0
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
 --- !u!114 &114442174613972204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1704,6 +1810,39 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114506333400661242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1601961773686276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Attack
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  Source: {fileID: 0}
+  mTarget: {fileID: 114734064508808816}
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  TranslatedObjects: []
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  AlwaysForceLocalize: 0
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
 --- !u!114 &114511416738232470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1736,7 +1875,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: LEVEL 80
+  m_Text: Level 80
 --- !u!114 &114514127570081274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1764,6 +1903,39 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114551831096756848
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1607467659244998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: SCORE
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  Source: {fileID: 0}
+  mTarget: {fileID: 114105242898215612}
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  TranslatedObjects: []
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  AlwaysForceLocalize: 0
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
 --- !u!114 &114556279637466570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1845,6 +2017,39 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114582157956837856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1246144374326236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: High Score
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  Source: {fileID: 0}
+  mTarget: {fileID: 114660204990725908}
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  TranslatedObjects: []
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  AlwaysForceLocalize: 0
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
 --- !u!114 &114612143542911316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1951,10 +2156,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: e0dbaed584a363c428962336a5609edd, type: 3}
-    m_FontSize: 46
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 4
     m_MaxSize: 56
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1962,7 +2167,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: HIGHSCORE
+  m_Text: High Score
 --- !u!114 &114677332271097520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1996,6 +2201,39 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &114677513041704018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1164173424490574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: LEVEL 80
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  Source: {fileID: 0}
+  mTarget: {fileID: 114511416738232470}
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  TranslatedObjects: []
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  AlwaysForceLocalize: 0
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
 --- !u!114 &114734064508808816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2094,7 +2332,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: WORLD
+  m_Text: World
 --- !u!114 &114787141911822646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2187,7 +2425,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: SHARE YOUR SCORE
+  m_Text: Share Your Score
 --- !u!114 &114862721305940986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2689,7 +2927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 480, y: -78.75}
+  m_AnchoredPosition: {x: 479.99997, y: -78.75}
   m_SizeDelta: {x: 148.5, y: 61.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224038990272241946
@@ -2707,7 +2945,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 507.16998, y: -62.9}
+  m_AnchoredPosition: {x: 507.16995, y: -62.9}
   m_SizeDelta: {x: 148.5, y: 61.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224039946317651216
@@ -2779,7 +3017,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 158.11, y: -65}
+  m_AnchoredPosition: {x: 158.10938, y: -65}
   m_SizeDelta: {x: 263.4, y: 109.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224060764648220296
@@ -2835,7 +3073,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 94.04999, y: -78.75}
+  m_AnchoredPosition: {x: 94.05078, y: -78.75}
   m_SizeDelta: {x: 148.5, y: 61.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224112146659303270
@@ -2855,7 +3093,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 1.4129944, y: 156.84656}
+  m_AnchoredPosition: {x: 1.4129944, y: 156.84375}
   m_SizeDelta: {x: -131.69995, y: 123.80005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224118209067191918
@@ -3020,7 +3258,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 334.15, y: -6.950001}
+  m_AnchoredPosition: {x: 334.1504, y: -6.950001}
   m_SizeDelta: {x: 148.5, y: 61.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224284396500089650
@@ -3223,7 +3461,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.4129944, y: -285.65356}
+  m_AnchoredPosition: {x: 1.4129944, y: -285.65625}
   m_SizeDelta: {x: -131.70001, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224468551903882790
@@ -3315,7 +3553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 191.13, y: -62.9}
+  m_AnchoredPosition: {x: 191.13086, y: -62.9}
   m_SizeDelta: {x: 148.5, y: 61.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224516275555078770
@@ -3335,7 +3573,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.4129944, y: -129.10364}
+  m_AnchoredPosition: {x: 1.4129944, y: -129.10547}
   m_SizeDelta: {x: -131.70001, y: 123.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224527922380951554
@@ -3448,7 +3686,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 482.19, y: -65}
+  m_AnchoredPosition: {x: 482.18942, y: -65}
   m_SizeDelta: {x: 263.4, y: 109.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224599814914971774
@@ -3466,7 +3704,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 116.99999, y: -28}
+  m_AnchoredPosition: {x: 117, y: -28}
   m_SizeDelta: {x: 100, y: 58.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224642950475005370
@@ -3505,7 +3743,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 334.15, y: -123.42999}
+  m_AnchoredPosition: {x: 334.1504, y: -123.42999}
   m_SizeDelta: {x: 279.5, y: 116.46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224663913875056264
@@ -3525,7 +3763,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 401.41296, y: 398.39636}
+  m_AnchoredPosition: {x: 401.4121, y: 398.39453}
   m_SizeDelta: {x: 311.2, y: 298}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224705166797247450
@@ -3581,7 +3819,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 179.65, y: -78.75}
+  m_AnchoredPosition: {x: 179.65039, y: -78.75}
   m_SizeDelta: {x: 148.5, y: 61.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224841485252330060
