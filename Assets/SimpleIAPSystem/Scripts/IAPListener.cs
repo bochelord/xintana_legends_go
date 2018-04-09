@@ -66,13 +66,6 @@ namespace SIS
                     AnalyticsManager.Instance.Item_Bought_Event("Extra Life");
                     AchievementsManager.Instance.BuyReviveAchievement();
                     break;
-                //case "si_noads":
-                //    Rad_SaveManager.profile.noAds = true;
-                //    DBManager.IncreasePurchase("si_noads", 1);
-                //    ShowMessage("No more ads!");
-                //    AnalyticsManager.Instance.Item_Bought_Event("No ads");
-                //    break;
-
                 case "si_1gem":
                     Rad_SaveManager.profile.gems++;
                     DBManager.IncreaseFunds("gems", 1);
@@ -107,45 +100,38 @@ namespace SIS
                     break;
                 case "si_yellowsword":
                     ShowMessage("Slow time when fighting.");
-                    //DBManager.IncreasePurchase("si_yellowsword_gems", 1);
                     DBManager.IncreasePurchase("si_yellowsword", 1);
                     AnalyticsManager.Instance.Item_Bought_Event("Yellow sword");
                     AchievementsManager.Instance.BuyAllSwordsAchievement();
                     break;
                 case "si_bluesword":
                     ShowMessage("Press any gem, break any gem.");
-                    //DBManager.IncreasePurchase("si_bluesword_gems", 1);
                     DBManager.IncreasePurchase("si_bluesword", 1);
                     AnalyticsManager.Instance.Item_Bought_Event("Blue sword");
                     AchievementsManager.Instance.BuyAllSwordsAchievement();
                     break;
                 case "si_greensword":
                     ShowMessage("Drain life per kill.");
-                    //DBManager.IncreasePurchase("si_greensword_gems", 1);
                     DBManager.IncreasePurchase("si_greensword", 1);
                     AnalyticsManager.Instance.Item_Bought_Event("Green sword");
                     AchievementsManager.Instance.BuyAllSwordsAchievement();
                     break;
                 case "si_blacksword":
                     ShowMessage("All Crits while active.");
-                    //DBManager.IncreasePurchase("si_blacksword_gems", 1);
                     DBManager.IncreasePurchase("si_blacksword", 1);
                     AnalyticsManager.Instance.Item_Bought_Event("Black sword");
                     AchievementsManager.Instance.BuyAllSwordsAchievement();
                     break;
                 case "si_goldbig":
                     ShowMessage("Some gold to start or acomplish something?");
-                    //DBManager.IncreasePurchase("si_goldbig", 1);
                     DBManager.IncreaseFunds("coins", 750);
                     break;
                 case "si_goldchest":
                     ShowMessage("You got a Chest fuld of Gold!");
-                    //DBManager.IncreasePurchase("si_goldchest", 1);
                     DBManager.IncreaseFunds("coins", 2000);
                     break;
                 case "si_goldcave":
                     ShowMessage("You just found 'El Dorado'!!!");
-                    //DBManager.IncreasePurchase("si_goldcave", 1);
                     DBManager.IncreaseFunds("coins", 7500);
                     break;
                 case "si_shell01":
@@ -153,7 +139,7 @@ namespace SIS
                     Rad_SaveManager.profile.shells += 1;
                     break;
                 case "si_shell02":
-                    ShowMessage("Good luck in the Treasure Chest!");
+                    ShowMessage("Spin those Treasure Chests!");
                     Rad_SaveManager.profile.shells += 3;
                     break;
                 case "si_shell03":
@@ -164,35 +150,6 @@ namespace SIS
                     ShowMessage("Good luck in the Treasure Chest!");
                     Rad_SaveManager.profile.shells += 10;
                     break;
-                    //case "si_yellowsword_gems":
-                    //    ShowMessage("Slow time when fighting.");
-                    //    DBManager.IncreasePurchase("si_yellowsword_gems", 1);
-                    //    DBManager.IncreasePurchase("si_yellowsword", 1);
-                    //    AnalyticsManager.Instance.Item_Bought_Event("Yellow sword");
-                    //    AchievementsManager.Instance.BuyAllSwordsAchievement();
-                    //    break;
-                    //case "si_bluesword_gems":
-                    //    ShowMessage("Press any gem, break any gem.");
-                    //    DBManager.IncreasePurchase("si_bluesword_gems", 1);
-                    //    DBManager.IncreasePurchase("si_bluesword", 1);
-                    //    AnalyticsManager.Instance.Item_Bought_Event("Blue sword");
-                    //    AchievementsManager.Instance.BuyAllSwordsAchievement();
-                    //    break;
-                    //case "si_greensword_gems":
-                    //    ShowMessage("Drain life per kill.");
-                    //    DBManager.IncreasePurchase("si_greensword_gems", 1);
-                    //    DBManager.IncreasePurchase("si_greensword", 1);
-                    //    AnalyticsManager.Instance.Item_Bought_Event("Green sword");
-                    //    AchievementsManager.Instance.BuyAllSwordsAchievement();
-                    //    break;
-                    //case "si_blacksword_gems":
-                    //    ShowMessage("All Crits while active.");
-                    //    DBManager.IncreasePurchase("si_blacksword_gems", 1);
-                    //    DBManager.IncreasePurchase("si_blacksword", 1);
-                    //    AnalyticsManager.Instance.Item_Bought_Event("Black sword");
-                    //    AchievementsManager.Instance.BuyAllSwordsAchievement();
-                    //    break;
-
             }
             Rad_SaveManager.SaveData();
         }
