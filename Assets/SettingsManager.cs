@@ -4,15 +4,18 @@ using PaperPlaneTools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using I2.Loc;
 
 public class SettingsManager : MonoBehaviour {
 
 
     public Image audioOn;
     public Image audioOff;
+    public Dropdown dropdown;
 
     void Start()
     {
+
         //yield return new WaitForSeconds(0.2f);
         if (AudioManager.Instance.isAudioMuted())
         {
@@ -23,6 +26,27 @@ public class SettingsManager : MonoBehaviour {
         {
             audioOn.gameObject.SetActive(true);
             audioOff.gameObject.SetActive(false);
+        }
+
+        switch (LocalizationManager.CurrentLanguage)
+        {
+            case "English":
+                dropdown.value = 0;
+                break;
+            case "Spanish":
+                dropdown.value = 1;
+                break;
+            case "Italian":
+                dropdown.value = 2;
+                break;
+            case "Portuguese (Brazil)":
+                dropdown.value = 3;
+                break;
+            case "Arabic":
+                dropdown.value = 4;
+                break;
+            default:
+                break;
         }
     }
 
@@ -57,7 +81,30 @@ public class SettingsManager : MonoBehaviour {
         
     }
 
+    public void ChangeLanguageTo()
+    {
 
+        switch (dropdown.value)
+        {
+            case 0:
+                if (LocalizationManager.HasLanguage("English")) { LocalizationManager.CurrentLanguage = "English"; }
+                break;
+            case 1:
+                if (LocalizationManager.HasLanguage("Spanish")) { LocalizationManager.CurrentLanguage = "Spanish"; }
+                break;
+            case 2:
+                if (LocalizationManager.HasLanguage("Italian")) { LocalizationManager.CurrentLanguage = "Italian"; }
+                break;
+            case 3:
+                if (LocalizationManager.HasLanguage("Portuguese (Brazil)")) { LocalizationManager.CurrentLanguage = "Portuguese (Brazil)"; }
+                break;
+            case 4:
+                if (LocalizationManager.HasLanguage("Arabic")) { LocalizationManager.CurrentLanguage = "Arabic"; }
+                break;
+            default:
+                break;
+        }
+    }
 
 
 
