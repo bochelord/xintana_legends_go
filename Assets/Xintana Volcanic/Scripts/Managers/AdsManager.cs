@@ -133,7 +133,7 @@ public class AdsManager : MonoBehaviour {
     {
         if (Advertisement.IsReady())
         {
-            Advertisement.Show("rewardedVideo", new ShowOptions() { resultCallback = HandlResultNoReward });
+            Advertisement.Show("video", new ShowOptions() { resultCallback = HandlResultNoReward });
         }
     }
     public void ShowAdForDoublePrize()
