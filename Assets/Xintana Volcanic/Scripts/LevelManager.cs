@@ -426,7 +426,7 @@ public class LevelManager : MonoBehaviour {
 
         combinationManager.fightNumberValueText.text = _enemyCount.ToString();
 
-        if (_enemyCount == (bossFightFrecuency * (_worldNumber + numberOfRounds * worldspritesLevelList.Length)))//final boss is summont on its frecuency and per world
+        if (_enemyCount == (bossFightFrecuency * (_worldNumber + numberOfRounds * worldspritesLevelList.Length)))//final boss is summoned on its frecuency and per world
         {
             enemy = enemyPooler.GetBossObject();
             timerSafe = combinationManager.timeToResolveCombination;
@@ -697,7 +697,7 @@ public class LevelManager : MonoBehaviour {
         {
             worldspritesLevelList[i].SetActive(false);
         }
-        if (worldlevel > worldspritesLevelList.Length)
+        if (worldlevel == worldspritesLevelList.Length)
         {
             numberOfRounds++;
             worldlevel = 1;
