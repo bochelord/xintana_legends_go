@@ -4,6 +4,7 @@
  * 	otherwise make available to any third party the Service or the Content. */
 
 using UnityEngine;
+using I2.Loc;
 
 #if UNITY_PURCHASING
 using UnityEngine.Purchasing;
@@ -51,7 +52,8 @@ namespace SIS
                 //section for in app purchases
                 case "si_x2":
                     //the user bought the item "coins", show appropriate feedback
-                    ShowMessage("Your score will be double!!!");
+                    
+                    ShowMessage(ScriptLocalization.si_x2);
                     DBManager.IncreasePurchase("si_x2", 1);
                     Rad_SaveManager.profile.doubleScorePurchased++;
                     Rad_SaveManager.profile.doubleScore = true;
@@ -59,7 +61,7 @@ namespace SIS
                     AchievementsManager.Instance.BuyDoubleScoreAchievement();
                     break;
                 case "si_1up":
-                    ShowMessage("Now you have an extra life in combat!");
+                    ShowMessage(ScriptLocalization.si_1up);
                     Rad_SaveManager.profile.extraLife = true;
                     DBManager.IncreasePurchase("si_1up", 1);
                     Rad_SaveManager.profile.extraLifePurchased++;
@@ -69,14 +71,14 @@ namespace SIS
                 case "si_1gem":
                     Rad_SaveManager.profile.gems++;
                     DBManager.IncreaseFunds("gems", 1);
-                    ShowMessage("1 Gem Purchased !");
+                    ShowMessage(ScriptLocalization.si_1gem);
                     AnalyticsManager.Instance.Item_Bought_Event("1 Gem");
                     AchievementsManager.Instance.IncrementGemsEarnedAchievements(1);
                     break;
                 case "si_5gems":
                     Rad_SaveManager.profile.gems += 5;
                     DBManager.IncreaseFunds("gems", 5);
-                    ShowMessage("5 Gems Purchased !");
+                    ShowMessage(ScriptLocalization.si_5gems);
                     AnalyticsManager.Instance.Item_Bought_Event("5 Gems");
                     AchievementsManager.Instance.IncrementGemsEarnedAchievements(5);
                     break;
@@ -85,70 +87,70 @@ namespace SIS
                     DBManager.IncreaseFunds("gems", 10);
                     AnalyticsManager.Instance.Item_Bought_Event("10 Gems");
                     AchievementsManager.Instance.IncrementGemsEarnedAchievements(10);
-                    ShowMessage("10 Gems Purchased !");
+                    ShowMessage(ScriptLocalization.si_10gems);
                     break;
                 case "si_20gems":
                     Rad_SaveManager.profile.gems += 20;
                     DBManager.IncreaseFunds("gems", 20);
                     AnalyticsManager.Instance.Item_Bought_Event("20 Gems");
                     AchievementsManager.Instance.IncrementGemsEarnedAchievements(20);
-                    ShowMessage("20 Gems Purchased !");
+                    ShowMessage(ScriptLocalization.si_20gems);
                     break;
                 case "si_supportdevs":
-                    ShowMessage("Eternal gratitude...now! Thx");
+                    ShowMessage(ScriptLocalization.si_supportdevs);
                     AnalyticsManager.Instance.Item_Bought_Event("Eternal Gratitude");
                     break;
                 case "si_yellowsword":
-                    ShowMessage("Slow time when fighting.");
+                    ShowMessage(ScriptLocalization.si_yellowsword);
                     DBManager.IncreasePurchase("si_yellowsword", 1);
                     AnalyticsManager.Instance.Item_Bought_Event("Yellow sword");
                     AchievementsManager.Instance.BuyAllSwordsAchievement();
                     break;
                 case "si_bluesword":
-                    ShowMessage("Press any gem, break any gem.");
+                    ShowMessage(ScriptLocalization.si_bluesword);
                     DBManager.IncreasePurchase("si_bluesword", 1);
                     AnalyticsManager.Instance.Item_Bought_Event("Blue sword");
                     AchievementsManager.Instance.BuyAllSwordsAchievement();
                     break;
                 case "si_greensword":
-                    ShowMessage("Drain life per kill.");
+                    ShowMessage(ScriptLocalization.si_greensword);
                     DBManager.IncreasePurchase("si_greensword", 1);
                     AnalyticsManager.Instance.Item_Bought_Event("Green sword");
                     AchievementsManager.Instance.BuyAllSwordsAchievement();
                     break;
                 case "si_blacksword":
-                    ShowMessage("All Crits while active.");
+                    ShowMessage(ScriptLocalization.si_blacksword);
                     DBManager.IncreasePurchase("si_blacksword", 1);
                     AnalyticsManager.Instance.Item_Bought_Event("Black sword");
                     AchievementsManager.Instance.BuyAllSwordsAchievement();
                     break;
                 case "si_goldbig":
-                    ShowMessage("Some gold to start or acomplish something?");
+                    ShowMessage(ScriptLocalization.si_goldbig);
                     DBManager.IncreaseFunds("coins", 750);
                     break;
                 case "si_goldchest":
-                    ShowMessage("You got a Chest fuld of Gold!");
+                    ShowMessage(ScriptLocalization.si_goldchest);
                     DBManager.IncreaseFunds("coins", 2000);
                     break;
                 case "si_goldcave":
-                    ShowMessage("You just found 'El Dorado'!!!");
+                    ShowMessage(ScriptLocalization.si_goldcave);
                     DBManager.IncreaseFunds("coins", 7500);
                     break;
                 case "si_shell01":
                     
                     Rad_SaveManager.profile.shells += 1;
-                    ShowMessage("Good luck in the Treasure Chest!");
+                    ShowMessage(ScriptLocalization.si_shell01);
                     break;
                 case "si_shell02":
-                    ShowMessage("Spin those Treasure Chests!");
+                    ShowMessage(ScriptLocalization.si_shell02);
                     Rad_SaveManager.profile.shells += 3;
                     break;
                 case "si_shell03":
-                    ShowMessage("Good luck in the Treasure Chest!");
+                    ShowMessage(ScriptLocalization.si_shell03);
                     Rad_SaveManager.profile.shells += 5;
                     break;
                 case "si_shell04":
-                    ShowMessage("Good luck in the Treasure Chest!");
+                    ShowMessage(ScriptLocalization.si_shell04);
                     Rad_SaveManager.profile.shells += 10;
                     break;
             }
