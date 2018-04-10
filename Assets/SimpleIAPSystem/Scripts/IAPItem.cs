@@ -303,7 +303,7 @@ namespace SIS
         /// When the buy button has been clicked, here we try to purchase this item.
         /// This calls into the corresponding billing workflow of the IAPManager.
         /// </summary>
-        public void Purchase(GameObject pressedButton)
+        public void Purchase()
         {
             UnityEventBase asd = ShopManager.GetInstance().itemConfirmationPanel.GetComponent<ItemConfirmationPanelData>().okButton.onClick;
             asd.RemoveAllListeners();

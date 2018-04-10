@@ -210,29 +210,29 @@ namespace SIS
                     //GameObject buyItemWithCoinsObject = newItem.FindGameObjectWithTag("");
                     item.buyButton = itemConfirmationPanel;
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    item.buyTriggerCoins.GetComponent<Button>().onClick.AddListener(() => {
-                        itemConfirmationPanel.SetActive(true);
-                        itemConfirmationPanelGemsIcon.SetActive(false);
-                        //IAPItem shopItem = item;
-                        FillItemConfirmationPanelData(item, item.buyTriggerCoins);
-                    });
-
-                    item.buyTriggerGems.GetComponent<Button>().onClick.AddListener(() => {
-                        itemConfirmationPanel.SetActive(true);
-                        itemConfirmationPanelCoinsIcon.SetActive(false);
-                        //IAPItem shopItem = item;
-                        FillItemConfirmationPanelData(item, item.buyTriggerGems);
-                    });
-
-                    //newItem.GetComponent<Button>().onClick.AddListener(() => {
-
+                    //item.buyTriggerCoins.GetComponent<Button>().onClick.AddListener(() => {
                     //    itemConfirmationPanel.SetActive(true);
-                    //    IAPItem shopItem = item;
-                    //    FillItemConfirmationPanelData(shopItem);
+                    //    itemConfirmationPanelGemsIcon.SetActive(false);
+                    //    //IAPItem shopItem = item;
+                    //    FillItemConfirmationPanelData(item, item.buyTriggerCoins);
                     //});
-                    //END RAD EXTENSION =================================
 
-                    if (item == null) continue;
+                    //item.buyTriggerGems.GetComponent<Button>().onClick.AddListener(() => {
+                    //    itemConfirmationPanel.SetActive(true);
+                    //    itemConfirmationPanelCoinsIcon.SetActive(false);
+                    //    //IAPItem shopItem = item;
+                    //    FillItemConfirmationPanelData(item, item.buyTriggerGems);
+                    //});
+
+                    item.GetComponent<Button>().onClick.AddListener(() =>
+                    {
+                        itemConfirmationPanel.SetActive(true);
+                        //IAPItem shopItem = item;
+                        FillItemConfirmationPanelData(item);
+                });
+            //END RAD EXTENSION =================================
+
+            if (item == null) continue;
 
                     //add IAPItem to dictionary for later lookup
                     IAPItems.Add(obj.id, item);
@@ -288,7 +288,8 @@ namespace SIS
         /// Item Confirmation Panel.
         /// </summary>
         /// <param name="shopItem">IAPItem</param>
-        public void FillItemConfirmationPanelData(IAPItem shopItem, GameObject pressedButton)
+        //public void FillItemConfirmationPanelData(IAPItem shopItem, GameObject pressedButton)
+        public void FillItemConfirmationPanelData(IAPItem shopItem)
         {
             //Get the Metaclass of the productId (IAP item). <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             IAPObject obj = IAPManager.GetIAPObject(shopItem.productId);
@@ -341,7 +342,7 @@ namespace SIS
             //}
 
             icpd.okButton.onClick.AddListener(() => {
-                shopItem.Purchase(pressedButton);
+                shopItem.Purchase();
             });
             //icpd.price[0].text = shopItem.price[0].text;
 
