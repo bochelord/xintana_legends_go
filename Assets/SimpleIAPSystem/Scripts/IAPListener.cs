@@ -135,8 +135,9 @@ namespace SIS
                     DBManager.IncreaseFunds("coins", 7500);
                     break;
                 case "si_shell01":
-                    ShowMessage("Good luck in the Treasure Chest!");
+                    
                     Rad_SaveManager.profile.shells += 1;
+                    ShowMessage("Good luck in the Treasure Chest!");
                     break;
                 case "si_shell02":
                     ShowMessage("Spin those Treasure Chests!");
