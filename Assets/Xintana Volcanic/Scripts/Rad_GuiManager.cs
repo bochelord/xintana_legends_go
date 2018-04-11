@@ -62,6 +62,10 @@ public class Rad_GuiManager : MonoBehaviour {
     [Header("Power Up")]
     public GameObject powerUpButton;
     public Text PowerUpText;
+    public GameObject powerUpButtonParticleHeal;
+    public GameObject powerUpButtonParticleCrits;
+    public GameObject powerUpButtonParticleSlowTime;
+    public GameObject powerUpButtonParticleGemBreaker;
 
     private AnalyticsManager _analyticsManager;
     private AdsManager _adsManager;
@@ -607,6 +611,47 @@ public class Rad_GuiManager : MonoBehaviour {
         powerUpButton.transform.DOLocalMoveY(-900, 1).SetEase(Ease.OutBack);
         powerUpButton.transform.DOScale(0.5f, 1);
     }
+
+    public void EnablePowerUpButtonVFX_Heal()
+    {
+        powerUpButtonParticleHeal.SetActive(true);
+    }
+
+    public void DisablePowerUpButtonVFX_Heal()
+    {
+        powerUpButtonParticleHeal.SetActive(false);
+    }
+
+    public void EnablePowerUpButtonVFX_Crits()
+    {
+        powerUpButtonParticleCrits.SetActive(true);
+    }
+
+    public void DisablePowerUpButtonVFX_Crits()
+    {
+        powerUpButtonParticleCrits.SetActive(false);
+    }
+
+    public void EnablePowerUpButtonVFX_SlowTime()
+    {
+        powerUpButtonParticleSlowTime.SetActive(true);
+    }
+
+    public void DisablePowerUpButtonVFX_SlowTime()
+    {
+        powerUpButtonParticleSlowTime.SetActive(false);
+    }
+
+    public void EnablePowerUpButtonVFX_GemBreaker()
+    {
+        powerUpButtonParticleGemBreaker.SetActive(true);
+    }
+
+    public void DisablePowerUpButtonVFX_GemBreaker()
+    {
+        powerUpButtonParticleGemBreaker.SetActive(false);
+    }
+
     public void AddExperienceToSlider(float value)
     {
         float _tempValue = value / ((_tempLevel + 1) * _playerManager.pointsPerLevel);

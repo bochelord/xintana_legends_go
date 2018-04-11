@@ -33,7 +33,9 @@ public class PlayerManager : MonoBehaviour {
     private float totalExpPerGame = 0;
     private Animator playerAnimator;
     private GameObject _powerUpParticle;
+    private GameObject _powerUpButtonParticle;
     private bool _powerUpOn = false;
+    
     void Awake()
     {
         _particlePooler = FindObjectOfType<ParticlePooler>();
@@ -119,6 +121,7 @@ public class PlayerManager : MonoBehaviour {
     {
         _powerUpParticle = _particlePooler.GetPooledFreezeParticle();
         _powerUpParticle.SetActive(true);
+        _guiManager.EnablePowerUpButtonVFX_SlowTime();
         _guiManager.RemovePowerUpSliderValueForPowerUpTime(slowtimerTime);
         _guiManager.SetPowerUpOn(true);
         _combinationManager.timerSpeed = 0.5f;
@@ -129,6 +132,7 @@ public class PlayerManager : MonoBehaviour {
         _particlePooler.RemoveElement(_powerUpParticle.transform);
         _combinationManager.timerSpeed = 1f;
         _guiManager.SetPowerUpOn(false);
+        _guiManager.DisablePowerUpButtonVFX_SlowTime();
     }
 
     void CriticsPowerUp()
@@ -137,6 +141,7 @@ public class PlayerManager : MonoBehaviour {
         _powerUpParticle.SetActive(true);
         _guiManager.RemovePowerUpSliderValueForPowerUpTime(criticsPowerUpTime);
         _guiManager.SetPowerUpOn(true);
+        _guiManager.EnablePowerUpButtonVFX_Crits();
         _levelManager.SetCriticsPowerUp(true);
     }
     void StopCriticsPowerUp()
@@ -144,6 +149,7 @@ public class PlayerManager : MonoBehaviour {
         _particlePooler.RemoveElement(_powerUpParticle.transform);
         _levelManager.SetCriticsPowerUp(false);
         _guiManager.SetPowerUpOn(false);
+        _guiManager.DisablePowerUpButtonVFX_Crits();
     }
     void HealPowerUp()
     {
@@ -151,6 +157,7 @@ public class PlayerManager : MonoBehaviour {
         _powerUpParticle.SetActive(true);
         _guiManager.RemovePowerUpSliderValueForPowerUpTime(healPowerUpTime);
         _guiManager.SetPowerUpOn(true);
+        _guiManager.EnablePowerUpButtonVFX_Heal();
         _levelManager.SetHealPowerUp(true);
     }
     void StopHealPowerUp()
@@ -158,6 +165,7 @@ public class PlayerManager : MonoBehaviour {
         _particlePooler.RemoveElement(_powerUpParticle.transform);
         _levelManager.SetHealPowerUp(false);
         _guiManager.SetPowerUpOn(false);
+        _guiManager.EnablePowerUpButtonVFX_Heal();
     }
     void GemsPowerUp()
     {
@@ -165,6 +173,7 @@ public class PlayerManager : MonoBehaviour {
         _powerUpParticle.SetActive(true);
         _guiManager.RemovePowerUpSliderValueForPowerUpTime(timeGemsPowerUp);
         _guiManager.SetPowerUpOn(true);
+        _guiManager.EnablePowerUpButtonVFX_GemBreaker();
         _combinationManager.SetGemsPowerUp(true);
     }
     void StopGemsPowerUp()
@@ -172,6 +181,7 @@ public class PlayerManager : MonoBehaviour {
         _particlePooler.RemoveElement(_powerUpParticle.transform);
         _combinationManager.SetGemsPowerUp(false);
         _guiManager.SetPowerUpOn(false);
+        _guiManager.EnablePowerUpButtonVFX_GemBreaker();
     }
 
     #endregion
