@@ -241,6 +241,7 @@ public class ChestRoulette : MonoBehaviour {
         {
             int randomPrize = RadUtils.d100();
             if (randomPrize == 1 && !weaponIn)
+            //if (randomPrize > 1 && !weaponIn)
             {
                 int _rWeapon = Random.Range(0, prizesList.weaponsItemsList.Count);
                 chests[i].prize = prizesList.weaponsItemsList[_rWeapon];
@@ -369,19 +370,51 @@ public class ChestRoulette : MonoBehaviour {
                 switch (prizeType.weaponType)
                 {
                     case WeaponType.black:
-                        SIS.DBManager.IncreasePurchase("si_blacksword", 1);
+                        if (!SIS.DBManager.isPurchased("si_blacksword"))
+                        {
+                            SIS.DBManager.IncreasePurchase("si_blacksword", 1);
+                        }
+                        else
+                        {
+                            SIS.DBManager.IncreaseFunds("coins", 1750);
+                        }
+                        
                         //SIS.DBManager.IncreasePurchase("si_blacksword_gems", 1);
                         break;
                     case WeaponType.blue:
-                        SIS.DBManager.IncreasePurchase("si_bluesword", 1);
+                        if (!SIS.DBManager.isPurchased("si_bluesword"))
+                        {
+                            SIS.DBManager.IncreasePurchase("si_bluesword", 1);
+                        }
+                        else
+                        {
+                            SIS.DBManager.IncreaseFunds("coins", 3750);
+                        }
+                            
                         //SIS.DBManager.IncreasePurchase("si_bluesword_gems", 1);
                         break;
                     case WeaponType.green:
-                        SIS.DBManager.IncreasePurchase("si_greensword", 1);
+                        if (!SIS.DBManager.isPurchased("si_greensword"))
+                        {
+                            SIS.DBManager.IncreasePurchase("si_greensword", 1);
+                        }
+                        else
+                        {
+                            SIS.DBManager.IncreaseFunds("coins", 1250);
+                        }
+                            
                         //SIS.DBManager.IncreasePurchase("si_greensword_gems", 1);
                         break;
                     case WeaponType.yellow:
-                        SIS.DBManager.IncreasePurchase("si_yellowsword", 1);
+                        if (!SIS.DBManager.isPurchased("si_yellowsword"))
+                        {
+                            SIS.DBManager.IncreasePurchase("si_yellowsword", 1);
+                        }
+                        else
+                        {
+                            SIS.DBManager.IncreaseFunds("coins", 2500);
+                        }
+                            
                         //SIS.DBManager.IncreasePurchase("si_yellowword_gems", 1);
                         break;
                 }
@@ -484,13 +517,13 @@ public class ChestRoulette : MonoBehaviour {
     }
     public void ChestPresentation()
     {
-        rouletteTitle.transform.DOMove(posTitle.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+        rouletteTitle.transform.DOMove(posTitle.position, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
         {
-            chest1.transform.DOMove(posChest1.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+            chest1.transform.DOMove(posChest1.position, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
             {
-                chest2.transform.DOMove(posChest2.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+                chest2.transform.DOMove(posChest2.position, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
                 {
-                    chest3.transform.DOMove(posChest3.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+                    chest3.transform.DOMove(posChest3.position, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
                     {
                         RestartChestGenerations();
                     });
