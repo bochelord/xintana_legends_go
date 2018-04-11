@@ -30,6 +30,9 @@ public class LevelManager : MonoBehaviour {
     public bool enemyKilled = false;
     public GameObject GIFRecordingprefab;
 
+    [Header("FADER")]
+    public Image fader;
+
     [Header("Level Control Values")]
     [Tooltip("This is measure in number of fights")]
     public int bossFightFrecuency = 7; 
@@ -444,24 +447,10 @@ public class LevelManager : MonoBehaviour {
             _worldNumber++;
 
             //We change the level to another world
-            PrepareBackgroundLevel(_worldNumber);
-
-            int _musicArrayIndex = 0;
-            if (_worldNumber > AudioManager.Instance.musicArray.Length)
-            {
-                _musicArrayIndex = _worldNumber - AudioManager.Instance.musicArray.Length;
-            }
-            else
-            {
-                _musicArrayIndex = _worldNumber - 1;
-            }
-
-            if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicArray[_musicArrayIndex])
-            {
-                AudioManager.Instance.PlayMusicLevel(_worldNumber);
-
-                AudioManager.Instance.Play_NextStage();
-            }
+            //PrepareBackgroundLevel(_worldNumber);
+            StartCoroutine(ChangeWorld(_worldNumber));
+            yield return new WaitForSeconds(1.5f);//we wait for the fader on the changeworld effect
+            
         }
         else
         {
@@ -620,8 +609,9 @@ public class LevelManager : MonoBehaviour {
 
     public void UnPauseGame()
     {
-        state = GameState.Running;
         combinationManager.MoveButtonsIn();
+        state = GameState.Running;
+        
     }
 
     #region KogiBounty
@@ -706,6 +696,35 @@ public class LevelManager : MonoBehaviour {
 
         _worldNumber = worldlevel;
     }
+
+    private IEnumerator ChangeWorld(int next_world)
+    {
+        PauseGame();
+        fader.DOFade(1, 0.5f);
+        yield return new WaitForSeconds(1f);
+        PrepareBackgroundLevel(next_world);
+
+        int _musicArrayIndex = 0;
+        if (_worldNumber > AudioManager.Instance.musicArray.Length)
+        {
+            _musicArrayIndex = _worldNumber - AudioManager.Instance.musicArray.Length;
+        } else
+        {
+            _musicArrayIndex = _worldNumber - 1;
+        }
+
+        if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicArray[_musicArrayIndex])
+        {
+            AudioManager.Instance.PlayMusicLevel(_worldNumber);
+
+            AudioManager.Instance.Play_NextStage();
+        }
+
+        fader.DOFade(0, 0.5f);
+        yield return new WaitForSeconds(0.3f);
+        UnPauseGame();
+    }
+
 
     #endregion
 

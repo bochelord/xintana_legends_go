@@ -436,14 +436,18 @@ public class CombinationManager : MonoBehaviour {
     {
         //combinationButtons.GetComponent<GUIAnimFREE>().MoveOut();
         //combinationButtons.transform.DOLocalMove
-        combinationButtons.transform.DOLocalMove(new Vector3(-2.5f, -1000f, 0f), 1f);
+        combinationButtons.transform.DOLocalMove(new Vector3(-2.5f, -1000f, 0f), 0.7f);
+
+        //combinationButtons.transform.DOMoveY(-106f, 1f);
     }
     public void MoveButtonsIn()
     {
         //combinationButtons.GetComponent<GUIAnimFREE>().m_MoveIn.Time = 0.5f;
         //combinationButtons.GetComponent<GUIAnimFREE>().MoveIn();
 
-        combinationButtons.transform.DOLocalMove(new Vector3(-2.5f,-550f,0f),1f);
+        combinationButtons.transform.DOLocalMove(new Vector3(-2.5f,-475f,0f),0.7f);
+
+        //combinationButtons.transform.DOMoveY(100f, 1f);
         //combinationButtons.transform.DOMoveY(100f, 1f);
 
     }
