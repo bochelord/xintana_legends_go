@@ -284,11 +284,13 @@ public class CombinationManager : MonoBehaviour {
             }
             if (timerSlider.value <= 0)
             {
-                ShowLoseText();
-                // We STOP the Game as the Player lose.
-                gameOn = false;
+
+                ///TIME IS UP, PLAYER LOSES CAUSE OF THE TIME...          
+                
+                RanOutofTimeProcess();
                 //levelManager.GameOverPanel();
                 //levelManager.AddNemesisCount();
+
                 if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped <= levelManager.adsSkipped && !Rad_SaveManager.profile.noAds)
                 {
                     MoveButtonsOut();
@@ -491,6 +493,26 @@ public class CombinationManager : MonoBehaviour {
         youLose_Text.gameObject.SetActive(true);
         AudioManager.Instance.Play_YouLose();
     }
+
+
+
+    public void RanOutofTimeProcess()
+    {
+        /// Stop the game
+        /// Animation from Xinti dead...
+        /// Text you lose
+        /// Audio you lose..
+
+
+        gameOn = false;
+        AudioManager.Instance.Play_XintanaDeath();
+        levelManager.player.GetComponent<Animator>().SetInteger("AnimState", 4);
+        ShowLoseText();
+
+    }
+
+
+
 
     IEnumerator LoadNextEnemy(float delay){
 
