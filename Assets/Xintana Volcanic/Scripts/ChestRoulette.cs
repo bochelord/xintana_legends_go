@@ -659,6 +659,7 @@ public class ChestRoulette : MonoBehaviour {
     public void HideStartRoulettePanel()
     {
         startRoulettePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+        _menuManager.CheckInventory();
     }
     public void SetCanOpen(bool value) { canOpen = value; }
     public bool GetCanOpen() { return canOpen; }
