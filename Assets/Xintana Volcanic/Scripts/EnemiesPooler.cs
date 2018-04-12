@@ -15,11 +15,11 @@ public class EnemiesPooler : Pooler {
     private List<GameObject> pooledKogiBounty;
     //private List<GameObject>[] pooledObjArrayList = new List<GameObject>[7]; //index indicates the currentworld
 
-    private LevelManager levelManager;
+    private LevelManager _levelManager;
 
     public override void Start()
     {
-        levelManager = FindObjectOfType<LevelManager>();
+        _levelManager = FindObjectOfType<LevelManager>();
 
         pooledObjects = new List<GameObject>();
         for (int j = 0; j < enemiesList.xintanaEnemies.Count; j++)
