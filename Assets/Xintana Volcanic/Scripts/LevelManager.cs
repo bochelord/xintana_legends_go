@@ -426,8 +426,9 @@ public class LevelManager : MonoBehaviour {
         }
 
         _enemyCount++;
-
         combinationManager.fightNumberValueText.text = _enemyCount.ToString();
+        combinationManager.fightNumberValueText.transform.DOPunchScale(combinationManager.fightNumberValueText.transform.position, 0.5f, 1, 5f);
+        
 
         if (_enemyCount == (bossFightFrecuency * (_worldNumber + numberOfRounds * worldspritesLevelList.Length)))//final boss is summoned on its frecuency and per world
         {
@@ -445,7 +446,7 @@ public class LevelManager : MonoBehaviour {
             enemy = enemyPooler.GetPooledObject(_worldNumber);
 
             _worldNumber++;
-
+            _guiManager.worldText.transform.DOPunchScale(_guiManager.worldText.transform.position, 0.5f, 1, 5f);
             //We change the level to another world
             //PrepareBackgroundLevel(_worldNumber);
             StartCoroutine(ChangeWorld(_worldNumber));
