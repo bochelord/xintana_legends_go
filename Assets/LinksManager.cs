@@ -43,6 +43,12 @@ public class LinksManager : MonoBehaviour {
         Application.OpenURL("https://twitter.com/littlerobotsfx");
     }
 
+    public void Button_LinkedinWilliam()
+    {
+        Application.OpenURL("https://www.linkedin.com/in/williameperry/");
+    }
+
+
     public void Button_back()
     {
         SceneManager.LoadScene("SettingsScreen");
