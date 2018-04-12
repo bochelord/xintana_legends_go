@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour {
 
     [Header("Level Control Values")]
     [Tooltip("This is measure in number of fights")]
-    public int bossFightFrecuency = 7; 
+    public int bossFightFrecuency = 7;
     public int combinationIncreaseFrecuency = 3;
 
     [Header("Max ads skipped")]
@@ -104,7 +104,7 @@ public class LevelManager : MonoBehaviour {
         //fixscreeperra();
         //LaunchShowHUDText(enemyContainer.transform.position, enemyController.GetDamageDoneByEnemy().ToString("F1"), new Color32(245, 141, 12, 255));
         AudioManager.Instance.PlayMusicLevel(1);
-        
+
     }
 
 
@@ -137,11 +137,11 @@ public class LevelManager : MonoBehaviour {
             if (_healPowerUp)
             {
                 _playerManager.HealForValue(damagedone);
-                LaunchShowHUDText(player.transform.position + new Vector3(0.25f, 0.75f, 0), damagedone.ToString("f1"), new Color32(0,255, 0, 255),false);
+                LaunchShowHUDText(player.transform.position + new Vector3(0.25f, 0.75f, 0), damagedone.ToString("f1"), new Color32(0, 255, 0, 255), false);
                 StartCoroutine(HealParticle(3));
 
             }
-        } 
+        }
         else
         {
             player.GetComponent<Animator>().SetBool("Attacking", true);
@@ -172,8 +172,8 @@ public class LevelManager : MonoBehaviour {
         clone_damageFxprefab.SetActive(true);
         StartCoroutine(particlePooler.RemoveElement(clone_damageFxprefab.transform, 2.2f));
         enemyController.DamagedAnimation();
-        
-        LaunchShowHUDText(enemyContainer.transform.position + new Vector3(-0.25f,0.75f,0), damagedone.ToString("F1"), new Color32(245, 141, 12, 255),false); /// TODO This has to be feed with the proper damage coming from the playerManager
+
+        LaunchShowHUDText(enemyContainer.transform.position + new Vector3(-0.25f, 0.75f, 0), damagedone.ToString("F1"), new Color32(245, 141, 12, 255), false); /// TODO This has to be feed with the proper damage coming from the playerManager
 
         AudioManager.Instance.Play_XintanaAttack_1();
 
@@ -183,10 +183,10 @@ public class LevelManager : MonoBehaviour {
         enemyController.ApplyDamageToEnemy(damagedone);
         if (critico)
         {
-            LaunchShowHUDText(enemyContainer.transform.position + new Vector3(0.25f, 0.75f, 0), "crit!", new Color32(234, 57, 4, 255),true);
+            LaunchShowHUDText(enemyContainer.transform.position + new Vector3(0.25f, 0.75f, 0), "crit!", new Color32(234, 57, 4, 255), true);
         }
     }
-    
+
     IEnumerator HealParticle(float delay)
     {
         GameObject obj = particlePooler.GetPooledHealPlayerParticle();
@@ -207,33 +207,33 @@ public class LevelManager : MonoBehaviour {
         clone_damageFxprefab = particlePooler.GetHitParticle();
         clone_damageFxprefab.transform.position = player.transform.position;
         clone_damageFxprefab.SetActive(true);
-        StartCoroutine(particlePooler.RemoveElement(clone_damageFxprefab.transform,2.2f));
+        StartCoroutine(particlePooler.RemoveElement(clone_damageFxprefab.transform, 2.2f));
 
         enemyController.AttackAnimation();
 
 
         float _damageDone = enemyController.GetDamageDoneByEnemy();
-        LaunchShowHUDText(player.transform.position + new Vector3(0, 0.75f, 0), _damageDone.ToString("F1"), new Color32(245, 141, 12, 255),false);
+        LaunchShowHUDText(player.transform.position + new Vector3(0, 0.75f, 0), _damageDone.ToString("F1"), new Color32(245, 141, 12, 255), false);
 
         _playerManager.ReceiveDamage(_damageDone);
 
         AudioManager.Instance.Play_XintanaHit();
 
 
-        if(_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") <= 0)
+        if (_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") <= 0)
         {
             screenshot.TakeDeathScreenshot();
 
             //Continue or go to main menu
             AudioManager.Instance.Play_XintanaDeath();
-            player.GetComponent<Animator>().SetInteger("AnimState",4);
+            player.GetComponent<Animator>().SetInteger("AnimState", 4);
             //AddNemesisCount();
             if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped <= adsSkipped && !Rad_SaveManager.profile.noAds)
             {
                 combinationManager.SetGameOn(false);
                 combinationManager.MoveButtonsOut();
                 combinationManager.DestroyCombination();
-                StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowAdPanel,2f));
+                StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowAdPanel, 2f));
                 //_guiManager.ShowAdPanel();
             }
             else if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped >= adsSkipped && !Rad_SaveManager.profile.noAds)
@@ -246,14 +246,14 @@ public class LevelManager : MonoBehaviour {
             else
             {
                 StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 2.5f));
-                adManager.adViewed = false; 
+                adManager.adViewed = false;
             }
         }
         else if (_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") > 0)
         {
             combinationManager.SetGameOn(false);
             Rad_SaveManager.profile.extraLifePurchased--;
-            if(Rad_SaveManager.profile.extraLifePurchased <= 0)
+            if (Rad_SaveManager.profile.extraLifePurchased <= 0)
             {
                 SIS.DBManager.RemovePurchase("si_1up");
                 SIS.DBManager.RemovePurchaseUI("si_1up");
@@ -303,17 +303,17 @@ public class LevelManager : MonoBehaviour {
         {
             GetEnemyDeadParticle();
             enemyPooler.RemoveElement(enemyController.transform);
-        } 
+        }
         else
         {
             StartCoroutine(FunctionLibrary.CallWithDelay(GetEnemyDeadParticle, 1.5f));
 
-            StartCoroutine(removeEnemy(1.85f,enemyController.transform));
+            StartCoroutine(removeEnemy(1.85f, enemyController.transform));
             //StartCoroutine(FunctionLibrary.CallWithDelay(enemyPooler.RemoveElement(enemyController.transform),1.7f));
         }
 
-        
-        
+
+
         DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + _enemyPoints * levelin * timeRemaining, 3);
         DOTween.To(() => combinationManager.timerSlider.value, x => combinationManager.timerSlider.value = x, 0, 3f).OnComplete(() =>
          {
@@ -372,7 +372,7 @@ public class LevelManager : MonoBehaviour {
             _shell.transform.DOScale(1, 0);
             StartCoroutine(SpawnShellCollecetedParticle(_shell.transform.position));
             coinsPooler.RemoveElement(_shell.transform);
-            
+
         });
     }
     IEnumerator SpawnShellCollecetedParticle(Vector3 pos)
@@ -428,7 +428,7 @@ public class LevelManager : MonoBehaviour {
         _enemyCount++;
         combinationManager.fightNumberValueText.text = _enemyCount.ToString();
         combinationManager.fightNumberValueText.transform.DOPunchScale(combinationManager.fightNumberValueText.transform.position, 0.5f, 1, 5f);
-        
+
 
         if (_enemyCount == (bossFightFrecuency * (_worldNumber + numberOfRounds * worldspritesLevelList.Length)))//final boss is summoned on its frecuency and per world
         {
@@ -440,7 +440,7 @@ public class LevelManager : MonoBehaviour {
             AudioManager.Instance.Play_Boss();
         }
         //numberOfRounds * sprites.length because probably player will end worlds, we reset _worldnumber to 1 in PrepareBackgroundLevel()
-        else if (_enemyCount == (bossFightFrecuency *( _worldNumber + numberOfRounds * worldspritesLevelList.Length)) + 1)//after a boss fight we reset the timer to whatever it was before it and
+        else if (_enemyCount == (bossFightFrecuency * (_worldNumber + numberOfRounds * worldspritesLevelList.Length)) + 1)//after a boss fight we reset the timer to whatever it was before it and
         {
             combinationManager.timeToResolveCombination = timerSafe;
             enemy = enemyPooler.GetPooledObject(_worldNumber);
@@ -451,7 +451,7 @@ public class LevelManager : MonoBehaviour {
             //PrepareBackgroundLevel(_worldNumber);
             StartCoroutine(ChangeWorld(_worldNumber));
             yield return new WaitForSeconds(1.5f);//we wait for the fader on the changeworld effect
-            
+
         }
         else
         {
@@ -460,7 +460,7 @@ public class LevelManager : MonoBehaviour {
 
 
         enemyController = enemy.GetComponent<EnemyController>();
-        if(enemyController == null)
+        if (enemyController == null)
         {
             enemyController = enemy.GetComponentInChildren<EnemyController>();
         }
@@ -477,7 +477,7 @@ public class LevelManager : MonoBehaviour {
         combinationManager.ResetGame();
         state = GameState.Running;
     }
-    
+
 
     public void LaunchShowHUDText(Vector2 pos, string texto, Color color_in, bool isCrit)
     {
@@ -541,7 +541,7 @@ public class LevelManager : MonoBehaviour {
         {
             temptext.transform.DOShakeScale(0.3f, 0.9f, 8, 80f);
         }
-        
+
         //temptext.transform.DOShakeScale(0.8f, 1f, 8, 80f);
         yield return new WaitForSeconds(0.8f);
 
@@ -571,7 +571,7 @@ public class LevelManager : MonoBehaviour {
         AnalyticsManager.Instance.GameOver_Event((int)_playerScore, _enemyCount + 1, _worldNumber);
         VanishPlayer();
         combinationManager.MoveButtonsOut();
-        StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.PlayerGameOverPanelOn,2));
+        StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.PlayerGameOverPanelOn, 2));
         combinationManager.DisableButtonsInteraction();
         combinationManager.SetGameOn(false);
     }
@@ -612,7 +612,7 @@ public class LevelManager : MonoBehaviour {
     {
         combinationManager.MoveButtonsIn();
         state = GameState.Running;
-        
+
     }
 
     #region KogiBounty
@@ -674,8 +674,8 @@ public class LevelManager : MonoBehaviour {
             kogiReward = kogiRewardsList.tokensItemsList[_randomprice];
             Rad_SaveManager.profile.shells += kogiReward.itemValue;
         }
-        _guiManager.SetKogiRewardPanel(kogiReward.description,kogiReward.itemSprite);
-        
+        _guiManager.SetKogiRewardPanel(kogiReward.description, kogiReward.itemSprite);
+
     }
     #endregion
 
@@ -776,4 +776,13 @@ public class LevelManager : MonoBehaviour {
         _healPowerUp = value;
     }
     #endregion
+
+    #if UNITY_EDITOR
+    void OnGUI() { 
+    if (GUI.Button(new Rect(10, 70, 50, 30), "KOGI"))
+    {
+            this.SpawnKogiBounty();
+    }
+    }
+#endif
 }
