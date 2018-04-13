@@ -60,6 +60,7 @@ public class PokedexManager : MonoBehaviour {
         _enemies[0].transform.DOMove(centerScreenPosition.position, timeForMoving, false);
         _step = PokedexStep.ShowEnemy;
         _levelManager = FindObjectOfType<LevelManager>();
+        _currentWorld = 1;
     }
 
     void Update()
@@ -91,7 +92,7 @@ public class PokedexManager : MonoBehaviour {
     public void checkInput()
     {
         checkSwipeTouch();
-        //checkSwipeClick();
+        checkSwipeClick();
     }
     void checkSwipeTouch()
     {
@@ -149,57 +150,57 @@ public class PokedexManager : MonoBehaviour {
             }
         }
     }
-    //void checkSwipeClick()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        //save began touch 2d point
-    //        firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-    //    }
+    void checkSwipeClick()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            //save began touch 2d point
+            firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        }
 
-    //    if (Input.GetMouseButtonUp(0))
-    //    {
-    //        //save ended touch 2d point
-    //        secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        if (Input.GetMouseButtonUp(0))
+        {
+            //save ended touch 2d point
+            secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 
-    //        //create vector from the two points
-    //        currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
+            //create vector from the two points
+            currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
 
-    //        //normalize the 2d vector
-    //        currentSwipe.Normalize();
+            //normalize the 2d vector
+            currentSwipe.Normalize();
 
-    //        //swipe left
-    //        if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
-    //        {
-    //            _swipe = Swipe.Left;
-    //            if (pokedexIndex >= _enemies.Count - 1)
-    //            {
-    //                pokedexIndex = 0;
-    //            }
-    //            else
-    //            {
-    //                pokedexIndex++;
-    //            }
-    //        }
+            //swipe left
+            if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+            {
+                _swipe = Swipe.Left;
+                if (pokedexIndex >= _enemies.Count - 1)
+                {
+                    pokedexIndex = 0;
+                } else
+                {
+                    pokedexIndex++;
+                }
+                _step = PokedexStep.CheckAnimation;
+            }
 
-    //        //swipe right
-    //        if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
-    //        {
-    //            _swipe = Swipe.Right;
-    //            if (pokedexIndex <= 0)
-    //            {
-    //                pokedexIndex = _enemies.Count - 1;
-    //            }
-    //            else
-    //            {
-    //                pokedexIndex--;
-    //            }
-    //        }
-    //        _step = PokedexStep.CheckAnimation;
-    //    }
+            //swipe right
+            if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+            {
+                _swipe = Swipe.Right;
+                if (pokedexIndex <= 0)
+                {
+                    pokedexIndex = _enemies.Count - 1;
+                } else
+                {
+                    pokedexIndex--;
+                }
+                _step = PokedexStep.CheckAnimation;
+            }
+            
+        }
 
 
-    //}
+    }
     #endregion
 
     #region Animation
@@ -263,7 +264,7 @@ public class PokedexManager : MonoBehaviour {
                 if(bestiaryList.xintanaEnemies[i].type == _tempController.type)
                 {
                     enemyName.text = bestiaryList.xintanaEnemies[i].nameId;
-                    enemyWorld.text = "World " + bestiaryList.xintanaEnemies[i].appearsInWorld;
+                    enemyWorld.text = "World " + bestiaryList.xintanaEnemies[i].appearsInWorld[0];
                     break;
                 }
             }
@@ -272,7 +273,7 @@ public class PokedexManager : MonoBehaviour {
         {
             //still unknown enemy
             enemyName.text = "?????";
-            enemyWorld.text = "World " + bestiaryList.xintanaEnemies[pokedexIndex].appearsInWorld;
+            enemyWorld.text = "World " + bestiaryList.xintanaEnemies[pokedexIndex].appearsInWorld[0];
             //get 2dfx component so we can change their color
             _2dxFX_HSV[] _sprites = _enemies[pokedexIndex].GetComponentsInChildren<_2dxFX_HSV>();
             if(_sprites != null)
@@ -291,28 +292,31 @@ public class PokedexManager : MonoBehaviour {
 
 
         //change background with enemy type
-        ChangeBackground();
+        ChangeBackground(bestiaryList.xintanaEnemies[pokedexIndex].appearsInWorld[0]);
         _step = PokedexStep.WaitingForInput;
     }
 
-    private void ChangeBackground()
+    private void ChangeBackground(int world)
     {
-        int _backgroundWorldNumber = 0;
-        _currentWorld = _levelManager.GetCurrentWorldNumber();
+        int _backgroundWorldNumber;
+        //_currentWorld = _levelManager.GetCurrentWorldNumber();
+        //_currentWorld = 1;
         //select worldsprite 
-        for (int i = 0; i < bestiaryList.xintanaEnemies[pokedexIndex].appearsInWorld[i]; i++)
-        {
-            if (_currentWorld == bestiaryList.xintanaEnemies[pokedexIndex].appearsInWorld[i])
-            {
-                _backgroundWorldNumber = i;
-            }
+        //for (int i = 0; i < bestiaryList.xintanaEnemies[pokedexIndex].appearsInWorld[i]; i++)
+        //{
+        //    if (world == bestiaryList.xintanaEnemies[pokedexIndex].appearsInWorld[i])
+        //    {
+        //        _backgroundWorldNumber = i;
+        //    }
 
-        }
+        //}
 
-        if (_backgroundWorldNumber == 0)
-        { 
-            _backgroundWorldNumber = _currentWorld;
-        }
+        
+        _backgroundWorldNumber = world;
+
+        //_backgroundWorldNumber = bestiaryList.xintanaEnemies
+
+
 
         switch (_backgroundWorldNumber)
         {
