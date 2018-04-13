@@ -445,7 +445,7 @@ public class CombinationManager : MonoBehaviour {
         //combinationButtons.GetComponent<GUIAnimFREE>().m_MoveIn.Time = 0.5f;
         //combinationButtons.GetComponent<GUIAnimFREE>().MoveIn();
 
-        combinationButtons.transform.DOLocalMove(new Vector3(-2.5f,-475f,0f),0.7f);
+        combinationButtons.transform.DOLocalMove(new Vector3(-2.5f,-540f,0f),0.7f);
 
         //combinationButtons.transform.DOMoveY(100f, 1f);
         //combinationButtons.transform.DOMoveY(100f, 1f);
