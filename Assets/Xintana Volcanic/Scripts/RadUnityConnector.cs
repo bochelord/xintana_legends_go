@@ -317,43 +317,42 @@ public class RadUnityConnector : MonoBehaviour
                      
                     //we check the string where the format comes as : 1,2,3
                     int counter = 0;
+                    //tempEnemy.world = new int[tempstring.Split(',').Length];
+                    //tempEnemy.world = new int[2]; // 1,2
+                    //tempEnemy.world = new int[3]; // 1,10
+
                     tempEnemy.world = new int[tempstring.Split(',').Length];
+
                     for (int j = 0; j < tempstring.Length; j++)
                     {
                         if (tempstring[j] != ',')
                         {
-                            //Debug.Log("j: " + j);
-                            //Debug.Log("counter: " + counter);
+                            if (j + 1 < tempstring.Length)
+                            { 
 
-                            tempEnemy.world[counter] = int.Parse(tempstring[j].ToString());
-                            counter++;
-                            //Debug.Log("tempstring.Length: " + tempstring.Length);
+                                if (tempstring[j + 1] != ',')
+                                {
+                                    tempEnemy.world[counter] = int.Parse(tempstring[j].ToString() + tempstring[j + 1].ToString());
+                                    j++;
+                                }
+                                else
+                                {
+                                    tempEnemy.world[counter] = int.Parse(tempstring[j].ToString());
+                                }
+                            }
+                            else
+                            {
+                                tempEnemy.world[counter] = int.Parse(tempstring[j].ToString());
+                            }
                             
-                            //print("tempEnemy.world[counter]: " + tempEnemy.world[counter]);
-                            //Debug.Log("char.Parse(tempstring[j].ToString(): " + char.Parse(tempstring[j].ToString()));
-
+                            counter++;
                         }
                     }
-
-
-
-                    //tempEnemy.world = int.Parse(ssObjects[i]["world"].ToString());
                 }
-
-
-
-                //world = (int)ssObjects[i]["world"];
             }
-
             //EnemyList.Add(tempEnemy);
             //Debug.Log("Added Enemy as:" + tempEnemy.type.ToString());
-
-
-
             //Adding to the Scriptable Object
-
-            
-
             bestiary_enemy.nameId = tempEnemy.type.ToString();
 
             bestiary_enemy.type = tempEnemy.type;
