@@ -46,39 +46,41 @@ public class XintanaProfile : MonoBehaviour {
 
     public XintanaProfile GenerateXintanaProfile(int id)
     {
-        XintanaProfile profile = new XintanaProfile();
+        XintanaProfile profile = new XintanaProfile
+        {
 #if !UNITY_EDITOR
         profile.gameVersion = Application.version;
 #else
-        profile.gameVersion = "Debugversion";
+            gameVersion = "Debugversion",
 #endif
-        profile.profileID = id;
-        profile.highscore = 0;
-        profile.gems = 0;
-        profile.shells = 0;
-        profile.adsViewed = 0;
-        profile.adsSkipped = 0;
-        profile.playerKills = 0;
-        profile.gemsCollected = 0;
-        profile.gemsComboLength = 0;
-        profile.coinsEarned = 0;
-        profile.extraLifePurchased = 0;
-        profile.doubleScorePurchased = 0;
-        profile.doubleScoreOwned = 0;
-        profile.extraLifeOwned = 0;
-        profile.level = 1;
-        profile.experience = 0;
-        profile.weaponEquipped = WeaponType.red; // TODO check if this one will be the default weapon
-        profile.audioEnabled = true;
-        profile.extraLife = false;
-        profile.noAds = false;
-        profile.doubleScore = false;
-        profile.firstTimePlayed = true;
-        profile.freeTokenDay = false;
-        profile.tokenAdWatched = false;
-        profile.reviveAdWatched = false;
-        profile.timeStamp = System.DateTime.Now;
-        profile.sharedScoreTimes = 0;
+            profileID = id,
+            highscore = 0,
+            gems = 0,
+            shells = 0,
+            adsViewed = 0,
+            adsSkipped = 0,
+            playerKills = 0,
+            gemsCollected = 0,
+            gemsComboLength = 0,
+            coinsEarned = 0,
+            extraLifePurchased = 0,
+            doubleScorePurchased = 0,
+            doubleScoreOwned = 0,
+            extraLifeOwned = 0,
+            level = 1,
+            experience = 0,
+            weaponEquipped = WeaponType.red, // TODO check if this one will be the default weapon
+            audioEnabled = true,
+            extraLife = false,
+            noAds = false,
+            doubleScore = false,
+            firstTimePlayed = true,
+            freeTokenDay = false,
+            tokenAdWatched = false,
+            reviveAdWatched = false,
+            timeStamp = System.DateTime.Now,
+            sharedScoreTimes = 0
+        };
         return profile;
     }
     #endregion
