@@ -83,16 +83,19 @@ public class ChestRoulette : MonoBehaviour {
     {
         if (_doublePrize && prizeType.categoryType == PrizeType.COINS)
         {
-            prizeText.text = _pDoublePrize.ToString() + " Coins !!";
+            prizeText.text = _pDoublePrize.ToString() + " " + I2.Loc.ScriptLocalization.Get("GOLD") + " !!";   
         }
         else if (_doublePrize && prizeType.categoryType == PrizeType.GEMS)
         {
-            prizeText.text = _pDoublePrize.ToString() + " Gems !!";
+            prizeText.text = _pDoublePrize.ToString() + " " + I2.Loc.ScriptLocalization.Get("GEMS") + " !!";
         }
         else if (_doublePrize && prizeType.categoryType == PrizeType.SHELLS)
         {
-            prizeText.text = _pDoublePrize.ToString() + " Shells !!";
+            prizeText.text = _pDoublePrize.ToString() + " " + I2.Loc.ScriptLocalization.Get("SHELLS") + " !!";
         }
+
+
+
         if (rouletteOn)
         {
             shellsTextRoulette.text = Rad_SaveManager.profile.shells.ToString();
@@ -426,15 +429,15 @@ public class ChestRoulette : MonoBehaviour {
     {
         if (prizeText && prizeType.categoryType == PrizeType.COINS)
         {
-            prizeText.text = prizeAmount.ToString() + " Coins !!";
+            prizeText.text = prizeAmount.ToString() + " " + I2.Loc.ScriptLocalization.Get("GOLD") + " !!";
         }
         else if (prizeText && prizeType.categoryType == PrizeType.GEMS)
         {
-            prizeText.text = prizeAmount.ToString() + " Gems !!";
+            prizeText.text = prizeAmount.ToString() + " " + I2.Loc.ScriptLocalization.Get("GEMS") + " !!";
         }
         else if (prizeText && prizeType.categoryType == PrizeType.SHELLS)
         {
-            prizeText.text = prizeAmount.ToString() + " Shells !!";
+            prizeText.text = prizeAmount.ToString() + " " + I2.Loc.ScriptLocalization.Get("SHELLS") + " !!";
         }
         else if (prizeText && prizeType.categoryType == PrizeType.WEAPON)
         {
