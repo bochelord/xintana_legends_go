@@ -175,7 +175,7 @@ public class RadUnityConnector : MonoBehaviour
                 {
                     tempEnemy.type = EnemyType.skeletonMage;
                 }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Smile Zombie"))
+                else if (string.Equals(ssObjects[i]["name"].ToString(), "Zombie"))
                 {
                     tempEnemy.type = EnemyType.smileZombie;
                 }
@@ -191,9 +191,13 @@ public class RadUnityConnector : MonoBehaviour
                 {
                     tempEnemy.type = EnemyType.bloodMage;
                 }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Berserker Male"))
+                else if (string.Equals(ssObjects[i]["name"].ToString(), "Berserker"))
                 {
                     tempEnemy.type = EnemyType.bersekerMale;
+                }
+                else if (string.Equals(ssObjects[i]["name"].ToString(), "Makula"))
+                {
+                    tempEnemy.type = EnemyType.makula;
                 }
             }
 

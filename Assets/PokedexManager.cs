@@ -92,7 +92,7 @@ public class PokedexManager : MonoBehaviour {
         }
 
         //we order the list of enemies based on their world to show the bestiary in order based on the worlds
-        _enemies = _enemies.OrderBy(w => w.name).ToList();
+        //_enemies = _enemies.OrderBy(w => w.name).ToList();
         //_enemies.Shuffle();
         //_enemies.Sort(delegate (int world1, int world2)   {    });
     }

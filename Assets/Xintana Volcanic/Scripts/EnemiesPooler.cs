@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemiesPooler : Pooler {
 
-    public GameObject[] enemiesPrefabs;
+    //public GameObject[] enemiesPrefabs;
     public XintanaEnemiesBestiary enemiesList;
 
     public GameObject[] bossPrefab;
@@ -32,7 +32,20 @@ public class EnemiesPooler : Pooler {
                     GameObject obj = (GameObject)Instantiate(enemiesList.xintanaEnemies[j].prefab);
                     obj.transform.parent = this.transform;
                     obj.transform.position = Vector3.zero;
-                    obj.GetComponent<EnemyController>().appearsOnWorld = enemiesList.xintanaEnemies[j].appearsInWorld[0];
+
+                    if (obj.GetComponent<EnemyController>())
+                    {
+                        obj.GetComponent<EnemyController>().appearsOnWorld = enemiesList.xintanaEnemies[j].appearsInWorld[0];
+                    }
+                    else if (obj.GetComponentInChildren<EnemyController>())
+                    {
+                        obj.GetComponentInChildren<EnemyController>().appearsOnWorld = enemiesList.xintanaEnemies[j].appearsInWorld[0];
+                    }
+                    else
+                    {
+                        Debug.LogError("Enemy Pooler is trying to setup enemies but this one: " + obj.name + " does not have EnemyController attached (nor its children)");
+                    }
+                    
                     //obj.GetComponent<EnemyController>().type = enemiesList.xintanaEnemies[j].type;
                     obj.SetActive(false);
                     pooledObjects.Add(obj);
@@ -104,11 +117,11 @@ public class EnemiesPooler : Pooler {
 
         if (retEnemies.Count == 0)
         {
-            for (int i = 0; i < enemiesPrefabs.Length; i++)
+            for (int i = 0; i < enemiesList.xintanaEnemies.Count; i++)
             {
-                if (appearInWorld == enemiesPrefabs[i].GetComponentInChildren<EnemyController>().appearsOnWorld)
+                if (appearInWorld == enemiesList.xintanaEnemies[i].appearsInWorld[0])
                 {
-                    GameObject obj = (GameObject)Instantiate(enemiesPrefabs[i]);
+                    GameObject obj = (GameObject)Instantiate(enemiesList.xintanaEnemies[i].prefab);
                     obj.transform.parent = current.transform;
                     obj.transform.position = Vector3.zero;
                     obj.SetActive(false);

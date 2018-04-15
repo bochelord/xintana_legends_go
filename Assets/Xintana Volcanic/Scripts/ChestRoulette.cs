@@ -487,7 +487,7 @@ public class ChestRoulette : MonoBehaviour {
     public void HideDoublePrizePanel()
     {
         //pricePanel.SetActive(true);
-        doublePricePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+        doublePricePanel.transform.DOLocalMoveY(1000f, 0.5f).SetEase(Ease.OutBack).OnComplete(() =>
         {
             closePrizePanel.enabled = true;
             _doubleScorePanelOn = false;
