@@ -115,7 +115,7 @@ public class AudioManager : MonoBehaviour {
 
     public void PlayMusicLevel(int level)
     {
-        if (level > musicArray.Length) { level -= musicArray.Length; }
+        if (level > musicArray.Length) { level = 1; }
         if (musicArray[level-1] && audioEnabled)
         {
             musicPlayer.clip = musicArray[level - 1];

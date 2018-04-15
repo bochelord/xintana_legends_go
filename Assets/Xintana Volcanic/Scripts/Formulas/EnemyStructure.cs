@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [System.Serializable]
-public enum EnemyType { zazuc, makula, ball, kogi, blackKnight, lavabeast, alchemist, devil, explorer, fireMage, iceBeast, skeletonMage, smileZombie, parasite, mutant, bloodMage, bersekerMale}
+public enum EnemyType { zazuc, makula, blackKnight, lavabeast, alchemist, devil, explorer, fireMage, iceBeast, skeletonMage, smileZombie, parasite, mutant, bloodMage, bersekerMale}
 
 
 public class EnemyStructure {
@@ -38,14 +38,14 @@ public class EnemyStructure {
                 damageGrowth = 0.08f;
                 score = 2750;
                 break;
-            case EnemyType.kogi:
-                this.type = EnemyType.kogi;
-                lifeBase = 2f;
-                lifeGrowth = 0.07f;
-                damageBase = 1f;
-                damageGrowth = 0.09f;
-                score = 1000;
-                break;
+            //case EnemyType.kogi:
+            //    this.type = EnemyType.kogi;
+            //    lifeBase = 2f;
+            //    lifeGrowth = 0.07f;
+            //    damageBase = 1f;
+            //    damageGrowth = 0.09f;
+            //    score = 1000;
+            //    break;
             case EnemyType.blackKnight:
                 this.type = EnemyType.blackKnight;
                 lifeBase = 4f;

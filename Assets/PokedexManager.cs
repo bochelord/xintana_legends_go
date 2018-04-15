@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
+using System.Linq;
 public class PokedexManager : MonoBehaviour {
 
 
@@ -86,7 +87,14 @@ public class PokedexManager : MonoBehaviour {
             //_obj.GetComponent<EnemyController>().enabled = false;
             _obj.transform.position = leftPosition.position;
             _enemies.Add(_obj);
+
+            //_enemies.Insert(_obj.GetComponent<EnemyController>().appearsOnWorld, _obj);
         }
+
+        //we order the list of enemies based on their world to show the bestiary in order based on the worlds
+        _enemies = _enemies.OrderBy(w => w.name).ToList();
+        //_enemies.Shuffle();
+        //_enemies.Sort(delegate (int world1, int world2)   {    });
     }
     #region Input
     public void checkInput()

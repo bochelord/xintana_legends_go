@@ -299,7 +299,7 @@ public class LevelManager : MonoBehaviour {
         combinationManager.ChangeTimerSliderColor(-1);
         AudioManager.Instance.Play_AddScore();
 
-        if (typein == EnemyType.kogi || typein == EnemyType.zazuc)
+        if (typein == EnemyType.zazuc)
         {
             GetEnemyDeadParticle();
             enemyPooler.RemoveElement(enemyController.transform);
@@ -688,7 +688,7 @@ public class LevelManager : MonoBehaviour {
         {
             worldspritesLevelList[i].SetActive(false);
         }
-        if (worldlevel == worldspritesLevelList.Length)
+        if (worldlevel >= worldspritesLevelList.Length)
         {
             numberOfRounds++;
             worldlevel = 1;
@@ -708,10 +708,8 @@ public class LevelManager : MonoBehaviour {
         int _musicArrayIndex = 0;
         if (_worldNumber > AudioManager.Instance.musicArray.Length)
         {
-            _musicArrayIndex = _worldNumber - AudioManager.Instance.musicArray.Length;
-        } else
-        {
-            _musicArrayIndex = _worldNumber - 1;
+
+            _musicArrayIndex = 0;
         }
 
         if (AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicArray[_musicArrayIndex])

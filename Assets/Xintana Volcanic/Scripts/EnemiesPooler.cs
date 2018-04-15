@@ -32,6 +32,8 @@ public class EnemiesPooler : Pooler {
                     GameObject obj = (GameObject)Instantiate(enemiesList.xintanaEnemies[j].prefab);
                     obj.transform.parent = this.transform;
                     obj.transform.position = Vector3.zero;
+                    obj.GetComponent<EnemyController>().appearsOnWorld = enemiesList.xintanaEnemies[j].appearsInWorld[0];
+                    //obj.GetComponent<EnemyController>().type = enemiesList.xintanaEnemies[j].type;
                     obj.SetActive(false);
                     pooledObjects.Add(obj);
                 }
