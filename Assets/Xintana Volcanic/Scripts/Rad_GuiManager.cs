@@ -541,7 +541,7 @@ public class Rad_GuiManager : MonoBehaviour {
     {
         if (!_powerUpOn)
         {
-            float _tempValue = value / 10;
+            float _tempValue = value / 60;
             if (powerUpSlider.value + _tempValue >= 1 && powerUpSlider.value != 1)
             {
                 //TODO add poer Up button
