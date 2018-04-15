@@ -102,6 +102,10 @@ public class AdsManager : MonoBehaviour {
             case ShowResult.Failed:
                 StartCoroutine(FunctionLibrary.CallWithDelay(_levelManager.GameOverPanel, 2f));
                 break;
+
+            default:
+                StartCoroutine(FunctionLibrary.CallWithDelay(_levelManager.GameOverPanel, 2f));
+                break;
         }
     }
 
