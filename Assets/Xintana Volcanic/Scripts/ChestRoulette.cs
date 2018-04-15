@@ -145,7 +145,7 @@ public class ChestRoulette : MonoBehaviour {
         GameObject obj =_coinsPooler.GetPooledCoin();
         obj.transform.position = coinsImage.transform.position;
         obj.SetActive(true);
-        obj.transform.DOMove(coinsEndPosition.position, 0.5f, false).OnComplete(() => 
+        obj.transform.DOMove(coinsEndPosition.position, 15f, false).SetSpeedBased().OnComplete(() => 
         {
             AudioManager.Instance.Play_CoinCollect();
             SpawnCoinCollectedParticle(obj.transform.position);
@@ -520,13 +520,13 @@ public class ChestRoulette : MonoBehaviour {
     }
     public void ChestPresentation()
     {
-        rouletteTitle.transform.DOMove(posTitle.position, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
+        rouletteTitle.transform.DOMove(posTitle.position, 0.55f).SetEase(Ease.OutBack).OnComplete(() =>
         {
-            chest1.transform.DOMove(posChest1.position, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
+            chest1.transform.DOMove(posChest1.position, 0.55f).SetEase(Ease.OutBack).OnComplete(() =>
             {
-                chest2.transform.DOMove(posChest2.position, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
+                chest2.transform.DOMove(posChest2.position, 0.55f).SetEase(Ease.OutBack).OnComplete(() =>
                 {
-                    chest3.transform.DOMove(posChest3.position, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
+                    chest3.transform.DOMove(posChest3.position, 0.55f).SetEase(Ease.OutBack).OnComplete(() =>
                     {
                         RestartChestGenerations();
                     });
@@ -552,7 +552,7 @@ public class ChestRoulette : MonoBehaviour {
         yield return new WaitForSeconds(time);
 
         _prizePanelOn = true;
-        pricePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+        pricePanel.transform.DOLocalMoveY(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
         {
 
             if (prizeAmount > 0 && prizeType.categoryType != PrizeType.WEAPON)
@@ -574,7 +574,7 @@ public class ChestRoulette : MonoBehaviour {
 
         backButton.enabled = true;
         _prizePanelOn = false;
-        pricePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+        pricePanel.transform.DOLocalMoveY(1000f, 0.75f).SetEase(Ease.OutBack);
 
     }
     public void Button_CheckRerollButton()
@@ -657,11 +657,11 @@ public class ChestRoulette : MonoBehaviour {
     }
     public void ShowStartRoulettePanel()
     {
-        startRoulettePanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
+        startRoulettePanel.transform.DOLocalMoveY(0f, 0.75f).SetEase(Ease.OutBack);
     }
     public void HideStartRoulettePanel()
     {
-        startRoulettePanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack);
+        startRoulettePanel.transform.DOLocalMoveY(1000f, 0.75f).SetEase(Ease.OutBack);
         _menuManager.CheckInventory();
     }
     public void SetCanOpen(bool value) { canOpen = value; }
