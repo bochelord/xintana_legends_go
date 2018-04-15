@@ -611,10 +611,12 @@ public class ChestRoulette : MonoBehaviour {
             switch (randomCHest)
             {
                 case 0:
-                    _chest.prize = chests[1].prize;
+                    if (_chest.prize.categoryType != chests[1].prize.categoryType)
+                        _chest.prize = chests[1].prize;
                     break;
                 case 1:
-                    _chest.prize = chests[2].prize;
+                    if (_chest.prize.categoryType != chests[2].prize.categoryType)
+                        _chest.prize = chests[2].prize;
                     break;
             }
         }
@@ -623,10 +625,12 @@ public class ChestRoulette : MonoBehaviour {
             switch (randomCHest)
             {
                 case 0:
-                    _chest.prize = chests[0].prize;
+                    if (_chest.prize.categoryType != chests[0].prize.categoryType)
+                        _chest.prize = chests[0].prize;
                     break;
                 case 1:
-                    _chest.prize = chests[2].prize;
+                    if (_chest.prize.categoryType != chests[2].prize.categoryType)
+                        _chest.prize = chests[2].prize;
                     break;
             }
         }
@@ -635,10 +639,12 @@ public class ChestRoulette : MonoBehaviour {
             switch (randomCHest)
             {
                 case 0:
-                    _chest.prize = chests[1].prize;
+                    if (_chest.prize.categoryType != chests[1].prize.categoryType)
+                        _chest.prize = chests[1].prize;
                     break;
                 case 1:
-                    _chest.prize = chests[0].prize;
+                    if (_chest.prize.categoryType != chests[0].prize.categoryType)
+                        _chest.prize = chests[0].prize;
                     break;
             }
         }
