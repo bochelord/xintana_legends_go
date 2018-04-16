@@ -199,7 +199,7 @@ public class RadUnityConnector : MonoBehaviour
                     bestiary_enemy.nameId = "Blood Mage";
                 } else if (string.Equals(ssObjects[i]["name"].ToString(), "Berserker"))
                 {
-                    tempEnemy.type = EnemyType.bersekerMale;
+                    tempEnemy.type = EnemyType.berserker;
                     bestiary_enemy.nameId = "Berserker";
                 } else if (string.Equals(ssObjects[i]["name"].ToString(), "Makula"))
                 {
@@ -375,7 +375,7 @@ public class RadUnityConnector : MonoBehaviour
             bestiary_enemy.appearsInWorld = tempEnemy.world;
             bestiary_enemy.score = tempEnemy.score;
 
-
+            
 
             ///Get the prefabs
             for (int x = 0; x < enemiesPrefabs.Length; x++)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
+    public string nameID;
     public int level;
     public EnemyType type;
     public int score;

@@ -2,17 +2,18 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 
 public class AsyncLoadLevel : MonoBehaviour {
 
 
     [Header("Binding")]
     public static string LoadingScreenSceneName = "LoadingScreen";
-
+    public Text percentage;
 
     //private ProgressBarBehaviour barBehaviour;
     private AsyncOperation _asyncOperation; // When assigned, load is in progress.
+    private Scrollbar scrollbar_handle;
     protected static string _sceneToLoad = "";
 
     /// <summary>
@@ -46,6 +47,8 @@ public class AsyncLoadLevel : MonoBehaviour {
         // we setup our various visual elements
         //LoadingSetup();
 
+        scrollbar_handle = this.GetComponent<Scrollbar>();
+        float temp;
         // we start loading the scene
         _asyncOperation = SceneManager.LoadSceneAsync(_sceneToLoad, LoadSceneMode.Single);
         _asyncOperation.allowSceneActivation = false;
@@ -53,6 +56,18 @@ public class AsyncLoadLevel : MonoBehaviour {
         // while the scene loads, we assign its progress to a target that we'll use to fill the progress bar smoothly
         while (_asyncOperation.progress < 0.9f)
         {
+
+            
+                
+                scrollbar_handle.size = _asyncOperation.progress;
+                temp = _asyncOperation.progress * 100;
+                if (temp >= 89)
+                {
+                    temp = 100;
+                }
+                percentage.text = temp.ToString("F2") + "%";
+          
+
             //_fillTarget = _asyncOperation.progress;
             yield return null;
         }

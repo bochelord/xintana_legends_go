@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [System.Serializable]
-public enum EnemyType { zazuc, makula, blackKnight, lavabeast, alchemist, devil, explorer, fireMage, iceBeast, skeletonMage, smileZombie, parasite, mutant, bloodMage, bersekerMale}
+public enum EnemyType { zazuc, makula, blackKnight, lavabeast, alchemist, devil, explorer, fireMage, iceBeast, skeletonMage, smileZombie, parasite, mutant, bloodMage, berserker}
 
 
 public class EnemyStructure {
@@ -142,8 +142,8 @@ public class EnemyStructure {
                 damageGrowth = 0.1f;
                 score = 1500;
                 break;
-            case EnemyType.bersekerMale:
-                this.type = EnemyType.bersekerMale;
+            case EnemyType.berserker:
+                this.type = EnemyType.berserker;
                 lifeBase = 3.5f;
                 lifeGrowth = 0.07f;
                 damageBase = 2.75f;
@@ -174,7 +174,7 @@ public class EnemyStructure {
         retEnemy.dna_colorsat = UnityEngine.Random.Range(-2f, 2f);
         retEnemy.dna_brightness = UnityEngine.Random.Range(0.50f, 2f);
 
-        if (retEnemy.type == EnemyType.makula || retEnemy.type == EnemyType.mutant || retEnemy.type == EnemyType.bersekerMale)
+        if (retEnemy.type == EnemyType.makula || retEnemy.type == EnemyType.mutant || retEnemy.type == EnemyType.berserker)
         {
             retEnemy.xpBase = 10f;
             retEnemy.xpGrowth = 0.15f;

@@ -443,4 +443,15 @@ public class PokedexManager : MonoBehaviour {
         //SceneManager.LoadScene("XintanaLegendsGo_Menu");
         AsyncLoadLevel.LoadScene("XintanaLegendsGo_Menu");
     }
+
+
+
+    //public string GetEnemyNameID(EnemyType inType)
+    //{
+    //    foreach (GameObject enemy in bestiaryList)
+    //    {
+
+    //    }
+    //}
+
 }

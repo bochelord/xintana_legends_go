@@ -36,10 +36,12 @@ public class EnemiesPooler : Pooler {
                     if (obj.GetComponent<EnemyController>())
                     {
                         obj.GetComponent<EnemyController>().appearsOnWorld = enemiesList.xintanaEnemies[j].appearsInWorld[0];
+                        obj.GetComponent<EnemyController>().nameID = enemiesList.xintanaEnemies[j].nameId;
                     }
                     else if (obj.GetComponentInChildren<EnemyController>())
                     {
                         obj.GetComponentInChildren<EnemyController>().appearsOnWorld = enemiesList.xintanaEnemies[j].appearsInWorld[0];
+                        obj.GetComponentInChildren<EnemyController>().nameID = enemiesList.xintanaEnemies[j].nameId;
                     }
                     else
                     {
