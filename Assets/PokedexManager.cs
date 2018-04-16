@@ -272,7 +272,7 @@ public class PokedexManager : MonoBehaviour {
                 if(bestiaryList.xintanaEnemies[i].type == _tempController.type)
                 {
                     enemyName.text = bestiaryList.xintanaEnemies[i].nameId;
-                    enemyWorld.text = "World " + bestiaryList.xintanaEnemies[i].appearsInWorld[0];
+                    enemyWorld.text = I2.Loc.LocalizationManager.GetTranslation("World") + " " + bestiaryList.xintanaEnemies[i].appearsInWorld[0];
                     break;
                 }
             }
@@ -281,7 +281,7 @@ public class PokedexManager : MonoBehaviour {
         {
             //still unknown enemy
             enemyName.text = "?????";
-            enemyWorld.text = "World " + bestiaryList.xintanaEnemies[pokedexIndex].appearsInWorld[0];
+            enemyWorld.text = I2.Loc.LocalizationManager.GetTranslation("World") + " " + bestiaryList.xintanaEnemies[pokedexIndex].appearsInWorld[0];
             //get 2dfx component so we can change their color
             _2dxFX_HSV[] _sprites = _enemies[pokedexIndex].GetComponentsInChildren<_2dxFX_HSV>();
             if(_sprites != null)
