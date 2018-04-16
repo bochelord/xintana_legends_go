@@ -142,62 +142,69 @@ public class RadUnityConnector : MonoBehaviour
                 if (string.Equals(ssObjects[i]["name"].ToString(), "Zazuc"))
                 {
                     tempEnemy.type = EnemyType.zazuc;
-                }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Black Knight"))
+                    bestiary_enemy.nameId = "Zazuc";
+
+                } else if (string.Equals(ssObjects[i]["name"].ToString(), "Black Knight"))
                 {
                     tempEnemy.type = EnemyType.blackKnight;
-                }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Devil"))
+                    bestiary_enemy.nameId = "Black Knight";
+                } else if (string.Equals(ssObjects[i]["name"].ToString(), "Devil"))
                 {
                     tempEnemy.type = EnemyType.devil;
-                }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Explorer"))
+                    bestiary_enemy.nameId = "Devil";
+
+                } else if (string.Equals(ssObjects[i]["name"].ToString(), "Explorer"))
                 {
                     tempEnemy.type = EnemyType.explorer;
-                }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Fire Mage"))
+                    bestiary_enemy.nameId = "Explorer";
+
+                } else if (string.Equals(ssObjects[i]["name"].ToString(), "Fire Mage"))
                 {
                     tempEnemy.type = EnemyType.fireMage;
-                }
+                    bestiary_enemy.nameId = "Fire Mage";
+
+                } 
                 else if (string.Equals(ssObjects[i]["name"].ToString(), "Ice Beast"))
                 {
+                    bestiary_enemy.nameId = "Ice Beast";
                     tempEnemy.type = EnemyType.iceBeast;
-                }
+                } 
                 else if (string.Equals(ssObjects[i]["name"].ToString(), "Lava Beast"))
                 {
                     tempEnemy.type = EnemyType.lavabeast;
-                }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Alchemist"))
+                    bestiary_enemy.nameId = "Lava Beast";
+                } else if (string.Equals(ssObjects[i]["name"].ToString(), "Alchemist"))
                 {
                     tempEnemy.type = EnemyType.alchemist;
-                }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Skeleton Mage"))
+                    bestiary_enemy.nameId = "Alchemist";
+                } else if (string.Equals(ssObjects[i]["name"].ToString(), "Skeleton Mage"))
                 {
                     tempEnemy.type = EnemyType.skeletonMage;
-                }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Zombie"))
+                    bestiary_enemy.nameId = "Skeleton Mage";
+                } else if (string.Equals(ssObjects[i]["name"].ToString(), "Zombie"))
                 {
                     tempEnemy.type = EnemyType.smileZombie;
-                }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Parasite"))
+                    bestiary_enemy.nameId = "Zombie";
+                } else if (string.Equals(ssObjects[i]["name"].ToString(), "Parasite"))
                 {
                     tempEnemy.type = EnemyType.parasite;
-                }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Mutant"))
+                    bestiary_enemy.nameId = "Parasite";
+                } else if (string.Equals(ssObjects[i]["name"].ToString(), "Mutant"))
                 {
                     tempEnemy.type = EnemyType.mutant;
-                }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Blood Mage"))
+                    bestiary_enemy.nameId = "Mutant";
+                } else if (string.Equals(ssObjects[i]["name"].ToString(), "Blood Mage"))
                 {
                     tempEnemy.type = EnemyType.bloodMage;
-                }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Berserker"))
+                    bestiary_enemy.nameId = "Blood Mage";
+                } else if (string.Equals(ssObjects[i]["name"].ToString(), "Berserker"))
                 {
                     tempEnemy.type = EnemyType.bersekerMale;
-                }
-                else if (string.Equals(ssObjects[i]["name"].ToString(), "Makula"))
+                    bestiary_enemy.nameId = "Berserker";
+                } else if (string.Equals(ssObjects[i]["name"].ToString(), "Makula"))
                 {
                     tempEnemy.type = EnemyType.makula;
+                    bestiary_enemy.nameId = "Makula";
                 }
             }
 
@@ -357,8 +364,7 @@ public class RadUnityConnector : MonoBehaviour
             //EnemyList.Add(tempEnemy);
             //Debug.Log("Added Enemy as:" + tempEnemy.type.ToString());
             //Adding to the Scriptable Object
-            bestiary_enemy.nameId = tempEnemy.type.ToString();
-
+            
             bestiary_enemy.type = tempEnemy.type;
 
             bestiary_enemy.damageBase = tempEnemy.damageBase;
