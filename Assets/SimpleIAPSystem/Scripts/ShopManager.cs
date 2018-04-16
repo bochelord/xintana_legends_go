@@ -325,7 +325,7 @@ namespace SIS
             {
                 icpd.price[0].text = shopItem.price[0].text;
                 icpd.coinsIcon.SetActive(false);
-                icpd.gemsIcon.SetActive(true);
+                icpd.gemsIcon.SetActive(false);
 
             }
             else if (obj.editorType == IAPType.Currency)
