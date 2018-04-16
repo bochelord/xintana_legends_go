@@ -39,14 +39,11 @@ public class AdsManager : MonoBehaviour {
     }
     public void ShowAdForExtraLife()
     {
-        if (Advertisement.IsReady() && !Rad_SaveManager.profile.extraLife)
+        if (Advertisement.IsReady())
         {
             Advertisement.Show("rewardedVideo",new ShowOptions() { resultCallback = HandleResultExtraLife });
         }
-        else
-        {
-            _levelManager.ContinueGame();
-        }
+
     }
 
     private void HandleResultExtraLife(ShowResult result)

@@ -56,6 +56,7 @@ public class Rad_GuiManager : MonoBehaviour {
     [Header("ViewAdsPanel")]
     public Text timeCountdown;
     public Text timeCountDownContinuePanel;
+    public Text timeCountDownText;
     [Header("Reward Panel")]
     public Text rewardText;
     public Image rewardImage;
@@ -153,6 +154,7 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             _timerCountdown -= Time.deltaTime;
             timeCountDownContinuePanel.text = Mathf.Round(_timerCountdown).ToString();
+            timeCountDownText.text = Mathf.Round(_timerCountdown).ToString();
             if (_timerCountdown < 0)
             {
                 HideContinuePanel();
@@ -534,6 +536,7 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             ContinueNoAdPanel.SetActive(false);
             _levelManager.ContinueGame();
+            //Debug.Log("dentro de HideContinuePanel de Rad_GuiManager.");
         });
     }
 
