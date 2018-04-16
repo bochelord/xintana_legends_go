@@ -59,7 +59,8 @@ public class NativeShareScript : MonoBehaviour
 
         
 
-        string destination = Path.Combine(Application.persistentDataPath, "xintanalegendsgo_" + count +".jpg");
+        //string destination = Path.Combine(Application.persistentDataPath, "xintanalegendsgo_" + count +".jpg");
+        string destination = Path.Combine(Application.persistentDataPath, "xintanalegendsgo.jpg");
         JPGEncoder encoder = new JPGEncoder(_texture, 75, destination);
 
         //encoder is threaded; wait for it to finish
