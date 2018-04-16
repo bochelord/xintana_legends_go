@@ -251,10 +251,12 @@ public class LevelManager : MonoBehaviour {
         }
         else if (_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") > 0)
         {
+            Debug.Log("AttackPlayer! _playerManager.life <= 0 && SIS.DBManager.GetPurchase('si_1up') > 0");
             combinationManager.SetGameOn(false);
             Rad_SaveManager.profile.extraLifePurchased--;
             if (Rad_SaveManager.profile.extraLifePurchased <= 0)
             {
+                Debug.Log("AttackPlayer! _playerManager.life <= 0 && si_1ip > 0 =========== Rad_SaveManager.profile.extraLifePurchased <= 0");
                 SIS.DBManager.RemovePurchase("si_1up");
                 SIS.DBManager.RemovePurchaseUI("si_1up");
                 Rad_SaveManager.profile.extraLife = false;
