@@ -174,7 +174,7 @@ public class EnemyStructure {
         retEnemy.dna_colorsat = UnityEngine.Random.Range(-2f, 2f);
         retEnemy.dna_brightness = UnityEngine.Random.Range(0.50f, 2f);
 
-        if (retEnemy.type == EnemyType.makula)
+        if (retEnemy.type == EnemyType.makula || retEnemy.type == EnemyType.mutant || retEnemy.type == EnemyType.bersekerMale)
         {
             retEnemy.xpBase = 10f;
             retEnemy.xpGrowth = 0.15f;
