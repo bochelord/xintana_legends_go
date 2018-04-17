@@ -54,8 +54,9 @@ namespace SIS
                     //the user bought the item "coins", show appropriate feedback
                     
                     ShowMessage(ScriptLocalization.si_x2);
-                    DBManager.IncreasePurchase("si_x2", 1);
-                    Rad_SaveManager.profile.doubleScorePurchased++;
+                    //DBManager.IncreasePurchase("si_x2", 1);
+                    
+                    //Rad_SaveManager.profile.doubleScorePurchased++;
                     Rad_SaveManager.profile.doubleScore = true;
                     AnalyticsManager.Instance.Item_Bought_Event("Double Score");
                     AchievementsManager.Instance.BuyDoubleScoreAchievement();

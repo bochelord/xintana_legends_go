@@ -49,27 +49,6 @@ MonoBehaviour:
   - id: 1449154555.24286565
     name: Items
     items:
-    - id: si_x2
-      storeIDs: []
-      type: 0
-      title: X2
-      description: Double your score!
-      realPrice: 
-      fetch: 0
-      icon: {fileID: 21300000, guid: bf91dd0e328beec45909d46d9577c5f9, type: 3}
-      usageCount: 1
-      virtualPrice:
-      - name: coins
-        amount: 500
-      - name: gems
-        amount: 0
-      req:
-        entry: 
-        target: 0
-        labelText: 
-        nextId: 
-      editorType: 2
-      platformFoldout: 0
     - id: si_1up
       storeIDs: []
       type: 0
@@ -175,10 +154,29 @@ MonoBehaviour:
         nextId: 
       editorType: 2
       platformFoldout: 0
+    - id: si_x2
+      storeIDs:
+      - store: GooglePlay
+        id: si_x2
+      type: 1
+      title: X2
+      description: Double your score FOREVER!
+      realPrice: $2.99
+      fetch: 1
+      icon: {fileID: 21300000, guid: bf91dd0e328beec45909d46d9577c5f9, type: 3}
+      usageCount: 1
+      virtualPrice: []
+      req:
+        entry: 
+        target: 0
+        labelText: 
+        nextId: 
+      editorType: 0
+      platformFoldout: 0
     - id: si_1gem
       storeIDs:
       - store: GooglePlay
-        id: 
+        id: si_1gem
       type: 0
       title: 1 Gem
       description: Gems will get you tons of gold
@@ -199,7 +197,7 @@ MonoBehaviour:
     - id: si_5gems
       storeIDs:
       - store: GooglePlay
-        id: 
+        id: si_5gems
       type: 0
       title: 5 Gems
       description: 20% Discount
@@ -220,7 +218,7 @@ MonoBehaviour:
     - id: si_10gems
       storeIDs:
       - store: GooglePlay
-        id: 
+        id: si_10gems
       type: 0
       title: 10 Gems
       description: 25% Discount
@@ -241,7 +239,7 @@ MonoBehaviour:
     - id: si_20gems
       storeIDs:
       - store: GooglePlay
-        id: 
+        id: si_20gems
       type: 0
       title: 20 Gems
       description: 30% Discount
@@ -262,7 +260,7 @@ MonoBehaviour:
     - id: si_supportdevs
       storeIDs:
       - store: GooglePlay
-        id: 
+        id: si_supportdevs
       type: 1
       title: Support Devs!
       description: Eternal gratitude
