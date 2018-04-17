@@ -19,6 +19,10 @@ public class PokedexManager : MonoBehaviour {
     [Header("Canvas")]
     public Text enemyName;
     public Text enemyWorld;
+    public Text enemyScore;
+    
+    public Slider enemyLifeSlider;
+    public Slider enemyDamageSlider;
 
 
     [Header("Enemies Scriptable Object")]
@@ -273,6 +277,10 @@ public class PokedexManager : MonoBehaviour {
                 {
                     enemyName.text = bestiaryList.xintanaEnemies[i].nameId;
                     enemyWorld.text = I2.Loc.LocalizationManager.GetTranslation("World") + " " + bestiaryList.xintanaEnemies[i].appearsInWorld[0];
+                    enemyLifeSlider.value = bestiaryList.xintanaEnemies[i].life;
+                    enemyDamageSlider.value = bestiaryList.xintanaEnemies[i].damage;
+                    int BestiaryEnemyScore = bestiaryList.xintanaEnemies[i].score;
+                    enemyScore.text = BestiaryEnemyScore.ToString();
                     break;
                 }
             }
@@ -282,6 +290,9 @@ public class PokedexManager : MonoBehaviour {
             //still unknown enemy
             enemyName.text = "?????";
             enemyWorld.text = I2.Loc.LocalizationManager.GetTranslation("World") + " " + bestiaryList.xintanaEnemies[pokedexIndex].appearsInWorld[0];
+            enemyLifeSlider.value = 0.0f;
+            enemyDamageSlider.value = 0.0f;
+            enemyScore.text = "?????";
             //get 2dfx component so we can change their color
             _2dxFX_HSV[] _sprites = _enemies[pokedexIndex].GetComponentsInChildren<_2dxFX_HSV>();
             if(_sprites != null)
