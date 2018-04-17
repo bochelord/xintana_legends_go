@@ -173,11 +173,11 @@ namespace SIS
             }
 
             //if (title) title.text = name;
-            Debug.Log("name: " + name);
+            //Debug.Log("name: " + name);
             if (title) title.text = I2.Loc.LocalizationManager.GetTranslation(name);
             Debug.Log(title.text.ToString());
             //if (description) description.text = descr;
-            Debug.Log("description: " + description);
+            //Debug.Log("description: " + description);
             if (description) description.text = I2.Loc.LocalizationManager.GetTranslation(descr);
             Debug.Log(description.text.ToString());
 
