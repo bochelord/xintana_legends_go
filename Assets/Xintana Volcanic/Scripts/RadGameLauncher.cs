@@ -10,6 +10,31 @@ public class RadGameLauncher : MonoBehaviour {
 
 #if UNITY_ANDROID || UNITY_IOS
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+        //we set the language to the device language by default
+        switch (Application.systemLanguage)
+        {
+            case SystemLanguage.Arabic:
+                I2.Loc.LocalizationManager.CurrentLanguage = "Arabic";
+                
+                break;
+            case SystemLanguage.Italian:
+                I2.Loc.LocalizationManager.CurrentLanguage = "Italian";
+                break;
+            case SystemLanguage.Spanish:
+                I2.Loc.LocalizationManager.CurrentLanguage = "Spanish";
+                break;
+            case SystemLanguage.Portuguese:
+                I2.Loc.LocalizationManager.CurrentLanguage = "Portuguese (Brazil)";
+                break;
+            case SystemLanguage.English:
+                I2.Loc.LocalizationManager.CurrentLanguage = "English";
+                break;
+
+        }
+
+        print("Language set to " + I2.Loc.LocalizationManager.CurrentLanguage.ToString());
+
 #endif
 
         if (ES2.Exists(Rad_SaveManager.xintanaProfileFilename))
