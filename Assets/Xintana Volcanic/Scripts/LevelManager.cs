@@ -310,14 +310,20 @@ public class LevelManager : MonoBehaviour {
             //StartCoroutine(FunctionLibrary.CallWithDelay(enemyPooler.RemoveElement(enemyController.transform),1.7f));
         }
 
+        float _scoreMultiplier = (float)_playerManager.level / levelin;
 
+        if(_scoreMultiplier > 1)
+        {
+            _scoreMultiplier = 1;
+        }
 
-        DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + _enemyPoints * levelin * timeRemaining, 3);
+        DOTween.To(() => playerScoreUI, x => playerScoreUI = x, playerScoreUI + _enemyPoints * _scoreMultiplier * timeRemaining, 3);
         DOTween.To(() => combinationManager.timerSlider.value, x => combinationManager.timerSlider.value = x, 0, 3f).OnComplete(() =>
          {
              combinationManager.ChangeTimerSliderColor(1);
              GetNewEnemy(1.5f);
-             _playerScore += _enemyPoints * levelin * timeRemaining;
+
+             _playerScore += _enemyPoints * _scoreMultiplier * timeRemaining;
              AudioManager.Instance.Stop_AddScore();
              AchievementsManager.Instance.IncrementScoreAchievements(_playerScore);
              shellSpawned = false; // reset
