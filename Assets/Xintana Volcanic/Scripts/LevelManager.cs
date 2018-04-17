@@ -635,10 +635,11 @@ public class LevelManager : MonoBehaviour {
     {
         _extraLifeUsed = true;
         Rad_SaveManager.profile.extraLifePurchased--;
+        //Debug.Log("Extra lifes: " + Rad_SaveManager.profile.extraLifePurchased);
         if (Rad_SaveManager.profile.extraLifePurchased <= 0)
         {
             SIS.DBManager.RemovePurchase("si_1up");
-            SIS.DBManager.RemovePurchaseUI("si_1up");
+            //SIS.DBManager.RemovePurchaseUI("si_1up");
             Rad_SaveManager.profile.extraLife = false;
             _extraLifePurchased = false;
         }

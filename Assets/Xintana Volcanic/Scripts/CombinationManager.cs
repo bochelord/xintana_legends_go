@@ -291,16 +291,16 @@ public class CombinationManager : MonoBehaviour {
                 //levelManager.AddNemesisCount();
                 if(SIS.DBManager.GetPurchase("si_1up") > 0 && !levelManager._extraLifeUsed)
                 {
-                    levelManager._extraLifeUsed = true;
-                    SetGameOn(false);
-                    Rad_SaveManager.profile.extraLifePurchased--;
-                    if (Rad_SaveManager.profile.extraLifePurchased <= 0)
-                    {
-                        SIS.DBManager.RemovePurchase("si_1up");
-                        SIS.DBManager.RemovePurchaseUI("si_1up");
-                        Rad_SaveManager.profile.extraLife = false;
-                        levelManager._extraLifePurchased = false;
-                    }
+                    //levelManager._extraLifeUsed = true;
+                    //SetGameOn(false);
+                    //Rad_SaveManager.profile.extraLifePurchased--;
+                    //if (Rad_SaveManager.profile.extraLifePurchased <= 0)
+                    //{
+                    //    //SIS.DBManager.RemovePurchase("si_1up");
+                    //    //SIS.DBManager.RemovePurchaseUI("si_1up");
+                    //    Rad_SaveManager.profile.extraLife = false;
+                    //    levelManager._extraLifePurchased = false;
+                    //}
                     MoveButtonsOut();
                     StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowContinuePanel, 2f));
                 }
