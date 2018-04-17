@@ -29,7 +29,8 @@ public class CombinationManager : MonoBehaviour {
     public GameObject auraCombination;
     [Header("UI Buttons")]
     public GameObject[] uiButtons;
-    
+    public GameObject powerUpButton;
+
     [HideInInspector]
     public int combinationLength=1;                   //Combination length that the User will has to solve.
 
@@ -474,6 +475,12 @@ public class CombinationManager : MonoBehaviour {
             uiButtons[i].GetComponent<Button>().interactable = false;
 
         }
+        if (powerUpButton)
+        {
+            powerUpButton.GetComponent<Button>().interactable = false;
+            powerUpButton.GetComponent<Image>().DOFade(0.5f, 0);
+        }
+
     }
 
     public void ChangeTimerSliderColor(float value)
@@ -494,6 +501,12 @@ public class CombinationManager : MonoBehaviour {
                 uiButtons[i].GetComponent<Button>().interactable = true;
             }
         }
+        if (powerUpButton)
+        {
+            powerUpButton.GetComponent<Button>().interactable = true;
+            powerUpButton.GetComponent<Image>().DOFade(1,0);
+        }
+
     }
     public void CombinationButtons(bool _value)
     {
