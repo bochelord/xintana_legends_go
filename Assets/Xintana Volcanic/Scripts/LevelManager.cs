@@ -79,7 +79,10 @@ public class LevelManager : MonoBehaviour {
     private bool musiclevel2_AlreadyPlayed = false;
     private bool musiclevel3_AlreadyPlayed = false;
     private bool _criticsPowerUp = false;
-    private bool _extraLifePurchased = false;
+    [HideInInspector]
+    public bool _extraLifePurchased = false;
+    [HideInInspector]
+    public bool _ExtraLifeUsed = false;
     private bool _healPowerUp = false;
     //private int currentWorld = 1;
 
@@ -220,7 +223,23 @@ public class LevelManager : MonoBehaviour {
         AudioManager.Instance.Play_XintanaHit();
 
 
-        if (_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") <= 0)
+
+        if (_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") > 0 && !_ExtraLifeUsed)
+        {
+            _ExtraLifeUsed = true;
+            combinationManager.SetGameOn(false);
+            Rad_SaveManager.profile.extraLifePurchased--;
+            if (Rad_SaveManager.profile.extraLifePurchased <= 0)
+            {
+                SIS.DBManager.RemovePurchase("si_1up");
+                SIS.DBManager.RemovePurchaseUI("si_1up");
+                Rad_SaveManager.profile.extraLife = false;
+                _extraLifePurchased = false;
+            }
+            combinationManager.MoveButtonsOut();
+            StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowContinuePanel, 2f));
+        }
+        else if (_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") <= 0)
         {
             screenshot.TakeDeathScreenshot();
 
@@ -249,29 +268,13 @@ public class LevelManager : MonoBehaviour {
                 adManager.adViewed = false;
             }
         }
-        else if (_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") > 0)
-        {
-            Debug.Log("AttackPlayer! _playerManager.life <= 0 && SIS.DBManager.GetPurchase('si_1up') > 0");
-            combinationManager.SetGameOn(false);
-            Rad_SaveManager.profile.extraLifePurchased--;
-            if (Rad_SaveManager.profile.extraLifePurchased <= 0)
-            {
-                Debug.Log("AttackPlayer! _playerManager.life <= 0 && si_1ip > 0 =========== Rad_SaveManager.profile.extraLifePurchased <= 0");
-                SIS.DBManager.RemovePurchase("si_1up");
-                SIS.DBManager.RemovePurchaseUI("si_1up");
-                Rad_SaveManager.profile.extraLife = false;
-                _extraLifePurchased = false;
-            }
-            combinationManager.MoveButtonsOut();
-            StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowContinuePanel, 2f));
-        }
+
     }
 
     public void GetNewEnemy(float delay)
     {
         StartCoroutine(CoroGetNewEnemy(delay));
     }
-
 
     /// <summary>
     /// called in combinationManager, when you kill an enemy

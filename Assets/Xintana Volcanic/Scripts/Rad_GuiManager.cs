@@ -157,7 +157,7 @@ public class Rad_GuiManager : MonoBehaviour {
             timeCountDownText.text = Mathf.Round(_timerCountdown).ToString();
             if (_timerCountdown < 0)
             {
-                HideContinuePanel();
+                HideContinuePanelAndEndGame();
             }
         }
         if (_scorePanelOn)
@@ -528,7 +528,7 @@ public class Rad_GuiManager : MonoBehaviour {
         ContinueNoAdPanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
     }
 
-    public void HideContinuePanel()
+    public void HideContinuePanelAndContinue()
     {
         timerContdownContinue = false;
         _timerCountdown = 5;
@@ -536,10 +536,18 @@ public class Rad_GuiManager : MonoBehaviour {
         {
             ContinueNoAdPanel.SetActive(false);
             _levelManager.ContinueGame();
-            //Debug.Log("dentro de HideContinuePanel de Rad_GuiManager.");
         });
     }
-
+    public void HideContinuePanelAndEndGame()
+    {
+        timerContdownContinue = false;
+        _timerCountdown = 5;
+        ContinueNoAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+        {
+            ContinueNoAdPanel.SetActive(false);
+            PlayerGameOverPanelOn();
+        });
+    }
     public void AddPowerUpSlider(float value)
     {
         if (!_powerUpOn)

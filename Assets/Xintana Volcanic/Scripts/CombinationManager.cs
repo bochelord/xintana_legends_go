@@ -284,14 +284,26 @@ public class CombinationManager : MonoBehaviour {
             }
             if (timerSlider.value <= 0)
             {
-
                 ///TIME IS UP, PLAYER LOSES CAUSE OF THE TIME...          
-                
                 RanOutofTimeProcess();
                 //levelManager.GameOverPanel();
                 //levelManager.AddNemesisCount();
-
-                if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped <= levelManager.adsSkipped && !Rad_SaveManager.profile.noAds)
+                if(SIS.DBManager.GetPurchase("si_1up") > 0 && !levelManager._ExtraLifeUsed)
+                {
+                    levelManager._ExtraLifeUsed = true;
+                    SetGameOn(false);
+                    Rad_SaveManager.profile.extraLifePurchased--;
+                    if (Rad_SaveManager.profile.extraLifePurchased <= 0)
+                    {
+                        SIS.DBManager.RemovePurchase("si_1up");
+                        SIS.DBManager.RemovePurchaseUI("si_1up");
+                        Rad_SaveManager.profile.extraLife = false;
+                        levelManager._extraLifePurchased = false;
+                    }
+                    MoveButtonsOut();
+                    StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowContinuePanel, 2f));
+                }
+                else if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped <= levelManager.adsSkipped && !Rad_SaveManager.profile.noAds)
                 {
                     MoveButtonsOut();
                     _guiManager.ShowAdPanel();
