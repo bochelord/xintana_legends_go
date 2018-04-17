@@ -49,7 +49,7 @@ public class XintanaProfile : MonoBehaviour {
         XintanaProfile profile = new XintanaProfile
         {
 #if !UNITY_EDITOR
-        profile.gameVersion = Application.version;
+            gameVersion = Application.version,
 #else
             gameVersion = "Debugversion",
 #endif
