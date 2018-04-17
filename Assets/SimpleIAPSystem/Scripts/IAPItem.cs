@@ -172,8 +172,14 @@ namespace SIS
                 lockText = lockText.ToUpper();
             }
 
-            if (title) title.text = name;
-            if (description) description.text = descr;
+            //if (title) title.text = name;
+            Debug.Log("name: " + name);
+            if (title) title.text = I2.Loc.LocalizationManager.GetTranslation(name);
+            Debug.Log(title.text.ToString());
+            //if (description) description.text = descr;
+            Debug.Log("description: " + description);
+            if (description) description.text = I2.Loc.LocalizationManager.GetTranslation(descr);
+            Debug.Log(description.text.ToString());
 
             //Debug.Log("obj.editorType " + obj.editorType.ToString());
             if (obj.editorType != IAPType.Virtual)
