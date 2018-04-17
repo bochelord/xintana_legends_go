@@ -99,7 +99,7 @@ public class PokedexManager : MonoBehaviour {
     #region Input
     public void checkInput()
     {
-        checkSwipeTouch();
+      //  checkSwipeTouch();
         checkSwipeClick();
     }
     void checkSwipeTouch()
