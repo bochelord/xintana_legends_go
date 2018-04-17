@@ -530,10 +530,12 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void HideContinuePanelAndContinue()
     {
+        _levelManager.RemoveExtraLife();
         timerContdownContinue = false;
         _timerCountdown = 5;
         ContinueNoAdPanel.transform.DOLocalMoveY(1000f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
         {
+            
             ContinueNoAdPanel.SetActive(false);
             _levelManager.ContinueGame();
         });

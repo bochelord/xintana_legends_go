@@ -82,7 +82,7 @@ public class LevelManager : MonoBehaviour {
     [HideInInspector]
     public bool _extraLifePurchased = false;
     [HideInInspector]
-    public bool _ExtraLifeUsed = false;
+    public bool _extraLifeUsed = false;
     private bool _healPowerUp = false;
     //private int currentWorld = 1;
 
@@ -224,22 +224,15 @@ public class LevelManager : MonoBehaviour {
 
 
 
-        if (_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") > 0 && !_ExtraLifeUsed)
+        if (_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") > 0 && !_extraLifeUsed)
         {
-            _ExtraLifeUsed = true;
+
             combinationManager.SetGameOn(false);
-            Rad_SaveManager.profile.extraLifePurchased--;
-            if (Rad_SaveManager.profile.extraLifePurchased <= 0)
-            {
-                SIS.DBManager.RemovePurchase("si_1up");
-                SIS.DBManager.RemovePurchaseUI("si_1up");
-                Rad_SaveManager.profile.extraLife = false;
-                _extraLifePurchased = false;
-            }
+
             combinationManager.MoveButtonsOut();
             StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowContinuePanel, 2f));
         }
-        else if (_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") <= 0)
+        else if (_playerManager.life <= 0)
         {
             screenshot.TakeDeathScreenshot();
 
@@ -420,6 +413,31 @@ public class LevelManager : MonoBehaviour {
 
     //    }
     //}
+    private IEnumerator ContinueGame(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        combinationManager.fightNumberValueText.text = _enemyCount.ToString();
+        combinationManager.fightNumberValueText.transform.DOPunchScale(combinationManager.fightNumberValueText.transform.position, 0.5f, 1, 5f);
+
+        enemyController = enemy.GetComponent<EnemyController>();
+        if (enemyController == null)
+        {
+            enemyController = enemy.GetComponentInChildren<EnemyController>();
+        }
+        enemy.transform.position = enemyContainer.position;
+
+        if (_guiManager.enemyText)
+        {
+            _guiManager.enemyText.text = enemyController.type.ToString();
+        }
+        enemy.SetActive(true);
+        enemy.transform.SetParent(enemyContainer);
+        enemyKilled = false;
+        healthBarController.SetScrollbarValue();
+        combinationManager.ResetGame();
+        state = GameState.Running;
+    }
     private IEnumerator CoroGetNewEnemy(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -597,16 +615,28 @@ public class LevelManager : MonoBehaviour {
         _guiManager.UpdateIcons();
         combinationManager.timeToResolveCombination = combinationManager.original_timeToResolveCombination;
         //_guiManager.GameOverPanelOff();
-        enemyPooler.RemoveElement(enemyController.transform);
+        //enemyPooler.RemoveElement(enemyController.transform);
         combinationManager.MoveButtonsIn();
         //combinationManager.ResetCurrentLenghtCombination();
         PrepareBackgroundLevel(_worldNumber);
         AudioManager.Instance.ResumeMusic();
         _playerManager.OnAttackFinished();
         _playerManager.life = _playerManager.GetMaxLife();
-        GetNewEnemy(1);
+        StartCoroutine(ContinueGame(1));
+        //GetNewEnemy(1);
     }
-
+    public void RemoveExtraLife()
+    {
+        _extraLifeUsed = true;
+        Rad_SaveManager.profile.extraLifePurchased--;
+        if (Rad_SaveManager.profile.extraLifePurchased <= 0)
+        {
+            SIS.DBManager.RemovePurchase("si_1up");
+            SIS.DBManager.RemovePurchaseUI("si_1up");
+            Rad_SaveManager.profile.extraLife = false;
+            _extraLifePurchased = false;
+        }
+    }
     public void PauseGame()
     {
         state = GameState.Paused;

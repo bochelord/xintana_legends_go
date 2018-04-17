@@ -288,9 +288,9 @@ public class CombinationManager : MonoBehaviour {
                 RanOutofTimeProcess();
                 //levelManager.GameOverPanel();
                 //levelManager.AddNemesisCount();
-                if(SIS.DBManager.GetPurchase("si_1up") > 0 && !levelManager._ExtraLifeUsed)
+                if(SIS.DBManager.GetPurchase("si_1up") > 0 && !levelManager._extraLifeUsed)
                 {
-                    levelManager._ExtraLifeUsed = true;
+                    levelManager._extraLifeUsed = true;
                     SetGameOn(false);
                     Rad_SaveManager.profile.extraLifePurchased--;
                     if (Rad_SaveManager.profile.extraLifePurchased <= 0)
