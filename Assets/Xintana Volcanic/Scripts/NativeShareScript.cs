@@ -30,7 +30,7 @@ public class NativeShareScript : MonoBehaviour
             guiManager.FillSharePanel();
             _xintanaProfile.sharedScoreTimes++;
             AnalyticsManager.Instance.Shared_Screen(_xintanaProfile.sharedScoreTimes);
-            AchievementsManager.Instance.IncrementShareScoreAchievement();
+            //AchievementsManager.Instance.IncrementShareScoreAchievement();
         }
 
         if (!isProcessing)

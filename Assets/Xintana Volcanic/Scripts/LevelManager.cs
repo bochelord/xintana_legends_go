@@ -325,7 +325,7 @@ public class LevelManager : MonoBehaviour {
 
              _playerScore += _enemyPoints * _scoreMultiplier * timeRemaining;
              AudioManager.Instance.Stop_AddScore();
-             AchievementsManager.Instance.IncrementScoreAchievements(_playerScore);
+             //AchievementsManager.Instance.IncrementScoreAchievements(_playerScore);
              shellSpawned = false; // reset
          });
 

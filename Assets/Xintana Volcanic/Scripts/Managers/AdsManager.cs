@@ -57,7 +57,7 @@ public class AdsManager : MonoBehaviour {
                 _levelManager.ContinueGame();
                 _guiManager.HideAdPanel();
                 _analyticsManager.ResurrectionAd_Event(true);
-                AchievementsManager.Instance.ReviveAdAchievement();
+                //AchievementsManager.Instance.ReviveAdAchievement();
                 break;
             case ShowResult.Skipped:
                 _guiManager.HideAdPanelAndStartGameOverPanel();
@@ -122,7 +122,7 @@ public class AdsManager : MonoBehaviour {
                 Rad_SaveManager.profile.shells++;
                 _menuManager.HideFreeShellPanel();
                 _chestManager.StartRoulettePanel();
-                AchievementsManager.Instance.TokenAdAchievement();
+                //AchievementsManager.Instance.TokenAdAchievement();
                 break;
 
         }
@@ -132,7 +132,7 @@ public class AdsManager : MonoBehaviour {
     {
         AdsViewed++;
         Rad_SaveManager.profile.adsViewed++;
-        AchievementsManager.Instance.IncrementAdsWatchedAchievements();
+        //AchievementsManager.Instance.IncrementAdsWatchedAchievements();
     }
     public void ShowAdNoReward()
     {

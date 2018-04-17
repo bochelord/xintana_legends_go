@@ -96,7 +96,7 @@ public class Rad_GuiManager : MonoBehaviour {
     private int _tempLevel;
     private float _attackValue;
     private float _hpValue;
-    private AndroidLeaderboard _leaderboardManager;
+//    private AndroidLeaderboard _leaderboardManager;
     private Coroutine gameOverPanelCoroutine;
 
     private void Awake()
@@ -108,7 +108,7 @@ public class Rad_GuiManager : MonoBehaviour {
         _screenshot = FindObjectOfType<ScreenShot>();
         _playerManager = FindObjectOfType<PlayerManager>();
         _audioManager = FindObjectOfType<AudioManager>();
-        _leaderboardManager = FindObjectOfType<AndroidLeaderboard>();
+        //_leaderboardManager = FindObjectOfType<AndroidLeaderboard>();
         _combinationManager = FindObjectOfType<CombinationManager>();
     }
 
@@ -408,7 +408,7 @@ public class Rad_GuiManager : MonoBehaviour {
             Rad_SaveManager.profile.highscore = (int)_levelManager.GetPlayerScore();
             Rad_SaveManager.SaveData();
 
-            _leaderboardManager.OnAddScoreToLeaderBorad();
+            //_leaderboardManager.OnAddScoreToLeaderBorad();
 
             GameObject clone_HighScoreFxPrefab;
             clone_HighScoreFxPrefab = Instantiate(HighScoreFxPrefab);
