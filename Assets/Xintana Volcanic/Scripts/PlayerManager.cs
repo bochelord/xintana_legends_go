@@ -235,7 +235,7 @@ public class PlayerManager : MonoBehaviour {
     {
         life += damage;
     }
-    public void AddExperience(int value)
+    public void AddExperience(float value)
     {
         totalExpPerGame += value;
         experience += value;

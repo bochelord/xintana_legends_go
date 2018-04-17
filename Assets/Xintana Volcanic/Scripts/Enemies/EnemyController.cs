@@ -138,8 +138,14 @@ public class EnemyController : MonoBehaviour {
         levelManager.AddPlayerScoreAndGetNewEnemy(this.type, level);
         levelManager.enemyKilled = true;
         AchievementsManager.Instance.IncrementKillsAchievements();
-        _playerManager.AddExperience(_experience);
-        levelManager.LaunchShowHUDText(this.transform.position + new Vector3(-0.25f,0.25f,0f), "+" + _experience + "  XP", new Color32(85, 187, 17, 255),false);
+        float _expMultiplier = (float)level / _playerManager.level;
+        if(_expMultiplier > 1)
+        {
+            _expMultiplier = 1;
+        }
+
+        _playerManager.AddExperience(_experience * _expMultiplier);
+        levelManager.LaunchShowHUDText(this.transform.position + new Vector3(-0.25f,0.25f,0f), "+" + _experience * _expMultiplier + "  XP", new Color32(85, 187, 17, 255),false);
         //levelManager.GetNewEnemy(2.5f);
         DeadAnimation();
     }
