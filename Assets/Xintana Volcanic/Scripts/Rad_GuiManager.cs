@@ -153,7 +153,7 @@ public class Rad_GuiManager : MonoBehaviour {
         if (timerContdownContinue)
         {
             _timerCountdown -= Time.deltaTime;
-            timeCountDownContinuePanel.text = Mathf.Round(_timerCountdown).ToString();
+            //timeCountDownContinuePanel.text = Mathf.Round(_timerCountdown).ToString();
             timeCountDownText.text = Mathf.Round(_timerCountdown).ToString();
             if (_timerCountdown < 0)
             {
@@ -392,7 +392,7 @@ public class Rad_GuiManager : MonoBehaviour {
                 if(Rad_SaveManager.profile.doubleScorePurchased <= 0)
                 {
                     SIS.DBManager.RemovePurchase("si_x2");
-                    SIS.DBManager.RemovePurchaseUI("si_x2");
+                    //SIS.DBManager.RemovePurchaseUI("si_x2");
                     Rad_SaveManager.profile.doubleScore = false;
                 }
                 x2Text.SetActive(true);
@@ -528,6 +528,9 @@ public class Rad_GuiManager : MonoBehaviour {
         ContinueNoAdPanel.transform.DOLocalMoveY(0f, 1f).SetEase(Ease.OutBack);
     }
 
+    /// <summary>
+    /// Called from Button
+    /// </summary>
     public void HideContinuePanelAndContinue()
     {
         _levelManager.RemoveExtraLife();
