@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour {
     public EnemyType type;
     public int score;
     private int _experience;
-    public int appearsOnWorld;
+    public int[] appearsOnWorld;
 
     private Animator animator;
     private _2dxFX_HSV hsv_spriteFX;

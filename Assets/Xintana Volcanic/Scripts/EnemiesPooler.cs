@@ -35,12 +35,12 @@ public class EnemiesPooler : Pooler {
 
                     if (obj.GetComponent<EnemyController>())
                     {
-                        obj.GetComponent<EnemyController>().appearsOnWorld = enemiesList.xintanaEnemies[j].appearsInWorld[0];
+                        obj.GetComponent<EnemyController>().appearsOnWorld = enemiesList.xintanaEnemies[j].appearsInWorld;
                         obj.GetComponent<EnemyController>().nameID = enemiesList.xintanaEnemies[j].nameId;
                     }
                     else if (obj.GetComponentInChildren<EnemyController>())
                     {
-                        obj.GetComponentInChildren<EnemyController>().appearsOnWorld = enemiesList.xintanaEnemies[j].appearsInWorld[0];
+                        obj.GetComponentInChildren<EnemyController>().appearsOnWorld = enemiesList.xintanaEnemies[j].appearsInWorld;
                         obj.GetComponentInChildren<EnemyController>().nameID = enemiesList.xintanaEnemies[j].nameId;
                     }
                     else
@@ -109,7 +109,7 @@ public class EnemiesPooler : Pooler {
         List<GameObject> retEnemies = new List<GameObject>();
         foreach (GameObject enemyobj in pooledObjects)
         {
-            if (!enemyobj.activeInHierarchy && appearInWorld == enemyobj.GetComponentInChildren<EnemyController>().appearsOnWorld)
+            if (!enemyobj.activeInHierarchy && isEnemyInWorld(appearInWorld, enemyobj.GetComponentInChildren<EnemyController>().appearsOnWorld))
             {
                 retEnemies.Add(enemyobj);
             }
@@ -121,7 +121,7 @@ public class EnemiesPooler : Pooler {
         {
             for (int i = 0; i < enemiesList.xintanaEnemies.Count; i++)
             {
-                if (appearInWorld == enemiesList.xintanaEnemies[i].appearsInWorld[0])
+                if (isEnemyInWorld(appearInWorld, enemiesList.xintanaEnemies[i].appearsInWorld))
                 {
                     GameObject obj = (GameObject)Instantiate(enemiesList.xintanaEnemies[i].prefab);
                     obj.transform.parent = current.transform;
@@ -196,7 +196,7 @@ public class EnemiesPooler : Pooler {
         GameObject ret = null;
         for (int i = 0; i < inactiveBosses.Count; i++)
         {
-            if (inactiveBosses[i].GetComponentInChildren<EnemyController>().appearsOnWorld == appearinWorld)
+            if (isEnemyInWorld(appearinWorld, inactiveBosses[i].GetComponentInChildren<EnemyController>().appearsOnWorld))
             {
                 found = true;
                 ret = inactiveBosses[i];
@@ -249,6 +249,22 @@ public class EnemiesPooler : Pooler {
         for (int i = 0; i < array.Length; i++)
         {
             if (element == array[i])
+            {
+                ret = true;
+            }
+        }
+
+        return ret;
+    }
+
+
+    private bool isEnemyInWorld(int worldEnemy, int[] worlds)
+    {
+        bool ret = false;
+
+        for (int i = 0; i < worlds.Length; i++)
+        {
+            if (worldEnemy == worlds[i])
             {
                 ret = true;
             }
