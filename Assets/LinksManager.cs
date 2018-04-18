@@ -48,6 +48,15 @@ public class LinksManager : MonoBehaviour {
         Application.OpenURL("https://www.linkedin.com/in/williameperry/");
     }
 
+    public void Button_TwitterClaudiaGiglio()
+    {
+        Application.OpenURL("https://twitter.com/gigliolaclaudia");
+    }
+
+    public void Button_TwitterInigoViu()
+    {
+        Application.OpenURL("https://twitter.com/inigoviu");
+    }
 
     public void Button_back()
     {
