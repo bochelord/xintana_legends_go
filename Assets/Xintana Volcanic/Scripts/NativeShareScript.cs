@@ -88,16 +88,16 @@ public class NativeShareScript : MonoBehaviour
                 intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"),
                     uriObject);
                 intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"),
-                    "Can you beat my score?");
+                    I2.Loc.LocalizationManager.GetTranslation("share_text"));
                 intentObject.Call<AndroidJavaObject>("setType", "image/jpeg");
                 AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
                 AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
                 AndroidJavaObject chooser = intentClass.CallStatic<AndroidJavaObject>("createChooser",
-                    intentObject, "Share your new score");
+                    intentObject, I2.Loc.LocalizationManager.GetTranslation("share_title"));
                 currentActivity.Call("startActivity", chooser);
             }
             else {
-                ShareAndroid("Can you beat my score?", "Score", destination, null, "image/jpeg", true, "Share your new score");
+                ShareAndroid(I2.Loc.LocalizationManager.GetTranslation("share_text"), I2.Loc.LocalizationManager.GetTranslation("share_score"), destination, null, "image/jpeg", true, I2.Loc.LocalizationManager.GetTranslation("share_title"));
             }
 #endif
 
