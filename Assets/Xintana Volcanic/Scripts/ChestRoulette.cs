@@ -365,6 +365,7 @@ public class ChestRoulette : MonoBehaviour {
                 break;
             case PrizeType.GEMS:
                 Rad_SaveManager.profile.gems += prizeAmount;
+                SIS.DBManager.IncreaseFunds("gems", prizeAmount);
                 break;
             case PrizeType.SHELLS:
                 Rad_SaveManager.profile.shells += prizeAmount;
