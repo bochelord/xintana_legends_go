@@ -14,5 +14,6 @@ public class KogiReward : MonoBehaviour {
     public void BUTTON_SpawnKogiReward()
     {
         _levelManager.SpawnKogiReward();
+        AudioManager.Instance.playKogiAppears();
     }
 }

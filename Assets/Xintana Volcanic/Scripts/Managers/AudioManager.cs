@@ -25,6 +25,7 @@ public class AudioManager : MonoBehaviour {
     public ScriptableObject xintana_attack_weapon_2;
     public ScriptableObject xintana_death;
     public ScriptableObject xintana_hit;
+    public ScriptableObject kogiAppearsClip;
 
     [Header("FX")]
     public ScriptableObject YouWin;
@@ -248,6 +249,14 @@ public class AudioManager : MonoBehaviour {
         if (collectGem && audioEnabled)
         {
             ((SimpleAudioEvent)collectGem).Play(fxPlayer);
+        }
+    }
+
+    public void playKogiAppears()
+    {
+        if (kogiAppearsClip && audioEnabled)
+        {
+            ((SimpleAudioEvent)kogiAppearsClip).Play(fxPlayer);
         }
     }
 }
