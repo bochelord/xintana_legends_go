@@ -65,7 +65,32 @@ public class AndroidLeaderboard : MonoBehaviour
                     Debug.Log("Update Score Fail");
                 }
             });
+        } 
+        else
+        {
+            Social.localUser.Authenticate((bool success) =>
+            {
+                if (success)
+                {
+                    Debug.Log("Login Sucess");
+                    Social.ReportScore(Rad_SaveManager.profile.highscore, leaderboard, (bool successHighscore) =>
+                    {
+                        if (successHighscore)
+                        {
+                            Debug.Log("Update Score Success");
+
+                        } else
+                        {
+                            Debug.Log("Update Score Fail");
+                        }
+                    });
+                } else
+                {
+                    Debug.Log("Login failed");
+                }
+            });
         }
+        
     }
     /// <summary>
     /// On Logout of your Google+ Account
