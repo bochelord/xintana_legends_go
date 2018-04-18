@@ -447,6 +447,13 @@ public class CombinationManager : MonoBehaviour {
 
     public void MoveButtonsOut()
     {
+        for (int i = 0; i < combinationButtons.transform.childCount; i++)
+        {
+            if (combinationButtons.transform.GetChild(i).GetComponent<Button>())
+            {
+                combinationButtons.transform.GetChild(i).GetComponent<Button>().interactable = false;
+            }
+        }
         //combinationButtons.GetComponent<GUIAnimFREE>().MoveOut();
         //combinationButtons.transform.DOLocalMove
         combinationButtons.transform.DOLocalMove(new Vector3(-2.5f, -1000f, 0f), 0.7f);
@@ -455,6 +462,13 @@ public class CombinationManager : MonoBehaviour {
     }
     public void MoveButtonsIn()
     {
+        for (int i = 0; i < combinationButtons.transform.childCount; i++)
+        {
+            if (combinationButtons.transform.GetChild(i).GetComponent<Button>())
+            {
+                combinationButtons.transform.GetChild(i).GetComponent<Button>().interactable = true;
+            }
+        }
         //combinationButtons.GetComponent<GUIAnimFREE>().m_MoveIn.Time = 0.5f;
         //combinationButtons.GetComponent<GUIAnimFREE>().MoveIn();
 
