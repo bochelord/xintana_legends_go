@@ -301,12 +301,12 @@ public class CombinationManager : MonoBehaviour {
                     //    Rad_SaveManager.profile.extraLife = false;
                     //    levelManager._extraLifePurchased = false;
                     //}
-                    MoveButtonsOut();
+                    //MoveButtonsOut();
                     StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowContinuePanel, 2f));
                 }
                 else if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped <= levelManager.adsSkipped && !Rad_SaveManager.profile.noAds)
                 {
-                    MoveButtonsOut();
+                    //MoveButtonsOut();
                     _guiManager.ShowAdPanel();
                 }
                 else if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped >= levelManager.adsSkipped && !Rad_SaveManager.profile.noAds)
@@ -551,7 +551,7 @@ public class CombinationManager : MonoBehaviour {
         AudioManager.Instance.Play_XintanaDeath();
         levelManager.player.GetComponent<Animator>().SetInteger("AnimState", 4);
         ShowLoseText();
-
+        MoveButtonsOut();
     }
 
 
