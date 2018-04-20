@@ -290,6 +290,7 @@ public class ChestRoulette : MonoBehaviour {
         else if (prizeType.categoryType == PrizeType.GEMS)
         {
             Rad_SaveManager.profile.gems += prizeAmount;
+            SIS.DBManager.IncreaseFunds("gems", prizeAmount);
         }
         else if(prizeType.categoryType == PrizeType.SHELLS)
         {
