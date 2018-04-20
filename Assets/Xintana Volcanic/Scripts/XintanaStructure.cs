@@ -16,11 +16,11 @@ public class XintanaStructure
         switch (weaponType)
         {
             case WeaponType.blue:
-                damageBase = 2;
+                damageBase = 3;
                 damageGrouth = 0.01f;
                 break;
             case WeaponType.green:
-                damageBase = 2.5f;
+                damageBase = 2f;
                 damageGrouth = 0.01f;
                 break;
             case WeaponType.red:
@@ -28,7 +28,7 @@ public class XintanaStructure
                 damageGrouth = 0.005f;
                 break;
             case WeaponType.yellow:
-                damageBase = 3;
+                damageBase = 2.5f;
                 damageGrouth = 0.025f;
                 break;
             case WeaponType.black:

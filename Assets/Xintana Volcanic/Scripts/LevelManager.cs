@@ -694,6 +694,10 @@ public class LevelManager : MonoBehaviour {
                 });
             }
         }
+        else
+        {
+            kogiSpawned = false;
+        }
     }
 
 
@@ -823,12 +827,13 @@ public class LevelManager : MonoBehaviour {
     }
     #endregion
 
-    //#if UNITY_EDITOR
-    //void OnGUI() { 
-    //if (GUI.Button(new Rect(10, 70, 50, 30), "KOGI"))
-    //{
-    //        this.SpawnKogiBounty();
-    //}
-    //}
-    //#endif
+//#if UNITY_EDITOR
+//    void OnGUI()
+//    {
+//        if (GUI.Button(new Rect(10, 70, 50, 30), "KOGI"))
+//        {
+//            this.SpawnKogiBounty();
+//        }
+//    }
+//#endif
 }

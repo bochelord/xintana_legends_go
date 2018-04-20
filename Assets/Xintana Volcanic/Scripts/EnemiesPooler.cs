@@ -238,7 +238,13 @@ public class EnemiesPooler : Pooler {
     }
     public override void RemoveElement(Transform item)
     {
-        base.RemoveElement(item);
+        if (!item.GetComponentInChildren<KogiReward>())
+        {
+            item.transform.SetParent(this.transform);
+        }
+        //Reset it's position
+        item.transform.position = new Vector3(0, 0, 0);
+        item.gameObject.SetActive(false);
     }
 
 
