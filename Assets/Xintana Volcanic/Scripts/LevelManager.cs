@@ -588,7 +588,13 @@ public class LevelManager : MonoBehaviour {
 
     public int GetCurrentEnemyLevel()
     {
-        return _currentEnemyLevel;
+        int _enemyLevel = _playerManager.level;
+        if(_playerManager.level > 2)
+        {
+            int _randomlevel = Random.Range(0, 2);
+            _enemyLevel = _playerManager.level + _randomlevel;
+        }
+        return _enemyLevel;
     }
 
     public void GameOverPanel()
