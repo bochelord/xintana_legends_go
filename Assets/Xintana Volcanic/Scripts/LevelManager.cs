@@ -74,7 +74,8 @@ public class LevelManager : MonoBehaviour {
     private HealthBarControllerBoss healthBarController;
     private List<Transform> inactiveHUDTextList = new List<Transform>();
 
-    private bool kogiSpawned = false;
+    [HideInInspector]
+    public bool kogiSpawned = false;
     private bool shellSpawned = false;
     private bool musiclevel2_AlreadyPlayed = false;
     private bool musiclevel3_AlreadyPlayed = false;
@@ -86,6 +87,8 @@ public class LevelManager : MonoBehaviour {
     private bool _healPowerUp = false;
     //private int currentWorld = 1;
 
+    private Canvas _canvas;
+
     void Awake()
     {
         screenshot = FindObjectOfType<ScreenShot>();
@@ -95,6 +98,7 @@ public class LevelManager : MonoBehaviour {
         adManager = FindObjectOfType<AdsManager>();
         healthBarController = FindObjectOfType<HealthBarControllerBoss>();
         _extraLifePurchased = Rad_SaveManager.profile.extraLife;
+        _canvas = FindObjectOfType<Canvas>();
     }
 
     void Start()
@@ -588,7 +592,13 @@ public class LevelManager : MonoBehaviour {
 
     public int GetCurrentEnemyLevel()
     {
-        return _currentEnemyLevel;
+        int _enemyLevel = _playerManager.level;
+        if(_playerManager.level > 2)
+        {
+            int _randomlevel = Random.Range(0, 2);
+            _enemyLevel = _playerManager.level + _randomlevel;
+        }
+        return _enemyLevel;
     }
 
     public void GameOverPanel()
@@ -688,37 +698,143 @@ public class LevelManager : MonoBehaviour {
                 });
             }
         }
+        else
+        {
+            kogiSpawned = false;
+        }
     }
 
 
     public void SpawnKogiReward()
     {
         state = GameState.Paused;
-        GenerateAndShowKogiReward();
+        //GenerateAndShowKogiReward();
         enemyPooler.RemoveElement(_kogi.transform);
         combinationManager.CombinationButtons(false);
         kogiSpawned = true;
     }
 
-    private void GenerateAndShowKogiReward()
+    /// <summary>
+    /// New Method to manage how and what Kogi will spawn when clicked/touched.
+    /// </summary>
+    public void SpawnKogiRewardTween()
+    {
+        GenerateKogiReward();
+        enemyPooler.RemoveElement(_kogi.transform);
+        kogiSpawned = false;
+    }
+
+    //private void GenerateAndShowKogiReward()
+    //{
+    //    bool _price = Random.value > 0.5f;
+    //    int _randomprice;
+    //    if (_price)
+    //    {
+    //        _randomprice = Random.Range(0, kogiRewardsList.coinsItemsList.Count);
+    //        kogiReward = kogiRewardsList.coinsItemsList[_randomprice];
+    //        SIS.DBManager.IncreaseFunds("coins", kogiReward.itemValue);
+    //    }
+    //    else
+    //    {
+    //        _randomprice = Random.Range(0, kogiRewardsList.tokensItemsList.Count);
+    //        kogiReward = kogiRewardsList.tokensItemsList[_randomprice];
+    //        Rad_SaveManager.profile.shells += kogiReward.itemValue;
+    //    }
+    //    _guiManager.SetKogiRewardPanel(kogiReward.description, kogiReward.itemSprite);
+
+    //}
+
+    private void GenerateKogiReward()
     {
         bool _price = Random.value > 0.5f;
+        //Debug.Log("_price: " + _price);
         int _randomprice;
         if (_price)
         {
             _randomprice = Random.Range(0, kogiRewardsList.coinsItemsList.Count);
+            //Debug.Log("_randomprice: " + _randomprice.ToString());
             kogiReward = kogiRewardsList.coinsItemsList[_randomprice];
-            SIS.DBManager.IncreaseFunds("coins", kogiReward.itemValue);
+            //Debug.Log("kogiReward: " + kogiReward.ToString());
         }
         else
         {
             _randomprice = Random.Range(0, kogiRewardsList.tokensItemsList.Count);
+            //Debug.Log("_randomprice: " + _randomprice.ToString());
             kogiReward = kogiRewardsList.tokensItemsList[_randomprice];
-            Rad_SaveManager.profile.shells += kogiReward.itemValue;
+            //Debug.Log("kogiReward: " + kogiReward.ToString());
         }
-        _guiManager.SetKogiRewardPanel(kogiReward.description, kogiReward.itemSprite);
+
+        StartCoroutine(ShowKogiRewardAndSendToTarget(_kogi, player));
+    }
+
+    IEnumerator ShowKogiRewardAndSendToTarget(GameObject fromTarget, GameObject toTarget)
+    {
+        Debug.Log("IEnumerator launched!");
+
+        List<GameObject> coinsArray = new List<GameObject>();
+
+        Vector2 posConverted;
+
+
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject tempCoin = null;
+            if (kogiReward.categoryType == PrizeType.COINS)
+            {
+                tempCoin = coinsPooler.GetPooledCoin();
+            }
+            else if (kogiReward.categoryType == PrizeType.GEMS)
+            {
+                tempCoin = coinsPooler.GetPooledGem();
+            }
+            else if (kogiReward.categoryType == PrizeType.SHELLS)
+            {
+                tempCoin = coinsPooler.GetPooledShell();
+            }
+
+
+            tempCoin.SetActive(true);
+
+            tempCoin.transform.position = fromTarget.transform.position;
+            tempCoin.transform.SetParent(_canvas.transform);
+            tempCoin.transform.localScale = new Vector3(1, 1, 1);
+            coinsArray.Add(tempCoin);
+
+            Debug.Log("tempCoin: " + tempCoin.name);
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            toTarget.transform.position = Random.insideUnitCircle;
+            posConverted = RectTransformUtility.WorldToScreenPoint(null, toTarget.transform.position);
+            coinsArray[i].transform.DOMove(posConverted, 0.5f, false);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+
+            StartCoroutine(KillKogiRewardOnXintana(coinsArray[i], toTarget));
+        }
+
+        LaunchShowHUDText(toTarget.transform.position, kogiReward.description, new Color32(210, 104, 26, 255), false);
+
+        yield return null;
 
     }
+
+    IEnumerator KillKogiRewardOnXintana(GameObject reward, GameObject toTarget)
+    {
+        Vector2 posConverted;
+        posConverted = RectTransformUtility.WorldToScreenPoint(null, toTarget.transform.position);
+        reward.transform.DOMove(posConverted, 0.5f, false).OnComplete(() =>
+        {
+            
+            coinsPooler.RemoveElement(reward.transform);
+        });
+        yield return null;
+    }
+
     #endregion
 
     #region World Level Generation
@@ -817,12 +933,13 @@ public class LevelManager : MonoBehaviour {
     }
     #endregion
 
-    //#if UNITY_EDITOR
-    //void OnGUI() { 
-    //if (GUI.Button(new Rect(10, 70, 50, 30), "KOGI"))
-    //{
-    //        this.SpawnKogiBounty();
-    //}
-    //}
-    //#endif
+#if UNITY_EDITOR
+    void OnGUI()
+    {
+        if (GUI.Button(new Rect(10, 70, 50, 30), "KOGI"))
+        {
+            this.SpawnKogiBounty();
+        }
+    }
+#endif
 }

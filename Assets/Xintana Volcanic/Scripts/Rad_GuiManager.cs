@@ -218,7 +218,7 @@ public class Rad_GuiManager : MonoBehaviour {
         if (expScoreText)
         {
             //TODO MAKE IT DYNAMIC -> tweenable
-            expScoreText.text = _playerManager.experience.ToString() + "/" + _playerManager.GetExperienceToLevelUp().ToString();
+            expScoreText.text = _playerManager.experience.ToString("f1") + "/" + _playerManager.GetExperienceToLevelUp().ToString();
         }
         if (attackScoreValue)
         {

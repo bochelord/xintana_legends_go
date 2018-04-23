@@ -111,6 +111,7 @@ public class CoinsPooler : Pooler {
     public override void RemoveElement(Transform item)
     {
         item.transform.position = new Vector3(0, 0, 0);
+        item.transform.parent = this.transform;
         item.gameObject.SetActive(false);
     }
 }

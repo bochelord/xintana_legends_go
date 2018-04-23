@@ -145,7 +145,7 @@ public class EnemyController : MonoBehaviour {
         }
 
         _playerManager.AddExperience(_experience * _expMultiplier);
-        levelManager.LaunchShowHUDText(this.transform.position + new Vector3(-0.25f,0.25f,0f), "+" + _experience * _expMultiplier + "  XP", new Color32(85, 187, 17, 255),false);
+        levelManager.LaunchShowHUDText(this.transform.position + new Vector3(-0.25f,0.25f,0f), "+" +( _experience * _expMultiplier).ToString("f1") + "  XP", new Color32(85, 187, 17, 255),false);
         //levelManager.GetNewEnemy(2.5f);
         DeadAnimation();
     }

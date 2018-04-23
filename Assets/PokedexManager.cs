@@ -106,62 +106,62 @@ public class PokedexManager : MonoBehaviour {
       //  checkSwipeTouch();
         checkSwipeClick();
     }
-    void checkSwipeTouch()
-    {
+    //void checkSwipeTouch()
+    //{
 
-        if (Input.touches.Length > 0)
-        {
-            Touch t = Input.GetTouch(0);
-            if (t.phase == TouchPhase.Began)
-            {
-                //save began touch 2d point
-                firstPressPos = new Vector2(t.position.x, t.position.y);
-            }
+    //    if (Input.touches.Length > 0)
+    //    {
+    //        Touch t = Input.GetTouch(0);
+    //        if (t.phase == TouchPhase.Began)
+    //        {
+    //            //save began touch 2d point
+    //            firstPressPos = new Vector2(t.position.x, t.position.y);
+    //        }
 
-            else if (t.phase == TouchPhase.Ended)
-            {
-                //save ended touch 2d point
-                secondPressPos = new Vector2(t.position.x, t.position.y);
+    //        else if (t.phase == TouchPhase.Ended)
+    //        {
+    //            //save ended touch 2d point
+    //            secondPressPos = new Vector2(t.position.x, t.position.y);
 
-                //create vector from the two points
-                currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
+    //            //create vector from the two points
+    //            currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
 
-                //normalize the 2d vector
-                currentSwipe.Normalize();
+    //            //normalize the 2d vector
+    //            currentSwipe.Normalize();
 
-                //swipe left
-                if (currentSwipe.x < 0 && currentSwipe.y > -1f && currentSwipe.y < 1f)
-                {
-                    _swipe = Swipe.Left;
-                    if(pokedexIndex >= _enemies.Count - 1)
-                    {
-                        pokedexIndex = 0;
-                    }
-                    else
-                    {
-                        pokedexIndex++;
-                    }
-                    _step = PokedexStep.CheckAnimation;
-                }
+    //            //swipe left
+    //            if (currentSwipe.x < 0 && currentSwipe.y > -1f && currentSwipe.y < 1f)
+    //            {
+    //                _swipe = Swipe.Left;
+    //                if(pokedexIndex >= _enemies.Count - 1)
+    //                {
+    //                    pokedexIndex = 0;
+    //                }
+    //                else
+    //                {
+    //                    pokedexIndex++;
+    //                }
+    //                _step = PokedexStep.CheckAnimation;
+    //            }
 
-                //swipe right
-                if (currentSwipe.x > 0 && currentSwipe.y > -1f && currentSwipe.y < 1f)
-                {
-                    _swipe = Swipe.Right;
-                    if (pokedexIndex <= 0)
-                    {
-                        pokedexIndex = _enemies.Count-1;
-                    }
-                    else
-                    {
-                        pokedexIndex--;
-                    }
-                    _step = PokedexStep.CheckAnimation;
-                }
+    //            //swipe right
+    //            if (currentSwipe.x > 0 && currentSwipe.y > -1f && currentSwipe.y < 1f)
+    //            {
+    //                _swipe = Swipe.Right;
+    //                if (pokedexIndex <= 0)
+    //                {
+    //                    pokedexIndex = _enemies.Count-1;
+    //                }
+    //                else
+    //                {
+    //                    pokedexIndex--;
+    //                }
+    //                _step = PokedexStep.CheckAnimation;
+    //            }
                 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
     void checkSwipeClick()
     {
         if (Input.GetMouseButtonDown(0))

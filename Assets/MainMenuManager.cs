@@ -12,6 +12,7 @@ public class MainMenuManager : MonoBehaviour {
     public GameObject noShellsPanel;
     public GameObject freeShellpanel;
     public GameObject blockButtonsPanel;
+    public GameObject quitPanel;
     [Header("Main Menu")]
     public Text attackValue;
     public Text highscoreMainMenuText;
@@ -221,6 +222,26 @@ public class MainMenuManager : MonoBehaviour {
     {
         _adsManager.ShowAddForFreeShell();
     }
+
+
+    public void Show_QuitPanel()
+    {
+        quitPanel.SetActive(true);
+        quitPanel.transform.DOMoveY(0f, 0.4f).SetEase(Ease.OutBack);
+    }
+
+    public void Button_Quit()
+    {
+        Application.Quit();
+    }
+
+    public void Button_CancelQuit()
+    {
+        quitPanel.transform.DOMoveY(100f, 0.4f).SetEase(Ease.OutBack).OnComplete(() => { quitPanel.SetActive(false); });
+      
+        
+    }
+
     public void Button_Shop()
     {
         if(_chestManager.state == RouletteState.READY)
