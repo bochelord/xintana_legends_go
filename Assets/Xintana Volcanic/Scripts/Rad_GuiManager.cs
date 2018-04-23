@@ -120,7 +120,7 @@ public class Rad_GuiManager : MonoBehaviour {
         AddExperienceToSlider(_tempExp);
         if(Rad_SaveManager.profile.weaponEquipped != WeaponType.red)
         {
-            powerUpSlider.gameObject.SetActive(true);
+            powerUpSlider.transform.parent.gameObject.SetActive(true);
         }
        UpdatePowerUpColorSlider();
     }
