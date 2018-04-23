@@ -619,12 +619,12 @@ public class Rad_GuiManager : MonoBehaviour {
     }
     void ShowPowerUpButton()
     {
-        powerUpButton.transform.DOLocalMoveY(180,2).SetEase(Ease.OutBack);
+        powerUpButton.transform.DOLocalMoveX(190,2).SetEase(Ease.OutBack);
         powerUpButton.transform.DOScale(2, 2);
     }
     public void HidePowerUpButton()
     {
-        powerUpButton.transform.DOLocalMoveY(-900, 1).SetEase(Ease.OutBack);
+        powerUpButton.transform.DOLocalMoveX(-900, 1).SetEase(Ease.OutBack);
         powerUpButton.transform.DOScale(0.5f, 1);
     }
 
