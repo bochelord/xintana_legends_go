@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using I2.Loc;
 
 public enum RouletteState { READY, SPIN, WAITING}
 public class ChestRoulette : MonoBehaviour {
@@ -443,7 +444,14 @@ public class ChestRoulette : MonoBehaviour {
         }
         else if (prizeText && prizeType.categoryType == PrizeType.WEAPON)
         {
-            prizeText.text = prizeAmount.ToString() + " " + prizeType.description;
+            string tempString = "";
+
+            if (prizeType.weaponType == WeaponType.green) { tempString = ScriptLocalization.si_greensword_desc; }
+            if (prizeType.weaponType == WeaponType.yellow) { tempString = ScriptLocalization.si_yellowsword_desc; }
+            if (prizeType.weaponType == WeaponType.blue) { tempString = ScriptLocalization.si_bluesword_desc; }
+            if (prizeType.weaponType == WeaponType.black) { tempString = ScriptLocalization.si_blacksword_desc; }
+
+            prizeText.text = prizeAmount.ToString() + " " + tempString;
         }
         //else if(prizeText && _chestManager.prizeType == chestType.empty)
         //{
