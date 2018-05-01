@@ -25,6 +25,14 @@ namespace I2.Loc
 		public static string si_1up 		{ get{ return Get ("si_1up"); } }
 		public static string si_1gem 		{ get{ return Get ("si_1gem"); } }
 		public static string si_10gems 		{ get{ return Get ("si_10gems"); } }
+		public static string si_yellowsword_desc 		{ get{ return Get ("si_yellowsword_desc"); } }
+		public static string si_yellowsword_title 		{ get{ return Get ("si_yellowsword_title"); } }
+		public static string si_greensword_title 		{ get{ return Get ("si_greensword_title"); } }
+		public static string si_greensword_desc 		{ get{ return Get ("si_greensword_desc"); } }
+		public static string si_bluesword_title 		{ get{ return Get ("si_bluesword_title"); } }
+		public static string si_bluesword_desc 		{ get{ return Get ("si_bluesword_desc"); } }
+		public static string si_blacksword_title 		{ get{ return Get ("si_blacksword_title"); } }
+		public static string si_blacksword_desc 		{ get{ return Get ("si_blacksword_desc"); } }
 
 	}
 }
