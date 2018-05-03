@@ -73,6 +73,12 @@ public class TutorialManager : MonoBehaviour {
                 {
                     currentStep++;
                     ChangeTutorialPanel(currentStep);
+                    
+                } else if (currentStep == 6) // Ends Tutorial after swiping left in last panel
+                {
+                    TutorialPanels[6].SetActive(false);
+                    tutorialIsDisplayed = false;
+                    //Debug.Log("Tutorial End");
                 }
 
             }

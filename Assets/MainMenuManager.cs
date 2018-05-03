@@ -36,24 +36,33 @@ public class MainMenuManager : MonoBehaviour {
     private AnalyticsManager _analyticsManager;
     private AdsManager _adsManager;
     private PlayerManager _playerManager;
-    //private TutorialManager tutorialManager;
-    
+    private TutorialManager _tutorialManager;
+    private XintanaProfile xintanaProfile;
     void Awake()
     {
         _chestManager = FindObjectOfType<ChestRoulette>();
         _analyticsManager = FindObjectOfType<AnalyticsManager>();
         _adsManager = FindObjectOfType<AdsManager>();
         _playerManager = FindObjectOfType<PlayerManager>();
+        _tutorialManager = FindObjectOfType<TutorialManager>();
     }
     void Start()
     {
+        xintanaProfile = Rad_SaveManager.profile;
         CheckInventory();
         SetMainMenuStats();
         if(!AudioManager.Instance.musicPlayer.isPlaying || AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicMainMenu)
         {
             AudioManager.Instance.PlayMainMenuMusic();
         }
-
+        
+        // Starts Tutorial when first time played
+        if(xintanaProfile.firstTimePlayed)
+        {
+            //Debug.Log("Tutorial Starts");
+            _tutorialManager.StartTutorial();
+            
+        }
     }
     // Update is called once per frame
     void Update ()
