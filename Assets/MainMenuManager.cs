@@ -36,6 +36,7 @@ public class MainMenuManager : MonoBehaviour {
     private AnalyticsManager _analyticsManager;
     private AdsManager _adsManager;
     private PlayerManager _playerManager;
+    //private TutorialManager tutorialManager;
     
     void Awake()
     {
