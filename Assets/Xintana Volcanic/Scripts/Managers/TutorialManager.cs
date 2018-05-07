@@ -23,8 +23,6 @@ public class TutorialManager : MonoBehaviour {
         Right
     }
 
-    //public GameObject tutorialIndex = TutorialPanels[0];
-
     private MainMenuManager _menuManager;
     private bool tutorialIsDisplayed = false;
 
@@ -74,12 +72,13 @@ public class TutorialManager : MonoBehaviour {
                     currentStep++;
                     ChangeTutorialPanel(currentStep);
                     
-                } else if (currentStep == 6) // Ends Tutorial after swiping left in last panel
-                {
-                    TutorialPanels[6].SetActive(false);
-                    tutorialIsDisplayed = false;
-                    //Debug.Log("Tutorial End");
-                }
+                }   else if (currentStep == 6) // Ends Tutorial after swiping left in last panel
+                    {
+                        tutorialIsDisplayed = false;
+                        TutorialPanels[6].SetActive(false);
+                        currentStep = 0;
+                        Debug.Log("Tutorial End");
+                    }
 
             }
 
@@ -104,10 +103,11 @@ public class TutorialManager : MonoBehaviour {
 
     public void StartTutorial()
     {
-        
         this.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
         {
             tutorialIsDisplayed = true;
+            TutorialPanels[0].SetActive(true);
+            Debug.Log("Tutorial has started");
         });
     }
 

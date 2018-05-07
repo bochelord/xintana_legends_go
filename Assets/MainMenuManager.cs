@@ -59,9 +59,8 @@ public class MainMenuManager : MonoBehaviour {
         // Starts Tutorial when first time played
         if(xintanaProfile.firstTimePlayed)
         {
-            //Debug.Log("Tutorial Starts");
+            //Debug.Log("Tutorial Starts in Main menu manager");
             _tutorialManager.StartTutorial();
-            
         }
     }
     // Update is called once per frame
