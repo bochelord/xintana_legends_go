@@ -62,6 +62,7 @@ public class SettingsManager : MonoBehaviour {
         AsyncLoadLevel.LoadScene("XintanaLegendsGo_Menu");
     }
 
+
     public void Toggle_Sound()
     {
 

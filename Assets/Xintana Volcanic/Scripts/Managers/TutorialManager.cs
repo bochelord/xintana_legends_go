@@ -6,7 +6,7 @@ using DG.Tweening;
 public class TutorialManager : MonoBehaviour {
 
     [Header("TutorialPanels")]
-    public GameObject[] TutorialPanels;
+    public GameObject[] tutorialPanels;
 
   
     private int currentStep = 0; // variable to reference the current step of the array "TutorialPanels"
@@ -28,7 +28,12 @@ public class TutorialManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        _menuManager = FindObjectOfType<MainMenuManager>();
+        //DOTween.KillAll();
+        if (FindObjectOfType<MainMenuManager>())
+        {
+            _menuManager = FindObjectOfType<MainMenuManager>();
+        }
+        
   
     }
 	
@@ -75,7 +80,7 @@ public class TutorialManager : MonoBehaviour {
                 }   else if (currentStep == 6) // Ends Tutorial after swiping left in last panel
                     {
                         tutorialIsDisplayed = false;
-                        TutorialPanels[6].SetActive(false);
+                        tutorialPanels[6].SetActive(false);
                         currentStep = 0;
                         Debug.Log("Tutorial End");
                     }
@@ -103,14 +108,21 @@ public class TutorialManager : MonoBehaviour {
 
     public void StartTutorial()
     {
-        this.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
+                
+        this.gameObject.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
         {
             tutorialIsDisplayed = true;
-            TutorialPanels[0].SetActive(true);
-            Debug.Log("Tutorial has started");
+            this.tutorialPanels[0].gameObject.SetActive(true);
         });
     }
 
+    public void StartTutorial2()
+    {
+        Debug.Log("tutorial 2 has been called!");
+            tutorialIsDisplayed = true;
+            this.tutorialPanels[0].gameObject.SetActive(true);
+
+    }
 
 
     private void ChangeTutorialPanel(int tutorialStep)
@@ -123,94 +135,94 @@ public class TutorialManager : MonoBehaviour {
         {
             case 0:
 
-                for (int i = 0; i < TutorialPanels.Length; i++)
+                for (int i = 0; i < tutorialPanels.Length; i++)
                 {
                     if (i == 0)
                     {
-                        TutorialPanels[i].SetActive(true);
+                        tutorialPanels[i].SetActive(true);
                     }
                     else
                     {
-                        TutorialPanels[i].SetActive(false);
+                        tutorialPanels[i].SetActive(false);
                     }
                 }
                 break;
 
             case 1:
-                for (int i = 0; i < TutorialPanels.Length; i++)
+                for (int i = 0; i < tutorialPanels.Length; i++)
                 {
                     if (i == 1)
                     {
-                        TutorialPanels[i].SetActive(true);
+                        tutorialPanels[i].SetActive(true);
                     }
                     else
                     {
-                        TutorialPanels[i].SetActive(false);
+                        tutorialPanels[i].SetActive(false);
                     }
                 }
                 break;
             case 2:
-                for (int i = 0; i < TutorialPanels.Length; i++)
+                for (int i = 0; i < tutorialPanels.Length; i++)
                 {
                     if (i == 2)
                     {
-                        TutorialPanels[i].SetActive(true);
+                        tutorialPanels[i].SetActive(true);
                     }
                     else
                     {
-                        TutorialPanels[i].SetActive(false);
+                        tutorialPanels[i].SetActive(false);
                     }
                 }
                 break;
             case 3:
-                for (int i = 0; i < TutorialPanels.Length; i++)
+                for (int i = 0; i < tutorialPanels.Length; i++)
                 {
                     if (i == 3)
                     {
-                        TutorialPanels[i].SetActive(true);
+                        tutorialPanels[i].SetActive(true);
                     }
                     else
                     {
-                        TutorialPanels[i].SetActive(false);
+                        tutorialPanels[i].SetActive(false);
                     }
                 }
                 break;
             case 4:
-                for (int i = 0; i < TutorialPanels.Length; i++)
+                for (int i = 0; i < tutorialPanels.Length; i++)
                 {
                     if (i == 4)
                     {
-                        TutorialPanels[i].SetActive(true);
+                        tutorialPanels[i].SetActive(true);
                     }
                     else
                     {
-                        TutorialPanels[i].SetActive(false);
+                        tutorialPanels[i].SetActive(false);
                     }
                 }
                 break;
             case 5:
-                for (int i = 0; i < TutorialPanels.Length; i++)
+                for (int i = 0; i < tutorialPanels.Length; i++)
                 {
                     if (i == 5)
                     {
-                        TutorialPanels[i].SetActive(true);
+                        tutorialPanels[i].SetActive(true);
                     }
                     else
                     {
-                        TutorialPanels[i].SetActive(false);
+                        tutorialPanels[i].SetActive(false);
                     }
                 }
                 break;
             case 6:
-                for (int i = 0; i < TutorialPanels.Length; i++)
+                for (int i = 0; i < tutorialPanels.Length; i++)
                 {
                     if (i == 6)
                     {
-                        TutorialPanels[i].SetActive(true);
+                        tutorialPanels[i].SetActive(true);
                     }
                     else
                     {
-                        TutorialPanels[i].SetActive(false);
+                        tutorialPanels[i].SetActive(false);
                     }
                 }
                 break;
@@ -218,12 +230,12 @@ public class TutorialManager : MonoBehaviour {
     }
 
 #if UNITY_EDITOR
-    void OnGUI()
-    {
-        if (GUI.Button(new Rect(10, 70, 50, 30), "Tutorial"))
-        {
-            StartTutorial();   
-        }
-    }
+    //void OnGUI()
+    //{
+    //    if (GUI.Button(new Rect(10, 70, 50, 30), "Tutorial"))
+    //    {
+    //        StartTutorial();   
+    //    }
+    //}
 #endif
 }
