@@ -25,6 +25,8 @@ public class TutorialManager : MonoBehaviour {
 
     private MainMenuManager _menuManager;
     private bool tutorialIsDisplayed = false;
+    [HideInInspector]
+    public static bool isTutorialCompleted = false;
 
     // Use this for initialization
     void Start () {
@@ -82,7 +84,7 @@ public class TutorialManager : MonoBehaviour {
                         tutorialIsDisplayed = false;
                         tutorialPanels[6].SetActive(false);
                         currentStep = 0;
-                        Debug.Log("Tutorial End");
+                        isTutorialCompleted = true;
                     }
 
             }
@@ -108,20 +110,21 @@ public class TutorialManager : MonoBehaviour {
 
     public void StartTutorial()
     {
-                
-        this.gameObject.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
+        if (!isTutorialCompleted)
+        {
+
+            this.gameObject.transform.DOLocalMoveX(0f, 0.75f).SetEase(Ease.OutBack).OnComplete(() =>
         {
             tutorialIsDisplayed = true;
             this.tutorialPanels[0].gameObject.SetActive(true);
         });
+        }
     }
 
-    public void StartTutorial2()
+    public void ResetTutorial()
     {
-        Debug.Log("tutorial 2 has been called!");
-            tutorialIsDisplayed = true;
-            this.tutorialPanels[0].gameObject.SetActive(true);
-
+        isTutorialCompleted = false;
+            StartTutorial();
     }
 
 
