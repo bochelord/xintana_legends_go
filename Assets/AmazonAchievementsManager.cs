@@ -4,6 +4,10 @@ using UnityEngine;
 using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
 
+/// <summary>
+/// https://developer.amazon.com/docs/gamecircle/unity-setup.html
+/// </summary>
+
 public class AmazonAchievementsManager : MonoBehaviour
 {
     public static AmazonAchievementsManager Instance;
