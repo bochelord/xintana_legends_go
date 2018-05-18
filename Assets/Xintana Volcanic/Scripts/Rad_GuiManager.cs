@@ -97,6 +97,8 @@ public class Rad_GuiManager : MonoBehaviour {
     private float _attackValue;
     private float _hpValue;
 //    private AndroidLeaderboard _leaderboardManager;
+
+    private iosLeaderBoardManager _leaderboardManager;
     private Coroutine gameOverPanelCoroutine;
 
     private void Awake()
@@ -108,7 +110,7 @@ public class Rad_GuiManager : MonoBehaviour {
         _screenshot = FindObjectOfType<ScreenShot>();
         _playerManager = FindObjectOfType<PlayerManager>();
         _audioManager = FindObjectOfType<AudioManager>();
-        //_leaderboardManager = FindObjectOfType<AndroidLeaderboard>();
+        _leaderboardManager = FindObjectOfType<iosLeaderBoardManager>();
         _combinationManager = FindObjectOfType<CombinationManager>();
     }
 
@@ -409,6 +411,7 @@ public class Rad_GuiManager : MonoBehaviour {
             Rad_SaveManager.SaveData();
 
             //_leaderboardManager.OnAddScoreToLeaderBorad();
+            _leaderboardManager.LoginAddScoreLeaderBoard();
 
             GameObject clone_HighScoreFxPrefab;
             clone_HighScoreFxPrefab = Instantiate(HighScoreFxPrefab);

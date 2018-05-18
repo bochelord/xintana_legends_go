@@ -31,7 +31,7 @@ public class NativeShareIOS : MonoBehaviour {
             guiManager.FillSharePanel();
             _xintanaProfile.sharedScoreTimes++;
             AnalyticsManager.Instance.Shared_Screen(_xintanaProfile.sharedScoreTimes);
-            //AchievementsManager.Instance.IncrementShareScoreAchievement();
+            iosAchievementsManager.Instance.IncrementShareScoreAchievement();
         }
 
         if (!isProcessing)

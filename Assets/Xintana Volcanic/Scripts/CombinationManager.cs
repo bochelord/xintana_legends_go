@@ -388,7 +388,7 @@ public class CombinationManager : MonoBehaviour {
                 if (levelManager.enemyKilled)
                 {
                     ShowWinText();
-                    //AchievementsManager.Instance.IncrementGemsComboAchievements(combinationArray.Length);
+                    iosAchievementsManager.Instance.IncrementGemsComboAchievements(combinationArray.Length);
                     if (levelManager.GetTotalEnemyKilled() == _combinationFrecuency) //each three kills we gorw the combination and also give more time to solve it...
                     {
                         ChangeMinimCombinationLength(minimCombinationLenght + 1);

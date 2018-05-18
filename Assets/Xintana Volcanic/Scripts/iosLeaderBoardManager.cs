@@ -5,8 +5,11 @@ using UnityEngine.SocialPlatforms;
 
 public class iosLeaderBoardManager : MonoBehaviour {
 
+
+	public string leaderboardID;
+
 	#region GAME_CENTER    
-    public static void  AuthenticateToGameCenter()
+    public void  AuthenticateToGameCenter()
     {
         #if UNITY_IPHONE
         Social.localUser.Authenticate(success =>{
@@ -23,7 +26,7 @@ public class iosLeaderBoardManager : MonoBehaviour {
     }
 
 
-	public static void ReportScore(long score, string leaderboardID)
+	public void ReportScore(long score, string leaderboardID)
     {
         #if UNITY_IPHONE
         //Debug.Log("Reporting score " + score + " on leaderboard " + leaderboardID);
@@ -44,12 +47,26 @@ public class iosLeaderBoardManager : MonoBehaviour {
     }
 
 
-	public static void ShowLeaderboard()
+	public void ShowLeaderboard()
     {
         #if UNITY_IPHONE
             Social.ShowLeaderboardUI();
         #endif
     }
     #endregion
+
+
+	public void LoginAddScoreLeaderBoard(){
+		#if UNITY_IPHONE
+		if (Social.localUser.authenticated){
+			ReportScore(Rad_SaveManager.profile.highscore,leaderboardID);
+		}
+		else 
+		{
+			AuthenticateToGameCenter();
+			ReportScore(Rad_SaveManager.profile.highscore,leaderboardID);
+		}
+		#endif
+	}
 }
 
