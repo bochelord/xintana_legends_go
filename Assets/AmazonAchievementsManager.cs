@@ -4,20 +4,46 @@ using UnityEngine;
 using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
 
-public class AchievementsManager : MonoBehaviour
+public class AmazonAchievementsManager : MonoBehaviour
 {
-    public static AchievementsManager Instance;
+    public static AmazonAchievementsManager Instance;
 
     private XintanaProfile profile;
-
+    private bool isServiceReady = false;
     void Awake()
     {
         Instance = this;
+        AGSClient.ServiceReadyEvent += serviceReadyHandler;
+        AGSClient.ServiceNotReadyEvent += serviceNotReadyHandler;
+        bool usesLeaderboards = true;
+        bool usesAchievements = true;
+        bool usesWhispersync = false;
+
+        AGSClient.Init(usesLeaderboards, usesAchievements, usesWhispersync);
     }
     void Start()
     {
+
+        isServiceReady = AGSClient.IsServiceReady();
         profile = Rad_SaveManager.profile;
     }
+
+    private void serviceNotReadyHandler(string error)
+    {
+        Debug.Log("Service is not ready");
+    }
+
+    private void serviceReadyHandler()
+    {
+        Debug.Log("Service is ready");
+    }
+
+
+    //private void Update()
+    //{
+        
+        //Debug.Log("isServiceReady for AMAZON? " + isServiceReady); //LAST TEST WAS WORKING
+    //}
 
     public void LoginAndShowAchievements()
     {
@@ -33,18 +59,40 @@ public class AchievementsManager : MonoBehaviour
                 Debug.Log("Login failed");
             }
         });
+
+
+    }
+
+    /// <summary>
+    /// AMAZON method to handle Achievement feedback
+    /// </summary>
+    /// <param name="achievementId"></param>
+    private void updateAchievementSucceeded(string achievementId)
+    {
+        return;
+    }
+
+    /// <summary>
+    /// AMAZON method to handle Achievement feedback
+    /// </summary>
+    /// <param name="achievementId"></param>
+    /// <param name="error"></param>
+    private void updateAchievementFailed(string achievementId, string error)
+    {
+        return;
     }
 
     public void ShowAchievements()
     {
-        if (PlayGamesPlatform.Instance.localUser.authenticated)
-        {
-            PlayGamesPlatform.Instance.ShowAchievementsUI();
-        }
-        else
-        {
-            Debug.Log("annot showAcievements, not logged in");
-        }
+        //if (PlayGamesPlatform.Instance.localUser.authenticated)
+        //{
+        //    PlayGamesPlatform.Instance.ShowAchievementsUI();
+        //}
+        //else
+        //{
+        //    Debug.Log("Cannot showAcievements, not logged in");
+        //}
+        return;
     }
 
     public void IncrementKillsAchievements()
@@ -56,86 +104,147 @@ public class AchievementsManager : MonoBehaviour
             switch (_tempSum)
             {
                 case 5:
-                    PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_5_enemies, 100.0f, (bool success) =>
-                    {
-                        Debug.Log("Defeat 5 enemies: " +
-                                    success);
-                    });
+                    //PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_5_enemies, 100.0f, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 5 enemies: " +
+                    //                success);
+                    //});
+                    if(AGSClient.IsServiceReady()) {
+
+                        AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
+                        AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_5_enemies", 100f);
+                    }
                     break;
 
                 case 25:
-                    PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_25_enemies, 100.0f, (bool success) =>
+                    //PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_25_enemies, 100.0f, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 25 enemies: " +
+                    //                success);
+                    //});
+                    if (AGSClient.IsServiceReady())
                     {
-                        Debug.Log("Defeat 25 enemies: " +
-                                    success);
-                    });
+
+                        AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
+                        AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_25_enemies", 100f);
+                    }
                     break;
 
                 case 50:
-                    PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_50_enemies, 100.0f, (bool success) =>
+                    //PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_50_enemies, 100.0f, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 50 enemies: " +
+                    //                success);
+                    //});
+                    if (AGSClient.IsServiceReady())
                     {
-                        Debug.Log("Defeat 50 enemies: " +
-                                    success);
-                    });
+
+                        AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
+                        AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_50_enemies", 100f);
+                    }
                     break;
 
                 case 100:
-                    PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_100_enemies, 100.0f, (bool success) =>
+                    //PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_100_enemies, 100.0f, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 100 enemies: " + success);
+                    //});
+                    if (AGSClient.IsServiceReady())
                     {
-                        Debug.Log("Defeat 100 enemies: " + success);
-                    });
+
+                        AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
+                        AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_100_enemies", 100f);
+                    }
                     break;
 
                 case 200:
-                    PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_200_enemies, 100.0f, (bool success) =>
+                    //PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_200_enemies, 100.0f, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 200 enemies: " + success);
+                    //});
+                    if (AGSClient.IsServiceReady())
                     {
-                        Debug.Log("Defeat 200 enemies: " + success);
-                    });
+
+                        AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
+                        AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_200_enemies", 100f);
+                    }
                     break;
 
                 case 500:
-                    PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_500_enemies, 100.0f, (bool success) =>
+                    //PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_500_enemies, 100.0f, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 500 enemies: " + success);
+                    //});
+                    if (AGSClient.IsServiceReady())
                     {
-                        Debug.Log("Defeat 500 enemies: " + success);
-                    });
+
+                        AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
+                        AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_500_enemies", 100f);
+                    }
                     break;
 
                 case 1000:
-                    PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_1000_enemies, 100.0f, (bool success) =>
+                    //PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_defeat_1000_enemies, 100.0f, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 1000 enemies: " + success);
+                    //});
+                    if (AGSClient.IsServiceReady())
                     {
-                        Debug.Log("Defeat 1000 enemies: " + success);
-                    });
+
+                        AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
+                        AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_1000_enemies", 100f);
+                    }
                     break;
 
                 default:
-                    PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_5_enemies, 1, (bool success) =>
+                    //PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_5_enemies, 1, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 5 Enemies Increment: " + success);
+                    //});
+                    //PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_25_enemies, 1, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 25 Enemies Increment: " + success);
+                    //});
+                    //PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_50_enemies, 1, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 50 Enemies Increment: " + success);
+                    //});
+                    //PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_100_enemies, 1, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 100 Enemies Increment: " + success);
+                    //});
+                    //PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_200_enemies, 1, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 200 Enemies Increment: " + success);
+                    //});
+                    //PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_500_enemies, 1, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 500 Enemies Increment: " + success);
+                    //});
+                    //PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_1000_enemies, 1, (bool success) =>
+                    //{
+                    //    Debug.Log("Defeat 1000 Enemies Increment: " + success);
+                    //});
+                    if (AGSClient.IsServiceReady())
                     {
-                        Debug.Log("Defeat 5 Enemies Increment: " + success);
-                    });
-                    PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_25_enemies, 1, (bool success) =>
-                    {
-                        Debug.Log("Defeat 25 Enemies Increment: " + success);
-                    });
-                    PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_50_enemies, 1, (bool success) =>
-                    {
-                        Debug.Log("Defeat 50 Enemies Increment: " + success);
-                    });
-                    PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_100_enemies, 1, (bool success) =>
-                    {
-                        Debug.Log("Defeat 100 Enemies Increment: " + success);
-                    });
-                    PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_200_enemies, 1, (bool success) =>
-                    {
-                        Debug.Log("Defeat 200 Enemies Increment: " + success);
-                    });
-                    PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_500_enemies, 1, (bool success) =>
-                    {
-                        Debug.Log("Defeat 500 Enemies Increment: " + success);
-                    });
-                    PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_defeat_1000_enemies, 1, (bool success) =>
-                    {
-                        Debug.Log("Defeat 1000 Enemies Increment: " + success);
-                    });
+
+                        AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
+                        AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_5_enemies", 100f);
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_25_enemies", 100f);
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_50_enemies", 100f);
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_100_enemies", 100f);
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_200_enemies", 100f);
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_500_enemies", 100f);
+                        AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_1000_enemies", 100f);
+                    }
                     break;
             }
 
@@ -147,24 +256,46 @@ public class AchievementsManager : MonoBehaviour
         {
             if (value >= 3)
             {
-                PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_3_gems_combo, 100.0f, (bool success) =>
+                //PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_3_gems_combo, 100.0f, (bool success) =>
+                //{
+                //    Debug.Log("3 gems combo: " + success);
+                //});
+                if (AGSClient.IsServiceReady())
                 {
-                    Debug.Log("3 gems combo: " + success);
-                });
+
+                    AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
+                    AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
+                    AGSAchievementsClient.UpdateAchievementProgress("achievement_3_gems_combo", 100f);
+                }
             }
+
             if (value >= 5)
             {
-                PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_5_gems_combo, 100.0f, (bool success) =>
+                //PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_5_gems_combo, 100.0f, (bool success) =>
+                //{
+                //    Debug.Log("5 gems combo: " + success);
+                //});
+                if (AGSClient.IsServiceReady())
                 {
-                    Debug.Log("5 gems combo: " + success);
-                });
+
+                    AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
+                    AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
+                    AGSAchievementsClient.UpdateAchievementProgress("achievement_5_gems_combo", 100f);
+                }
             }
             if (value >= 7)
             {
-                PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_7_gems_combo, 100.0f, (bool success) =>
+                //PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_7_gems_combo, 100.0f, (bool success) =>
+                //{
+                //    Debug.Log("7 gems combo: " + success);
+                //});
+                if (AGSClient.IsServiceReady())
                 {
-                    Debug.Log("7 gems combo: " + success);
-                });
+
+                    AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
+                    AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
+                    AGSAchievementsClient.UpdateAchievementProgress("achievement_7_gems_combo", 100f);
+                }
             }
             if (value >= 9)
             {
