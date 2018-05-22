@@ -73,7 +73,7 @@ public class TutorialManager : MonoBehaviour {
             {
                 //swipes left except in the last tutorial panel
                 _swipe = Swipe.Left;
-                Debug.Log("Swipe.Left");
+                //Debug.Log("Swipe.Left");
                 if (currentStep < 6)
                 {
                     currentStep++;
@@ -102,7 +102,7 @@ public class TutorialManager : MonoBehaviour {
                 }
 
             }
-            Debug.Log(currentStep);
+            //Debug.Log(currentStep);
         }
 
 
