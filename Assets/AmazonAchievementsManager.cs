@@ -75,6 +75,7 @@ public class AmazonAchievementsManager : MonoBehaviour
     /// <param name="achievementId"></param>
     private void updateAchievementSucceeded(string achievementId)
     {
+        Debug.Log("ACHIVEMENT " + achievementId + " UPDATE HAS SUCCEED");
         return;
     }
 
@@ -91,171 +92,150 @@ public class AmazonAchievementsManager : MonoBehaviour
 
     public void ShowAchievements()
     {
-        //if (PlayGamesPlatform.Instance.localUser.authenticated)
-        //{
-        //    PlayGamesPlatform.Instance.ShowAchievementsUI();
-        //}
-        //else
-        //{
-        //    Debug.Log("Cannot showAcievements, not logged in");
-        //}
+        AGSAchievementsClient.ShowAchievementsOverlay();
         return;
     }
 
     public void IncrementKillsAchievements()
     {
-        if (AGSClient.IsServiceReady())
+        //if (AGSClient.IsServiceReady())
+        if (AGSPlayerClient.IsSignedIn())
         {
             AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
             AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
 
             int _tempSum = profile.playerKills;
+            string _tempString = "";
 
             switch (_tempSum)
             {
                 case 5:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_5_enemies", 100f);
+                    _tempString = "achievement_defeat_5_enemies";
                     break;
-
                 case 25:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_25_enemies", 100f);
+                    _tempString = "achievement_defeat_25_enemies";
                     break;
-
                 case 50:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_50_enemies", 100f);
+                    _tempString = "achievement_defeat_50_enemies";
                     break;
-
                 case 100:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_100_enemies", 100f);
+                    _tempString = "achievement_defeat_100_enemies";
                     break;
-
                 case 200:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_200_enemies", 100f);
+                    _tempString = "achievement_defeat_200_enemies";
                     break;
-
                 case 500:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_500_enemies", 100f);
+                    _tempString = "achievement_defeat_500_enemies";
                     break;
-
                 case 1000:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_1000_enemies", 100f);
-                    break;
-
-                default:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_5_enemies", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_25_enemies", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_50_enemies", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_100_enemies", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_200_enemies", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_500_enemies", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_defeat_1000_enemies", 100f);
+                    _tempString = "achievement_defeat_1000_enemies";
                     break;
             }
+            AGSAchievementsClient.UpdateAchievementProgress(_tempString, 100f);
         }
     }
 
+
     public void IncrementGemsComboAchievements(int value)
     {
-        if (AGSClient.IsServiceReady())
+        if (AGSPlayerClient.IsSignedIn())
         {
             AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
             AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
+
+            string _tempString = "";
+
             if (value >= 3)
             {
                 AGSAchievementsClient.UpdateAchievementProgress("achievement_3_gems_combo", 100f);
+                _tempString = "achievement_3_gems_combo";
             }
 
             if (value >= 5)
             {
                 AGSAchievementsClient.UpdateAchievementProgress("achievement_5_gems_combo", 100f);
+                _tempString = "achievement_5_gems_combo";
             }
             if (value >= 7)
             {
                 AGSAchievementsClient.UpdateAchievementProgress("achievement_7_gems_combo", 100f);
+                _tempString = "achievement_7_gems_combo";
             }
             if (value >= 9)
             {
                 AGSAchievementsClient.UpdateAchievementProgress("achievement_9_gems_combo", 100f);
+                _tempString = "achievement_9_gems_combo";
             }
+            AGSAchievementsClient.UpdateAchievementProgress(_tempString, 100f);
         }
     }
 
     public void IncrementLevelAchievements(int value)
     {
-        if (AGSClient.IsServiceReady())
+        if (AGSPlayerClient.IsSignedIn())
         {
             AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
             AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
 
             int _tempSum = value;
-
+            string _tempString = "";
             switch (_tempSum)
             {
                 case 5:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_reach_lvl_5", 100f);
+                    _tempString = "achievement_reach_lvl_5";
                     break;
-
                 case 10:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_reach_lvl_10", 100f);
+                    _tempString = "achievement_reach_lvl_10";
                     break;
-
                 case 20:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_reach_lvl_20", 100f);
+                    _tempString = "achievement_reach_lvl_20";
                     break;
-
                 case 30:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_reach_lvl_30", 100f);
+                    _tempString = "achievement_reach_lvl_30";
                     break;
-
                 case 40:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_reach_lvl_40", 100f);
+                    _tempString = "achievement_reach_lvl_40";
                     break;
-
                 case 50:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_reach_lvl_50", 100f);
-                    break;
-
-                default:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_reach_lvl_5", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_reach_lvl_10", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_reach_lvl_20", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_reach_lvl_30", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_reach_lvl_40", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_reach_lvl_50", 100f);
+                    _tempString = "achievement_reach_lvl_50";
                     break;
             }
-
+            AGSAchievementsClient.UpdateAchievementProgress(_tempString, 100f);
             profile.playerKills = _tempSum;
         }
     }
 
     public void IncrementScoreAchievements(float value)
     {
-        if (AGSClient.IsServiceReady())
+        if (AGSPlayerClient.IsSignedIn())
         {
             AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
             AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
 
+            string _tempString = "";
+
             if (value >= 10000)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_score_10_000_points", 100f);
+                _tempString = "achievement_score_10_000_points";
             }
             if (value >= 250000)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_score_25_000_points", 100f);
+                _tempString = "achievement_score_25_000_points";
             }
             if (value >= 50000)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_score_50_000_points", 100f);
+                _tempString = "achievement_score_50_000_points";
             }
             if (value >= 75000)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_score_75_000_points", 100f);
+                _tempString = "achievement_score_75_000_points";
             }
             if (value >= 100000)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_score_100_000_points", 100f);
+                _tempString = "achievement_score_100_000_points";
             }
+
+            AGSAchievementsClient.UpdateAchievementProgress(_tempString, 100f);
         }
     }
 
@@ -263,7 +243,7 @@ public class AmazonAchievementsManager : MonoBehaviour
     {
         int _tempValue = profile.sharedScoreTimes;
 
-        if (AGSClient.IsServiceReady() && _tempValue < 25)
+        if (AGSPlayerClient.IsSignedIn() && _tempValue < 25)
         {
             AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
             AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
@@ -273,71 +253,76 @@ public class AmazonAchievementsManager : MonoBehaviour
 
     public void IncrementCoinsEarnedAchievements(int value)
     {
-        if (AGSClient.IsServiceReady())
+        if (AGSPlayerClient.IsSignedIn())
         {
             AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
             AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
 
             int _tempSum = profile.coinsEarned + value;
+            string _tempString = "";
 
             if(_tempSum >= 100)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_earn_100_coins", 100f);
+                _tempString = "achievement_earn_100_coins";
             }
             if (_tempSum >= 500)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_earn_500_coins", 100f);
+                _tempString = "achievement_earn_500_coins";
             }
             if (_tempSum >= 1000)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_earn_1000_coins", 100f);
+                _tempString = "achievement_earn_1000_coins";
             }
             if (_tempSum >= 5000)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_earn_5000_coins", 100f);
+                _tempString = "achievement_earn_5000_coins";
             }
             if (_tempSum >= 10000)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_earn_10_000_coins", 100f);
+                _tempString = "achievement_earn_10_000_coins";
             }
+            AGSAchievementsClient.UpdateAchievementProgress(_tempString, 100f);
         }
     }
 
     public void IncrementGemsEarnedAchievements(int value)
     {
-        if (AGSClient.IsServiceReady())
+        if (AGSPlayerClient.IsSignedIn())
         {
             AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
             AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
 
             int _tempSum = profile.gemsCollected + value;
+            string _tempString = "";
 
             if (_tempSum > 1)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_collect_1_gem", 100f);
+                _tempString = "achievement_collect_1_gem";
             }
             if (_tempSum >= 5)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_collect_5_gems", 100f);
+                _tempString = "achievement_collect_5_gems";
             }
             if (_tempSum >= 10)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_collect_10_gems", 100f);
+                _tempString = "achievement_collect_10_gems";
             }
             if (_tempSum >= 20)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_collect_20_gems", 100f);
+                _tempString = "achievement_collect_20_gems";
             }
             if (_tempSum >= 50)
             {
-                AGSAchievementsClient.UpdateAchievementProgress("achievement_collect_50_gems", 100f);
+                _tempString = "achievement_collect_50_gems";
             }
+
+            AGSAchievementsClient.UpdateAchievementProgress(_tempString, 100f);
         }
     }
 
     public void ReviveAdAchievement()
     {
-        if (AGSClient.IsServiceReady())
+        if (AGSPlayerClient.IsSignedIn())
         {
             AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
             AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
@@ -347,7 +332,7 @@ public class AmazonAchievementsManager : MonoBehaviour
 
     public void TokenAdAchievement()
     {
-        if (AGSClient.IsServiceReady())
+        if (AGSPlayerClient.IsSignedIn())
         {
             AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
             AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
@@ -357,40 +342,35 @@ public class AmazonAchievementsManager : MonoBehaviour
 
     public void IncrementAdsWatchedAchievements()
     {
-        if (AGSClient.IsServiceReady())
+        if (AGSPlayerClient.IsSignedIn())
         {
             AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
             AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
 
             int _tempValue = profile.adsViewed;
-
+            string _tempString = "";
             switch (_tempValue)
             {
                 case 7:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_watch_7_ads", 100f);
+                    _tempString = "achievement_watch_7_ads";
                     break;
                 case 10:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_watch_10_ads", 100f);
+                    _tempString = "achievement_watch_10_ads";
                     break;
                 case 25:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_watch_25_ads", 100f);
+                    _tempString = "achievement_watch_25_ads";
                     break;
                 case 50:
-                        AGSAchievementsClient.UpdateAchievementProgress("achievement_watch_50_ads", 100f);
-                    break;
-                default:
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_watch_7_ads", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_watch_10_ads", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_watch_25_ads", 100f);
-                    AGSAchievementsClient.UpdateAchievementProgress("achievement_watch_50_ads", 100f);
+                    _tempString = "achievement_watch_50_ads";
                     break;
             }
+            AGSAchievementsClient.UpdateAchievementProgress(_tempString, 100f);
         }
     }
 
     public void BuyDoubleScoreAchievement()
     {
-        if (AGSClient.IsServiceReady())
+        if (AGSPlayerClient.IsSignedIn())
         {
             AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
             AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
@@ -400,7 +380,7 @@ public class AmazonAchievementsManager : MonoBehaviour
 
     public void BuyReviveAchievement()
     {
-        if (AGSClient.IsServiceReady())
+        if (AGSPlayerClient.IsSignedIn())
         {
             AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
             AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;
@@ -412,7 +392,7 @@ public class AmazonAchievementsManager : MonoBehaviour
     {
         if(SIS.DBManager.GetPurchase("si_yellowsword") > 0 && SIS.DBManager.GetPurchase("si_bluesword") > 0 && SIS.DBManager.GetPurchase("si_blacksword") > 0 && SIS.DBManager.GetPurchase("si_greensword") > 0)
         {
-            if (AGSClient.IsServiceReady())
+            if (AGSPlayerClient.IsSignedIn())
             {
                 AGSAchievementsClient.UpdateAchievementSucceededEvent += updateAchievementSucceeded;
                 AGSAchievementsClient.UpdateAchievementFailedEvent += updateAchievementFailed;

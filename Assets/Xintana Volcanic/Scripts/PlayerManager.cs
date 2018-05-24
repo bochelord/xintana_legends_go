@@ -282,7 +282,7 @@ public class PlayerManager : MonoBehaviour {
         maxLife = _newXintana.life;
         life = GetMaxLife();
         attack = _newXintana.damage;
-        AchievementsManager.Instance.IncrementLevelAchievements(level);
+        AmazonAchievementsManager.Instance.IncrementLevelAchievements(level);
     }
     public bool GetExperienceAddedFromProfile()
     {
