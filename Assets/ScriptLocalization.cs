@@ -8,8 +8,8 @@ namespace I2.Loc
 
 
 		public static string si_yellowsword 		{ get{ return Get ("si_yellowsword"); } }
-		public static string si_x2 		{ get{ return Get ("si_x2"); } }
-		public static string si_supportdevs 		{ get{ return Get ("si_supportdevs"); } }
+		public static string si_x2 		{ get{ return Get ("si_x2_amazon"); } }
+		public static string si_supportdevs 		{ get{ return Get ("si_supportdevs_amazon"); } }
 		public static string si_shell04 		{ get{ return Get ("si_shell04"); } }
 		public static string si_shell03 		{ get{ return Get ("si_shell03"); } }
 		public static string si_shell02 		{ get{ return Get ("si_shell02"); } }
@@ -20,11 +20,11 @@ namespace I2.Loc
 		public static string si_goldbig 		{ get{ return Get ("si_goldbig"); } }
 		public static string si_bluesword 		{ get{ return Get ("si_bluesword"); } }
 		public static string si_blacksword 		{ get{ return Get ("si_blacksword"); } }
-		public static string si_5gems 		{ get{ return Get ("si_5gems"); } }
-		public static string si_20gems 		{ get{ return Get ("si_20gems"); } }
+		public static string si_5gems 		{ get{ return Get ("si_5gems_amazon"); } }
+		public static string si_20gems 		{ get{ return Get ("si_20gems_amazon"); } }
 		public static string si_1up 		{ get{ return Get ("si_1up"); } }
-		public static string si_1gem 		{ get{ return Get ("si_1gem"); } }
-		public static string si_10gems 		{ get{ return Get ("si_10gems"); } }
+		public static string si_1gem 		{ get{ return Get ("si_1gem_amazon"); } }
+		public static string si_10gems 		{ get{ return Get ("si_10gems_amazon"); } }
 		public static string si_yellowsword_desc 		{ get{ return Get ("si_yellowsword_desc"); } }
 		public static string si_yellowsword_title 		{ get{ return Get ("si_yellowsword_title"); } }
 		public static string si_greensword_title 		{ get{ return Get ("si_greensword_title"); } }

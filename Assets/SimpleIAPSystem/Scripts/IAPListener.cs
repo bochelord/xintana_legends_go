@@ -50,7 +50,7 @@ namespace SIS
             switch (id)
             {
                 //section for in app purchases
-                case "si_x2":
+                case "si_x2_amazon":
                     //the user bought the item "coins", show appropriate feedback
                     
                     ShowMessage(ScriptLocalization.si_x2);
@@ -69,35 +69,35 @@ namespace SIS
                     AnalyticsManager.Instance.Item_Bought_Event("Extra Life");
                     AmazonAchievementsManager.Instance.BuyReviveAchievement();
                     break;
-                case "si_1gem":
+                case "si_1gem_amazon":
                     Rad_SaveManager.profile.gems++;
                     DBManager.IncreaseFunds("gems", 1);
                     ShowMessage(ScriptLocalization.si_1gem);
                     AnalyticsManager.Instance.Item_Bought_Event("1 Gem");
                     AmazonAchievementsManager.Instance.IncrementGemsEarnedAchievements(1);
                     break;
-                case "si_5gems":
+                case "si_5gems_amazon":
                     Rad_SaveManager.profile.gems += 5;
                     DBManager.IncreaseFunds("gems", 5);
                     ShowMessage(ScriptLocalization.si_5gems);
                     AnalyticsManager.Instance.Item_Bought_Event("5 Gems");
                     AmazonAchievementsManager.Instance.IncrementGemsEarnedAchievements(5);
                     break;
-                case "si_10gems":
+                case "si_10gems_amazon":
                     Rad_SaveManager.profile.gems += 10;
                     DBManager.IncreaseFunds("gems", 10);
                     AnalyticsManager.Instance.Item_Bought_Event("10 Gems");
                     AmazonAchievementsManager.Instance.IncrementGemsEarnedAchievements(10);
                     ShowMessage(ScriptLocalization.si_10gems);
                     break;
-                case "si_20gems":
+                case "si_20gems_amazon":
                     Rad_SaveManager.profile.gems += 20;
                     DBManager.IncreaseFunds("gems", 20);
                     AnalyticsManager.Instance.Item_Bought_Event("20 Gems");
                     AmazonAchievementsManager.Instance.IncrementGemsEarnedAchievements(20);
                     ShowMessage(ScriptLocalization.si_20gems);
                     break;
-                case "si_supportdevs":
+                case "si_supportdevs_amazon":
                     ShowMessage(ScriptLocalization.si_supportdevs);
                     AnalyticsManager.Instance.Item_Bought_Event("Eternal Gratitude");
                     break;
