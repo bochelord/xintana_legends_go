@@ -5,7 +5,7 @@ using UnityEngine.SocialPlatforms;
 
 public class AndroidLeaderboard : MonoBehaviour
 {
-
+/*
     #region PUBLIC_VAR
     public string leaderboard;
     #endregion
@@ -99,5 +99,5 @@ public class AndroidLeaderboard : MonoBehaviour
     {
         ((PlayGamesPlatform)Social.Active).SignOut();
     }
-    #endregion
+    #endregion*/
 }

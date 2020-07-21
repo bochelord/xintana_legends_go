@@ -70,7 +70,7 @@ public class LevelManager : MonoBehaviour {
     private PlayerManager _playerManager;
     private CombinationManager combinationManager;
     private Rad_GuiManager _guiManager;
-    private AdsManager adManager;
+    //private AdsManager adManager;
     private HealthBarControllerBoss healthBarController;
     private List<Transform> inactiveHUDTextList = new List<Transform>();
 
@@ -95,7 +95,7 @@ public class LevelManager : MonoBehaviour {
         combinationManager = FindObjectOfType<CombinationManager>();
         _playerManager = player.GetComponent<PlayerManager>();
         _guiManager = FindObjectOfType<Rad_GuiManager>();
-        adManager = FindObjectOfType<AdsManager>();
+        //adManager = FindObjectOfType<AdsManager>();
         healthBarController = FindObjectOfType<HealthBarControllerBoss>();
         _extraLifePurchased = Rad_SaveManager.profile.extraLife;
         _canvas = FindObjectOfType<Canvas>();
@@ -104,7 +104,7 @@ public class LevelManager : MonoBehaviour {
     void Start()
     {
         _guiManager.UpdateIcons();
-        AnalyticsManager.Instance.DeviceModel_Event();
+        //AnalyticsManager.Instance.DeviceModel_Event();
         combinationManager.SetCombinationFrecuency(combinationIncreaseFrecuency);
         PrepareBackgroundLevel(1);
         GetNewEnemy(0);
@@ -244,26 +244,26 @@ public class LevelManager : MonoBehaviour {
             AudioManager.Instance.Play_XintanaDeath();
             player.GetComponent<Animator>().SetInteger("AnimState", 4);
             //AddNemesisCount();
-            if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped <= adsSkipped && !Rad_SaveManager.profile.noAds)
-            {
-                combinationManager.SetGameOn(false);
-                combinationManager.MoveButtonsOut();
-                combinationManager.DestroyCombination();
-                StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowAdPanel, 2f));
-                //_guiManager.ShowAdPanel();
-            }
-            else if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped >= adsSkipped && !Rad_SaveManager.profile.noAds)
-            {
-                combinationManager.SetGameOn(false);
-                combinationManager.MoveButtonsOut();
-                combinationManager.DestroyCombination();
-                StartCoroutine(FunctionLibrary.CallWithDelay(adManager.ShowAdNoReward, 2f));
-            }
-            else
-            {
-                StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 2.5f));
-                adManager.adViewed = false;
-            }
+            //if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped <= adsSkipped && !Rad_SaveManager.profile.noAds)
+            //{
+            //    combinationManager.SetGameOn(false);
+            //    combinationManager.MoveButtonsOut();
+            //    combinationManager.DestroyCombination();
+            //    StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowAdPanel, 2f));
+            //    //_guiManager.ShowAdPanel();
+            //}
+            //else if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped >= adsSkipped && !Rad_SaveManager.profile.noAds)
+            //{
+            //    combinationManager.SetGameOn(false);
+            //    combinationManager.MoveButtonsOut();
+            //    combinationManager.DestroyCombination();
+            //    StartCoroutine(FunctionLibrary.CallWithDelay(adManager.ShowAdNoReward, 2f));
+            //}
+            //else
+            //{
+            //    StartCoroutine(FunctionLibrary.CallWithDelay(GameOverPanel, 2.5f));
+            //    adManager.adViewed = false;
+            //}
         }
 
     }
@@ -329,7 +329,7 @@ public class LevelManager : MonoBehaviour {
 
              _playerScore += _enemyPoints * _scoreMultiplier * timeRemaining;
              AudioManager.Instance.Stop_AddScore();
-             AchievementsManager.Instance.IncrementScoreAchievements(_playerScore);
+             //AchievementsManager.Instance.IncrementScoreAchievements(_playerScore);
              shellSpawned = false; // reset
          });
 
@@ -607,7 +607,7 @@ public class LevelManager : MonoBehaviour {
         {
             _playerManager.StopPowerUp();
         }
-        AnalyticsManager.Instance.GameOver_Event((int)_playerScore, _enemyCount + 1, _worldNumber);
+        //AnalyticsManager.Instance.GameOver_Event((int)_playerScore, _enemyCount + 1, _worldNumber);
         VanishPlayer();
         combinationManager.MoveButtonsOut();
         StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.PlayerGameOverPanelOn, 2));

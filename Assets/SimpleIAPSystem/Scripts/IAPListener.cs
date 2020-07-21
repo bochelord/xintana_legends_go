@@ -59,7 +59,7 @@ namespace SIS
                     //Rad_SaveManager.profile.doubleScorePurchased++;
                     Rad_SaveManager.profile.doubleScore = true;
                     AnalyticsManager.Instance.Item_Bought_Event("Double Score");
-                    AchievementsManager.Instance.BuyDoubleScoreAchievement();
+                    //AchievementsManager.Instance.BuyDoubleScoreAchievement();
                     break;
                 case "si_1up":
                     ShowMessage(ScriptLocalization.si_1up);
@@ -67,34 +67,34 @@ namespace SIS
                     DBManager.IncreasePurchase("si_1up", 1);
                     Rad_SaveManager.profile.extraLifePurchased++;
                     AnalyticsManager.Instance.Item_Bought_Event("Extra Life");
-                    AchievementsManager.Instance.BuyReviveAchievement();
+                    //AchievementsManager.Instance.BuyReviveAchievement();
                     break;
                 case "si_1gem":
                     Rad_SaveManager.profile.gems++;
                     DBManager.IncreaseFunds("gems", 1);
                     ShowMessage(ScriptLocalization.si_1gem);
                     AnalyticsManager.Instance.Item_Bought_Event("1 Gem");
-                    AchievementsManager.Instance.IncrementGemsEarnedAchievements(1);
+                    //AchievementsManager.Instance.IncrementGemsEarnedAchievements(1);
                     break;
                 case "si_5gems":
                     Rad_SaveManager.profile.gems += 5;
                     DBManager.IncreaseFunds("gems", 5);
                     ShowMessage(ScriptLocalization.si_5gems);
                     AnalyticsManager.Instance.Item_Bought_Event("5 Gems");
-                    AchievementsManager.Instance.IncrementGemsEarnedAchievements(5);
+                    //AchievementsManager.Instance.IncrementGemsEarnedAchievements(5);
                     break;
                 case "si_10gems":
                     Rad_SaveManager.profile.gems += 10;
                     DBManager.IncreaseFunds("gems", 10);
                     AnalyticsManager.Instance.Item_Bought_Event("10 Gems");
-                    AchievementsManager.Instance.IncrementGemsEarnedAchievements(10);
+                    //AchievementsManager.Instance.IncrementGemsEarnedAchievements(10);
                     ShowMessage(ScriptLocalization.si_10gems);
                     break;
                 case "si_20gems":
                     Rad_SaveManager.profile.gems += 20;
                     DBManager.IncreaseFunds("gems", 20);
                     AnalyticsManager.Instance.Item_Bought_Event("20 Gems");
-                    AchievementsManager.Instance.IncrementGemsEarnedAchievements(20);
+                    //AchievementsManager.Instance.IncrementGemsEarnedAchievements(20);
                     ShowMessage(ScriptLocalization.si_20gems);
                     break;
                 case "si_supportdevs":
@@ -105,25 +105,25 @@ namespace SIS
                     ShowMessage(ScriptLocalization.si_yellowsword);
                     DBManager.IncreasePurchase("si_yellowsword", 1);
                     AnalyticsManager.Instance.Item_Bought_Event("Yellow sword");
-                    AchievementsManager.Instance.BuyAllSwordsAchievement();
+                    //AchievementsManager.Instance.BuyAllSwordsAchievement();
                     break;
                 case "si_bluesword":
                     ShowMessage(ScriptLocalization.si_bluesword);
                     DBManager.IncreasePurchase("si_bluesword", 1);
                     AnalyticsManager.Instance.Item_Bought_Event("Blue sword");
-                    AchievementsManager.Instance.BuyAllSwordsAchievement();
+                    //AchievementsManager.Instance.BuyAllSwordsAchievement();
                     break;
                 case "si_greensword":
                     ShowMessage(ScriptLocalization.si_greensword);
                     DBManager.IncreasePurchase("si_greensword", 1);
                     AnalyticsManager.Instance.Item_Bought_Event("Green sword");
-                    AchievementsManager.Instance.BuyAllSwordsAchievement();
+                    //AchievementsManager.Instance.BuyAllSwordsAchievement();
                     break;
                 case "si_blacksword":
                     ShowMessage(ScriptLocalization.si_blacksword);
                     DBManager.IncreasePurchase("si_blacksword", 1);
                     AnalyticsManager.Instance.Item_Bought_Event("Black sword");
-                    AchievementsManager.Instance.BuyAllSwordsAchievement();
+                    //AchievementsManager.Instance.BuyAllSwordsAchievement();
                     break;
                 case "si_goldbig":
                     ShowMessage(ScriptLocalization.si_goldbig);

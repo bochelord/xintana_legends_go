@@ -65,7 +65,7 @@ public class ChestRoulette : MonoBehaviour {
 
     private float _prizeSpawnTime = 0;
     private AnalyticsManager _analyticsManager;
-    private AdsManager _adsManager;
+    //private AdsManager _adsManager;
 
     private Coroutine doublePricePanelCoroutine;
     // Use this for initialization
@@ -77,7 +77,7 @@ public class ChestRoulette : MonoBehaviour {
         _particlePooler = FindObjectOfType<ParticlePooler>();
         _coinsPooler = FindObjectOfType<CoinsPooler>();
         _analyticsManager = FindObjectOfType<AnalyticsManager>();
-        _adsManager = FindObjectOfType<AdsManager>();
+        //_adsManager = FindObjectOfType<AdsManager>();
     }
 	
     void Update()
@@ -475,7 +475,7 @@ public class ChestRoulette : MonoBehaviour {
     }
     public void Button_DoublePrize()
     {
-        _adsManager.ShowAdForDoublePrize();
+        //_adsManager.ShowAdForDoublePrize();
     }
     public void DoublePrize()
     {
@@ -678,7 +678,7 @@ public class ChestRoulette : MonoBehaviour {
     public void HideStartRoulettePanel()
     {
         startRoulettePanel.transform.DOLocalMoveY(1000f, 0.75f).SetEase(Ease.OutBack);
-        _menuManager.CheckInventory();
+        //_menuManager.CheckInventory();
     }
     public void SetCanOpen(bool value) { canOpen = value; }
     public bool GetCanOpen() { return canOpen; }

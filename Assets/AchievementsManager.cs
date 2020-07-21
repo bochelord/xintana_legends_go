@@ -37,17 +37,17 @@ public class AchievementsManager : MonoBehaviour
 
     public void ShowAchievements()
     {
-        if (PlayGamesPlatform.Instance.localUser.authenticated)
-        {
-            PlayGamesPlatform.Instance.ShowAchievementsUI();
-        }
-        else
-        {
+        //if (PlayGamesPlatform.Instance.localUser.authenticated)
+        //{
+        //    PlayGamesPlatform.Instance.ShowAchievementsUI();
+        //}
+        //else
+        //{
             Debug.Log("annot showAcievements, not logged in");
-        }
+        //}
     }
 
-    public void IncrementKillsAchievements()
+    /*public void IncrementKillsAchievements()
     {
         if (Social.localUser.authenticated)
         {
@@ -507,7 +507,7 @@ public class AchievementsManager : MonoBehaviour
             }
 
         }
-    }
+    }*/
 }
 
 

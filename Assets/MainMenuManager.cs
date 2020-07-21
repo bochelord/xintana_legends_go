@@ -34,7 +34,7 @@ public class MainMenuManager : MonoBehaviour {
 
     private ChestRoulette _chestManager;
     private AnalyticsManager _analyticsManager;
-    private AdsManager _adsManager;
+    //private AdsManager _adsManager;
     private PlayerManager _playerManager;
     private TutorialManager _tutorialManager;
     private XintanaProfile xintanaProfile;
@@ -42,14 +42,14 @@ public class MainMenuManager : MonoBehaviour {
     {
         _chestManager = FindObjectOfType<ChestRoulette>();
         _analyticsManager = FindObjectOfType<AnalyticsManager>();
-        _adsManager = FindObjectOfType<AdsManager>();
+        //_adsManager = FindObjectOfType<AdsManager>();
         _playerManager = FindObjectOfType<PlayerManager>();
         _tutorialManager = FindObjectOfType<TutorialManager>();
     }
     void Start()
     {
         xintanaProfile = Rad_SaveManager.profile;
-        CheckInventory();
+        //CheckInventory();
         SetMainMenuStats();
         if(!AudioManager.Instance.musicPlayer.isPlaying || AudioManager.Instance.musicPlayer.clip != AudioManager.Instance.musicMainMenu)
         {
@@ -217,10 +217,10 @@ public class MainMenuManager : MonoBehaviour {
         {
             _chestManager.StartRoulettePanel();
         }
-        else if (!_adsManager.GetFreeShellAdViewed())
+        /*else *//*if (!_adsManager.GetFreeShellAdViewed())*//*
         {
             ShowFreeShellPanel();
-        }
+        }*/
         else
         {
             ShowNoShellsCoroutine(1.5f);
@@ -229,7 +229,7 @@ public class MainMenuManager : MonoBehaviour {
     }
     public void Button_ShowFreeShellAd()
     {
-        _adsManager.ShowAddForFreeShell();
+        //_adsManager.ShowAddForFreeShell();
     }
 
 

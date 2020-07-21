@@ -69,7 +69,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public GameObject powerUpButtonParticleGemBreaker;
 
     private AnalyticsManager _analyticsManager;
-    private AdsManager _adsManager;
+    //private AdsManager _adsManager;
     private SIS.ShopManager _shopManager;
     private LevelManager _levelManager;
     private ScreenShot _screenshot;
@@ -104,7 +104,7 @@ public class Rad_GuiManager : MonoBehaviour {
         _analyticsManager = FindObjectOfType<AnalyticsManager>();
         _levelManager = FindObjectOfType<LevelManager>();
         _shopManager = FindObjectOfType<SIS.ShopManager>();
-        _adsManager = FindObjectOfType<AdsManager>();
+        //_adsManager = FindObjectOfType<AdsManager>();
         _screenshot = FindObjectOfType<ScreenShot>();
         _playerManager = FindObjectOfType<PlayerManager>();
         _audioManager = FindObjectOfType<AudioManager>();
@@ -232,23 +232,23 @@ public class Rad_GuiManager : MonoBehaviour {
 
     public void UpdateIcons()
     {
-        if (SIS.DBManager.GetPurchase("si_x2") > 0)
-        {
-            doubleScoreIcon.SetActive(true);
-        }
-        else
-        {
-            doubleScoreIcon.SetActive(false);
-        }
+        //if (SIS.DBManager.GetPurchase("si_x2") > 0)
+        //{
+        //    doubleScoreIcon.SetActive(true);
+        //}
+        //else
+        //{
+        //    doubleScoreIcon.SetActive(false);
+        //}
 
-        if (SIS.DBManager.GetPurchase("si_1up") > 0)
-        {
-            extraLifeIcon.SetActive(true);
-        }
-        else
-        {
-            extraLifeIcon.SetActive(false);
-        }
+        //if (SIS.DBManager.GetPurchase("si_1up") > 0)
+        //{
+        //    extraLifeIcon.SetActive(true);
+        //}
+        //else
+        //{
+        //    extraLifeIcon.SetActive(false);
+        //}
     }
 
     void UpdatePowerUpColorSlider()
@@ -365,7 +365,7 @@ public class Rad_GuiManager : MonoBehaviour {
     public void Button_ShowAdExtraLife()
     {
         timerCountdownAdOn = false;
-        _adsManager.ShowAdForExtraLife();
+        //_adsManager.ShowAdForExtraLife();
     }
 
     private IEnumerator refreshHighScore(int newHighScore) {
@@ -408,7 +408,7 @@ public class Rad_GuiManager : MonoBehaviour {
             Rad_SaveManager.profile.highscore = (int)_levelManager.GetPlayerScore();
             Rad_SaveManager.SaveData();
 
-            _leaderboardManager.OnAddScoreToLeaderBorad();
+            //_leaderboardManager.OnAddScoreToLeaderBorad();
 
             GameObject clone_HighScoreFxPrefab;
             clone_HighScoreFxPrefab = Instantiate(HighScoreFxPrefab);

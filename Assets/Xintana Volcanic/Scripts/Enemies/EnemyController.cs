@@ -137,7 +137,7 @@ public class EnemyController : MonoBehaviour {
         levelManager.AddEnemiesKilledCount();
         levelManager.AddPlayerScoreAndGetNewEnemy(this.type, level);
         levelManager.enemyKilled = true;
-        AchievementsManager.Instance.IncrementKillsAchievements();
+        //AchievementsManager.Instance.IncrementKillsAchievements();
         float _expMultiplier = (float)level / _playerManager.level;
         if(_expMultiplier > 1)
         {

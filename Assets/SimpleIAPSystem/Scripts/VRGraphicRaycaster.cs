@@ -321,20 +321,20 @@ namespace SIS
 		public ReflectionMethodsCache()
 		{
 			var raycast3DMethodInfo = typeof(Physics).GetMethod("Raycast", new[] { typeof(Ray), typeof(RaycastHit).MakeByRefType(), typeof(float), typeof(int) });
-			if (raycast3DMethodInfo != null)
-				raycast3D = (Raycast3DCallback)UnityEngineInternal.ScriptingUtils.CreateDelegate(typeof(Raycast3DCallback), raycast3DMethodInfo);
+			//if (raycast3DMethodInfo != null)
+			//	raycast3D = (Raycast3DCallback)UnityEngineInternal.ScriptingUtils.CreateDelegate(typeof(Raycast3DCallback), raycast3DMethodInfo);
 
-			var raycast2DMethodInfo = typeof(Physics2D).GetMethod("Raycast", new[] { typeof(Vector2), typeof(Vector2), typeof(float), typeof(int) });
-			if (raycast2DMethodInfo != null)
-				raycast2D = (Raycast2DCallback)UnityEngineInternal.ScriptingUtils.CreateDelegate(typeof(Raycast2DCallback), raycast2DMethodInfo);
+			//var raycast2DMethodInfo = typeof(Physics2D).GetMethod("Raycast", new[] { typeof(Vector2), typeof(Vector2), typeof(float), typeof(int) });
+			//if (raycast2DMethodInfo != null)
+			//	raycast2D = (Raycast2DCallback)UnityEngineInternal.ScriptingUtils.CreateDelegate(typeof(Raycast2DCallback), raycast2DMethodInfo);
 
-			var raycastAllMethodInfo = typeof(Physics).GetMethod("RaycastAll", new[] { typeof(Ray), typeof(float), typeof(int) });
-			if (raycastAllMethodInfo != null)
-				raycast3DAll = (RaycastAllCallback)UnityEngineInternal.ScriptingUtils.CreateDelegate(typeof(RaycastAllCallback), raycastAllMethodInfo);
+			//var raycastAllMethodInfo = typeof(Physics).GetMethod("RaycastAll", new[] { typeof(Ray), typeof(float), typeof(int) });
+			//if (raycastAllMethodInfo != null)
+			//	raycast3DAll = (RaycastAllCallback)UnityEngineInternal.ScriptingUtils.CreateDelegate(typeof(RaycastAllCallback), raycastAllMethodInfo);
 
-			var getRayIntersectionAllMethodInfo = typeof(Physics2D).GetMethod("GetRayIntersectionAll", new[] { typeof(Ray), typeof(float), typeof(int) });
-			if (getRayIntersectionAllMethodInfo != null)
-				getRayIntersectionAll = (GetRayIntersectionAllCallback)UnityEngineInternal.ScriptingUtils.CreateDelegate(typeof(GetRayIntersectionAllCallback), getRayIntersectionAllMethodInfo);
+			//var getRayIntersectionAllMethodInfo = typeof(Physics2D).GetMethod("GetRayIntersectionAll", new[] { typeof(Ray), typeof(float), typeof(int) });
+			//if (getRayIntersectionAllMethodInfo != null)
+			//	getRayIntersectionAll = (GetRayIntersectionAllCallback)UnityEngineInternal.ScriptingUtils.CreateDelegate(typeof(GetRayIntersectionAllCallback), getRayIntersectionAllMethodInfo);
 		}
 
 		public Raycast3DCallback raycast3D = null;

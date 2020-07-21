@@ -53,7 +53,7 @@ public class CombinationManager : MonoBehaviour {
     private PlayerManager _playerManager;
     private int _combinationFrecuency = 3;//bydefault
     public float original_timeToResolveCombination;
-    private AdsManager adManager;
+    //private AdsManager adManager;
     private Rad_GuiManager _guiManager;
     private Vector2 _initialButtonsPosition;
     private Coroutine _auraCoroutine;
@@ -64,7 +64,7 @@ public class CombinationManager : MonoBehaviour {
         levelManager = FindObjectOfType<LevelManager>();
         _playerManager = FindObjectOfType<PlayerManager>();
         original_timeToResolveCombination = timeToResolveCombination;
-        adManager = FindObjectOfType<AdsManager>();
+        //adManager = FindObjectOfType<AdsManager>();
         _guiManager = FindObjectOfType<Rad_GuiManager>();
         _initialButtonsPosition = combinationButtons.transform.localPosition;
         audio = AudioManager.Instance.fxPlayer;
@@ -287,37 +287,25 @@ public class CombinationManager : MonoBehaviour {
             {
                 ///TIME IS UP, PLAYER LOSES CAUSE OF THE TIME...          
                 RanOutofTimeProcess();
-                //levelManager.GameOverPanel();
-                //levelManager.AddNemesisCount();
+
                 if(SIS.DBManager.GetPurchase("si_1up") > 0 && !levelManager._extraLifeUsed)
                 {
-                    //levelManager._extraLifeUsed = true;
-                    //SetGameOn(false);
-                    //Rad_SaveManager.profile.extraLifePurchased--;
-                    //if (Rad_SaveManager.profile.extraLifePurchased <= 0)
-                    //{
-                    //    //SIS.DBManager.RemovePurchase("si_1up");
-                    //    //SIS.DBManager.RemovePurchaseUI("si_1up");
-                    //    Rad_SaveManager.profile.extraLife = false;
-                    //    levelManager._extraLifePurchased = false;
-                    //}
-                    //MoveButtonsOut();
                     StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowContinuePanel, 2f));
                 }
-                else if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped <= levelManager.adsSkipped && !Rad_SaveManager.profile.noAds)
-                {
-                    //MoveButtonsOut();
-                    _guiManager.ShowAdPanel();
-                }
-                else if (!adManager.adViewed && Rad_SaveManager.profile.adsSkipped >= levelManager.adsSkipped && !Rad_SaveManager.profile.noAds)
-                {
-                    StartCoroutine(FunctionLibrary.CallWithDelay(adManager.ShowAdNoReward,1.5f));
-                }
-                else
-                {
-                    StartCoroutine(FunctionLibrary.CallWithDelay(levelManager.GameOverPanel, 1.5f));
-                    adManager.adViewed = false;
-                }
+                //else if (/*!adManager.adViewed*/ Rad_SaveManager.profile.adsSkipped <= levelManager.adsSkipped && !Rad_SaveManager.profile.noAds)
+                //{
+                //    //MoveButtonsOut();
+                //    _guiManager.ShowAdPanel();
+                //}
+                //else if (/*!adManager.adViewed*/ Rad_SaveManager.profile.adsSkipped >= levelManager.adsSkipped && !Rad_SaveManager.profile.noAds)
+                //{
+                //    StartCoroutine(FunctionLibrary.CallWithDelay(adManager.ShowAdNoReward,1.5f));
+                //}
+                //else
+                //{
+                //    StartCoroutine(FunctionLibrary.CallWithDelay(levelManager.GameOverPanel, 1.5f));
+                //    adManager.adViewed = false;
+                //}
             }
             if(kogiTimer >= levelManager.kogiSpawnTime)
             {
@@ -388,7 +376,7 @@ public class CombinationManager : MonoBehaviour {
                 if (levelManager.enemyKilled)
                 {
                     ShowWinText();
-                    AchievementsManager.Instance.IncrementGemsComboAchievements(combinationArray.Length);
+                    //AchievementsManager.Instance.IncrementGemsComboAchievements(combinationArray.Length);
                     if (levelManager.GetTotalEnemyKilled() == _combinationFrecuency) //each three kills we gorw the combination and also give more time to solve it...
                     {
                         ChangeMinimCombinationLength(minimCombinationLenght + 1);

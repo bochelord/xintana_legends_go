@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using PaperPlaneTools;
+//using PaperPlaneTools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -109,10 +109,10 @@ public class SettingsManager : MonoBehaviour {
 
 
 
-    public void Button_rate()
-    {
-        RateBox.Instance.Show();
-    }
+    //public void Button_rate()
+    //{
+    //    RateBox.Instance.Show();
+    //}
 
 
 }

@@ -86,14 +86,14 @@ public class AnalyticsManager : MonoBehaviour
     /// How many Ads has watched the player in 1 game run.
     /// </summary>
     /// <param name="value"></param>
-    public void AdsViewed_Event(ShowResult value)
-    {
-        Analytics.CustomEvent("Ads_Viewed", new Dictionary<string, object>
-        {
-            {"ads viewed",value }
+    //public void AdsViewed_Event(ShowResult value)
+    //{
+    //    Analytics.CustomEvent("Ads_Viewed", new Dictionary<string, object>
+    //    {
+    //        {"ads viewed",value }
 
-        });
-    }
+    //    });
+    //}
 
     /// <summary>
     /// The total number of ads a player has watched since app installation to uninstall.
