@@ -228,7 +228,7 @@ public class LevelManager : MonoBehaviour {
 
 
 
-        if (_playerManager.life <= 0 && SIS.DBManager.GetPurchase("si_1up") > 0 && !_extraLifeUsed)
+        if (_playerManager.life <= 0 /*&& SIS.DBManager.GetPurchase("si_1up") > 0*/ && !_extraLifeUsed)
         {
 
             combinationManager.SetGameOn(false);
@@ -648,7 +648,7 @@ public class LevelManager : MonoBehaviour {
         //Debug.Log("Extra lifes: " + Rad_SaveManager.profile.extraLifePurchased);
         if (Rad_SaveManager.profile.extraLifePurchased <= 0)
         {
-            SIS.DBManager.RemovePurchase("si_1up");
+            //SIS.DBManager.RemovePurchase("si_1up");
             //SIS.DBManager.RemovePurchaseUI("si_1up");
             Rad_SaveManager.profile.extraLife = false;
             _extraLifePurchased = false;

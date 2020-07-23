@@ -89,10 +89,14 @@ public class CombinationManager : MonoBehaviour {
         int _tempLength = Random.Range(minimCombinationLenght, combinationLength);
         combinationArray = new GameObject[_tempLength];
         copyCombinationArray = new GameObject[_tempLength];
-        foreach (Transform child in combinationPanel.transform)
+        for (int i = 0; i < combinationPanel.transform.childCount; i++)
         {
-            Destroy(child.gameObject);
+            Destroy(combinationPanel.transform.GetChild(i).gameObject);
         }
+        //foreach (Transform child in combinationPanel.transform)
+        //{
+        //    Destroy(child.gameObject);
+        //}
         currentCombinationPosition = 0;
         GenerateCombination();
         InstantiateGemsAndPlaceThem();
@@ -110,10 +114,14 @@ public class CombinationManager : MonoBehaviour {
         int _tempLength = Random.Range(minimCombinationLenght, combinationLength);
         combinationArray = new GameObject[_tempLength];
         copyCombinationArray = new GameObject[_tempLength];
-        foreach (Transform child in combinationPanel.transform)
+        for (int i = 0; i < combinationPanel.transform.childCount; i++)
         {
-            Destroy(child.gameObject);
+            Destroy(combinationPanel.transform.GetChild(i).gameObject);
         }
+        //foreach (Transform child in combinationPanel.transform)
+        //{
+        //    Destroy(child.gameObject);
+        //}
         currentCombinationPosition = 0;
         GenerateCombination();
         InstantiateGemsAndPlaceThem();
@@ -143,10 +151,14 @@ public class CombinationManager : MonoBehaviour {
     {
         combinationArray = null;
         copyCombinationArray = null;
-        foreach (Transform child in combinationPanel.transform)
+        for (int i = 0; i < combinationPanel.transform.childCount; i++)
         {
-            Destroy(child.gameObject);
+            Destroy(combinationPanel.transform.GetChild(i).gameObject);
         }
+        //foreach (Transform child in combinationPanel.transform)
+        //{
+        //    Destroy(child.gameObject);
+        //}
         currentCombinationPosition = 0;
         minimCombinationLenght = 1;
         timerSlider.value = 1;
@@ -164,10 +176,14 @@ public class CombinationManager : MonoBehaviour {
     {
         combinationArray = null;
         copyCombinationArray = null;
-        foreach (Transform child in combinationPanel.transform)
+        for (int i = 0; i < combinationPanel.transform.childCount; i++)
         {
-            Destroy(child.gameObject);
+            Destroy(combinationPanel.transform.GetChild(i).gameObject);
         }
+        //foreach (Transform child in combinationPanel.transform)
+        //{
+        //    Destroy(child.gameObject);
+        //}
     }
     /// <summary>
     /// Generates a Random combination with a combinationLength.
@@ -288,7 +304,7 @@ public class CombinationManager : MonoBehaviour {
                 ///TIME IS UP, PLAYER LOSES CAUSE OF THE TIME...          
                 RanOutofTimeProcess();
 
-                if(SIS.DBManager.GetPurchase("si_1up") > 0 && !levelManager._extraLifeUsed)
+                if(/*SIS.DBManager.GetPurchase("si_1up") > 0 &&*/ !levelManager._extraLifeUsed)
                 {
                     StartCoroutine(FunctionLibrary.CallWithDelay(_guiManager.ShowContinuePanel, 2f));
                 }

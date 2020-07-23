@@ -88,12 +88,22 @@ public class EnemiesPooler : Pooler {
     public override GameObject GetPooledObject()
     {
         List<GameObject> activeEnemies = new List<GameObject>();
-        foreach (GameObject enemyobj in pooledObjects) {
-            if (!enemyobj.activeInHierarchy && !isThisinTheArray(enemyobj,bossPrefab))//we only get the enemies that are not bosses...
+
+        for (int i = 0; i < pooledObjects.Count; i++)
+        {
+            if (!pooledObjects[i].activeInHierarchy && !isThisinTheArray(pooledObjects[i], bossPrefab))//we only get the enemies that are not bosses...
             {
-                activeEnemies.Add(enemyobj);
+                activeEnemies.Add(pooledObjects[i]);
             }
         }
+
+
+        //foreach (GameObject enemyobj in pooledObjects) {
+        //    if (!enemyobj.activeInHierarchy && !isThisinTheArray(enemyobj,bossPrefab))//we only get the enemies that are not bosses...
+        //    {
+        //        activeEnemies.Add(enemyobj);
+        //    }
+        //}
 
         int index = Random.Range(0, activeEnemies.Count);
 
@@ -107,13 +117,22 @@ public class EnemiesPooler : Pooler {
     {
 
         List<GameObject> retEnemies = new List<GameObject>();
-        foreach (GameObject enemyobj in pooledObjects)
+        for (int i = 0; i < pooledObjects.Count; i++)
         {
-            if (!enemyobj.activeInHierarchy && isEnemyInWorld(appearInWorld, enemyobj.GetComponentInChildren<EnemyController>().appearsOnWorld))
+            if (!pooledObjects[i].activeInHierarchy && isEnemyInWorld(appearInWorld, pooledObjects[i].GetComponentInChildren<EnemyController>().appearsOnWorld))
             {
-                retEnemies.Add(enemyobj);
+                retEnemies.Add(pooledObjects[i]);
             }
         }
+
+
+        //foreach (GameObject enemyobj in pooledObjects)
+        //{
+        //    if (!enemyobj.activeInHierarchy && isEnemyInWorld(appearInWorld, enemyobj.GetComponentInChildren<EnemyController>().appearsOnWorld))
+        //    {
+        //        retEnemies.Add(enemyobj);
+        //    }
+        //}
 
         int index = Random.Range(0, retEnemies.Count);
 
@@ -164,13 +183,22 @@ public class EnemiesPooler : Pooler {
     public GameObject GetBossObject()
     {
         List<GameObject> activeEnemies = new List<GameObject>();
-        foreach (GameObject enemyobj in pooledBoss)
+
+        for (int i = 0; i < pooledBoss.Count; i++)
         {
-            if (!enemyobj.activeInHierarchy)
+            if (!pooledBoss[i].activeInHierarchy)
             {
-                activeEnemies.Add(enemyobj);
+                activeEnemies.Add(pooledBoss[i]);
             }
         }
+
+        //foreach (GameObject enemyobj in pooledBoss)
+        //{
+        //    if (!enemyobj.activeInHierarchy)
+        //    {
+        //        activeEnemies.Add(enemyobj);
+        //    }
+        //}
 
         int index = Random.Range(0, activeEnemies.Count);
 
@@ -183,13 +211,20 @@ public class EnemiesPooler : Pooler {
     public GameObject GetBossObject(int appearinWorld)
     {
         List<GameObject> inactiveBosses = new List<GameObject>();
-        foreach (GameObject enemyobj in pooledBoss)
+        for (int i = 0; i < pooledBoss.Count; i++)
         {
-            if (!enemyobj.activeInHierarchy)
+            if (!pooledBoss[i].activeInHierarchy)
             {
-                inactiveBosses.Add(enemyobj);
+                inactiveBosses.Add(pooledBoss[i]);
             }
         }
+        //foreach (GameObject enemyobj in pooledBoss)
+        //{
+        //    if (!enemyobj.activeInHierarchy)
+        //    {
+        //        inactiveBosses.Add(enemyobj);
+        //    }
+        //}
 
 
         bool found = false;
@@ -222,13 +257,20 @@ public class EnemiesPooler : Pooler {
     public GameObject GetPooledKogiBounty()
     {
         List<GameObject> activeKogi = new List<GameObject>();
-        foreach (GameObject kogi in pooledKogiBounty)
+        for (int i = 0; i < pooledKogiBounty.Count; i++)
         {
-            if (!kogi.activeInHierarchy)
+            if (!pooledKogiBounty[i].activeInHierarchy)
             {
-                activeKogi.Add(kogi);
+                activeKogi.Add(pooledKogiBounty[i]);
             }
         }
+        //foreach (GameObject kogi in pooledKogiBounty)
+        //{
+        //    if (!kogi.activeInHierarchy)
+        //    {
+        //        activeKogi.Add(kogi);
+        //    }
+        //}
 
         int index = Random.Range(0, activeKogi.Count);
 
